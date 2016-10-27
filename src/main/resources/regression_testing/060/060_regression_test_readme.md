@@ -11,23 +11,27 @@ This file provides the configurations and code used to generate these files.
 # 060_ModelSerializer_Regression_MLP_1.zip
 
 MultiLayerConfiguration conf = new NeuralNetConfiguration.Builder()
-    .seed(12345)
-    .iterations(1)
-    .optimizationAlgo(OptimizationAlgorithm.STOCHASTIC_GRADIENT_DESCENT)
-    .learningRate(0.15)
-    .updater(Updater.NESTEROVS).momentum(0.9)
-    .weightInit(WeightInit.XAVIER)
-    .list()
-    .layer(0, new DenseLayer.Builder().nIn(3).nOut(4)
-        .activation("relu")
-        .build())
-    .layer(1, new OutputLayer.Builder(LossFunctions.LossFunction.MCXENT)
-        .activation("softmax")
-        .nIn(4).nOut(5).build())
-    .pretrain(false).backprop(true).build();
+	.seed(12345)
+	.iterations(1)
+	.optimizationAlgo(OptimizationAlgorithm.STOCHASTIC_GRADIENT_DESCENT)
+	.learningRate(0.15)
+	.updater(Updater.NESTEROVS).momentum(0.9)
+	.weightInit(WeightInit.XAVIER)
+	.list()
+	.layer(0, new DenseLayer.Builder().nIn(3).nOut(4)
+		.activation("relu")
+		.build())
+	.layer(1, new OutputLayer.Builder(LossFunctions.LossFunction.MCXENT)
+		.activation("softmax")
+		.nIn(4).nOut(5).build())
+	.pretrain(false).backprop(true).build();
 
 MultiLayerNetwork net = new MultiLayerNetwork(conf);
 net.init();
+
+org.deeplearning4j.nn.api.Updater u = net.getUpdater();
+int viewStateSize = u.stateSizeForLayer(net);
+u.setStateViewArray(net, Nd4j.linspace(1,viewStateSize,viewStateSize), false);
 
 int numParams = net.numParams();
 INDArray params = Nd4j.linspace(1,numParams, numParams);
