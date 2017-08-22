@@ -1,0 +1,51 @@
+{
+ "class_name": "Sequential", 
+ "keras_version": "1.2.2", 
+ "config": [
+  {
+   "class_name": "Embedding", 
+   "config": {
+    "trainable": true, 
+    "name": "embedding_1", 
+    "activity_regularizer": null, 
+    "W_constraint": null, 
+    "init": "uniform", 
+    "input_dtype": "int32", 
+    "mask_zero": false, 
+    "input_dim": 20000, 
+    "batch_input_shape": [
+     null, 
+     400
+    ], 
+    "W_regularizer": null, 
+    "dropout": 0.0, 
+    "output_dim": 50, 
+    "input_length": 400
+   }
+  }, 
+  {
+   "class_name": "GlobalAveragePooling1D", 
+   "config": {
+    "trainable": true, 
+    "name": "globalaveragepooling1d_1"
+   }
+  }, 
+  {
+   "class_name": "Dense", 
+   "config": {
+    "W_constraint": null, 
+    "b_constraint": null, 
+    "name": "dense_1", 
+    "activity_regularizer": null, 
+    "trainable": true, 
+    "init": "glorot_uniform", 
+    "bias": true, 
+    "input_dim": 50, 
+    "b_regularizer": null, 
+    "W_regularizer": null, 
+    "activation": "sigmoid", 
+    "output_dim": 1
+   }
+  }
+ ]
+}
