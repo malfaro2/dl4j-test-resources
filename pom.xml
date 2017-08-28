@@ -20,6 +20,23 @@
                     <skip>true</skip>
                 </configuration>
             </plugin>
+            <plugin>
+              <groupId>org.codehaus.mojo</groupId>
+              <artifactId>build-helper-maven-plugin</artifactId>
+              <version>1.7</version>
+              <executions>
+                <execution>
+                  <id>remove-old-artifacts</id>
+                  <phase>package</phase>
+                  <goals>
+                    <goal>remove-project-artifact</goal>
+                  </goals>
+                  <configuration>
+                    <removeAll>true</removeAll>
+                  </configuration>
+                </execution>
+              </executions>
+            </plugin>
         </plugins>
     </build>
     <dependencies>
