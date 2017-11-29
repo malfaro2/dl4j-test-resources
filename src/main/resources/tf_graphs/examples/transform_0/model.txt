@@ -433,33 +433,9 @@ node {
   }
 }
 node {
-  name: "matmul17"
-  op: "MatMul"
-  input: "log16"
-  input: "input_1"
-  attr {
-    key: "T"
-    value {
-      type: DT_FLOAT
-    }
-  }
-  attr {
-    key: "transpose_a"
-    value {
-      b: false
-    }
-  }
-  attr {
-    key: "transpose_b"
-    value {
-      b: false
-    }
-  }
-}
-node {
   name: "output"
   op: "Rsqrt"
-  input: "matmul17"
+  input: "log16"
   attr {
     key: "T"
     value {
