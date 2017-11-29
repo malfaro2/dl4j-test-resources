@@ -8,3 +8,5 @@ dependency-reduced-pom.xml
 buildNumber.properties
 .mvn/timing.properties
 .idea/
+src/main/resources/tf_graphs/examples/**/data-all*
+src/main/resources/tf_graphs/examples/**/checkpoint
