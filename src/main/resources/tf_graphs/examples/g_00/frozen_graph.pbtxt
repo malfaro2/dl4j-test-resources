@@ -1,0 +1,120 @@
+node {
+  name: "in0"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+          dim {
+            size: 3
+          }
+          dim {
+            size: 3
+          }
+        }
+        tensor_content: "\026\356\023>\337\022-\3008\332T?\030`\210\276t2\211>\365i\231\276W\230i?4\332\220\277 4\311>"
+      }
+    }
+  }
+}
+node {
+  name: "in0/read"
+  op: "Identity"
+  input: "in0"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@in0"
+      }
+    }
+  }
+}
+node {
+  name: "Add/x"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+          dim {
+            size: 3
+          }
+          dim {
+            size: 3
+          }
+        }
+        tensor_content: "\000\000\200\300\000\000@\300\000\000\000\300\000\000\200\277\000\000\000\000\000\000\200?\000\000\000@\000\000@@\000\000\200@"
+      }
+    }
+  }
+}
+node {
+  name: "Add"
+  op: "Add"
+  input: "Add/x"
+  input: "in0/read"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "Abs"
+  op: "Abs"
+  input: "Add"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "Rsqrt"
+  op: "Rsqrt"
+  input: "Abs"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "output"
+  op: "Tanh"
+  input: "Rsqrt"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+library {
+}

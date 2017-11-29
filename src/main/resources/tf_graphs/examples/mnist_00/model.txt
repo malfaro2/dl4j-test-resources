@@ -266,7 +266,7 @@ node {
   }
 }
 node {
-  name: "output"
+  name: "BiasAdd"
   op: "BiasAdd"
   input: "MatMul"
   input: "Variable_1/read"
@@ -307,6 +307,17 @@ node {
   }
 }
 node {
+  name: "output"
+  op: "Softmax"
+  input: "BiasAdd"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
   name: "Rank"
   op: "Const"
   attr {
@@ -330,7 +341,7 @@ node {
 node {
   name: "Shape"
   op: "Shape"
-  input: "output"
+  input: "BiasAdd"
   attr {
     key: "T"
     value {
@@ -368,7 +379,7 @@ node {
 node {
   name: "Shape_1"
   op: "Shape"
-  input: "output"
+  input: "BiasAdd"
   attr {
     key: "T"
     value {
@@ -554,7 +565,7 @@ node {
 node {
   name: "Reshape"
   op: "Reshape"
-  input: "output"
+  input: "BiasAdd"
   input: "concat"
   attr {
     key: "T"
@@ -1412,7 +1423,7 @@ node {
 node {
   name: "gradients/Reshape_grad/Shape"
   op: "Shape"
-  input: "output"
+  input: "BiasAdd"
   attr {
     key: "T"
     value {
@@ -1445,7 +1456,7 @@ node {
   }
 }
 node {
-  name: "gradients/output_grad/BiasAddGrad"
+  name: "gradients/BiasAdd_grad/BiasAddGrad"
   op: "BiasAddGrad"
   input: "gradients/Reshape_grad/Reshape"
   attr {
@@ -1462,16 +1473,16 @@ node {
   }
 }
 node {
-  name: "gradients/output_grad/tuple/group_deps"
+  name: "gradients/BiasAdd_grad/tuple/group_deps"
   op: "NoOp"
   input: "^gradients/Reshape_grad/Reshape"
-  input: "^gradients/output_grad/BiasAddGrad"
+  input: "^gradients/BiasAdd_grad/BiasAddGrad"
 }
 node {
-  name: "gradients/output_grad/tuple/control_dependency"
+  name: "gradients/BiasAdd_grad/tuple/control_dependency"
   op: "Identity"
   input: "gradients/Reshape_grad/Reshape"
-  input: "^gradients/output_grad/tuple/group_deps"
+  input: "^gradients/BiasAdd_grad/tuple/group_deps"
   attr {
     key: "T"
     value {
@@ -1488,10 +1499,10 @@ node {
   }
 }
 node {
-  name: "gradients/output_grad/tuple/control_dependency_1"
+  name: "gradients/BiasAdd_grad/tuple/control_dependency_1"
   op: "Identity"
-  input: "gradients/output_grad/BiasAddGrad"
-  input: "^gradients/output_grad/tuple/group_deps"
+  input: "gradients/BiasAdd_grad/BiasAddGrad"
+  input: "^gradients/BiasAdd_grad/tuple/group_deps"
   attr {
     key: "T"
     value {
@@ -1502,7 +1513,7 @@ node {
     key: "_class"
     value {
       list {
-        s: "loc:@gradients/output_grad/BiasAddGrad"
+        s: "loc:@gradients/BiasAdd_grad/BiasAddGrad"
       }
     }
   }
@@ -1510,7 +1521,7 @@ node {
 node {
   name: "gradients/MatMul_grad/MatMul"
   op: "MatMul"
-  input: "gradients/output_grad/tuple/control_dependency"
+  input: "gradients/BiasAdd_grad/tuple/control_dependency"
   input: "Variable/read"
   attr {
     key: "T"
@@ -1535,7 +1546,7 @@ node {
   name: "gradients/MatMul_grad/MatMul_1"
   op: "MatMul"
   input: "input"
-  input: "gradients/output_grad/tuple/control_dependency"
+  input: "gradients/BiasAdd_grad/tuple/control_dependency"
   attr {
     key: "T"
     value {
@@ -1654,7 +1665,7 @@ node {
   op: "ApplyGradientDescent"
   input: "Variable_1"
   input: "GradientDescent/learning_rate"
-  input: "gradients/output_grad/tuple/control_dependency_1"
+  input: "gradients/BiasAdd_grad/tuple/control_dependency_1"
   attr {
     key: "T"
     value {
@@ -2017,7 +2028,7 @@ node {
 node {
   name: "ArgMax"
   op: "ArgMax"
-  input: "output"
+  input: "BiasAdd"
   input: "ArgMax/dimension"
   attr {
     key: "T"
