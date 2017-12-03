@@ -1,5 +1,5 @@
 node {
-  name: "Placeholder"
+  name: "input"
   op: "Placeholder"
   attr {
     key: "dtype"
@@ -22,7 +22,7 @@ node {
   }
 }
 node {
-  name: "Placeholder_1"
+  name: "Placeholder"
   op: "Placeholder"
   attr {
     key: "dtype"
@@ -71,7 +71,7 @@ node {
 node {
   name: "reshape/Reshape"
   op: "Reshape"
-  input: "Placeholder"
+  input: "input"
   input: "reshape/Reshape/shape"
   attr {
     key: "T"
@@ -1987,7 +1987,7 @@ node {
 node {
   name: "loss/Shape_2"
   op: "Shape"
-  input: "Placeholder_1"
+  input: "Placeholder"
   attr {
     key: "T"
     value {
@@ -2173,7 +2173,7 @@ node {
 node {
   name: "loss/Reshape_1"
   op: "Reshape"
-  input: "Placeholder_1"
+  input: "Placeholder"
   input: "loss/concat_1"
   attr {
     key: "T"
@@ -7170,7 +7170,7 @@ node {
 node {
   name: "accuracy/ArgMax_1"
   op: "ArgMax"
-  input: "Placeholder_1"
+  input: "Placeholder"
   input: "accuracy/ArgMax_1/dimension"
   attr {
     key: "T"
