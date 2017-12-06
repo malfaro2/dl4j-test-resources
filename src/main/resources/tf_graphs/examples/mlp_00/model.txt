@@ -15,7 +15,7 @@ node {
           size: -1
         }
         dim {
-          size: 784
+          size: 5
         }
       }
     }
@@ -40,7 +40,7 @@ node {
             size: 2
           }
         }
-        tensor_content: "\020\003\000\000\000\001\000\000"
+        tensor_content: "\005\000\000\000\n\000\000\000"
       }
     }
   }
@@ -160,10 +160,10 @@ node {
     value {
       shape {
         dim {
-          size: 784
+          size: 5
         }
         dim {
-          size: 256
+          size: 10
         }
       }
     }
@@ -245,7 +245,7 @@ node {
             size: 2
           }
         }
-        tensor_content: "\000\001\000\000\n\000\000\000"
+        tensor_content: "\n\000\000\000\003\000\000\000"
       }
     }
   }
@@ -365,10 +365,10 @@ node {
     value {
       shape {
         dim {
-          size: 256
+          size: 10
         }
         dim {
-          size: 10
+          size: 3
         }
       }
     }
@@ -450,7 +450,7 @@ node {
             size: 1
           }
         }
-        int_val: 256
+        int_val: 10
       }
     }
   }
@@ -570,7 +570,7 @@ node {
     value {
       shape {
         dim {
-          size: 256
+          size: 10
         }
       }
     }
@@ -652,7 +652,7 @@ node {
             size: 1
           }
         }
-        int_val: 10
+        int_val: 3
       }
     }
   }
@@ -772,7 +772,7 @@ node {
     value {
       shape {
         dim {
-          size: 10
+          size: 3
         }
       }
     }
