@@ -92,8 +92,8 @@ node {
   }
 }
 node {
-  name: "acos5"
-  op: "Acos"
+  name: "cos5"
+  op: "Cos"
   input: "abs4"
   attr {
     key: "T"
@@ -103,56 +103,56 @@ node {
   }
 }
 node {
-  name: "add6"
-  op: "Add"
-  input: "acos5"
-  input: "input_1"
-  attr {
-    key: "T"
-    value {
-      type: DT_FLOAT
-    }
-  }
-}
-node {
-  name: "maximum7"
-  op: "Maximum"
-  input: "add6"
-  input: "input_1"
-  attr {
-    key: "T"
-    value {
-      type: DT_FLOAT
-    }
-  }
-}
-node {
-  name: "minimum8"
-  op: "Minimum"
-  input: "maximum7"
-  input: "input_1"
-  attr {
-    key: "T"
-    value {
-      type: DT_FLOAT
-    }
-  }
-}
-node {
-  name: "abs9"
-  op: "Abs"
-  input: "minimum8"
-  attr {
-    key: "T"
-    value {
-      type: DT_FLOAT
-    }
-  }
-}
-node {
-  name: "acos10"
+  name: "acos6"
   op: "Acos"
-  input: "abs9"
+  input: "cos5"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "add7"
+  op: "Add"
+  input: "acos6"
+  input: "input_1"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "maximum8"
+  op: "Maximum"
+  input: "add7"
+  input: "input_1"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "minimum9"
+  op: "Minimum"
+  input: "maximum8"
+  input: "input_1"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "abs10"
+  op: "Abs"
+  input: "minimum9"
   attr {
     key: "T"
     value {
@@ -163,7 +163,7 @@ node {
 node {
   name: "ceil11"
   op: "Ceil"
-  input: "acos10"
+  input: "abs10"
   attr {
     key: "T"
     value {
@@ -184,8 +184,8 @@ node {
   }
 }
 node {
-  name: "cos13"
-  op: "Cos"
+  name: "exp13"
+  op: "Exp"
   input: "minimum12"
   attr {
     key: "T"
@@ -195,31 +195,9 @@ node {
   }
 }
 node {
-  name: "cosh14"
-  op: "Cosh"
-  input: "cos13"
-  attr {
-    key: "T"
-    value {
-      type: DT_FLOAT
-    }
-  }
-}
-node {
-  name: "exp15"
-  op: "Exp"
-  input: "cosh14"
-  attr {
-    key: "T"
-    value {
-      type: DT_FLOAT
-    }
-  }
-}
-node {
-  name: "log16"
+  name: "log14"
   op: "Log"
-  input: "exp15"
+  input: "exp13"
   attr {
     key: "T"
     value {
@@ -230,7 +208,7 @@ node {
 node {
   name: "output"
   op: "Rsqrt"
-  input: "log16"
+  input: "log14"
   attr {
     key: "T"
     value {
