@@ -102,7 +102,7 @@ node {
 node {
   name: "add"
   op: "Add"
-  input: "unstack:2"
+  input: "unstack"
   input: "Variable/read"
   attr {
     key: "T"
@@ -116,7 +116,7 @@ node {
   op: "Pack"
   input: "add"
   input: "unstack:1"
-  input: "unstack"
+  input: "unstack:2"
   input: "unstack:3"
   attr {
     key: "N"
