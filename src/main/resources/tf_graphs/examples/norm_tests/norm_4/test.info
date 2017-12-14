@@ -1,0 +1,4 @@
+ord 0.5
+axis None
+keep_dims False
+input matrix shape (2, 5)
