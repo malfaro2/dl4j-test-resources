@@ -1,0 +1,221 @@
+node {
+  name: "input_0"
+  op: "Placeholder"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "shape"
+    value {
+      shape {
+        dim {
+          size: 4
+        }
+        dim {
+          size: 4
+        }
+        dim {
+          size: 16
+        }
+        dim {
+          size: 16
+        }
+      }
+    }
+  }
+}
+node {
+  name: "in0"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+          dim {
+            size: 8
+          }
+          dim {
+            size: 8
+          }
+        }
+        tensor_content: "SU\236\276\206:\307\276\313\216\035?t\232\000\277\253`\211\275~S\004\277\277\305\202\277f\235r\277\007\351\264\276\255\\\216>\356\231~>\242J\203>\350\007o\273\037?\222?\035\352\023>7&\316=n}\204>\262?\231=\367\247\362\277\372\n\360>c`\325\276\007\236\225?\250\010!<\226\246\271=\345\256\313\277QF\316\276%\236\215\277`\306Q>\034@k\277\215\373\307\277\356\266\200\277\352\024\224?\352)\362\277\010\254\213\276\031\347`@JQQ?\371`>>\252\370 \300\245\263\212\277\267\203\331\275g\204v\277\201>\212\276S=\241?\353.]\276\243*\203\277^\310\231\277\013\363\217?N\351]\2763\364\341\277;\t\003?\001U\337?d\277\202\277\231J\365=\352{\212?\022\013y\277\265\2656?&66\277\343\214\345>\353`\235?\036R\020\300\325|\245\277\006\214\025?\216k\033\277\031P\236\277"
+      }
+    }
+  }
+}
+node {
+  name: "in0/read"
+  op: "Identity"
+  input: "in0"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@in0"
+      }
+    }
+  }
+}
+node {
+  name: "DepthToSpace"
+  op: "DepthToSpace"
+  input: "input_0"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "block_size"
+    value {
+      i: 4
+    }
+  }
+}
+node {
+  name: "Cumsum/axis"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+        }
+        int_val: -3
+      }
+    }
+  }
+}
+node {
+  name: "Cumsum"
+  op: "Cumsum"
+  input: "DepthToSpace"
+  input: "Cumsum/axis"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "Tidx"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "exclusive"
+    value {
+      b: true
+    }
+  }
+  attr {
+    key: "reverse"
+    value {
+      b: true
+    }
+  }
+}
+node {
+  name: "Reshape/shape"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+            size: 4
+          }
+        }
+        tensor_content: "\010\000\000\000\010\000\000\000\010\000\000\000\010\000\000\000"
+      }
+    }
+  }
+}
+node {
+  name: "Reshape"
+  op: "Reshape"
+  input: "Cumsum"
+  input: "Reshape/shape"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "Tshape"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "DiagPart"
+  op: "DiagPart"
+  input: "Reshape"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "Diag"
+  op: "Diag"
+  input: "DiagPart"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "output"
+  op: "Add"
+  input: "Diag"
+  input: "in0/read"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+library {
+}
