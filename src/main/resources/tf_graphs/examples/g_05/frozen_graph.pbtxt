@@ -12,10 +12,16 @@ node {
     value {
       shape {
         dim {
-          size: 16
+          size: 2
         }
         dim {
-          size: 16
+          size: 4
+        }
+        dim {
+          size: 3
+        }
+        dim {
+          size: 2
         }
       }
     }
@@ -35,10 +41,10 @@ node {
     value {
       shape {
         dim {
-          size: 16
+          size: 3
         }
         dim {
-          size: 16
+          size: 2
         }
       }
     }
@@ -60,16 +66,13 @@ node {
         dtype: DT_FLOAT
         tensor_shape {
           dim {
-            size: 8
+            size: 3
           }
           dim {
-            size: 1
-          }
-          dim {
-            size: 8
+            size: 2
           }
         }
-        tensor_content: "\323\326\010?\0025\265\277\213\275\002?\326x\'\274/\263\323?\230\203\246\277\347\215\276?#;\357?\273l\027>\374\350\331?KYQ\276\325Ew\277\371\377y>\316\006N\276[\034\013\277\026+\022>\206wF\276Y+\250\275\223\005\020\277\360\036\324\277<\370\300?\374\034\332?\244&\356>\237\315\377\277\250\214I>\266\372\242?\275\345n\276[\362\263?\251]\036>\214\214_\276\257\222\341=~\027!?8\310\016?\304\275\236\277\036\030u\275\n\376.?\377\254%\276M\303\201>\344s*@r0f?\022\305\037?\031\037\270>\3178\202?n\207\273\274j\230\315?B\304\247\277lC\267?\353I\200>T-\030\277\327\251q>\0172\221\2775\362\010\3008\036\202?\300\372\207\277\305\227\005\276J\300\025?U\210\232?\332\240\024@\251;\026\300\002\006n?\373\021\245>H\375\234\276\301\027 ?^\317\003\275"
+        tensor_content: "\307&\222?\251E\"\277\203\212R?\350,m>hu\">z\214l\274"
       }
     }
   }
@@ -94,7 +97,31 @@ node {
   }
 }
 node {
-  name: "concat/axis"
+  name: "GatherV2/indices"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+            size: 2
+          }
+        }
+        tensor_content: "\001\000\000\000\000\000\000\000"
+      }
+    }
+  }
+}
+node {
+  name: "GatherV2/axis"
   op: "Const"
   attr {
     key: "dtype"
@@ -115,32 +142,32 @@ node {
   }
 }
 node {
-  name: "concat"
-  op: "ConcatV2"
+  name: "GatherV2"
+  op: "GatherV2"
   input: "input_1"
-  input: "input_2"
-  input: "concat/axis"
+  input: "GatherV2/indices"
+  input: "GatherV2/axis"
   attr {
-    key: "N"
-    value {
-      i: 2
-    }
-  }
-  attr {
-    key: "T"
-    value {
-      type: DT_FLOAT
-    }
-  }
-  attr {
-    key: "Tidx"
+    key: "Taxis"
     value {
       type: DT_INT32
     }
   }
+  attr {
+    key: "Tindices"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "Tparams"
+    value {
+      type: DT_FLOAT
+    }
+  }
 }
 node {
-  name: "Reshape/shape"
+  name: "GatherNd/indices"
   op: "Const"
   attr {
     key: "dtype"
@@ -157,71 +184,28 @@ node {
           dim {
             size: 3
           }
+          dim {
+            size: 3
+          }
         }
-        tensor_content: "\010\000\000\000\010\000\000\000\010\000\000\000"
+        tensor_content: "\000\000\000\000\002\000\000\000\001\000\000\000\000\000\000\000\001\000\000\000\000\000\000\000\001\000\000\000\003\000\000\000\001\000\000\000"
       }
     }
   }
 }
 node {
-  name: "Reshape"
-  op: "Reshape"
-  input: "concat"
-  input: "Reshape/shape"
+  name: "GatherNd"
+  op: "GatherNd"
+  input: "GatherV2"
+  input: "GatherNd/indices"
   attr {
-    key: "T"
-    value {
-      type: DT_FLOAT
-    }
-  }
-  attr {
-    key: "Tshape"
+    key: "Tindices"
     value {
       type: DT_INT32
     }
   }
-}
-node {
-  name: "Pow"
-  op: "Pow"
-  input: "Reshape"
-  input: "Reshape"
   attr {
-    key: "T"
-    value {
-      type: DT_FLOAT
-    }
-  }
-}
-node {
-  name: "Tan"
-  op: "Tan"
-  input: "Pow"
-  attr {
-    key: "T"
-    value {
-      type: DT_FLOAT
-    }
-  }
-}
-node {
-  name: "Neg"
-  op: "Neg"
-  input: "Tan"
-  attr {
-    key: "T"
-    value {
-      type: DT_FLOAT
-    }
-  }
-}
-node {
-  name: "Mul"
-  op: "Mul"
-  input: "Neg"
-  input: "Pow"
-  attr {
-    key: "T"
+    key: "Tparams"
     value {
       type: DT_FLOAT
     }
@@ -229,13 +213,26 @@ node {
 }
 node {
   name: "output"
-  op: "Sub"
-  input: "Mul"
+  op: "Pack"
+  input: "GatherNd"
   input: "in0/read"
+  input: "input_2"
+  attr {
+    key: "N"
+    value {
+      i: 3
+    }
+  }
   attr {
     key: "T"
     value {
       type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "axis"
+    value {
+      i: -1
     }
   }
 }
