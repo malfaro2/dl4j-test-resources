@@ -114,6 +114,6 @@ with tf.Session() as sess:
     sess.run(tf.global_variables_initializer())
 
     saver = tf.train.Saver(tf.global_variables())
-    tf.train.write_graph(sess.graph_def, 'lenet_dir', 'graph3 .pb',as_text=False)
+    tf.train.write_graph(sess.graph_def, 'lenet_dir', 'lenet.pbtxt',as_text=True)
     saver.save(sess, 'lenet_dir/test3.ckpt',write_meta_graph=False)
 
