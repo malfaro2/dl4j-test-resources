@@ -247,7 +247,7 @@ node {
   }
 }
 node {
-  name: "Const_1"
+  name: "Const_2"
   op: "Const"
   attr {
     key: "dtype"
@@ -271,7 +271,7 @@ node {
   name: "output"
   op: "Add"
   input: "cond/Merge"
-  input: "Const_1"
+  input: "Const_2"
   attr {
     key: "T"
     value {

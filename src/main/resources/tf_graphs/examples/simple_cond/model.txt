@@ -409,7 +409,203 @@ node {
   }
 }
 node {
+  name: "sub_1"
+  op: "Sub"
+  input: "greater/read"
+  input: "lesser/read"
+  attr {
+    key: "T"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+}
+node {
   name: "Const_1"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+            size: 1
+          }
+        }
+        int_val: 0
+      }
+    }
+  }
+}
+node {
+  name: "Sum_1"
+  op: "Sum"
+  input: "sub_1"
+  input: "Const_1"
+  attr {
+    key: "T"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "Tidx"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "keep_dims"
+    value {
+      b: false
+    }
+  }
+}
+node {
+  name: "Less_1/y"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_DOUBLE
+        tensor_shape {
+        }
+        double_val: 2.0
+      }
+    }
+  }
+}
+node {
+  name: "Less_1"
+  op: "Less"
+  input: "Sum_1"
+  input: "Less_1/y"
+  attr {
+    key: "T"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+}
+node {
+  name: "cond_1/Switch"
+  op: "Switch"
+  input: "Less_1"
+  input: "Less_1"
+  attr {
+    key: "T"
+    value {
+      type: DT_BOOL
+    }
+  }
+}
+node {
+  name: "cond_1/switch_t"
+  op: "Identity"
+  input: "cond_1/Switch:1"
+  attr {
+    key: "T"
+    value {
+      type: DT_BOOL
+    }
+  }
+}
+node {
+  name: "cond_1/switch_f"
+  op: "Identity"
+  input: "cond_1/Switch"
+  attr {
+    key: "T"
+    value {
+      type: DT_BOOL
+    }
+  }
+}
+node {
+  name: "cond_1/pred_id"
+  op: "Identity"
+  input: "Less_1"
+  attr {
+    key: "T"
+    value {
+      type: DT_BOOL
+    }
+  }
+}
+node {
+  name: "cond_1/Switch_1"
+  op: "Switch"
+  input: "greater/read"
+  input: "cond_1/pred_id"
+  attr {
+    key: "T"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@greater"
+      }
+    }
+  }
+}
+node {
+  name: "cond_1/Switch_2"
+  op: "Switch"
+  input: "lesser/read"
+  input: "cond_1/pred_id"
+  attr {
+    key: "T"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@lesser"
+      }
+    }
+  }
+}
+node {
+  name: "cond_1/Merge"
+  op: "Merge"
+  input: "cond_1/Switch_2"
+  input: "cond_1/Switch_1:1"
+  attr {
+    key: "N"
+    value {
+      i: 2
+    }
+  }
+  attr {
+    key: "T"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+}
+node {
+  name: "Const_2"
   op: "Const"
   attr {
     key: "dtype"
@@ -433,7 +629,40 @@ node {
   name: "output"
   op: "Add"
   input: "cond/Merge"
-  input: "Const_1"
+  input: "Const_2"
+  attr {
+    key: "T"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+}
+node {
+  name: "Const_3"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_DOUBLE
+        tensor_shape {
+        }
+        double_val: 1.0
+      }
+    }
+  }
+}
+node {
+  name: "output2"
+  op: "Add"
+  input: "cond_1/Merge"
+  input: "Const_3"
   attr {
     key: "T"
     value {
