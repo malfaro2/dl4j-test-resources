@@ -1,0 +1,234 @@
+node {
+  name: "Variable"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+          dim {
+            size: 1
+          }
+          dim {
+            size: 1
+          }
+        }
+        float_val: 5.0
+      }
+    }
+  }
+}
+node {
+  name: "Variable/read"
+  op: "Identity"
+  input: "Variable"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Variable"
+      }
+    }
+  }
+}
+node {
+  name: "Variable_1"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+          dim {
+            size: 1
+          }
+          dim {
+            size: 1
+          }
+        }
+        float_val: 5.0
+      }
+    }
+  }
+}
+node {
+  name: "Variable_1/read"
+  op: "Identity"
+  input: "Variable_1"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Variable_1"
+      }
+    }
+  }
+}
+node {
+  name: "Variable_2"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+          dim {
+            size: 1
+          }
+          dim {
+            size: 1
+          }
+        }
+        float_val: 5.0
+      }
+    }
+  }
+}
+node {
+  name: "Variable_2/read"
+  op: "Identity"
+  input: "Variable_2"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Variable_2"
+      }
+    }
+  }
+}
+node {
+  name: "Variable_3"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+          dim {
+            size: 1
+          }
+          dim {
+            size: 1
+          }
+        }
+        float_val: 5.0
+      }
+    }
+  }
+}
+node {
+  name: "Variable_3/read"
+  op: "Identity"
+  input: "Variable_3"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Variable_3"
+      }
+    }
+  }
+}
+node {
+  name: "output/axis"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+        }
+        int_val: 0
+      }
+    }
+  }
+}
+node {
+  name: "output"
+  op: "ConcatV2"
+  input: "Variable/read"
+  input: "Variable_1/read"
+  input: "Variable_2/read"
+  input: "Variable_3/read"
+  input: "output/axis"
+  attr {
+    key: "N"
+    value {
+      i: 4
+    }
+  }
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "Tidx"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+library {
+}
