@@ -40,7 +40,7 @@ node {
             size: 1
           }
         }
-        tensor_content: "{\033~?\372\023\234?"
+        tensor_content: "\242\032\272\277M\257\020\277"
       }
     }
   }
