@@ -583,7 +583,7 @@ node {
     key: "T"
     value {
       type: DT_DOUBLE
-    }
+    }d
   }
 }
 node {
