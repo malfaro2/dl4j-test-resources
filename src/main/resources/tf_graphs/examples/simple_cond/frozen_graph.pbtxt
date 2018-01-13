@@ -178,7 +178,7 @@ node {
   }
 }
 node {
-  name: "cond/pred_id"
+  name: "cond5/pred_id"
   op: "Identity"
   input: "Less"
   attr {
@@ -189,10 +189,50 @@ node {
   }
 }
 node {
-  name: "cond/Switch_1"
+  name: "cond5/div_f1_constant"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_DOUBLE
+        tensor_shape {
+        }
+        double_val: 2.0
+      }
+    }
+  }
+}
+node {
+  name: "cond5/div_f1_constant/read"
+  op: "Identity"
+  input: "cond5/div_f1_constant"
+  attr {
+    key: "T"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@cond5/div_f1_constant"
+      }
+    }
+  }
+}
+node {
+  name: "cond5/div/Switch"
   op: "Switch"
   input: "greater/read"
-  input: "cond/pred_id"
+  input: "cond5/pred_id"
   attr {
     key: "T"
     value {
@@ -209,10 +249,82 @@ node {
   }
 }
 node {
-  name: "cond/Switch_2"
+  name: "cond5/div/Switch_1"
+  op: "Switch"
+  input: "cond5/div_f1_constant/read"
+  input: "cond5/pred_id"
+  attr {
+    key: "T"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@cond5/div_f1_constant"
+      }
+    }
+  }
+}
+node {
+  name: "cond5/div"
+  op: "RealDiv"
+  input: "cond5/div/Switch:1"
+  input: "cond5/div/Switch_1:1"
+  attr {
+    key: "T"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+}
+node {
+  name: "cond5/mul_f2_constant"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_DOUBLE
+        tensor_shape {
+        }
+        double_val: 4.0
+      }
+    }
+  }
+}
+node {
+  name: "cond5/mul_f2_constant/read"
+  op: "Identity"
+  input: "cond5/mul_f2_constant"
+  attr {
+    key: "T"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@cond5/mul_f2_constant"
+      }
+    }
+  }
+}
+node {
+  name: "cond5/mul/Switch"
   op: "Switch"
   input: "lesser/read"
-  input: "cond/pred_id"
+  input: "cond5/pred_id"
   attr {
     key: "T"
     value {
@@ -229,10 +341,348 @@ node {
   }
 }
 node {
-  name: "cond/Merge"
+  name: "cond5/mul/Switch_1"
+  op: "Switch"
+  input: "cond5/mul_f2_constant/read"
+  input: "cond5/pred_id"
+  attr {
+    key: "T"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@cond5/mul_f2_constant"
+      }
+    }
+  }
+}
+node {
+  name: "cond5/mul"
+  op: "Mul"
+  input: "cond5/mul/Switch"
+  input: "cond5/mul/Switch_1"
+  attr {
+    key: "T"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+}
+node {
+  name: "cond5/Merge"
   op: "Merge"
-  input: "cond/Switch_2"
-  input: "cond/Switch_1:1"
+  input: "cond5/mul"
+  input: "cond5/div"
+  attr {
+    key: "N"
+    value {
+      i: 2
+    }
+  }
+  attr {
+    key: "T"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+}
+node {
+  name: "sub_1"
+  op: "Sub"
+  input: "greater/read"
+  input: "lesser/read"
+  attr {
+    key: "T"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+}
+node {
+  name: "Const_1"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+            size: 1
+          }
+        }
+        int_val: 0
+      }
+    }
+  }
+}
+node {
+  name: "Sum_1"
+  op: "Sum"
+  input: "sub_1"
+  input: "Const_1"
+  attr {
+    key: "T"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "Tidx"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "keep_dims"
+    value {
+      b: false
+    }
+  }
+}
+node {
+  name: "Less_1/y"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_DOUBLE
+        tensor_shape {
+        }
+        double_val: 2.0
+      }
+    }
+  }
+}
+node {
+  name: "Less_1"
+  op: "Less"
+  input: "Sum_1"
+  input: "Less_1/y"
+  attr {
+    key: "T"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+}
+node {
+  name: "cond6/pred_id"
+  op: "Identity"
+  input: "Less_1"
+  attr {
+    key: "T"
+    value {
+      type: DT_BOOL
+    }
+  }
+}
+node {
+  name: "cond6/div_f1_constant"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_DOUBLE
+        tensor_shape {
+        }
+        double_val: 2.0
+      }
+    }
+  }
+}
+node {
+  name: "cond6/div_f1_constant/read"
+  op: "Identity"
+  input: "cond6/div_f1_constant"
+  attr {
+    key: "T"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@cond6/div_f1_constant"
+      }
+    }
+  }
+}
+node {
+  name: "cond6/div/Switch"
+  op: "Switch"
+  input: "greater/read"
+  input: "cond6/pred_id"
+  attr {
+    key: "T"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@greater"
+      }
+    }
+  }
+}
+node {
+  name: "cond6/div/Switch_1"
+  op: "Switch"
+  input: "cond6/div_f1_constant/read"
+  input: "cond6/pred_id"
+  attr {
+    key: "T"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@cond6/div_f1_constant"
+      }
+    }
+  }
+}
+node {
+  name: "cond6/div"
+  op: "RealDiv"
+  input: "cond6/div/Switch:1"
+  input: "cond6/div/Switch_1:1"
+  attr {
+    key: "T"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+}
+node {
+  name: "cond6/mul_f2_constant"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_DOUBLE
+        tensor_shape {
+        }
+        double_val: 4.0
+      }
+    }
+  }
+}
+node {
+  name: "cond6/mul_f2_constant/read"
+  op: "Identity"
+  input: "cond6/mul_f2_constant"
+  attr {
+    key: "T"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@cond6/mul_f2_constant"
+      }
+    }
+  }
+}
+node {
+  name: "cond6/mul/Switch"
+  op: "Switch"
+  input: "lesser/read"
+  input: "cond6/pred_id"
+  attr {
+    key: "T"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@lesser"
+      }
+    }
+  }
+}
+node {
+  name: "cond6/mul/Switch_1"
+  op: "Switch"
+  input: "cond6/mul_f2_constant/read"
+  input: "cond6/pred_id"
+  attr {
+    key: "T"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@cond6/mul_f2_constant"
+      }
+    }
+  }
+}
+node {
+  name: "cond6/mul"
+  op: "Mul"
+  input: "cond6/mul/Switch"
+  input: "cond6/mul/Switch_1"
+  attr {
+    key: "T"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+}
+node {
+  name: "cond6/Merge"
+  op: "Merge"
+  input: "cond6/mul"
+  input: "cond6/div"
   attr {
     key: "N"
     value {
@@ -268,10 +718,55 @@ node {
   }
 }
 node {
+  name: "first_output_input"
+  op: "Add"
+  input: "cond5/Merge"
+  input: "Const_2"
+  attr {
+    key: "T"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+}
+node {
+  name: "Const_3"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_DOUBLE
+        tensor_shape {
+        }
+        double_val: 1.0
+      }
+    }
+  }
+}
+node {
+  name: "second_output_input"
+  op: "Add"
+  input: "cond6/Merge"
+  input: "Const_3"
+  attr {
+    key: "T"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+}
+node {
   name: "output"
   op: "Add"
-  input: "cond/Merge"
-  input: "Const_2"
+  input: "first_output_input"
+  input: "second_output_input"
   attr {
     key: "T"
     value {
