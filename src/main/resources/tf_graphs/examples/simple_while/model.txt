@@ -100,7 +100,7 @@ node {
   }
 }
 node {
-  name: "loop_result/Enter"
+  name: "output/Enter"
   op: "Enter"
   input: "loop_var/read"
   attr {
@@ -112,7 +112,7 @@ node {
   attr {
     key: "frame_name"
     value {
-      s: "loop_result/loop_result/"
+      s: "output/output/"
     }
   }
   attr {
@@ -129,10 +129,10 @@ node {
   }
 }
 node {
-  name: "loop_result/Merge"
+  name: "output/Merge"
   op: "Merge"
-  input: "loop_result/Enter"
-  input: "loop_result/NextIteration"
+  input: "output/Enter"
+  input: "output/NextIteration"
   attr {
     key: "N"
     value {
@@ -147,9 +147,9 @@ node {
   }
 }
 node {
-  name: "loop_result/Less/y"
+  name: "output/Less/y"
   op: "Const"
-  input: "^loop_result/Merge"
+  input: "^output/Merge"
   attr {
     key: "dtype"
     value {
@@ -169,10 +169,10 @@ node {
   }
 }
 node {
-  name: "loop_result/Less"
+  name: "output/Less"
   op: "Less"
-  input: "loop_result/Merge"
-  input: "loop_result/Less/y"
+  input: "output/Merge"
+  input: "output/Less/y"
   attr {
     key: "T"
     value {
@@ -181,15 +181,15 @@ node {
   }
 }
 node {
-  name: "loop_result/LoopCond"
+  name: "output/LoopCond"
   op: "LoopCond"
-  input: "loop_result/Less"
+  input: "output/Less"
 }
 node {
-  name: "loop_result/Switch"
+  name: "output/Switch"
   op: "Switch"
-  input: "loop_result/Merge"
-  input: "loop_result/LoopCond"
+  input: "output/Merge"
+  input: "output/LoopCond"
   attr {
     key: "T"
     value {
@@ -200,15 +200,15 @@ node {
     key: "_class"
     value {
       list {
-        s: "loc:@loop_result/Merge"
+        s: "loc:@output/Merge"
       }
     }
   }
 }
 node {
-  name: "loop_result/Identity"
+  name: "output/Identity"
   op: "Identity"
-  input: "loop_result/Switch:1"
+  input: "output/Switch:1"
   attr {
     key: "T"
     value {
@@ -217,9 +217,9 @@ node {
   }
 }
 node {
-  name: "loop_result/Add/y"
+  name: "output/Add/y"
   op: "Const"
-  input: "^loop_result/Identity"
+  input: "^output/Identity"
   attr {
     key: "dtype"
     value {
@@ -239,10 +239,10 @@ node {
   }
 }
 node {
-  name: "loop_result/Add"
+  name: "output/Add"
   op: "Add"
-  input: "loop_result/Identity"
-  input: "loop_result/Add/y"
+  input: "output/Identity"
+  input: "output/Add/y"
   attr {
     key: "T"
     value {
@@ -251,9 +251,9 @@ node {
   }
 }
 node {
-  name: "loop_result/NextIteration"
+  name: "output/NextIteration"
   op: "NextIteration"
-  input: "loop_result/Add"
+  input: "output/Add"
   attr {
     key: "T"
     value {
@@ -262,9 +262,9 @@ node {
   }
 }
 node {
-  name: "loop_result/Exit"
+  name: "output/Exit"
   op: "Exit"
-  input: "loop_result/Switch"
+  input: "output/Switch"
   attr {
     key: "T"
     value {
