@@ -112,13 +112,13 @@ node {
   attr {
     key: "seed"
     value {
-      i: 0
+      i: 13
     }
   }
   attr {
     key: "seed2"
     value {
-      i: 0
+      i: 13
     }
   }
 }
@@ -681,13 +681,13 @@ node {
   attr {
     key: "seed"
     value {
-      i: 0
+      i: 13
     }
   }
   attr {
     key: "seed2"
     value {
-      i: 0
+      i: 17
     }
   }
 }
@@ -820,7 +820,7 @@ node {
   }
 }
 node {
-  name: "output/Shape"
+  name: "convolution/Shape"
   op: "Const"
   attr {
     key: "dtype"
@@ -844,7 +844,7 @@ node {
   }
 }
 node {
-  name: "output/dilation_rate"
+  name: "convolution/dilation_rate"
   op: "Const"
   attr {
     key: "dtype"
@@ -868,7 +868,7 @@ node {
   }
 }
 node {
-  name: "output/required_space_to_batch_paddings/input_shape"
+  name: "convolution/required_space_to_batch_paddings/input_shape"
   op: "Const"
   attr {
     key: "dtype"
@@ -892,7 +892,7 @@ node {
   }
 }
 node {
-  name: "output/required_space_to_batch_paddings/base_paddings"
+  name: "convolution/required_space_to_batch_paddings/base_paddings"
   op: "Const"
   attr {
     key: "dtype"
@@ -919,7 +919,7 @@ node {
   }
 }
 node {
-  name: "output/required_space_to_batch_paddings/paddings"
+  name: "convolution/required_space_to_batch_paddings/paddings"
   op: "Const"
   attr {
     key: "dtype"
@@ -946,7 +946,7 @@ node {
   }
 }
 node {
-  name: "output/required_space_to_batch_paddings/crops"
+  name: "convolution/required_space_to_batch_paddings/crops"
   op: "Const"
   attr {
     key: "dtype"
@@ -973,7 +973,7 @@ node {
   }
 }
 node {
-  name: "output/SpaceToBatchND/block_shape"
+  name: "convolution/SpaceToBatchND/block_shape"
   op: "Const"
   attr {
     key: "dtype"
@@ -997,7 +997,7 @@ node {
   }
 }
 node {
-  name: "output/SpaceToBatchND/paddings"
+  name: "convolution/SpaceToBatchND/paddings"
   op: "Const"
   attr {
     key: "dtype"
@@ -1024,11 +1024,11 @@ node {
   }
 }
 node {
-  name: "output/SpaceToBatchND"
+  name: "convolution/SpaceToBatchND"
   op: "SpaceToBatchND"
   input: "atrous_one/BatchToSpaceND"
-  input: "output/SpaceToBatchND/block_shape"
-  input: "output/SpaceToBatchND/paddings"
+  input: "convolution/SpaceToBatchND/block_shape"
+  input: "convolution/SpaceToBatchND/paddings"
   attr {
     key: "T"
     value {
@@ -1049,9 +1049,9 @@ node {
   }
 }
 node {
-  name: "output"
+  name: "convolution"
   op: "Conv2D"
-  input: "output/SpaceToBatchND"
+  input: "convolution/SpaceToBatchND"
   input: "filter2/read"
   attr {
     key: "T"
@@ -1090,7 +1090,7 @@ node {
   }
 }
 node {
-  name: "output/BatchToSpaceND/block_shape"
+  name: "convolution/BatchToSpaceND/block_shape"
   op: "Const"
   attr {
     key: "dtype"
@@ -1114,7 +1114,7 @@ node {
   }
 }
 node {
-  name: "output/BatchToSpaceND/crops"
+  name: "convolution/BatchToSpaceND/crops"
   op: "Const"
   attr {
     key: "dtype"
@@ -1141,11 +1141,11 @@ node {
   }
 }
 node {
-  name: "output/BatchToSpaceND"
+  name: "convolution/BatchToSpaceND"
   op: "BatchToSpaceND"
-  input: "output"
-  input: "output/BatchToSpaceND/block_shape"
-  input: "output/BatchToSpaceND/crops"
+  input: "convolution"
+  input: "convolution/BatchToSpaceND/block_shape"
+  input: "convolution/BatchToSpaceND/crops"
   attr {
     key: "T"
     value {
@@ -1162,6 +1162,17 @@ node {
     key: "Tcrops"
     value {
       type: DT_INT32
+    }
+  }
+}
+node {
+  name: "output"
+  op: "Identity"
+  input: "convolution/BatchToSpaceND"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
     }
   }
 }
