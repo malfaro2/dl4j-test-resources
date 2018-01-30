@@ -4,7 +4,7 @@ node {
   attr {
     key: "dtype"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -65,14 +65,31 @@ node {
   }
 }
 node {
+  name: "Cast"
+  op: "Cast"
+  input: "bias/read"
+  attr {
+    key: "DstT"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "SrcT"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
   name: "output"
   op: "BiasAdd"
   input: "input"
-  input: "bias/read"
+  input: "Cast"
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
