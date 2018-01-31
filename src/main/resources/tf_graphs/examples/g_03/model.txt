@@ -4,7 +4,7 @@ node {
   attr {
     key: "dtype"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -57,17 +57,17 @@ node {
   attr {
     key: "dtype"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
     key: "value"
     value {
       tensor {
-        dtype: DT_FLOAT
+        dtype: DT_DOUBLE
         tensor_shape {
         }
-        float_val: 0.0
+        double_val: 0.0
       }
     }
   }
@@ -78,17 +78,17 @@ node {
   attr {
     key: "dtype"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
     key: "value"
     value {
       tensor {
-        dtype: DT_FLOAT
+        dtype: DT_DOUBLE
         tensor_shape {
         }
-        float_val: 1.0
+        double_val: 1.0
       }
     }
   }
@@ -106,19 +106,19 @@ node {
   attr {
     key: "dtype"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
     key: "seed"
     value {
-      i: 0
+      i: 13
     }
   }
   attr {
     key: "seed2"
     value {
-      i: 0
+      i: 4
     }
   }
 }
@@ -130,7 +130,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
 }
@@ -142,7 +142,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
 }
@@ -158,7 +158,7 @@ node {
   attr {
     key: "dtype"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -189,7 +189,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -220,7 +220,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -239,7 +239,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -278,7 +278,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -332,7 +332,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -349,7 +349,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
 }
@@ -360,7 +360,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
 }
@@ -372,7 +372,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
 }
@@ -461,7 +461,7 @@ node {
     key: "dtypes"
     value {
       list {
-        type: DT_FLOAT
+        type: DT_DOUBLE
       }
     }
   }
@@ -544,7 +544,7 @@ node {
     key: "dtypes"
     value {
       list {
-        type: DT_FLOAT
+        type: DT_DOUBLE
       }
     }
   }
@@ -557,7 +557,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {

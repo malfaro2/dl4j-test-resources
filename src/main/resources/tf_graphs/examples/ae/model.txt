@@ -28,17 +28,17 @@ node {
   attr {
     key: "dtype"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
     key: "value"
     value {
       tensor {
-        dtype: DT_FLOAT
+        dtype: DT_DOUBLE
         tensor_shape {
         }
-        float_val: 0.0
+        double_val: 0.0
       }
     }
   }
@@ -49,17 +49,17 @@ node {
   attr {
     key: "dtype"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
     key: "value"
     value {
       tensor {
-        dtype: DT_FLOAT
+        dtype: DT_DOUBLE
         tensor_shape {
         }
-        float_val: 1.0
+        double_val: 1.0
       }
     }
   }
@@ -77,7 +77,7 @@ node {
   attr {
     key: "dtype"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -101,7 +101,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
 }
@@ -113,7 +113,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
 }
@@ -129,7 +129,7 @@ node {
   attr {
     key: "dtype"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -160,7 +160,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -191,7 +191,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -233,17 +233,17 @@ node {
   attr {
     key: "dtype"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
     key: "value"
     value {
       tensor {
-        dtype: DT_FLOAT
+        dtype: DT_DOUBLE
         tensor_shape {
         }
-        float_val: 0.0
+        double_val: 0.0
       }
     }
   }
@@ -254,17 +254,17 @@ node {
   attr {
     key: "dtype"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
     key: "value"
     value {
       tensor {
-        dtype: DT_FLOAT
+        dtype: DT_DOUBLE
         tensor_shape {
         }
-        float_val: 1.0
+        double_val: 1.0
       }
     }
   }
@@ -282,7 +282,7 @@ node {
   attr {
     key: "dtype"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -306,7 +306,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
 }
@@ -318,7 +318,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
 }
@@ -334,7 +334,7 @@ node {
   attr {
     key: "dtype"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -365,7 +365,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -396,7 +396,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -438,17 +438,17 @@ node {
   attr {
     key: "dtype"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
     key: "value"
     value {
       tensor {
-        dtype: DT_FLOAT
+        dtype: DT_DOUBLE
         tensor_shape {
         }
-        float_val: 0.0
+        double_val: 0.0
       }
     }
   }
@@ -459,17 +459,17 @@ node {
   attr {
     key: "dtype"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
     key: "value"
     value {
       tensor {
-        dtype: DT_FLOAT
+        dtype: DT_DOUBLE
         tensor_shape {
         }
-        float_val: 1.0
+        double_val: 1.0
       }
     }
   }
@@ -487,7 +487,7 @@ node {
   attr {
     key: "dtype"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -511,7 +511,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
 }
@@ -523,7 +523,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
 }
@@ -539,7 +539,7 @@ node {
   attr {
     key: "dtype"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -570,7 +570,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -601,7 +601,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -643,17 +643,17 @@ node {
   attr {
     key: "dtype"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
     key: "value"
     value {
       tensor {
-        dtype: DT_FLOAT
+        dtype: DT_DOUBLE
         tensor_shape {
         }
-        float_val: 0.0
+        double_val: 0.0
       }
     }
   }
@@ -664,17 +664,17 @@ node {
   attr {
     key: "dtype"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
     key: "value"
     value {
       tensor {
-        dtype: DT_FLOAT
+        dtype: DT_DOUBLE
         tensor_shape {
         }
-        float_val: 1.0
+        double_val: 1.0
       }
     }
   }
@@ -692,7 +692,7 @@ node {
   attr {
     key: "dtype"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -716,7 +716,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
 }
@@ -728,7 +728,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
 }
@@ -744,7 +744,7 @@ node {
   attr {
     key: "dtype"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -775,7 +775,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -806,7 +806,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -848,17 +848,17 @@ node {
   attr {
     key: "dtype"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
     key: "value"
     value {
       tensor {
-        dtype: DT_FLOAT
+        dtype: DT_DOUBLE
         tensor_shape {
         }
-        float_val: 0.0
+        double_val: 0.0
       }
     }
   }
@@ -869,17 +869,17 @@ node {
   attr {
     key: "dtype"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
     key: "value"
     value {
       tensor {
-        dtype: DT_FLOAT
+        dtype: DT_DOUBLE
         tensor_shape {
         }
-        float_val: 1.0
+        double_val: 1.0
       }
     }
   }
@@ -897,7 +897,7 @@ node {
   attr {
     key: "dtype"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -921,7 +921,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
 }
@@ -933,7 +933,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
 }
@@ -949,7 +949,7 @@ node {
   attr {
     key: "dtype"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -977,7 +977,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -1008,7 +1008,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -1050,17 +1050,17 @@ node {
   attr {
     key: "dtype"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
     key: "value"
     value {
       tensor {
-        dtype: DT_FLOAT
+        dtype: DT_DOUBLE
         tensor_shape {
         }
-        float_val: 0.0
+        double_val: 0.0
       }
     }
   }
@@ -1071,17 +1071,17 @@ node {
   attr {
     key: "dtype"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
     key: "value"
     value {
       tensor {
-        dtype: DT_FLOAT
+        dtype: DT_DOUBLE
         tensor_shape {
         }
-        float_val: 1.0
+        double_val: 1.0
       }
     }
   }
@@ -1099,7 +1099,7 @@ node {
   attr {
     key: "dtype"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -1123,7 +1123,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
 }
@@ -1135,7 +1135,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
 }
@@ -1151,7 +1151,7 @@ node {
   attr {
     key: "dtype"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -1179,7 +1179,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -1210,7 +1210,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -1252,17 +1252,17 @@ node {
   attr {
     key: "dtype"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
     key: "value"
     value {
       tensor {
-        dtype: DT_FLOAT
+        dtype: DT_DOUBLE
         tensor_shape {
         }
-        float_val: 0.0
+        double_val: 0.0
       }
     }
   }
@@ -1273,17 +1273,17 @@ node {
   attr {
     key: "dtype"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
     key: "value"
     value {
       tensor {
-        dtype: DT_FLOAT
+        dtype: DT_DOUBLE
         tensor_shape {
         }
-        float_val: 1.0
+        double_val: 1.0
       }
     }
   }
@@ -1301,7 +1301,7 @@ node {
   attr {
     key: "dtype"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -1325,7 +1325,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
 }
@@ -1337,7 +1337,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
 }
@@ -1353,7 +1353,7 @@ node {
   attr {
     key: "dtype"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -1381,7 +1381,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -1412,7 +1412,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -1454,17 +1454,17 @@ node {
   attr {
     key: "dtype"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
     key: "value"
     value {
       tensor {
-        dtype: DT_FLOAT
+        dtype: DT_DOUBLE
         tensor_shape {
         }
-        float_val: 0.0
+        double_val: 0.0
       }
     }
   }
@@ -1475,17 +1475,17 @@ node {
   attr {
     key: "dtype"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
     key: "value"
     value {
       tensor {
-        dtype: DT_FLOAT
+        dtype: DT_DOUBLE
         tensor_shape {
         }
-        float_val: 1.0
+        double_val: 1.0
       }
     }
   }
@@ -1503,7 +1503,7 @@ node {
   attr {
     key: "dtype"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -1527,7 +1527,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
 }
@@ -1539,7 +1539,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
 }
@@ -1555,7 +1555,7 @@ node {
   attr {
     key: "dtype"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -1583,7 +1583,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -1614,7 +1614,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -1632,7 +1632,7 @@ node {
   attr {
     key: "dtype"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -1657,7 +1657,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -1681,7 +1681,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
 }
@@ -1692,7 +1692,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
 }
@@ -1704,7 +1704,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -1728,7 +1728,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
 }
@@ -1739,7 +1739,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
 }
@@ -1751,7 +1751,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -1775,7 +1775,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
 }
@@ -1786,7 +1786,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
 }
@@ -1798,7 +1798,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -1822,7 +1822,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
 }
@@ -1833,7 +1833,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
 }
@@ -1845,7 +1845,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
 }
@@ -1855,17 +1855,17 @@ node {
   attr {
     key: "dtype"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
     key: "value"
     value {
       tensor {
-        dtype: DT_FLOAT
+        dtype: DT_DOUBLE
         tensor_shape {
         }
-        float_val: 2.0
+        double_val: 2.0
       }
     }
   }
@@ -1878,7 +1878,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
 }
@@ -1914,7 +1914,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -1958,17 +1958,17 @@ node {
   attr {
     key: "dtype"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
     key: "value"
     value {
       tensor {
-        dtype: DT_FLOAT
+        dtype: DT_DOUBLE
         tensor_shape {
         }
-        float_val: 1.0
+        double_val: 1.0
       }
     }
   }
@@ -1981,7 +1981,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
 }
@@ -2017,7 +2017,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -2034,7 +2034,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -2052,7 +2052,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -2069,7 +2069,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -2249,7 +2249,7 @@ node {
   attr {
     key: "DstT"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -2267,7 +2267,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
 }
@@ -2278,7 +2278,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -2330,7 +2330,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
 }
@@ -2340,17 +2340,17 @@ node {
   attr {
     key: "dtype"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
     key: "value"
     value {
       tensor {
-        dtype: DT_FLOAT
+        dtype: DT_DOUBLE
         tensor_shape {
         }
-        float_val: 1.0
+        double_val: 1.0
       }
     }
   }
@@ -2363,7 +2363,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
 }
@@ -2375,7 +2375,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
 }
@@ -2387,7 +2387,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
 }
@@ -2399,7 +2399,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -2423,7 +2423,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -2439,17 +2439,17 @@ node {
   attr {
     key: "dtype"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
     key: "value"
     value {
       tensor {
-        dtype: DT_FLOAT
+        dtype: DT_DOUBLE
         tensor_shape {
         }
-        float_val: 0.0
+        double_val: 0.0
       }
     }
   }
@@ -2462,7 +2462,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
 }
@@ -2473,7 +2473,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
 }
@@ -2484,7 +2484,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
 }
@@ -2497,7 +2497,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
 }
@@ -2509,7 +2509,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
 }
@@ -2521,7 +2521,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
 }
@@ -2533,7 +2533,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -2557,7 +2557,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -2581,7 +2581,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -2601,7 +2601,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -2620,7 +2620,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -2637,7 +2637,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -2667,7 +2667,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -2691,7 +2691,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -2709,7 +2709,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -2732,7 +2732,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
 }
@@ -2744,7 +2744,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -2768,7 +2768,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -2788,7 +2788,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -2808,7 +2808,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
 }
@@ -2819,7 +2819,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -2873,7 +2873,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -2897,7 +2897,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -2915,7 +2915,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -2939,7 +2939,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -2963,7 +2963,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -2983,7 +2983,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -3003,7 +3003,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -3027,7 +3027,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -3057,7 +3057,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -3077,7 +3077,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -3097,7 +3097,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
 }
@@ -3108,7 +3108,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -3162,7 +3162,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -3186,7 +3186,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -3204,7 +3204,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -3228,7 +3228,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -3252,7 +3252,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -3272,7 +3272,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -3292,7 +3292,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -3316,7 +3316,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -3346,7 +3346,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -3366,7 +3366,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -3386,7 +3386,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
 }
@@ -3397,7 +3397,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -3451,7 +3451,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -3475,7 +3475,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -3493,7 +3493,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -3517,7 +3517,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -3541,7 +3541,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -3561,7 +3561,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -3581,7 +3581,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -3605,7 +3605,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -3635,7 +3635,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -3655,7 +3655,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -3675,7 +3675,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
 }
@@ -3686,7 +3686,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -3740,7 +3740,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -3764,7 +3764,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -3782,7 +3782,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -3806,7 +3806,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -3830,7 +3830,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -3850,7 +3850,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -3870,7 +3870,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -3894,7 +3894,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -3924,7 +3924,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -3944,7 +3944,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -4204,14 +4204,14 @@ node {
   attr {
     key: "dtype"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
     key: "value"
     value {
       tensor {
-        dtype: DT_FLOAT
+        dtype: DT_DOUBLE
         tensor_shape {
           dim {
             size: 676
@@ -4220,7 +4220,7 @@ node {
             size: 60
           }
         }
-        float_val: 0.0
+        double_val: 0.0
       }
     }
   }
@@ -4245,7 +4245,7 @@ node {
   attr {
     key: "dtype"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -4276,7 +4276,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -4307,7 +4307,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -4333,14 +4333,14 @@ node {
   attr {
     key: "dtype"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
     key: "value"
     value {
       tensor {
-        dtype: DT_FLOAT
+        dtype: DT_DOUBLE
         tensor_shape {
           dim {
             size: 676
@@ -4349,7 +4349,7 @@ node {
             size: 60
           }
         }
-        float_val: 0.0
+        double_val: 0.0
       }
     }
   }
@@ -4374,7 +4374,7 @@ node {
   attr {
     key: "dtype"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -4405,7 +4405,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -4436,7 +4436,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -4462,14 +4462,14 @@ node {
   attr {
     key: "dtype"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
     key: "value"
     value {
       tensor {
-        dtype: DT_FLOAT
+        dtype: DT_DOUBLE
         tensor_shape {
           dim {
             size: 60
@@ -4478,7 +4478,7 @@ node {
             size: 2
           }
         }
-        float_val: 0.0
+        double_val: 0.0
       }
     }
   }
@@ -4503,7 +4503,7 @@ node {
   attr {
     key: "dtype"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -4534,7 +4534,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -4565,7 +4565,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -4591,14 +4591,14 @@ node {
   attr {
     key: "dtype"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
     key: "value"
     value {
       tensor {
-        dtype: DT_FLOAT
+        dtype: DT_DOUBLE
         tensor_shape {
           dim {
             size: 60
@@ -4607,7 +4607,7 @@ node {
             size: 2
           }
         }
-        float_val: 0.0
+        double_val: 0.0
       }
     }
   }
@@ -4632,7 +4632,7 @@ node {
   attr {
     key: "dtype"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -4663,7 +4663,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -4694,7 +4694,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -4720,14 +4720,14 @@ node {
   attr {
     key: "dtype"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
     key: "value"
     value {
       tensor {
-        dtype: DT_FLOAT
+        dtype: DT_DOUBLE
         tensor_shape {
           dim {
             size: 2
@@ -4736,7 +4736,7 @@ node {
             size: 60
           }
         }
-        float_val: 0.0
+        double_val: 0.0
       }
     }
   }
@@ -4761,7 +4761,7 @@ node {
   attr {
     key: "dtype"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -4792,7 +4792,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -4823,7 +4823,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -4849,14 +4849,14 @@ node {
   attr {
     key: "dtype"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
     key: "value"
     value {
       tensor {
-        dtype: DT_FLOAT
+        dtype: DT_DOUBLE
         tensor_shape {
           dim {
             size: 2
@@ -4865,7 +4865,7 @@ node {
             size: 60
           }
         }
-        float_val: 0.0
+        double_val: 0.0
       }
     }
   }
@@ -4890,7 +4890,7 @@ node {
   attr {
     key: "dtype"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -4921,7 +4921,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -4952,7 +4952,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -4978,14 +4978,14 @@ node {
   attr {
     key: "dtype"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
     key: "value"
     value {
       tensor {
-        dtype: DT_FLOAT
+        dtype: DT_DOUBLE
         tensor_shape {
           dim {
             size: 60
@@ -4994,7 +4994,7 @@ node {
             size: 676
           }
         }
-        float_val: 0.0
+        double_val: 0.0
       }
     }
   }
@@ -5019,7 +5019,7 @@ node {
   attr {
     key: "dtype"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -5050,7 +5050,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -5081,7 +5081,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -5107,14 +5107,14 @@ node {
   attr {
     key: "dtype"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
     key: "value"
     value {
       tensor {
-        dtype: DT_FLOAT
+        dtype: DT_DOUBLE
         tensor_shape {
           dim {
             size: 60
@@ -5123,7 +5123,7 @@ node {
             size: 676
           }
         }
-        float_val: 0.0
+        double_val: 0.0
       }
     }
   }
@@ -5148,7 +5148,7 @@ node {
   attr {
     key: "dtype"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -5179,7 +5179,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -5210,7 +5210,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -5236,20 +5236,20 @@ node {
   attr {
     key: "dtype"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
     key: "value"
     value {
       tensor {
-        dtype: DT_FLOAT
+        dtype: DT_DOUBLE
         tensor_shape {
           dim {
             size: 60
           }
         }
-        float_val: 0.0
+        double_val: 0.0
       }
     }
   }
@@ -5274,7 +5274,7 @@ node {
   attr {
     key: "dtype"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -5302,7 +5302,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -5333,7 +5333,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -5359,20 +5359,20 @@ node {
   attr {
     key: "dtype"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
     key: "value"
     value {
       tensor {
-        dtype: DT_FLOAT
+        dtype: DT_DOUBLE
         tensor_shape {
           dim {
             size: 60
           }
         }
-        float_val: 0.0
+        double_val: 0.0
       }
     }
   }
@@ -5397,7 +5397,7 @@ node {
   attr {
     key: "dtype"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -5425,7 +5425,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -5456,7 +5456,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -5482,20 +5482,20 @@ node {
   attr {
     key: "dtype"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
     key: "value"
     value {
       tensor {
-        dtype: DT_FLOAT
+        dtype: DT_DOUBLE
         tensor_shape {
           dim {
             size: 2
           }
         }
-        float_val: 0.0
+        double_val: 0.0
       }
     }
   }
@@ -5520,7 +5520,7 @@ node {
   attr {
     key: "dtype"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -5548,7 +5548,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -5579,7 +5579,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -5605,20 +5605,20 @@ node {
   attr {
     key: "dtype"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
     key: "value"
     value {
       tensor {
-        dtype: DT_FLOAT
+        dtype: DT_DOUBLE
         tensor_shape {
           dim {
             size: 2
           }
         }
-        float_val: 0.0
+        double_val: 0.0
       }
     }
   }
@@ -5643,7 +5643,7 @@ node {
   attr {
     key: "dtype"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -5671,7 +5671,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -5702,7 +5702,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -5728,20 +5728,20 @@ node {
   attr {
     key: "dtype"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
     key: "value"
     value {
       tensor {
-        dtype: DT_FLOAT
+        dtype: DT_DOUBLE
         tensor_shape {
           dim {
             size: 60
           }
         }
-        float_val: 0.0
+        double_val: 0.0
       }
     }
   }
@@ -5766,7 +5766,7 @@ node {
   attr {
     key: "dtype"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -5794,7 +5794,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -5825,7 +5825,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -5851,20 +5851,20 @@ node {
   attr {
     key: "dtype"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
     key: "value"
     value {
       tensor {
-        dtype: DT_FLOAT
+        dtype: DT_DOUBLE
         tensor_shape {
           dim {
             size: 60
           }
         }
-        float_val: 0.0
+        double_val: 0.0
       }
     }
   }
@@ -5889,7 +5889,7 @@ node {
   attr {
     key: "dtype"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -5917,7 +5917,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -5948,7 +5948,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -5974,20 +5974,20 @@ node {
   attr {
     key: "dtype"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
     key: "value"
     value {
       tensor {
-        dtype: DT_FLOAT
+        dtype: DT_DOUBLE
         tensor_shape {
           dim {
             size: 676
           }
         }
-        float_val: 0.0
+        double_val: 0.0
       }
     }
   }
@@ -6012,7 +6012,7 @@ node {
   attr {
     key: "dtype"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -6040,7 +6040,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -6071,7 +6071,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -6097,20 +6097,20 @@ node {
   attr {
     key: "dtype"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
     key: "value"
     value {
       tensor {
-        dtype: DT_FLOAT
+        dtype: DT_DOUBLE
         tensor_shape {
           dim {
             size: 676
           }
         }
-        float_val: 0.0
+        double_val: 0.0
       }
     }
   }
@@ -6135,7 +6135,7 @@ node {
   attr {
     key: "dtype"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -6163,7 +6163,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -6194,7 +6194,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -6291,22 +6291,172 @@ node {
   }
 }
 node {
+  name: "Adam/update_Variable/Cast"
+  op: "Cast"
+  input: "beta1_power/read"
+  attr {
+    key: "DstT"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "SrcT"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Variable"
+      }
+    }
+  }
+}
+node {
+  name: "Adam/update_Variable/Cast_1"
+  op: "Cast"
+  input: "beta2_power/read"
+  attr {
+    key: "DstT"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "SrcT"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Variable"
+      }
+    }
+  }
+}
+node {
+  name: "Adam/update_Variable/Cast_2"
+  op: "Cast"
+  input: "Adam/learning_rate"
+  attr {
+    key: "DstT"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "SrcT"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Variable"
+      }
+    }
+  }
+}
+node {
+  name: "Adam/update_Variable/Cast_3"
+  op: "Cast"
+  input: "Adam/beta1"
+  attr {
+    key: "DstT"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "SrcT"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Variable"
+      }
+    }
+  }
+}
+node {
+  name: "Adam/update_Variable/Cast_4"
+  op: "Cast"
+  input: "Adam/beta2"
+  attr {
+    key: "DstT"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "SrcT"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Variable"
+      }
+    }
+  }
+}
+node {
+  name: "Adam/update_Variable/Cast_5"
+  op: "Cast"
+  input: "Adam/epsilon"
+  attr {
+    key: "DstT"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "SrcT"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Variable"
+      }
+    }
+  }
+}
+node {
   name: "Adam/update_Variable/ApplyAdam"
   op: "ApplyAdam"
   input: "Variable"
   input: "Variable/Adam"
   input: "Variable/Adam_1"
-  input: "beta1_power/read"
-  input: "beta2_power/read"
-  input: "Adam/learning_rate"
-  input: "Adam/beta1"
-  input: "Adam/beta2"
-  input: "Adam/epsilon"
+  input: "Adam/update_Variable/Cast"
+  input: "Adam/update_Variable/Cast_1"
+  input: "Adam/update_Variable/Cast_2"
+  input: "Adam/update_Variable/Cast_3"
+  input: "Adam/update_Variable/Cast_4"
+  input: "Adam/update_Variable/Cast_5"
   input: "gradients/MatMul_grad/tuple/control_dependency_1"
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -6331,22 +6481,172 @@ node {
   }
 }
 node {
+  name: "Adam/update_Variable_1/Cast"
+  op: "Cast"
+  input: "beta1_power/read"
+  attr {
+    key: "DstT"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "SrcT"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Variable_1"
+      }
+    }
+  }
+}
+node {
+  name: "Adam/update_Variable_1/Cast_1"
+  op: "Cast"
+  input: "beta2_power/read"
+  attr {
+    key: "DstT"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "SrcT"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Variable_1"
+      }
+    }
+  }
+}
+node {
+  name: "Adam/update_Variable_1/Cast_2"
+  op: "Cast"
+  input: "Adam/learning_rate"
+  attr {
+    key: "DstT"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "SrcT"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Variable_1"
+      }
+    }
+  }
+}
+node {
+  name: "Adam/update_Variable_1/Cast_3"
+  op: "Cast"
+  input: "Adam/beta1"
+  attr {
+    key: "DstT"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "SrcT"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Variable_1"
+      }
+    }
+  }
+}
+node {
+  name: "Adam/update_Variable_1/Cast_4"
+  op: "Cast"
+  input: "Adam/beta2"
+  attr {
+    key: "DstT"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "SrcT"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Variable_1"
+      }
+    }
+  }
+}
+node {
+  name: "Adam/update_Variable_1/Cast_5"
+  op: "Cast"
+  input: "Adam/epsilon"
+  attr {
+    key: "DstT"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "SrcT"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Variable_1"
+      }
+    }
+  }
+}
+node {
   name: "Adam/update_Variable_1/ApplyAdam"
   op: "ApplyAdam"
   input: "Variable_1"
   input: "Variable_1/Adam"
   input: "Variable_1/Adam_1"
-  input: "beta1_power/read"
-  input: "beta2_power/read"
-  input: "Adam/learning_rate"
-  input: "Adam/beta1"
-  input: "Adam/beta2"
-  input: "Adam/epsilon"
+  input: "Adam/update_Variable_1/Cast"
+  input: "Adam/update_Variable_1/Cast_1"
+  input: "Adam/update_Variable_1/Cast_2"
+  input: "Adam/update_Variable_1/Cast_3"
+  input: "Adam/update_Variable_1/Cast_4"
+  input: "Adam/update_Variable_1/Cast_5"
   input: "gradients/MatMul_1_grad/tuple/control_dependency_1"
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -6371,22 +6671,172 @@ node {
   }
 }
 node {
+  name: "Adam/update_Variable_2/Cast"
+  op: "Cast"
+  input: "beta1_power/read"
+  attr {
+    key: "DstT"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "SrcT"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Variable_2"
+      }
+    }
+  }
+}
+node {
+  name: "Adam/update_Variable_2/Cast_1"
+  op: "Cast"
+  input: "beta2_power/read"
+  attr {
+    key: "DstT"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "SrcT"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Variable_2"
+      }
+    }
+  }
+}
+node {
+  name: "Adam/update_Variable_2/Cast_2"
+  op: "Cast"
+  input: "Adam/learning_rate"
+  attr {
+    key: "DstT"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "SrcT"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Variable_2"
+      }
+    }
+  }
+}
+node {
+  name: "Adam/update_Variable_2/Cast_3"
+  op: "Cast"
+  input: "Adam/beta1"
+  attr {
+    key: "DstT"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "SrcT"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Variable_2"
+      }
+    }
+  }
+}
+node {
+  name: "Adam/update_Variable_2/Cast_4"
+  op: "Cast"
+  input: "Adam/beta2"
+  attr {
+    key: "DstT"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "SrcT"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Variable_2"
+      }
+    }
+  }
+}
+node {
+  name: "Adam/update_Variable_2/Cast_5"
+  op: "Cast"
+  input: "Adam/epsilon"
+  attr {
+    key: "DstT"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "SrcT"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Variable_2"
+      }
+    }
+  }
+}
+node {
   name: "Adam/update_Variable_2/ApplyAdam"
   op: "ApplyAdam"
   input: "Variable_2"
   input: "Variable_2/Adam"
   input: "Variable_2/Adam_1"
-  input: "beta1_power/read"
-  input: "beta2_power/read"
-  input: "Adam/learning_rate"
-  input: "Adam/beta1"
-  input: "Adam/beta2"
-  input: "Adam/epsilon"
+  input: "Adam/update_Variable_2/Cast"
+  input: "Adam/update_Variable_2/Cast_1"
+  input: "Adam/update_Variable_2/Cast_2"
+  input: "Adam/update_Variable_2/Cast_3"
+  input: "Adam/update_Variable_2/Cast_4"
+  input: "Adam/update_Variable_2/Cast_5"
   input: "gradients/MatMul_2_grad/tuple/control_dependency_1"
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -6411,22 +6861,172 @@ node {
   }
 }
 node {
+  name: "Adam/update_Variable_3/Cast"
+  op: "Cast"
+  input: "beta1_power/read"
+  attr {
+    key: "DstT"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "SrcT"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Variable_3"
+      }
+    }
+  }
+}
+node {
+  name: "Adam/update_Variable_3/Cast_1"
+  op: "Cast"
+  input: "beta2_power/read"
+  attr {
+    key: "DstT"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "SrcT"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Variable_3"
+      }
+    }
+  }
+}
+node {
+  name: "Adam/update_Variable_3/Cast_2"
+  op: "Cast"
+  input: "Adam/learning_rate"
+  attr {
+    key: "DstT"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "SrcT"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Variable_3"
+      }
+    }
+  }
+}
+node {
+  name: "Adam/update_Variable_3/Cast_3"
+  op: "Cast"
+  input: "Adam/beta1"
+  attr {
+    key: "DstT"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "SrcT"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Variable_3"
+      }
+    }
+  }
+}
+node {
+  name: "Adam/update_Variable_3/Cast_4"
+  op: "Cast"
+  input: "Adam/beta2"
+  attr {
+    key: "DstT"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "SrcT"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Variable_3"
+      }
+    }
+  }
+}
+node {
+  name: "Adam/update_Variable_3/Cast_5"
+  op: "Cast"
+  input: "Adam/epsilon"
+  attr {
+    key: "DstT"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "SrcT"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Variable_3"
+      }
+    }
+  }
+}
+node {
   name: "Adam/update_Variable_3/ApplyAdam"
   op: "ApplyAdam"
   input: "Variable_3"
   input: "Variable_3/Adam"
   input: "Variable_3/Adam_1"
-  input: "beta1_power/read"
-  input: "beta2_power/read"
-  input: "Adam/learning_rate"
-  input: "Adam/beta1"
-  input: "Adam/beta2"
-  input: "Adam/epsilon"
+  input: "Adam/update_Variable_3/Cast"
+  input: "Adam/update_Variable_3/Cast_1"
+  input: "Adam/update_Variable_3/Cast_2"
+  input: "Adam/update_Variable_3/Cast_3"
+  input: "Adam/update_Variable_3/Cast_4"
+  input: "Adam/update_Variable_3/Cast_5"
   input: "gradients/MatMul_3_grad/tuple/control_dependency_1"
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -6451,22 +7051,172 @@ node {
   }
 }
 node {
+  name: "Adam/update_Variable_4/Cast"
+  op: "Cast"
+  input: "beta1_power/read"
+  attr {
+    key: "DstT"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "SrcT"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Variable_4"
+      }
+    }
+  }
+}
+node {
+  name: "Adam/update_Variable_4/Cast_1"
+  op: "Cast"
+  input: "beta2_power/read"
+  attr {
+    key: "DstT"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "SrcT"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Variable_4"
+      }
+    }
+  }
+}
+node {
+  name: "Adam/update_Variable_4/Cast_2"
+  op: "Cast"
+  input: "Adam/learning_rate"
+  attr {
+    key: "DstT"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "SrcT"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Variable_4"
+      }
+    }
+  }
+}
+node {
+  name: "Adam/update_Variable_4/Cast_3"
+  op: "Cast"
+  input: "Adam/beta1"
+  attr {
+    key: "DstT"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "SrcT"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Variable_4"
+      }
+    }
+  }
+}
+node {
+  name: "Adam/update_Variable_4/Cast_4"
+  op: "Cast"
+  input: "Adam/beta2"
+  attr {
+    key: "DstT"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "SrcT"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Variable_4"
+      }
+    }
+  }
+}
+node {
+  name: "Adam/update_Variable_4/Cast_5"
+  op: "Cast"
+  input: "Adam/epsilon"
+  attr {
+    key: "DstT"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "SrcT"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Variable_4"
+      }
+    }
+  }
+}
+node {
   name: "Adam/update_Variable_4/ApplyAdam"
   op: "ApplyAdam"
   input: "Variable_4"
   input: "Variable_4/Adam"
   input: "Variable_4/Adam_1"
-  input: "beta1_power/read"
-  input: "beta2_power/read"
-  input: "Adam/learning_rate"
-  input: "Adam/beta1"
-  input: "Adam/beta2"
-  input: "Adam/epsilon"
+  input: "Adam/update_Variable_4/Cast"
+  input: "Adam/update_Variable_4/Cast_1"
+  input: "Adam/update_Variable_4/Cast_2"
+  input: "Adam/update_Variable_4/Cast_3"
+  input: "Adam/update_Variable_4/Cast_4"
+  input: "Adam/update_Variable_4/Cast_5"
   input: "gradients/Add_grad/tuple/control_dependency_1"
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -6491,22 +7241,172 @@ node {
   }
 }
 node {
+  name: "Adam/update_Variable_5/Cast"
+  op: "Cast"
+  input: "beta1_power/read"
+  attr {
+    key: "DstT"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "SrcT"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Variable_5"
+      }
+    }
+  }
+}
+node {
+  name: "Adam/update_Variable_5/Cast_1"
+  op: "Cast"
+  input: "beta2_power/read"
+  attr {
+    key: "DstT"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "SrcT"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Variable_5"
+      }
+    }
+  }
+}
+node {
+  name: "Adam/update_Variable_5/Cast_2"
+  op: "Cast"
+  input: "Adam/learning_rate"
+  attr {
+    key: "DstT"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "SrcT"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Variable_5"
+      }
+    }
+  }
+}
+node {
+  name: "Adam/update_Variable_5/Cast_3"
+  op: "Cast"
+  input: "Adam/beta1"
+  attr {
+    key: "DstT"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "SrcT"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Variable_5"
+      }
+    }
+  }
+}
+node {
+  name: "Adam/update_Variable_5/Cast_4"
+  op: "Cast"
+  input: "Adam/beta2"
+  attr {
+    key: "DstT"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "SrcT"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Variable_5"
+      }
+    }
+  }
+}
+node {
+  name: "Adam/update_Variable_5/Cast_5"
+  op: "Cast"
+  input: "Adam/epsilon"
+  attr {
+    key: "DstT"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "SrcT"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Variable_5"
+      }
+    }
+  }
+}
+node {
   name: "Adam/update_Variable_5/ApplyAdam"
   op: "ApplyAdam"
   input: "Variable_5"
   input: "Variable_5/Adam"
   input: "Variable_5/Adam_1"
-  input: "beta1_power/read"
-  input: "beta2_power/read"
-  input: "Adam/learning_rate"
-  input: "Adam/beta1"
-  input: "Adam/beta2"
-  input: "Adam/epsilon"
+  input: "Adam/update_Variable_5/Cast"
+  input: "Adam/update_Variable_5/Cast_1"
+  input: "Adam/update_Variable_5/Cast_2"
+  input: "Adam/update_Variable_5/Cast_3"
+  input: "Adam/update_Variable_5/Cast_4"
+  input: "Adam/update_Variable_5/Cast_5"
   input: "gradients/Add_1_grad/tuple/control_dependency_1"
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -6531,22 +7431,172 @@ node {
   }
 }
 node {
+  name: "Adam/update_Variable_6/Cast"
+  op: "Cast"
+  input: "beta1_power/read"
+  attr {
+    key: "DstT"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "SrcT"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Variable_6"
+      }
+    }
+  }
+}
+node {
+  name: "Adam/update_Variable_6/Cast_1"
+  op: "Cast"
+  input: "beta2_power/read"
+  attr {
+    key: "DstT"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "SrcT"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Variable_6"
+      }
+    }
+  }
+}
+node {
+  name: "Adam/update_Variable_6/Cast_2"
+  op: "Cast"
+  input: "Adam/learning_rate"
+  attr {
+    key: "DstT"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "SrcT"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Variable_6"
+      }
+    }
+  }
+}
+node {
+  name: "Adam/update_Variable_6/Cast_3"
+  op: "Cast"
+  input: "Adam/beta1"
+  attr {
+    key: "DstT"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "SrcT"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Variable_6"
+      }
+    }
+  }
+}
+node {
+  name: "Adam/update_Variable_6/Cast_4"
+  op: "Cast"
+  input: "Adam/beta2"
+  attr {
+    key: "DstT"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "SrcT"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Variable_6"
+      }
+    }
+  }
+}
+node {
+  name: "Adam/update_Variable_6/Cast_5"
+  op: "Cast"
+  input: "Adam/epsilon"
+  attr {
+    key: "DstT"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "SrcT"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Variable_6"
+      }
+    }
+  }
+}
+node {
   name: "Adam/update_Variable_6/ApplyAdam"
   op: "ApplyAdam"
   input: "Variable_6"
   input: "Variable_6/Adam"
   input: "Variable_6/Adam_1"
-  input: "beta1_power/read"
-  input: "beta2_power/read"
-  input: "Adam/learning_rate"
-  input: "Adam/beta1"
-  input: "Adam/beta2"
-  input: "Adam/epsilon"
+  input: "Adam/update_Variable_6/Cast"
+  input: "Adam/update_Variable_6/Cast_1"
+  input: "Adam/update_Variable_6/Cast_2"
+  input: "Adam/update_Variable_6/Cast_3"
+  input: "Adam/update_Variable_6/Cast_4"
+  input: "Adam/update_Variable_6/Cast_5"
   input: "gradients/Add_2_grad/tuple/control_dependency_1"
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -6571,22 +7621,172 @@ node {
   }
 }
 node {
+  name: "Adam/update_Variable_7/Cast"
+  op: "Cast"
+  input: "beta1_power/read"
+  attr {
+    key: "DstT"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "SrcT"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Variable_7"
+      }
+    }
+  }
+}
+node {
+  name: "Adam/update_Variable_7/Cast_1"
+  op: "Cast"
+  input: "beta2_power/read"
+  attr {
+    key: "DstT"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "SrcT"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Variable_7"
+      }
+    }
+  }
+}
+node {
+  name: "Adam/update_Variable_7/Cast_2"
+  op: "Cast"
+  input: "Adam/learning_rate"
+  attr {
+    key: "DstT"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "SrcT"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Variable_7"
+      }
+    }
+  }
+}
+node {
+  name: "Adam/update_Variable_7/Cast_3"
+  op: "Cast"
+  input: "Adam/beta1"
+  attr {
+    key: "DstT"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "SrcT"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Variable_7"
+      }
+    }
+  }
+}
+node {
+  name: "Adam/update_Variable_7/Cast_4"
+  op: "Cast"
+  input: "Adam/beta2"
+  attr {
+    key: "DstT"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "SrcT"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Variable_7"
+      }
+    }
+  }
+}
+node {
+  name: "Adam/update_Variable_7/Cast_5"
+  op: "Cast"
+  input: "Adam/epsilon"
+  attr {
+    key: "DstT"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "SrcT"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Variable_7"
+      }
+    }
+  }
+}
+node {
   name: "Adam/update_Variable_7/ApplyAdam"
   op: "ApplyAdam"
   input: "Variable_7"
   input: "Variable_7/Adam"
   input: "Variable_7/Adam_1"
-  input: "beta1_power/read"
-  input: "beta2_power/read"
-  input: "Adam/learning_rate"
-  input: "Adam/beta1"
-  input: "Adam/beta2"
-  input: "Adam/epsilon"
+  input: "Adam/update_Variable_7/Cast"
+  input: "Adam/update_Variable_7/Cast_1"
+  input: "Adam/update_Variable_7/Cast_2"
+  input: "Adam/update_Variable_7/Cast_3"
+  input: "Adam/update_Variable_7/Cast_4"
+  input: "Adam/update_Variable_7/Cast_5"
   input: "gradients/Add_3_grad/tuple/control_dependency_1"
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -6929,30 +8129,30 @@ node {
     key: "dtypes"
     value {
       list {
-        type: DT_FLOAT
-        type: DT_FLOAT
-        type: DT_FLOAT
-        type: DT_FLOAT
-        type: DT_FLOAT
-        type: DT_FLOAT
-        type: DT_FLOAT
-        type: DT_FLOAT
-        type: DT_FLOAT
-        type: DT_FLOAT
-        type: DT_FLOAT
-        type: DT_FLOAT
-        type: DT_FLOAT
-        type: DT_FLOAT
-        type: DT_FLOAT
-        type: DT_FLOAT
-        type: DT_FLOAT
-        type: DT_FLOAT
-        type: DT_FLOAT
-        type: DT_FLOAT
-        type: DT_FLOAT
-        type: DT_FLOAT
-        type: DT_FLOAT
-        type: DT_FLOAT
+        type: DT_DOUBLE
+        type: DT_DOUBLE
+        type: DT_DOUBLE
+        type: DT_DOUBLE
+        type: DT_DOUBLE
+        type: DT_DOUBLE
+        type: DT_DOUBLE
+        type: DT_DOUBLE
+        type: DT_DOUBLE
+        type: DT_DOUBLE
+        type: DT_DOUBLE
+        type: DT_DOUBLE
+        type: DT_DOUBLE
+        type: DT_DOUBLE
+        type: DT_DOUBLE
+        type: DT_DOUBLE
+        type: DT_DOUBLE
+        type: DT_DOUBLE
+        type: DT_DOUBLE
+        type: DT_DOUBLE
+        type: DT_DOUBLE
+        type: DT_DOUBLE
+        type: DT_DOUBLE
+        type: DT_DOUBLE
         type: DT_FLOAT
         type: DT_FLOAT
       }
@@ -7037,7 +8237,7 @@ node {
     key: "dtypes"
     value {
       list {
-        type: DT_FLOAT
+        type: DT_DOUBLE
       }
     }
   }
@@ -7050,7 +8250,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -7132,7 +8332,7 @@ node {
     key: "dtypes"
     value {
       list {
-        type: DT_FLOAT
+        type: DT_DOUBLE
       }
     }
   }
@@ -7145,7 +8345,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -7227,7 +8427,7 @@ node {
     key: "dtypes"
     value {
       list {
-        type: DT_FLOAT
+        type: DT_DOUBLE
       }
     }
   }
@@ -7240,7 +8440,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -7322,7 +8522,7 @@ node {
     key: "dtypes"
     value {
       list {
-        type: DT_FLOAT
+        type: DT_DOUBLE
       }
     }
   }
@@ -7335,7 +8535,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -7417,7 +8617,7 @@ node {
     key: "dtypes"
     value {
       list {
-        type: DT_FLOAT
+        type: DT_DOUBLE
       }
     }
   }
@@ -7430,7 +8630,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -7512,7 +8712,7 @@ node {
     key: "dtypes"
     value {
       list {
-        type: DT_FLOAT
+        type: DT_DOUBLE
       }
     }
   }
@@ -7525,7 +8725,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -7607,7 +8807,7 @@ node {
     key: "dtypes"
     value {
       list {
-        type: DT_FLOAT
+        type: DT_DOUBLE
       }
     }
   }
@@ -7620,7 +8820,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -7702,7 +8902,7 @@ node {
     key: "dtypes"
     value {
       list {
-        type: DT_FLOAT
+        type: DT_DOUBLE
       }
     }
   }
@@ -7715,7 +8915,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -7797,7 +8997,7 @@ node {
     key: "dtypes"
     value {
       list {
-        type: DT_FLOAT
+        type: DT_DOUBLE
       }
     }
   }
@@ -7810,7 +9010,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -7892,7 +9092,7 @@ node {
     key: "dtypes"
     value {
       list {
-        type: DT_FLOAT
+        type: DT_DOUBLE
       }
     }
   }
@@ -7905,7 +9105,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -7987,7 +9187,7 @@ node {
     key: "dtypes"
     value {
       list {
-        type: DT_FLOAT
+        type: DT_DOUBLE
       }
     }
   }
@@ -8000,7 +9200,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -8082,7 +9282,7 @@ node {
     key: "dtypes"
     value {
       list {
-        type: DT_FLOAT
+        type: DT_DOUBLE
       }
     }
   }
@@ -8095,7 +9295,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -8177,7 +9377,7 @@ node {
     key: "dtypes"
     value {
       list {
-        type: DT_FLOAT
+        type: DT_DOUBLE
       }
     }
   }
@@ -8190,7 +9390,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -8272,7 +9472,7 @@ node {
     key: "dtypes"
     value {
       list {
-        type: DT_FLOAT
+        type: DT_DOUBLE
       }
     }
   }
@@ -8285,7 +9485,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -8367,7 +9567,7 @@ node {
     key: "dtypes"
     value {
       list {
-        type: DT_FLOAT
+        type: DT_DOUBLE
       }
     }
   }
@@ -8380,7 +9580,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -8462,7 +9662,7 @@ node {
     key: "dtypes"
     value {
       list {
-        type: DT_FLOAT
+        type: DT_DOUBLE
       }
     }
   }
@@ -8475,7 +9675,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -8557,7 +9757,7 @@ node {
     key: "dtypes"
     value {
       list {
-        type: DT_FLOAT
+        type: DT_DOUBLE
       }
     }
   }
@@ -8570,7 +9770,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -8652,7 +9852,7 @@ node {
     key: "dtypes"
     value {
       list {
-        type: DT_FLOAT
+        type: DT_DOUBLE
       }
     }
   }
@@ -8665,7 +9865,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -8747,7 +9947,7 @@ node {
     key: "dtypes"
     value {
       list {
-        type: DT_FLOAT
+        type: DT_DOUBLE
       }
     }
   }
@@ -8760,7 +9960,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -8842,7 +10042,7 @@ node {
     key: "dtypes"
     value {
       list {
-        type: DT_FLOAT
+        type: DT_DOUBLE
       }
     }
   }
@@ -8855,7 +10055,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -8937,7 +10137,7 @@ node {
     key: "dtypes"
     value {
       list {
-        type: DT_FLOAT
+        type: DT_DOUBLE
       }
     }
   }
@@ -8950,7 +10150,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -9032,7 +10232,7 @@ node {
     key: "dtypes"
     value {
       list {
-        type: DT_FLOAT
+        type: DT_DOUBLE
       }
     }
   }
@@ -9045,7 +10245,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -9127,7 +10327,7 @@ node {
     key: "dtypes"
     value {
       list {
-        type: DT_FLOAT
+        type: DT_DOUBLE
       }
     }
   }
@@ -9140,7 +10340,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -9222,7 +10422,7 @@ node {
     key: "dtypes"
     value {
       list {
-        type: DT_FLOAT
+        type: DT_DOUBLE
       }
     }
   }
@@ -9235,7 +10435,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {

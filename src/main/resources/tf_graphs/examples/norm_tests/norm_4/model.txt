@@ -1,119 +1,50 @@
 node {
-  name: "random_normal/shape"
+  name: "input"
+  op: "Placeholder"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "shape"
+    value {
+      shape {
+        dim {
+          size: 2
+        }
+        dim {
+          size: 5
+        }
+      }
+    }
+  }
+}
+node {
+  name: "zeros"
   op: "Const"
   attr {
     key: "dtype"
     value {
-      type: DT_INT32
+      type: DT_DOUBLE
     }
   }
   attr {
     key: "value"
     value {
       tensor {
-        dtype: DT_INT32
+        dtype: DT_DOUBLE
         tensor_shape {
           dim {
             size: 2
           }
+          dim {
+            size: 5
+          }
         }
-        tensor_content: "\002\000\000\000\005\000\000\000"
+        double_val: 0.0
       }
-    }
-  }
-}
-node {
-  name: "random_normal/mean"
-  op: "Const"
-  attr {
-    key: "dtype"
-    value {
-      type: DT_FLOAT
-    }
-  }
-  attr {
-    key: "value"
-    value {
-      tensor {
-        dtype: DT_FLOAT
-        tensor_shape {
-        }
-        float_val: 0.0
-      }
-    }
-  }
-}
-node {
-  name: "random_normal/stddev"
-  op: "Const"
-  attr {
-    key: "dtype"
-    value {
-      type: DT_FLOAT
-    }
-  }
-  attr {
-    key: "value"
-    value {
-      tensor {
-        dtype: DT_FLOAT
-        tensor_shape {
-        }
-        float_val: 1.0
-      }
-    }
-  }
-}
-node {
-  name: "random_normal/RandomStandardNormal"
-  op: "RandomStandardNormal"
-  input: "random_normal/shape"
-  attr {
-    key: "T"
-    value {
-      type: DT_INT32
-    }
-  }
-  attr {
-    key: "dtype"
-    value {
-      type: DT_FLOAT
-    }
-  }
-  attr {
-    key: "seed"
-    value {
-      i: 13
-    }
-  }
-  attr {
-    key: "seed2"
-    value {
-      i: 13
-    }
-  }
-}
-node {
-  name: "random_normal/mul"
-  op: "Mul"
-  input: "random_normal/RandomStandardNormal"
-  input: "random_normal/stddev"
-  attr {
-    key: "T"
-    value {
-      type: DT_FLOAT
-    }
-  }
-}
-node {
-  name: "random_normal"
-  op: "Add"
-  input: "random_normal/mul"
-  input: "random_normal/mean"
-  attr {
-    key: "T"
-    value {
-      type: DT_FLOAT
     }
   }
 }
@@ -129,7 +60,7 @@ node {
   attr {
     key: "dtype"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -156,11 +87,11 @@ node {
   name: "in0/Assign"
   op: "Assign"
   input: "in0"
-  input: "random_normal"
+  input: "zeros"
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -191,7 +122,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -204,29 +135,6 @@ node {
   }
 }
 node {
-  name: "input"
-  op: "Placeholder"
-  attr {
-    key: "dtype"
-    value {
-      type: DT_FLOAT
-    }
-  }
-  attr {
-    key: "shape"
-    value {
-      shape {
-        dim {
-          size: 2
-        }
-        dim {
-          size: 5
-        }
-      }
-    }
-  }
-}
-node {
   name: "add"
   op: "Add"
   input: "input"
@@ -234,7 +142,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
 }
@@ -246,7 +154,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
 }
@@ -282,7 +190,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -305,7 +213,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
 }
@@ -316,7 +224,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -334,7 +242,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
 }
@@ -423,7 +331,7 @@ node {
     key: "dtypes"
     value {
       list {
-        type: DT_FLOAT
+        type: DT_DOUBLE
       }
     }
   }
@@ -506,7 +414,7 @@ node {
     key: "dtypes"
     value {
       list {
-        type: DT_FLOAT
+        type: DT_DOUBLE
       }
     }
   }
@@ -519,7 +427,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -549,121 +457,52 @@ node {
   input: "^save/Assign"
 }
 node {
-  name: "random_normal/shape_1"
+  name: "input_1"
+  op: "Placeholder"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "shape"
+    value {
+      shape {
+        dim {
+          size: 2
+        }
+        dim {
+          size: 5
+        }
+      }
+    }
+  }
+}
+node {
+  name: "zeros_1"
   op: "Const"
   attr {
     key: "dtype"
     value {
-      type: DT_INT32
+      type: DT_DOUBLE
     }
   }
   attr {
     key: "value"
     value {
       tensor {
-        dtype: DT_INT32
+        dtype: DT_DOUBLE
         tensor_shape {
           dim {
             size: 2
           }
+          dim {
+            size: 5
+          }
         }
-        tensor_content: "\002\000\000\000\005\000\000\000"
+        double_val: 0.0
       }
-    }
-  }
-}
-node {
-  name: "random_normal/mean_1"
-  op: "Const"
-  attr {
-    key: "dtype"
-    value {
-      type: DT_FLOAT
-    }
-  }
-  attr {
-    key: "value"
-    value {
-      tensor {
-        dtype: DT_FLOAT
-        tensor_shape {
-        }
-        float_val: 0.0
-      }
-    }
-  }
-}
-node {
-  name: "random_normal/stddev_1"
-  op: "Const"
-  attr {
-    key: "dtype"
-    value {
-      type: DT_FLOAT
-    }
-  }
-  attr {
-    key: "value"
-    value {
-      tensor {
-        dtype: DT_FLOAT
-        tensor_shape {
-        }
-        float_val: 1.0
-      }
-    }
-  }
-}
-node {
-  name: "random_normal/RandomStandardNormal_1"
-  op: "RandomStandardNormal"
-  input: "random_normal/shape_1"
-  attr {
-    key: "T"
-    value {
-      type: DT_INT32
-    }
-  }
-  attr {
-    key: "dtype"
-    value {
-      type: DT_FLOAT
-    }
-  }
-  attr {
-    key: "seed"
-    value {
-      i: 13
-    }
-  }
-  attr {
-    key: "seed2"
-    value {
-      i: 13
-    }
-  }
-}
-node {
-  name: "random_normal/mul_1"
-  op: "Mul"
-  input: "random_normal/RandomStandardNormal_1"
-  input: "random_normal/stddev_1"
-  attr {
-    key: "T"
-    value {
-      type: DT_FLOAT
-    }
-  }
-}
-node {
-  name: "random_normal_1"
-  op: "Add"
-  input: "random_normal/mul_1"
-  input: "random_normal/mean_1"
-  attr {
-    key: "T"
-    value {
-      type: DT_FLOAT
     }
   }
 }
@@ -679,7 +518,7 @@ node {
   attr {
     key: "dtype"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -706,11 +545,11 @@ node {
   name: "in0/Assign_1"
   op: "Assign"
   input: "in0_1"
-  input: "random_normal_1"
+  input: "zeros_1"
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -741,7 +580,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -754,29 +593,6 @@ node {
   }
 }
 node {
-  name: "input_1"
-  op: "Placeholder"
-  attr {
-    key: "dtype"
-    value {
-      type: DT_FLOAT
-    }
-  }
-  attr {
-    key: "shape"
-    value {
-      shape {
-        dim {
-          size: 2
-        }
-        dim {
-          size: 5
-        }
-      }
-    }
-  }
-}
-node {
   name: "add_1"
   op: "Add"
   input: "input_1"
@@ -784,7 +600,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
 }
@@ -796,7 +612,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
 }
@@ -832,7 +648,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -855,7 +671,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
 }
@@ -866,7 +682,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -884,7 +700,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
 }
@@ -973,7 +789,7 @@ node {
     key: "dtypes"
     value {
       list {
-        type: DT_FLOAT
+        type: DT_DOUBLE
       }
     }
   }
@@ -1056,7 +872,7 @@ node {
     key: "dtypes"
     value {
       list {
-        type: DT_FLOAT
+        type: DT_DOUBLE
       }
     }
   }
@@ -1069,7 +885,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -1178,7 +994,7 @@ node {
     key: "dtypes"
     value {
       list {
-        type: DT_FLOAT
+        type: DT_DOUBLE
       }
     }
   }
@@ -1261,7 +1077,7 @@ node {
     key: "dtypes"
     value {
       list {
-        type: DT_FLOAT
+        type: DT_DOUBLE
       }
     }
   }
@@ -1274,7 +1090,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -1304,121 +1120,52 @@ node {
   input: "^save_1/Assign"
 }
 node {
-  name: "random_normal_2/shape"
+  name: "input_2"
+  op: "Placeholder"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "shape"
+    value {
+      shape {
+        dim {
+          size: 2
+        }
+        dim {
+          size: 5
+        }
+      }
+    }
+  }
+}
+node {
+  name: "zeros_2"
   op: "Const"
   attr {
     key: "dtype"
     value {
-      type: DT_INT32
+      type: DT_DOUBLE
     }
   }
   attr {
     key: "value"
     value {
       tensor {
-        dtype: DT_INT32
+        dtype: DT_DOUBLE
         tensor_shape {
           dim {
             size: 2
           }
+          dim {
+            size: 5
+          }
         }
-        tensor_content: "\002\000\000\000\005\000\000\000"
+        double_val: 0.0
       }
-    }
-  }
-}
-node {
-  name: "random_normal_2/mean"
-  op: "Const"
-  attr {
-    key: "dtype"
-    value {
-      type: DT_FLOAT
-    }
-  }
-  attr {
-    key: "value"
-    value {
-      tensor {
-        dtype: DT_FLOAT
-        tensor_shape {
-        }
-        float_val: 0.0
-      }
-    }
-  }
-}
-node {
-  name: "random_normal_2/stddev"
-  op: "Const"
-  attr {
-    key: "dtype"
-    value {
-      type: DT_FLOAT
-    }
-  }
-  attr {
-    key: "value"
-    value {
-      tensor {
-        dtype: DT_FLOAT
-        tensor_shape {
-        }
-        float_val: 1.0
-      }
-    }
-  }
-}
-node {
-  name: "random_normal_2/RandomStandardNormal"
-  op: "RandomStandardNormal"
-  input: "random_normal_2/shape"
-  attr {
-    key: "T"
-    value {
-      type: DT_INT32
-    }
-  }
-  attr {
-    key: "dtype"
-    value {
-      type: DT_FLOAT
-    }
-  }
-  attr {
-    key: "seed"
-    value {
-      i: 13
-    }
-  }
-  attr {
-    key: "seed2"
-    value {
-      i: 13
-    }
-  }
-}
-node {
-  name: "random_normal_2/mul"
-  op: "Mul"
-  input: "random_normal_2/RandomStandardNormal"
-  input: "random_normal_2/stddev"
-  attr {
-    key: "T"
-    value {
-      type: DT_FLOAT
-    }
-  }
-}
-node {
-  name: "random_normal_2"
-  op: "Add"
-  input: "random_normal_2/mul"
-  input: "random_normal_2/mean"
-  attr {
-    key: "T"
-    value {
-      type: DT_FLOAT
     }
   }
 }
@@ -1434,7 +1181,7 @@ node {
   attr {
     key: "dtype"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -1461,11 +1208,11 @@ node {
   name: "in0_2/Assign"
   op: "Assign"
   input: "in0_2"
-  input: "random_normal_2"
+  input: "zeros_2"
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -1496,7 +1243,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -1509,29 +1256,6 @@ node {
   }
 }
 node {
-  name: "input_2"
-  op: "Placeholder"
-  attr {
-    key: "dtype"
-    value {
-      type: DT_FLOAT
-    }
-  }
-  attr {
-    key: "shape"
-    value {
-      shape {
-        dim {
-          size: 2
-        }
-        dim {
-          size: 5
-        }
-      }
-    }
-  }
-}
-node {
   name: "add_2"
   op: "Add"
   input: "input_2"
@@ -1539,7 +1263,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
 }
@@ -1551,7 +1275,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
 }
@@ -1587,7 +1311,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -1610,7 +1334,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
 }
@@ -1621,7 +1345,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -1641,7 +1365,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
 }
@@ -1734,8 +1458,8 @@ node {
     key: "dtypes"
     value {
       list {
-        type: DT_FLOAT
-        type: DT_FLOAT
+        type: DT_DOUBLE
+        type: DT_DOUBLE
       }
     }
   }
@@ -1818,7 +1542,7 @@ node {
     key: "dtypes"
     value {
       list {
-        type: DT_FLOAT
+        type: DT_DOUBLE
       }
     }
   }
@@ -1831,7 +1555,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -1913,7 +1637,7 @@ node {
     key: "dtypes"
     value {
       list {
-        type: DT_FLOAT
+        type: DT_DOUBLE
       }
     }
   }
@@ -1926,7 +1650,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -1957,121 +1681,52 @@ node {
   input: "^save_2/Assign_1"
 }
 node {
-  name: "random_normal/shape_2"
+  name: "input_3"
+  op: "Placeholder"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "shape"
+    value {
+      shape {
+        dim {
+          size: 2
+        }
+        dim {
+          size: 5
+        }
+      }
+    }
+  }
+}
+node {
+  name: "zeros_3"
   op: "Const"
   attr {
     key: "dtype"
     value {
-      type: DT_INT32
+      type: DT_DOUBLE
     }
   }
   attr {
     key: "value"
     value {
       tensor {
-        dtype: DT_INT32
+        dtype: DT_DOUBLE
         tensor_shape {
           dim {
             size: 2
           }
+          dim {
+            size: 5
+          }
         }
-        tensor_content: "\002\000\000\000\005\000\000\000"
+        double_val: 0.0
       }
-    }
-  }
-}
-node {
-  name: "random_normal/mean_2"
-  op: "Const"
-  attr {
-    key: "dtype"
-    value {
-      type: DT_FLOAT
-    }
-  }
-  attr {
-    key: "value"
-    value {
-      tensor {
-        dtype: DT_FLOAT
-        tensor_shape {
-        }
-        float_val: 0.0
-      }
-    }
-  }
-}
-node {
-  name: "random_normal/stddev_2"
-  op: "Const"
-  attr {
-    key: "dtype"
-    value {
-      type: DT_FLOAT
-    }
-  }
-  attr {
-    key: "value"
-    value {
-      tensor {
-        dtype: DT_FLOAT
-        tensor_shape {
-        }
-        float_val: 1.0
-      }
-    }
-  }
-}
-node {
-  name: "random_normal/RandomStandardNormal_2"
-  op: "RandomStandardNormal"
-  input: "random_normal/shape_2"
-  attr {
-    key: "T"
-    value {
-      type: DT_INT32
-    }
-  }
-  attr {
-    key: "dtype"
-    value {
-      type: DT_FLOAT
-    }
-  }
-  attr {
-    key: "seed"
-    value {
-      i: 13
-    }
-  }
-  attr {
-    key: "seed2"
-    value {
-      i: 13
-    }
-  }
-}
-node {
-  name: "random_normal/mul_2"
-  op: "Mul"
-  input: "random_normal/RandomStandardNormal_2"
-  input: "random_normal/stddev_2"
-  attr {
-    key: "T"
-    value {
-      type: DT_FLOAT
-    }
-  }
-}
-node {
-  name: "random_normal_3"
-  op: "Add"
-  input: "random_normal/mul_2"
-  input: "random_normal/mean_2"
-  attr {
-    key: "T"
-    value {
-      type: DT_FLOAT
     }
   }
 }
@@ -2087,7 +1742,7 @@ node {
   attr {
     key: "dtype"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -2114,11 +1769,11 @@ node {
   name: "in0/Assign_2"
   op: "Assign"
   input: "in0_3"
-  input: "random_normal_3"
+  input: "zeros_3"
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -2149,7 +1804,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -2162,29 +1817,6 @@ node {
   }
 }
 node {
-  name: "input_3"
-  op: "Placeholder"
-  attr {
-    key: "dtype"
-    value {
-      type: DT_FLOAT
-    }
-  }
-  attr {
-    key: "shape"
-    value {
-      shape {
-        dim {
-          size: 2
-        }
-        dim {
-          size: 5
-        }
-      }
-    }
-  }
-}
-node {
   name: "add_3"
   op: "Add"
   input: "input_3"
@@ -2192,7 +1824,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
 }
@@ -2204,7 +1836,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
 }
@@ -2240,7 +1872,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -2263,7 +1895,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
 }
@@ -2274,7 +1906,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -2292,7 +1924,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
 }
@@ -2381,7 +2013,7 @@ node {
     key: "dtypes"
     value {
       list {
-        type: DT_FLOAT
+        type: DT_DOUBLE
       }
     }
   }
@@ -2464,7 +2096,7 @@ node {
     key: "dtypes"
     value {
       list {
-        type: DT_FLOAT
+        type: DT_DOUBLE
       }
     }
   }
@@ -2477,7 +2109,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -2507,121 +2139,52 @@ node {
   input: "^save/Assign_2"
 }
 node {
-  name: "random_normal/shape_1_1"
+  name: "input_1_1"
+  op: "Placeholder"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "shape"
+    value {
+      shape {
+        dim {
+          size: 2
+        }
+        dim {
+          size: 5
+        }
+      }
+    }
+  }
+}
+node {
+  name: "zeros_1_1"
   op: "Const"
   attr {
     key: "dtype"
     value {
-      type: DT_INT32
+      type: DT_DOUBLE
     }
   }
   attr {
     key: "value"
     value {
       tensor {
-        dtype: DT_INT32
+        dtype: DT_DOUBLE
         tensor_shape {
           dim {
             size: 2
           }
+          dim {
+            size: 5
+          }
         }
-        tensor_content: "\002\000\000\000\005\000\000\000"
+        double_val: 0.0
       }
-    }
-  }
-}
-node {
-  name: "random_normal/mean_1_1"
-  op: "Const"
-  attr {
-    key: "dtype"
-    value {
-      type: DT_FLOAT
-    }
-  }
-  attr {
-    key: "value"
-    value {
-      tensor {
-        dtype: DT_FLOAT
-        tensor_shape {
-        }
-        float_val: 0.0
-      }
-    }
-  }
-}
-node {
-  name: "random_normal/stddev_1_1"
-  op: "Const"
-  attr {
-    key: "dtype"
-    value {
-      type: DT_FLOAT
-    }
-  }
-  attr {
-    key: "value"
-    value {
-      tensor {
-        dtype: DT_FLOAT
-        tensor_shape {
-        }
-        float_val: 1.0
-      }
-    }
-  }
-}
-node {
-  name: "random_normal/RandomStandardNormal_1_1"
-  op: "RandomStandardNormal"
-  input: "random_normal/shape_1_1"
-  attr {
-    key: "T"
-    value {
-      type: DT_INT32
-    }
-  }
-  attr {
-    key: "dtype"
-    value {
-      type: DT_FLOAT
-    }
-  }
-  attr {
-    key: "seed"
-    value {
-      i: 13
-    }
-  }
-  attr {
-    key: "seed2"
-    value {
-      i: 13
-    }
-  }
-}
-node {
-  name: "random_normal/mul_1_1"
-  op: "Mul"
-  input: "random_normal/RandomStandardNormal_1_1"
-  input: "random_normal/stddev_1_1"
-  attr {
-    key: "T"
-    value {
-      type: DT_FLOAT
-    }
-  }
-}
-node {
-  name: "random_normal_1_1"
-  op: "Add"
-  input: "random_normal/mul_1_1"
-  input: "random_normal/mean_1_1"
-  attr {
-    key: "T"
-    value {
-      type: DT_FLOAT
     }
   }
 }
@@ -2637,7 +2200,7 @@ node {
   attr {
     key: "dtype"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -2664,11 +2227,11 @@ node {
   name: "in0/Assign_1_1"
   op: "Assign"
   input: "in0_1_1"
-  input: "random_normal_1_1"
+  input: "zeros_1_1"
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -2699,7 +2262,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -2712,29 +2275,6 @@ node {
   }
 }
 node {
-  name: "input_1_1"
-  op: "Placeholder"
-  attr {
-    key: "dtype"
-    value {
-      type: DT_FLOAT
-    }
-  }
-  attr {
-    key: "shape"
-    value {
-      shape {
-        dim {
-          size: 2
-        }
-        dim {
-          size: 5
-        }
-      }
-    }
-  }
-}
-node {
   name: "add_1_1"
   op: "Add"
   input: "input_1_1"
@@ -2742,7 +2282,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
 }
@@ -2754,7 +2294,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
 }
@@ -2790,7 +2330,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -2813,7 +2353,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
 }
@@ -2824,7 +2364,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -2842,7 +2382,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
 }
@@ -2931,7 +2471,7 @@ node {
     key: "dtypes"
     value {
       list {
-        type: DT_FLOAT
+        type: DT_DOUBLE
       }
     }
   }
@@ -3014,7 +2554,7 @@ node {
     key: "dtypes"
     value {
       list {
-        type: DT_FLOAT
+        type: DT_DOUBLE
       }
     }
   }
@@ -3027,7 +2567,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -3136,7 +2676,7 @@ node {
     key: "dtypes"
     value {
       list {
-        type: DT_FLOAT
+        type: DT_DOUBLE
       }
     }
   }
@@ -3219,7 +2759,7 @@ node {
     key: "dtypes"
     value {
       list {
-        type: DT_FLOAT
+        type: DT_DOUBLE
       }
     }
   }
@@ -3232,7 +2772,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -3262,121 +2802,52 @@ node {
   input: "^save_1/Assign_1"
 }
 node {
-  name: "random_normal_2/shape_1"
+  name: "input_2_1"
+  op: "Placeholder"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "shape"
+    value {
+      shape {
+        dim {
+          size: 2
+        }
+        dim {
+          size: 5
+        }
+      }
+    }
+  }
+}
+node {
+  name: "zeros_2_1"
   op: "Const"
   attr {
     key: "dtype"
     value {
-      type: DT_INT32
+      type: DT_DOUBLE
     }
   }
   attr {
     key: "value"
     value {
       tensor {
-        dtype: DT_INT32
+        dtype: DT_DOUBLE
         tensor_shape {
           dim {
             size: 2
           }
+          dim {
+            size: 5
+          }
         }
-        tensor_content: "\002\000\000\000\005\000\000\000"
+        double_val: 0.0
       }
-    }
-  }
-}
-node {
-  name: "random_normal_2/mean_1"
-  op: "Const"
-  attr {
-    key: "dtype"
-    value {
-      type: DT_FLOAT
-    }
-  }
-  attr {
-    key: "value"
-    value {
-      tensor {
-        dtype: DT_FLOAT
-        tensor_shape {
-        }
-        float_val: 0.0
-      }
-    }
-  }
-}
-node {
-  name: "random_normal_2/stddev_1"
-  op: "Const"
-  attr {
-    key: "dtype"
-    value {
-      type: DT_FLOAT
-    }
-  }
-  attr {
-    key: "value"
-    value {
-      tensor {
-        dtype: DT_FLOAT
-        tensor_shape {
-        }
-        float_val: 1.0
-      }
-    }
-  }
-}
-node {
-  name: "random_normal_2/RandomStandardNormal_1"
-  op: "RandomStandardNormal"
-  input: "random_normal_2/shape_1"
-  attr {
-    key: "T"
-    value {
-      type: DT_INT32
-    }
-  }
-  attr {
-    key: "dtype"
-    value {
-      type: DT_FLOAT
-    }
-  }
-  attr {
-    key: "seed"
-    value {
-      i: 13
-    }
-  }
-  attr {
-    key: "seed2"
-    value {
-      i: 13
-    }
-  }
-}
-node {
-  name: "random_normal_2/mul_1"
-  op: "Mul"
-  input: "random_normal_2/RandomStandardNormal_1"
-  input: "random_normal_2/stddev_1"
-  attr {
-    key: "T"
-    value {
-      type: DT_FLOAT
-    }
-  }
-}
-node {
-  name: "random_normal_2_1"
-  op: "Add"
-  input: "random_normal_2/mul_1"
-  input: "random_normal_2/mean_1"
-  attr {
-    key: "T"
-    value {
-      type: DT_FLOAT
     }
   }
 }
@@ -3392,7 +2863,7 @@ node {
   attr {
     key: "dtype"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -3419,11 +2890,11 @@ node {
   name: "in0_2/Assign_1"
   op: "Assign"
   input: "in0_2_1"
-  input: "random_normal_2_1"
+  input: "zeros_2_1"
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -3454,7 +2925,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -3467,29 +2938,6 @@ node {
   }
 }
 node {
-  name: "input_2_1"
-  op: "Placeholder"
-  attr {
-    key: "dtype"
-    value {
-      type: DT_FLOAT
-    }
-  }
-  attr {
-    key: "shape"
-    value {
-      shape {
-        dim {
-          size: 2
-        }
-        dim {
-          size: 5
-        }
-      }
-    }
-  }
-}
-node {
   name: "add_2_1"
   op: "Add"
   input: "input_2_1"
@@ -3497,7 +2945,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
 }
@@ -3509,7 +2957,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
 }
@@ -3545,7 +2993,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -3568,7 +3016,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
 }
@@ -3579,7 +3027,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -3599,7 +3047,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
 }
@@ -3692,8 +3140,8 @@ node {
     key: "dtypes"
     value {
       list {
-        type: DT_FLOAT
-        type: DT_FLOAT
+        type: DT_DOUBLE
+        type: DT_DOUBLE
       }
     }
   }
@@ -3776,7 +3224,7 @@ node {
     key: "dtypes"
     value {
       list {
-        type: DT_FLOAT
+        type: DT_DOUBLE
       }
     }
   }
@@ -3789,7 +3237,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -3871,7 +3319,7 @@ node {
     key: "dtypes"
     value {
       list {
-        type: DT_FLOAT
+        type: DT_DOUBLE
       }
     }
   }
@@ -3884,7 +3332,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -3997,8 +3445,8 @@ node {
     key: "dtypes"
     value {
       list {
-        type: DT_FLOAT
-        type: DT_FLOAT
+        type: DT_DOUBLE
+        type: DT_DOUBLE
       }
     }
   }
@@ -4081,7 +3529,7 @@ node {
     key: "dtypes"
     value {
       list {
-        type: DT_FLOAT
+        type: DT_DOUBLE
       }
     }
   }
@@ -4094,7 +3542,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -4176,7 +3624,7 @@ node {
     key: "dtypes"
     value {
       list {
-        type: DT_FLOAT
+        type: DT_DOUBLE
       }
     }
   }
@@ -4189,7 +3637,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -4220,121 +3668,52 @@ node {
   input: "^save_3/Assign_1"
 }
 node {
-  name: "random_normal_4/shape"
+  name: "input_4"
+  op: "Placeholder"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "shape"
+    value {
+      shape {
+        dim {
+          size: 2
+        }
+        dim {
+          size: 5
+        }
+      }
+    }
+  }
+}
+node {
+  name: "zeros_4"
   op: "Const"
   attr {
     key: "dtype"
     value {
-      type: DT_INT32
+      type: DT_DOUBLE
     }
   }
   attr {
     key: "value"
     value {
       tensor {
-        dtype: DT_INT32
+        dtype: DT_DOUBLE
         tensor_shape {
           dim {
             size: 2
           }
+          dim {
+            size: 5
+          }
         }
-        tensor_content: "\002\000\000\000\005\000\000\000"
+        double_val: 0.0
       }
-    }
-  }
-}
-node {
-  name: "random_normal_4/mean"
-  op: "Const"
-  attr {
-    key: "dtype"
-    value {
-      type: DT_FLOAT
-    }
-  }
-  attr {
-    key: "value"
-    value {
-      tensor {
-        dtype: DT_FLOAT
-        tensor_shape {
-        }
-        float_val: 0.0
-      }
-    }
-  }
-}
-node {
-  name: "random_normal_4/stddev"
-  op: "Const"
-  attr {
-    key: "dtype"
-    value {
-      type: DT_FLOAT
-    }
-  }
-  attr {
-    key: "value"
-    value {
-      tensor {
-        dtype: DT_FLOAT
-        tensor_shape {
-        }
-        float_val: 1.0
-      }
-    }
-  }
-}
-node {
-  name: "random_normal_4/RandomStandardNormal"
-  op: "RandomStandardNormal"
-  input: "random_normal_4/shape"
-  attr {
-    key: "T"
-    value {
-      type: DT_INT32
-    }
-  }
-  attr {
-    key: "dtype"
-    value {
-      type: DT_FLOAT
-    }
-  }
-  attr {
-    key: "seed"
-    value {
-      i: 13
-    }
-  }
-  attr {
-    key: "seed2"
-    value {
-      i: 13
-    }
-  }
-}
-node {
-  name: "random_normal_4/mul"
-  op: "Mul"
-  input: "random_normal_4/RandomStandardNormal"
-  input: "random_normal_4/stddev"
-  attr {
-    key: "T"
-    value {
-      type: DT_FLOAT
-    }
-  }
-}
-node {
-  name: "random_normal_4"
-  op: "Add"
-  input: "random_normal_4/mul"
-  input: "random_normal_4/mean"
-  attr {
-    key: "T"
-    value {
-      type: DT_FLOAT
     }
   }
 }
@@ -4350,7 +3729,7 @@ node {
   attr {
     key: "dtype"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -4377,11 +3756,11 @@ node {
   name: "in0_4/Assign"
   op: "Assign"
   input: "in0_4"
-  input: "random_normal_4"
+  input: "zeros_4"
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -4412,7 +3791,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -4425,29 +3804,6 @@ node {
   }
 }
 node {
-  name: "input_4"
-  op: "Placeholder"
-  attr {
-    key: "dtype"
-    value {
-      type: DT_FLOAT
-    }
-  }
-  attr {
-    key: "shape"
-    value {
-      shape {
-        dim {
-          size: 2
-        }
-        dim {
-          size: 5
-        }
-      }
-    }
-  }
-}
-node {
   name: "add_4"
   op: "Add"
   input: "input_4"
@@ -4455,7 +3811,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
 }
@@ -4467,7 +3823,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
 }
@@ -4503,7 +3859,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -4526,7 +3882,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
 }
@@ -4537,7 +3893,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -4557,7 +3913,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
 }
@@ -4654,9 +4010,9 @@ node {
     key: "dtypes"
     value {
       list {
-        type: DT_FLOAT
-        type: DT_FLOAT
-        type: DT_FLOAT
+        type: DT_DOUBLE
+        type: DT_DOUBLE
+        type: DT_DOUBLE
       }
     }
   }
@@ -4739,7 +4095,7 @@ node {
     key: "dtypes"
     value {
       list {
-        type: DT_FLOAT
+        type: DT_DOUBLE
       }
     }
   }
@@ -4752,7 +4108,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -4834,7 +4190,7 @@ node {
     key: "dtypes"
     value {
       list {
-        type: DT_FLOAT
+        type: DT_DOUBLE
       }
     }
   }
@@ -4847,7 +4203,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -4929,7 +4285,7 @@ node {
     key: "dtypes"
     value {
       list {
-        type: DT_FLOAT
+        type: DT_DOUBLE
       }
     }
   }
@@ -4942,7 +4298,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -4974,121 +4330,52 @@ node {
   input: "^save_4/Assign_2"
 }
 node {
-  name: "random_normal/shape_3"
+  name: "input_5"
+  op: "Placeholder"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "shape"
+    value {
+      shape {
+        dim {
+          size: 2
+        }
+        dim {
+          size: 5
+        }
+      }
+    }
+  }
+}
+node {
+  name: "zeros_5"
   op: "Const"
   attr {
     key: "dtype"
     value {
-      type: DT_INT32
+      type: DT_DOUBLE
     }
   }
   attr {
     key: "value"
     value {
       tensor {
-        dtype: DT_INT32
+        dtype: DT_DOUBLE
         tensor_shape {
           dim {
             size: 2
           }
+          dim {
+            size: 5
+          }
         }
-        tensor_content: "\002\000\000\000\005\000\000\000"
+        double_val: 0.0
       }
-    }
-  }
-}
-node {
-  name: "random_normal/mean_3"
-  op: "Const"
-  attr {
-    key: "dtype"
-    value {
-      type: DT_FLOAT
-    }
-  }
-  attr {
-    key: "value"
-    value {
-      tensor {
-        dtype: DT_FLOAT
-        tensor_shape {
-        }
-        float_val: 0.0
-      }
-    }
-  }
-}
-node {
-  name: "random_normal/stddev_3"
-  op: "Const"
-  attr {
-    key: "dtype"
-    value {
-      type: DT_FLOAT
-    }
-  }
-  attr {
-    key: "value"
-    value {
-      tensor {
-        dtype: DT_FLOAT
-        tensor_shape {
-        }
-        float_val: 1.0
-      }
-    }
-  }
-}
-node {
-  name: "random_normal/RandomStandardNormal_3"
-  op: "RandomStandardNormal"
-  input: "random_normal/shape_3"
-  attr {
-    key: "T"
-    value {
-      type: DT_INT32
-    }
-  }
-  attr {
-    key: "dtype"
-    value {
-      type: DT_FLOAT
-    }
-  }
-  attr {
-    key: "seed"
-    value {
-      i: 13
-    }
-  }
-  attr {
-    key: "seed2"
-    value {
-      i: 13
-    }
-  }
-}
-node {
-  name: "random_normal/mul_3"
-  op: "Mul"
-  input: "random_normal/RandomStandardNormal_3"
-  input: "random_normal/stddev_3"
-  attr {
-    key: "T"
-    value {
-      type: DT_FLOAT
-    }
-  }
-}
-node {
-  name: "random_normal_5"
-  op: "Add"
-  input: "random_normal/mul_3"
-  input: "random_normal/mean_3"
-  attr {
-    key: "T"
-    value {
-      type: DT_FLOAT
     }
   }
 }
@@ -5104,7 +4391,7 @@ node {
   attr {
     key: "dtype"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -5131,11 +4418,11 @@ node {
   name: "in0/Assign_3"
   op: "Assign"
   input: "in0_5"
-  input: "random_normal_5"
+  input: "zeros_5"
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -5166,7 +4453,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -5179,29 +4466,6 @@ node {
   }
 }
 node {
-  name: "input_5"
-  op: "Placeholder"
-  attr {
-    key: "dtype"
-    value {
-      type: DT_FLOAT
-    }
-  }
-  attr {
-    key: "shape"
-    value {
-      shape {
-        dim {
-          size: 2
-        }
-        dim {
-          size: 5
-        }
-      }
-    }
-  }
-}
-node {
   name: "add_5"
   op: "Add"
   input: "input_5"
@@ -5209,7 +4473,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
 }
@@ -5221,7 +4485,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
 }
@@ -5257,7 +4521,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -5280,7 +4544,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
 }
@@ -5291,7 +4555,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -5309,7 +4573,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
 }
@@ -5398,7 +4662,7 @@ node {
     key: "dtypes"
     value {
       list {
-        type: DT_FLOAT
+        type: DT_DOUBLE
       }
     }
   }
@@ -5481,7 +4745,7 @@ node {
     key: "dtypes"
     value {
       list {
-        type: DT_FLOAT
+        type: DT_DOUBLE
       }
     }
   }
@@ -5494,7 +4758,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -5524,121 +4788,52 @@ node {
   input: "^save/Assign_3"
 }
 node {
-  name: "random_normal/shape_1_2"
+  name: "input_1_2"
+  op: "Placeholder"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "shape"
+    value {
+      shape {
+        dim {
+          size: 2
+        }
+        dim {
+          size: 5
+        }
+      }
+    }
+  }
+}
+node {
+  name: "zeros_1_2"
   op: "Const"
   attr {
     key: "dtype"
     value {
-      type: DT_INT32
+      type: DT_DOUBLE
     }
   }
   attr {
     key: "value"
     value {
       tensor {
-        dtype: DT_INT32
+        dtype: DT_DOUBLE
         tensor_shape {
           dim {
             size: 2
           }
+          dim {
+            size: 5
+          }
         }
-        tensor_content: "\002\000\000\000\005\000\000\000"
+        double_val: 0.0
       }
-    }
-  }
-}
-node {
-  name: "random_normal/mean_1_2"
-  op: "Const"
-  attr {
-    key: "dtype"
-    value {
-      type: DT_FLOAT
-    }
-  }
-  attr {
-    key: "value"
-    value {
-      tensor {
-        dtype: DT_FLOAT
-        tensor_shape {
-        }
-        float_val: 0.0
-      }
-    }
-  }
-}
-node {
-  name: "random_normal/stddev_1_2"
-  op: "Const"
-  attr {
-    key: "dtype"
-    value {
-      type: DT_FLOAT
-    }
-  }
-  attr {
-    key: "value"
-    value {
-      tensor {
-        dtype: DT_FLOAT
-        tensor_shape {
-        }
-        float_val: 1.0
-      }
-    }
-  }
-}
-node {
-  name: "random_normal/RandomStandardNormal_1_2"
-  op: "RandomStandardNormal"
-  input: "random_normal/shape_1_2"
-  attr {
-    key: "T"
-    value {
-      type: DT_INT32
-    }
-  }
-  attr {
-    key: "dtype"
-    value {
-      type: DT_FLOAT
-    }
-  }
-  attr {
-    key: "seed"
-    value {
-      i: 13
-    }
-  }
-  attr {
-    key: "seed2"
-    value {
-      i: 13
-    }
-  }
-}
-node {
-  name: "random_normal/mul_1_2"
-  op: "Mul"
-  input: "random_normal/RandomStandardNormal_1_2"
-  input: "random_normal/stddev_1_2"
-  attr {
-    key: "T"
-    value {
-      type: DT_FLOAT
-    }
-  }
-}
-node {
-  name: "random_normal_1_2"
-  op: "Add"
-  input: "random_normal/mul_1_2"
-  input: "random_normal/mean_1_2"
-  attr {
-    key: "T"
-    value {
-      type: DT_FLOAT
     }
   }
 }
@@ -5654,7 +4849,7 @@ node {
   attr {
     key: "dtype"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -5681,11 +4876,11 @@ node {
   name: "in0/Assign_1_2"
   op: "Assign"
   input: "in0_1_2"
-  input: "random_normal_1_2"
+  input: "zeros_1_2"
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -5716,7 +4911,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -5729,29 +4924,6 @@ node {
   }
 }
 node {
-  name: "input_1_2"
-  op: "Placeholder"
-  attr {
-    key: "dtype"
-    value {
-      type: DT_FLOAT
-    }
-  }
-  attr {
-    key: "shape"
-    value {
-      shape {
-        dim {
-          size: 2
-        }
-        dim {
-          size: 5
-        }
-      }
-    }
-  }
-}
-node {
   name: "add_1_2"
   op: "Add"
   input: "input_1_2"
@@ -5759,7 +4931,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
 }
@@ -5771,7 +4943,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
 }
@@ -5807,7 +4979,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -5830,7 +5002,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
 }
@@ -5841,7 +5013,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -5859,7 +5031,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
 }
@@ -5948,7 +5120,7 @@ node {
     key: "dtypes"
     value {
       list {
-        type: DT_FLOAT
+        type: DT_DOUBLE
       }
     }
   }
@@ -6031,7 +5203,7 @@ node {
     key: "dtypes"
     value {
       list {
-        type: DT_FLOAT
+        type: DT_DOUBLE
       }
     }
   }
@@ -6044,7 +5216,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -6153,7 +5325,7 @@ node {
     key: "dtypes"
     value {
       list {
-        type: DT_FLOAT
+        type: DT_DOUBLE
       }
     }
   }
@@ -6236,7 +5408,7 @@ node {
     key: "dtypes"
     value {
       list {
-        type: DT_FLOAT
+        type: DT_DOUBLE
       }
     }
   }
@@ -6249,7 +5421,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -6279,121 +5451,52 @@ node {
   input: "^save_1/Assign_2"
 }
 node {
-  name: "random_normal_2/shape_2"
+  name: "input_2_2"
+  op: "Placeholder"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "shape"
+    value {
+      shape {
+        dim {
+          size: 2
+        }
+        dim {
+          size: 5
+        }
+      }
+    }
+  }
+}
+node {
+  name: "zeros_2_2"
   op: "Const"
   attr {
     key: "dtype"
     value {
-      type: DT_INT32
+      type: DT_DOUBLE
     }
   }
   attr {
     key: "value"
     value {
       tensor {
-        dtype: DT_INT32
+        dtype: DT_DOUBLE
         tensor_shape {
           dim {
             size: 2
           }
+          dim {
+            size: 5
+          }
         }
-        tensor_content: "\002\000\000\000\005\000\000\000"
+        double_val: 0.0
       }
-    }
-  }
-}
-node {
-  name: "random_normal_2/mean_2"
-  op: "Const"
-  attr {
-    key: "dtype"
-    value {
-      type: DT_FLOAT
-    }
-  }
-  attr {
-    key: "value"
-    value {
-      tensor {
-        dtype: DT_FLOAT
-        tensor_shape {
-        }
-        float_val: 0.0
-      }
-    }
-  }
-}
-node {
-  name: "random_normal_2/stddev_2"
-  op: "Const"
-  attr {
-    key: "dtype"
-    value {
-      type: DT_FLOAT
-    }
-  }
-  attr {
-    key: "value"
-    value {
-      tensor {
-        dtype: DT_FLOAT
-        tensor_shape {
-        }
-        float_val: 1.0
-      }
-    }
-  }
-}
-node {
-  name: "random_normal_2/RandomStandardNormal_2"
-  op: "RandomStandardNormal"
-  input: "random_normal_2/shape_2"
-  attr {
-    key: "T"
-    value {
-      type: DT_INT32
-    }
-  }
-  attr {
-    key: "dtype"
-    value {
-      type: DT_FLOAT
-    }
-  }
-  attr {
-    key: "seed"
-    value {
-      i: 13
-    }
-  }
-  attr {
-    key: "seed2"
-    value {
-      i: 13
-    }
-  }
-}
-node {
-  name: "random_normal_2/mul_2"
-  op: "Mul"
-  input: "random_normal_2/RandomStandardNormal_2"
-  input: "random_normal_2/stddev_2"
-  attr {
-    key: "T"
-    value {
-      type: DT_FLOAT
-    }
-  }
-}
-node {
-  name: "random_normal_2_2"
-  op: "Add"
-  input: "random_normal_2/mul_2"
-  input: "random_normal_2/mean_2"
-  attr {
-    key: "T"
-    value {
-      type: DT_FLOAT
     }
   }
 }
@@ -6409,7 +5512,7 @@ node {
   attr {
     key: "dtype"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -6436,11 +5539,11 @@ node {
   name: "in0_2/Assign_2"
   op: "Assign"
   input: "in0_2_2"
-  input: "random_normal_2_2"
+  input: "zeros_2_2"
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -6471,7 +5574,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -6484,29 +5587,6 @@ node {
   }
 }
 node {
-  name: "input_2_2"
-  op: "Placeholder"
-  attr {
-    key: "dtype"
-    value {
-      type: DT_FLOAT
-    }
-  }
-  attr {
-    key: "shape"
-    value {
-      shape {
-        dim {
-          size: 2
-        }
-        dim {
-          size: 5
-        }
-      }
-    }
-  }
-}
-node {
   name: "add_2_2"
   op: "Add"
   input: "input_2_2"
@@ -6514,7 +5594,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
 }
@@ -6526,7 +5606,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
 }
@@ -6562,7 +5642,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -6585,7 +5665,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
 }
@@ -6596,7 +5676,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -6616,7 +5696,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
 }
@@ -6709,8 +5789,8 @@ node {
     key: "dtypes"
     value {
       list {
-        type: DT_FLOAT
-        type: DT_FLOAT
+        type: DT_DOUBLE
+        type: DT_DOUBLE
       }
     }
   }
@@ -6793,7 +5873,7 @@ node {
     key: "dtypes"
     value {
       list {
-        type: DT_FLOAT
+        type: DT_DOUBLE
       }
     }
   }
@@ -6806,7 +5886,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -6888,7 +5968,7 @@ node {
     key: "dtypes"
     value {
       list {
-        type: DT_FLOAT
+        type: DT_DOUBLE
       }
     }
   }
@@ -6901,7 +5981,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -6932,121 +6012,52 @@ node {
   input: "^save_2/Assign_1_2"
 }
 node {
-  name: "random_normal/shape_2_1"
+  name: "input_3_1"
+  op: "Placeholder"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "shape"
+    value {
+      shape {
+        dim {
+          size: 2
+        }
+        dim {
+          size: 5
+        }
+      }
+    }
+  }
+}
+node {
+  name: "zeros_3_1"
   op: "Const"
   attr {
     key: "dtype"
     value {
-      type: DT_INT32
+      type: DT_DOUBLE
     }
   }
   attr {
     key: "value"
     value {
       tensor {
-        dtype: DT_INT32
+        dtype: DT_DOUBLE
         tensor_shape {
           dim {
             size: 2
           }
+          dim {
+            size: 5
+          }
         }
-        tensor_content: "\002\000\000\000\005\000\000\000"
+        double_val: 0.0
       }
-    }
-  }
-}
-node {
-  name: "random_normal/mean_2_1"
-  op: "Const"
-  attr {
-    key: "dtype"
-    value {
-      type: DT_FLOAT
-    }
-  }
-  attr {
-    key: "value"
-    value {
-      tensor {
-        dtype: DT_FLOAT
-        tensor_shape {
-        }
-        float_val: 0.0
-      }
-    }
-  }
-}
-node {
-  name: "random_normal/stddev_2_1"
-  op: "Const"
-  attr {
-    key: "dtype"
-    value {
-      type: DT_FLOAT
-    }
-  }
-  attr {
-    key: "value"
-    value {
-      tensor {
-        dtype: DT_FLOAT
-        tensor_shape {
-        }
-        float_val: 1.0
-      }
-    }
-  }
-}
-node {
-  name: "random_normal/RandomStandardNormal_2_1"
-  op: "RandomStandardNormal"
-  input: "random_normal/shape_2_1"
-  attr {
-    key: "T"
-    value {
-      type: DT_INT32
-    }
-  }
-  attr {
-    key: "dtype"
-    value {
-      type: DT_FLOAT
-    }
-  }
-  attr {
-    key: "seed"
-    value {
-      i: 13
-    }
-  }
-  attr {
-    key: "seed2"
-    value {
-      i: 13
-    }
-  }
-}
-node {
-  name: "random_normal/mul_2_1"
-  op: "Mul"
-  input: "random_normal/RandomStandardNormal_2_1"
-  input: "random_normal/stddev_2_1"
-  attr {
-    key: "T"
-    value {
-      type: DT_FLOAT
-    }
-  }
-}
-node {
-  name: "random_normal_3_1"
-  op: "Add"
-  input: "random_normal/mul_2_1"
-  input: "random_normal/mean_2_1"
-  attr {
-    key: "T"
-    value {
-      type: DT_FLOAT
     }
   }
 }
@@ -7062,7 +6073,7 @@ node {
   attr {
     key: "dtype"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -7089,11 +6100,11 @@ node {
   name: "in0/Assign_2_1"
   op: "Assign"
   input: "in0_3_1"
-  input: "random_normal_3_1"
+  input: "zeros_3_1"
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -7124,7 +6135,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -7137,29 +6148,6 @@ node {
   }
 }
 node {
-  name: "input_3_1"
-  op: "Placeholder"
-  attr {
-    key: "dtype"
-    value {
-      type: DT_FLOAT
-    }
-  }
-  attr {
-    key: "shape"
-    value {
-      shape {
-        dim {
-          size: 2
-        }
-        dim {
-          size: 5
-        }
-      }
-    }
-  }
-}
-node {
   name: "add_3_1"
   op: "Add"
   input: "input_3_1"
@@ -7167,7 +6155,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
 }
@@ -7179,7 +6167,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
 }
@@ -7215,7 +6203,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -7238,7 +6226,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
 }
@@ -7249,7 +6237,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -7267,7 +6255,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
 }
@@ -7356,7 +6344,7 @@ node {
     key: "dtypes"
     value {
       list {
-        type: DT_FLOAT
+        type: DT_DOUBLE
       }
     }
   }
@@ -7439,7 +6427,7 @@ node {
     key: "dtypes"
     value {
       list {
-        type: DT_FLOAT
+        type: DT_DOUBLE
       }
     }
   }
@@ -7452,7 +6440,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -7482,121 +6470,52 @@ node {
   input: "^save/Assign_2_1"
 }
 node {
-  name: "random_normal/shape_1_1_1"
+  name: "input_1_1_1"
+  op: "Placeholder"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "shape"
+    value {
+      shape {
+        dim {
+          size: 2
+        }
+        dim {
+          size: 5
+        }
+      }
+    }
+  }
+}
+node {
+  name: "zeros_1_1_1"
   op: "Const"
   attr {
     key: "dtype"
     value {
-      type: DT_INT32
+      type: DT_DOUBLE
     }
   }
   attr {
     key: "value"
     value {
       tensor {
-        dtype: DT_INT32
+        dtype: DT_DOUBLE
         tensor_shape {
           dim {
             size: 2
           }
+          dim {
+            size: 5
+          }
         }
-        tensor_content: "\002\000\000\000\005\000\000\000"
+        double_val: 0.0
       }
-    }
-  }
-}
-node {
-  name: "random_normal/mean_1_1_1"
-  op: "Const"
-  attr {
-    key: "dtype"
-    value {
-      type: DT_FLOAT
-    }
-  }
-  attr {
-    key: "value"
-    value {
-      tensor {
-        dtype: DT_FLOAT
-        tensor_shape {
-        }
-        float_val: 0.0
-      }
-    }
-  }
-}
-node {
-  name: "random_normal/stddev_1_1_1"
-  op: "Const"
-  attr {
-    key: "dtype"
-    value {
-      type: DT_FLOAT
-    }
-  }
-  attr {
-    key: "value"
-    value {
-      tensor {
-        dtype: DT_FLOAT
-        tensor_shape {
-        }
-        float_val: 1.0
-      }
-    }
-  }
-}
-node {
-  name: "random_normal/RandomStandardNormal_1_1_1"
-  op: "RandomStandardNormal"
-  input: "random_normal/shape_1_1_1"
-  attr {
-    key: "T"
-    value {
-      type: DT_INT32
-    }
-  }
-  attr {
-    key: "dtype"
-    value {
-      type: DT_FLOAT
-    }
-  }
-  attr {
-    key: "seed"
-    value {
-      i: 13
-    }
-  }
-  attr {
-    key: "seed2"
-    value {
-      i: 13
-    }
-  }
-}
-node {
-  name: "random_normal/mul_1_1_1"
-  op: "Mul"
-  input: "random_normal/RandomStandardNormal_1_1_1"
-  input: "random_normal/stddev_1_1_1"
-  attr {
-    key: "T"
-    value {
-      type: DT_FLOAT
-    }
-  }
-}
-node {
-  name: "random_normal_1_1_1"
-  op: "Add"
-  input: "random_normal/mul_1_1_1"
-  input: "random_normal/mean_1_1_1"
-  attr {
-    key: "T"
-    value {
-      type: DT_FLOAT
     }
   }
 }
@@ -7612,7 +6531,7 @@ node {
   attr {
     key: "dtype"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -7639,11 +6558,11 @@ node {
   name: "in0/Assign_1_1_1"
   op: "Assign"
   input: "in0_1_1_1"
-  input: "random_normal_1_1_1"
+  input: "zeros_1_1_1"
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -7674,7 +6593,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -7687,29 +6606,6 @@ node {
   }
 }
 node {
-  name: "input_1_1_1"
-  op: "Placeholder"
-  attr {
-    key: "dtype"
-    value {
-      type: DT_FLOAT
-    }
-  }
-  attr {
-    key: "shape"
-    value {
-      shape {
-        dim {
-          size: 2
-        }
-        dim {
-          size: 5
-        }
-      }
-    }
-  }
-}
-node {
   name: "add_1_1_1"
   op: "Add"
   input: "input_1_1_1"
@@ -7717,7 +6613,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
 }
@@ -7729,7 +6625,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
 }
@@ -7765,7 +6661,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -7788,7 +6684,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
 }
@@ -7799,7 +6695,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -7817,7 +6713,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
 }
@@ -7906,7 +6802,7 @@ node {
     key: "dtypes"
     value {
       list {
-        type: DT_FLOAT
+        type: DT_DOUBLE
       }
     }
   }
@@ -7989,7 +6885,7 @@ node {
     key: "dtypes"
     value {
       list {
-        type: DT_FLOAT
+        type: DT_DOUBLE
       }
     }
   }
@@ -8002,7 +6898,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -8111,7 +7007,7 @@ node {
     key: "dtypes"
     value {
       list {
-        type: DT_FLOAT
+        type: DT_DOUBLE
       }
     }
   }
@@ -8194,7 +7090,7 @@ node {
     key: "dtypes"
     value {
       list {
-        type: DT_FLOAT
+        type: DT_DOUBLE
       }
     }
   }
@@ -8207,7 +7103,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -8237,121 +7133,52 @@ node {
   input: "^save_1/Assign_1_1"
 }
 node {
-  name: "random_normal_2/shape_1_1"
+  name: "input_2_1_1"
+  op: "Placeholder"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "shape"
+    value {
+      shape {
+        dim {
+          size: 2
+        }
+        dim {
+          size: 5
+        }
+      }
+    }
+  }
+}
+node {
+  name: "zeros_2_1_1"
   op: "Const"
   attr {
     key: "dtype"
     value {
-      type: DT_INT32
+      type: DT_DOUBLE
     }
   }
   attr {
     key: "value"
     value {
       tensor {
-        dtype: DT_INT32
+        dtype: DT_DOUBLE
         tensor_shape {
           dim {
             size: 2
           }
+          dim {
+            size: 5
+          }
         }
-        tensor_content: "\002\000\000\000\005\000\000\000"
+        double_val: 0.0
       }
-    }
-  }
-}
-node {
-  name: "random_normal_2/mean_1_1"
-  op: "Const"
-  attr {
-    key: "dtype"
-    value {
-      type: DT_FLOAT
-    }
-  }
-  attr {
-    key: "value"
-    value {
-      tensor {
-        dtype: DT_FLOAT
-        tensor_shape {
-        }
-        float_val: 0.0
-      }
-    }
-  }
-}
-node {
-  name: "random_normal_2/stddev_1_1"
-  op: "Const"
-  attr {
-    key: "dtype"
-    value {
-      type: DT_FLOAT
-    }
-  }
-  attr {
-    key: "value"
-    value {
-      tensor {
-        dtype: DT_FLOAT
-        tensor_shape {
-        }
-        float_val: 1.0
-      }
-    }
-  }
-}
-node {
-  name: "random_normal_2/RandomStandardNormal_1_1"
-  op: "RandomStandardNormal"
-  input: "random_normal_2/shape_1_1"
-  attr {
-    key: "T"
-    value {
-      type: DT_INT32
-    }
-  }
-  attr {
-    key: "dtype"
-    value {
-      type: DT_FLOAT
-    }
-  }
-  attr {
-    key: "seed"
-    value {
-      i: 13
-    }
-  }
-  attr {
-    key: "seed2"
-    value {
-      i: 13
-    }
-  }
-}
-node {
-  name: "random_normal_2/mul_1_1"
-  op: "Mul"
-  input: "random_normal_2/RandomStandardNormal_1_1"
-  input: "random_normal_2/stddev_1_1"
-  attr {
-    key: "T"
-    value {
-      type: DT_FLOAT
-    }
-  }
-}
-node {
-  name: "random_normal_2_1_1"
-  op: "Add"
-  input: "random_normal_2/mul_1_1"
-  input: "random_normal_2/mean_1_1"
-  attr {
-    key: "T"
-    value {
-      type: DT_FLOAT
     }
   }
 }
@@ -8367,7 +7194,7 @@ node {
   attr {
     key: "dtype"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -8394,11 +7221,11 @@ node {
   name: "in0_2/Assign_1_1"
   op: "Assign"
   input: "in0_2_1_1"
-  input: "random_normal_2_1_1"
+  input: "zeros_2_1_1"
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -8429,7 +7256,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -8442,29 +7269,6 @@ node {
   }
 }
 node {
-  name: "input_2_1_1"
-  op: "Placeholder"
-  attr {
-    key: "dtype"
-    value {
-      type: DT_FLOAT
-    }
-  }
-  attr {
-    key: "shape"
-    value {
-      shape {
-        dim {
-          size: 2
-        }
-        dim {
-          size: 5
-        }
-      }
-    }
-  }
-}
-node {
   name: "add_2_1_1"
   op: "Add"
   input: "input_2_1_1"
@@ -8472,7 +7276,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
 }
@@ -8484,7 +7288,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
 }
@@ -8520,7 +7324,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -8543,7 +7347,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
 }
@@ -8554,7 +7358,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -8574,7 +7378,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
 }
@@ -8667,8 +7471,8 @@ node {
     key: "dtypes"
     value {
       list {
-        type: DT_FLOAT
-        type: DT_FLOAT
+        type: DT_DOUBLE
+        type: DT_DOUBLE
       }
     }
   }
@@ -8751,7 +7555,7 @@ node {
     key: "dtypes"
     value {
       list {
-        type: DT_FLOAT
+        type: DT_DOUBLE
       }
     }
   }
@@ -8764,7 +7568,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -8846,7 +7650,7 @@ node {
     key: "dtypes"
     value {
       list {
-        type: DT_FLOAT
+        type: DT_DOUBLE
       }
     }
   }
@@ -8859,7 +7663,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -8972,8 +7776,8 @@ node {
     key: "dtypes"
     value {
       list {
-        type: DT_FLOAT
-        type: DT_FLOAT
+        type: DT_DOUBLE
+        type: DT_DOUBLE
       }
     }
   }
@@ -9056,7 +7860,7 @@ node {
     key: "dtypes"
     value {
       list {
-        type: DT_FLOAT
+        type: DT_DOUBLE
       }
     }
   }
@@ -9069,7 +7873,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -9151,7 +7955,7 @@ node {
     key: "dtypes"
     value {
       list {
-        type: DT_FLOAT
+        type: DT_DOUBLE
       }
     }
   }
@@ -9164,7 +7968,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -9195,121 +7999,52 @@ node {
   input: "^save_3/Assign_1_1"
 }
 node {
-  name: "random_normal_4/shape_1"
+  name: "input_4_1"
+  op: "Placeholder"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "shape"
+    value {
+      shape {
+        dim {
+          size: 2
+        }
+        dim {
+          size: 5
+        }
+      }
+    }
+  }
+}
+node {
+  name: "zeros_4_1"
   op: "Const"
   attr {
     key: "dtype"
     value {
-      type: DT_INT32
+      type: DT_DOUBLE
     }
   }
   attr {
     key: "value"
     value {
       tensor {
-        dtype: DT_INT32
+        dtype: DT_DOUBLE
         tensor_shape {
           dim {
             size: 2
           }
+          dim {
+            size: 5
+          }
         }
-        tensor_content: "\002\000\000\000\005\000\000\000"
+        double_val: 0.0
       }
-    }
-  }
-}
-node {
-  name: "random_normal_4/mean_1"
-  op: "Const"
-  attr {
-    key: "dtype"
-    value {
-      type: DT_FLOAT
-    }
-  }
-  attr {
-    key: "value"
-    value {
-      tensor {
-        dtype: DT_FLOAT
-        tensor_shape {
-        }
-        float_val: 0.0
-      }
-    }
-  }
-}
-node {
-  name: "random_normal_4/stddev_1"
-  op: "Const"
-  attr {
-    key: "dtype"
-    value {
-      type: DT_FLOAT
-    }
-  }
-  attr {
-    key: "value"
-    value {
-      tensor {
-        dtype: DT_FLOAT
-        tensor_shape {
-        }
-        float_val: 1.0
-      }
-    }
-  }
-}
-node {
-  name: "random_normal_4/RandomStandardNormal_1"
-  op: "RandomStandardNormal"
-  input: "random_normal_4/shape_1"
-  attr {
-    key: "T"
-    value {
-      type: DT_INT32
-    }
-  }
-  attr {
-    key: "dtype"
-    value {
-      type: DT_FLOAT
-    }
-  }
-  attr {
-    key: "seed"
-    value {
-      i: 13
-    }
-  }
-  attr {
-    key: "seed2"
-    value {
-      i: 13
-    }
-  }
-}
-node {
-  name: "random_normal_4/mul_1"
-  op: "Mul"
-  input: "random_normal_4/RandomStandardNormal_1"
-  input: "random_normal_4/stddev_1"
-  attr {
-    key: "T"
-    value {
-      type: DT_FLOAT
-    }
-  }
-}
-node {
-  name: "random_normal_4_1"
-  op: "Add"
-  input: "random_normal_4/mul_1"
-  input: "random_normal_4/mean_1"
-  attr {
-    key: "T"
-    value {
-      type: DT_FLOAT
     }
   }
 }
@@ -9325,7 +8060,7 @@ node {
   attr {
     key: "dtype"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -9352,11 +8087,11 @@ node {
   name: "in0_4/Assign_1"
   op: "Assign"
   input: "in0_4_1"
-  input: "random_normal_4_1"
+  input: "zeros_4_1"
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -9387,7 +8122,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -9400,29 +8135,6 @@ node {
   }
 }
 node {
-  name: "input_4_1"
-  op: "Placeholder"
-  attr {
-    key: "dtype"
-    value {
-      type: DT_FLOAT
-    }
-  }
-  attr {
-    key: "shape"
-    value {
-      shape {
-        dim {
-          size: 2
-        }
-        dim {
-          size: 5
-        }
-      }
-    }
-  }
-}
-node {
   name: "add_4_1"
   op: "Add"
   input: "input_4_1"
@@ -9430,7 +8142,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
 }
@@ -9442,7 +8154,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
 }
@@ -9478,7 +8190,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -9501,7 +8213,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
 }
@@ -9512,7 +8224,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -9532,7 +8244,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
 }
@@ -9629,9 +8341,9 @@ node {
     key: "dtypes"
     value {
       list {
-        type: DT_FLOAT
-        type: DT_FLOAT
-        type: DT_FLOAT
+        type: DT_DOUBLE
+        type: DT_DOUBLE
+        type: DT_DOUBLE
       }
     }
   }
@@ -9714,7 +8426,7 @@ node {
     key: "dtypes"
     value {
       list {
-        type: DT_FLOAT
+        type: DT_DOUBLE
       }
     }
   }
@@ -9727,7 +8439,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -9809,7 +8521,7 @@ node {
     key: "dtypes"
     value {
       list {
-        type: DT_FLOAT
+        type: DT_DOUBLE
       }
     }
   }
@@ -9822,7 +8534,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -9904,7 +8616,7 @@ node {
     key: "dtypes"
     value {
       list {
-        type: DT_FLOAT
+        type: DT_DOUBLE
       }
     }
   }
@@ -9917,7 +8629,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -10034,9 +8746,9 @@ node {
     key: "dtypes"
     value {
       list {
-        type: DT_FLOAT
-        type: DT_FLOAT
-        type: DT_FLOAT
+        type: DT_DOUBLE
+        type: DT_DOUBLE
+        type: DT_DOUBLE
       }
     }
   }
@@ -10119,7 +8831,7 @@ node {
     key: "dtypes"
     value {
       list {
-        type: DT_FLOAT
+        type: DT_DOUBLE
       }
     }
   }
@@ -10132,7 +8844,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -10214,7 +8926,7 @@ node {
     key: "dtypes"
     value {
       list {
-        type: DT_FLOAT
+        type: DT_DOUBLE
       }
     }
   }
@@ -10227,7 +8939,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -10309,7 +9021,7 @@ node {
     key: "dtypes"
     value {
       list {
-        type: DT_FLOAT
+        type: DT_DOUBLE
       }
     }
   }
@@ -10322,7 +9034,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -10354,121 +9066,52 @@ node {
   input: "^save_5/Assign_2"
 }
 node {
-  name: "random_normal_6/shape"
+  name: "input_6"
+  op: "Placeholder"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "shape"
+    value {
+      shape {
+        dim {
+          size: 2
+        }
+        dim {
+          size: 5
+        }
+      }
+    }
+  }
+}
+node {
+  name: "zeros_6"
   op: "Const"
   attr {
     key: "dtype"
     value {
-      type: DT_INT32
+      type: DT_DOUBLE
     }
   }
   attr {
     key: "value"
     value {
       tensor {
-        dtype: DT_INT32
+        dtype: DT_DOUBLE
         tensor_shape {
           dim {
             size: 2
           }
+          dim {
+            size: 5
+          }
         }
-        tensor_content: "\002\000\000\000\005\000\000\000"
+        double_val: 0.0
       }
-    }
-  }
-}
-node {
-  name: "random_normal_6/mean"
-  op: "Const"
-  attr {
-    key: "dtype"
-    value {
-      type: DT_FLOAT
-    }
-  }
-  attr {
-    key: "value"
-    value {
-      tensor {
-        dtype: DT_FLOAT
-        tensor_shape {
-        }
-        float_val: 0.0
-      }
-    }
-  }
-}
-node {
-  name: "random_normal_6/stddev"
-  op: "Const"
-  attr {
-    key: "dtype"
-    value {
-      type: DT_FLOAT
-    }
-  }
-  attr {
-    key: "value"
-    value {
-      tensor {
-        dtype: DT_FLOAT
-        tensor_shape {
-        }
-        float_val: 1.0
-      }
-    }
-  }
-}
-node {
-  name: "random_normal_6/RandomStandardNormal"
-  op: "RandomStandardNormal"
-  input: "random_normal_6/shape"
-  attr {
-    key: "T"
-    value {
-      type: DT_INT32
-    }
-  }
-  attr {
-    key: "dtype"
-    value {
-      type: DT_FLOAT
-    }
-  }
-  attr {
-    key: "seed"
-    value {
-      i: 13
-    }
-  }
-  attr {
-    key: "seed2"
-    value {
-      i: 13
-    }
-  }
-}
-node {
-  name: "random_normal_6/mul"
-  op: "Mul"
-  input: "random_normal_6/RandomStandardNormal"
-  input: "random_normal_6/stddev"
-  attr {
-    key: "T"
-    value {
-      type: DT_FLOAT
-    }
-  }
-}
-node {
-  name: "random_normal_6"
-  op: "Add"
-  input: "random_normal_6/mul"
-  input: "random_normal_6/mean"
-  attr {
-    key: "T"
-    value {
-      type: DT_FLOAT
     }
   }
 }
@@ -10484,7 +9127,7 @@ node {
   attr {
     key: "dtype"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -10511,11 +9154,11 @@ node {
   name: "in0_6/Assign"
   op: "Assign"
   input: "in0_6"
-  input: "random_normal_6"
+  input: "zeros_6"
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -10546,7 +9189,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -10559,29 +9202,6 @@ node {
   }
 }
 node {
-  name: "input_6"
-  op: "Placeholder"
-  attr {
-    key: "dtype"
-    value {
-      type: DT_FLOAT
-    }
-  }
-  attr {
-    key: "shape"
-    value {
-      shape {
-        dim {
-          size: 2
-        }
-        dim {
-          size: 5
-        }
-      }
-    }
-  }
-}
-node {
   name: "add_6"
   op: "Add"
   input: "input_6"
@@ -10589,7 +9209,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
 }
@@ -10600,7 +9220,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
 }
@@ -10610,17 +9230,17 @@ node {
   attr {
     key: "dtype"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
     key: "value"
     value {
       tensor {
-        dtype: DT_FLOAT
+        dtype: DT_DOUBLE
         tensor_shape {
         }
-        float_val: 0.5
+        double_val: 0.5
       }
     }
   }
@@ -10633,7 +9253,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
 }
@@ -10669,7 +9289,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -10691,17 +9311,17 @@ node {
   attr {
     key: "dtype"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
     key: "value"
     value {
       tensor {
-        dtype: DT_FLOAT
+        dtype: DT_DOUBLE
         tensor_shape {
         }
-        float_val: 2.0
+        double_val: 2.0
       }
     }
   }
@@ -10714,7 +9334,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
 }
@@ -10725,7 +9345,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -10743,7 +9363,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
 }
@@ -10844,10 +9464,10 @@ node {
     key: "dtypes"
     value {
       list {
-        type: DT_FLOAT
-        type: DT_FLOAT
-        type: DT_FLOAT
-        type: DT_FLOAT
+        type: DT_DOUBLE
+        type: DT_DOUBLE
+        type: DT_DOUBLE
+        type: DT_DOUBLE
       }
     }
   }
@@ -10930,7 +9550,7 @@ node {
     key: "dtypes"
     value {
       list {
-        type: DT_FLOAT
+        type: DT_DOUBLE
       }
     }
   }
@@ -10943,7 +9563,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -11025,7 +9645,7 @@ node {
     key: "dtypes"
     value {
       list {
-        type: DT_FLOAT
+        type: DT_DOUBLE
       }
     }
   }
@@ -11038,7 +9658,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -11120,7 +9740,7 @@ node {
     key: "dtypes"
     value {
       list {
-        type: DT_FLOAT
+        type: DT_DOUBLE
       }
     }
   }
@@ -11133,7 +9753,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -11215,7 +9835,7 @@ node {
     key: "dtypes"
     value {
       list {
-        type: DT_FLOAT
+        type: DT_DOUBLE
       }
     }
   }
@@ -11228,7 +9848,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {

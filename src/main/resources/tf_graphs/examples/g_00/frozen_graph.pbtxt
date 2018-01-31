@@ -4,14 +4,14 @@ node {
   attr {
     key: "dtype"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
     key: "value"
     value {
       tensor {
-        dtype: DT_FLOAT
+        dtype: DT_DOUBLE
         tensor_shape {
           dim {
             size: 3
@@ -20,7 +20,7 @@ node {
             size: 3
           }
         }
-        tensor_content: "\036\232\376<r\314\314=\352/\214\277\365\3403\277\016D#=\333\235\020=\367\302]\277{>\010?-\226\017?"
+        tensor_content: "\335\360L|\357\253\372?4\030\034\335\266\230\303?RS\002~\244Y\000\300w\266\233\275r\232\341\277\206\230]0\346\002\305?\235\263F\334\245,\354?B\255\023\236\351\315\372?I\363\301\2128\226\373?\324\035\217s\325X\362?"
       }
     }
   }
@@ -32,7 +32,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -50,14 +50,14 @@ node {
   attr {
     key: "dtype"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
     key: "value"
     value {
       tensor {
-        dtype: DT_FLOAT
+        dtype: DT_DOUBLE
         tensor_shape {
           dim {
             size: 3
@@ -66,7 +66,7 @@ node {
             size: 3
           }
         }
-        tensor_content: "\000\000\200\300\000\000@\300\000\000\000\300\000\000\200\277\000\000\000\000\000\000\200?\000\000\000@\000\000@@\000\000\200@"
+        tensor_content: "\000\000\000\000\000\000\020\300\000\000\000\000\000\000\010\300\000\000\000\000\000\000\000\300\000\000\000\000\000\000\360\277\000\000\000\000\000\000\000\000\000\000\000\000\000\000\360?\000\000\000\000\000\000\000@\000\000\000\000\000\000\010@\000\000\000\000\000\000\020@"
       }
     }
   }
@@ -79,7 +79,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
 }
@@ -90,7 +90,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
 }
@@ -101,7 +101,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
 }
@@ -112,7 +112,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
 }

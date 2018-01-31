@@ -4,7 +4,7 @@ node {
   attr {
     key: "dtype"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -27,14 +27,14 @@ node {
   attr {
     key: "dtype"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
     key: "value"
     value {
       tensor {
-        dtype: DT_FLOAT
+        dtype: DT_DOUBLE
         tensor_shape {
           dim {
             size: 3
@@ -43,7 +43,7 @@ node {
             size: 3
           }
         }
-        tensor_content: "\315\361\031\277\'o\232>k(\270\277M\355\036\276=T\006\277\\\005\266\277\2326\261\275\250\233\n\277\024\310L?"
+        tensor_content: "\234\246\0362\366-\331\277\353\205\033\355K\037\324?O*\240\375\275\212\360\277\211\201;\035\261b\006\300\026\n\353M\005\034\360?If*\334\025\001\337\277C\3145u\023\270\365?\211\327%\250\2737\363\277\264\267i\\l\233\343\277"
       }
     }
   }
@@ -55,7 +55,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -74,7 +74,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
 }
@@ -186,7 +186,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -204,7 +204,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_FLOAT
+      type: DT_DOUBLE
     }
   }
 }
