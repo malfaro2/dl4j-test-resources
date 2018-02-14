@@ -45,6 +45,24 @@ node {
   }
 }
 node {
+  name: "keep_prob"
+  op: "Placeholder"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "shape"
+    value {
+      shape {
+        unknown_rank: true
+      }
+    }
+  }
+}
+node {
   name: "reshape/Reshape/shape"
   op: "Const"
   attr {
@@ -1342,24 +1360,6 @@ node {
   }
 }
 node {
-  name: "dropout/Placeholder"
-  op: "Placeholder"
-  attr {
-    key: "dtype"
-    value {
-      type: DT_FLOAT
-    }
-  }
-  attr {
-    key: "shape"
-    value {
-      shape {
-        unknown_rank: true
-      }
-    }
-  }
-}
-node {
   name: "dropout/dropout/Shape"
   op: "Shape"
   input: "fc1/Relu"
@@ -1486,7 +1486,7 @@ node {
 node {
   name: "dropout/dropout/add"
   op: "Add"
-  input: "dropout/Placeholder"
+  input: "keep_prob"
   input: "dropout/dropout/random_uniform"
   attr {
     key: "T"
@@ -1510,7 +1510,7 @@ node {
   name: "dropout/dropout/div"
   op: "RealDiv"
   input: "fc1/Relu"
-  input: "dropout/Placeholder"
+  input: "keep_prob"
   attr {
     key: "T"
     value {
@@ -3524,7 +3524,7 @@ node {
 node {
   name: "adam_optimizer/gradients/dropout/dropout/div_grad/Shape_1"
   op: "Shape"
-  input: "dropout/Placeholder"
+  input: "keep_prob"
   attr {
     key: "T"
     value {
@@ -3554,7 +3554,7 @@ node {
   name: "adam_optimizer/gradients/dropout/dropout/div_grad/RealDiv"
   op: "RealDiv"
   input: "adam_optimizer/gradients/dropout/dropout/mul_grad/tuple/control_dependency"
-  input: "dropout/Placeholder"
+  input: "keep_prob"
   attr {
     key: "T"
     value {
@@ -3619,7 +3619,7 @@ node {
   name: "adam_optimizer/gradients/dropout/dropout/div_grad/RealDiv_1"
   op: "RealDiv"
   input: "adam_optimizer/gradients/dropout/dropout/div_grad/Neg"
-  input: "dropout/Placeholder"
+  input: "keep_prob"
   attr {
     key: "T"
     value {
@@ -3631,7 +3631,7 @@ node {
   name: "adam_optimizer/gradients/dropout/dropout/div_grad/RealDiv_2"
   op: "RealDiv"
   input: "adam_optimizer/gradients/dropout/dropout/div_grad/RealDiv_1"
-  input: "dropout/Placeholder"
+  input: "keep_prob"
   attr {
     key: "T"
     value {
