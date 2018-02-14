@@ -100,7 +100,7 @@ node {
   }
 }
 node {
-  name: "output/Enter"
+  name: "while/Enter"
   op: "Enter"
   input: "loop_var/read"
   attr {
@@ -112,7 +112,7 @@ node {
   attr {
     key: "frame_name"
     value {
-      s: "output/output/"
+      s: "while/while/"
     }
   }
   attr {
@@ -129,10 +129,10 @@ node {
   }
 }
 node {
-  name: "output/Merge"
+  name: "while/Merge"
   op: "Merge"
-  input: "output/Enter"
-  input: "output/NextIteration"
+  input: "while/Enter"
+  input: "while/NextIteration"
   attr {
     key: "N"
     value {
@@ -147,9 +147,9 @@ node {
   }
 }
 node {
-  name: "output/Less/y"
+  name: "while/Less/y"
   op: "Const"
-  input: "^output/Merge"
+  input: "^while/Merge"
   attr {
     key: "dtype"
     value {
@@ -169,10 +169,10 @@ node {
   }
 }
 node {
-  name: "output/Less"
+  name: "while/Less"
   op: "Less"
-  input: "output/Merge"
-  input: "output/Less/y"
+  input: "while/Merge"
+  input: "while/Less/y"
   attr {
     key: "T"
     value {
@@ -181,15 +181,15 @@ node {
   }
 }
 node {
-  name: "output/LoopCond"
+  name: "while/LoopCond"
   op: "LoopCond"
-  input: "output/Less"
+  input: "while/Less"
 }
 node {
-  name: "output/Switch"
+  name: "while/Switch"
   op: "Switch"
-  input: "output/Merge"
-  input: "output/LoopCond"
+  input: "while/Merge"
+  input: "while/LoopCond"
   attr {
     key: "T"
     value {
@@ -200,15 +200,15 @@ node {
     key: "_class"
     value {
       list {
-        s: "loc:@output/Merge"
+        s: "loc:@while/Merge"
       }
     }
   }
 }
 node {
-  name: "output/Identity"
+  name: "while/Identity"
   op: "Identity"
-  input: "output/Switch:1"
+  input: "while/Switch:1"
   attr {
     key: "T"
     value {
@@ -217,9 +217,9 @@ node {
   }
 }
 node {
-  name: "output/Add/y"
+  name: "while/Add/y"
   op: "Const"
-  input: "^output/Identity"
+  input: "^while/Identity"
   attr {
     key: "dtype"
     value {
@@ -239,10 +239,10 @@ node {
   }
 }
 node {
-  name: "output/Add"
+  name: "while/Add"
   op: "Add"
-  input: "output/Identity"
-  input: "output/Add/y"
+  input: "while/Identity"
+  input: "while/Add/y"
   attr {
     key: "T"
     value {
@@ -251,9 +251,9 @@ node {
   }
 }
 node {
-  name: "output/NextIteration"
+  name: "while/NextIteration"
   op: "NextIteration"
-  input: "output/Add"
+  input: "while/Add"
   attr {
     key: "T"
     value {
@@ -262,9 +262,20 @@ node {
   }
 }
 node {
-  name: "output/Exit"
+  name: "while/Exit"
   op: "Exit"
-  input: "output/Switch"
+  input: "while/Switch"
+  attr {
+    key: "T"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "output"
+  op: "Identity"
+  input: "while/Exit"
   attr {
     key: "T"
     value {
