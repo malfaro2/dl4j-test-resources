@@ -1,0 +1,1505 @@
+node {
+  name: "input_a"
+  op: "Placeholder"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "shape"
+    value {
+      shape {
+        dim {
+          size: -1
+        }
+        dim {
+          size: 3
+        }
+        dim {
+          size: 4
+        }
+        dim {
+          size: 5
+        }
+      }
+    }
+  }
+}
+node {
+  name: "input_b"
+  op: "Placeholder"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "shape"
+    value {
+      shape {
+        dim {
+          size: -1
+        }
+        dim {
+          size: 5
+        }
+        dim {
+          size: 3
+        }
+        dim {
+          size: 4
+        }
+      }
+    }
+  }
+}
+node {
+  name: "Tensordot/Shape"
+  op: "Shape"
+  input: "input_a"
+  attr {
+    key: "T"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "out_type"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "Tensordot/Rank"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+        }
+        int_val: 4
+      }
+    }
+  }
+}
+node {
+  name: "Tensordot/axes"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+            size: 2
+          }
+        }
+        tensor_content: "\003\000\000\000\001\000\000\000"
+      }
+    }
+  }
+}
+node {
+  name: "Tensordot/GreaterEqual/y"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+        }
+        int_val: 0
+      }
+    }
+  }
+}
+node {
+  name: "Tensordot/GreaterEqual"
+  op: "GreaterEqual"
+  input: "Tensordot/axes"
+  input: "Tensordot/GreaterEqual/y"
+  attr {
+    key: "T"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "Tensordot/Cast"
+  op: "Cast"
+  input: "Tensordot/GreaterEqual"
+  attr {
+    key: "DstT"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "SrcT"
+    value {
+      type: DT_BOOL
+    }
+  }
+}
+node {
+  name: "Tensordot/mul"
+  op: "Mul"
+  input: "Tensordot/Cast"
+  input: "Tensordot/axes"
+  attr {
+    key: "T"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "Tensordot/Less/y"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+        }
+        int_val: 0
+      }
+    }
+  }
+}
+node {
+  name: "Tensordot/Less"
+  op: "Less"
+  input: "Tensordot/axes"
+  input: "Tensordot/Less/y"
+  attr {
+    key: "T"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "Tensordot/Cast_1"
+  op: "Cast"
+  input: "Tensordot/Less"
+  attr {
+    key: "DstT"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "SrcT"
+    value {
+      type: DT_BOOL
+    }
+  }
+}
+node {
+  name: "Tensordot/add"
+  op: "Add"
+  input: "Tensordot/axes"
+  input: "Tensordot/Rank"
+  attr {
+    key: "T"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "Tensordot/mul_1"
+  op: "Mul"
+  input: "Tensordot/Cast_1"
+  input: "Tensordot/add"
+  attr {
+    key: "T"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "Tensordot/add_1"
+  op: "Add"
+  input: "Tensordot/mul"
+  input: "Tensordot/mul_1"
+  attr {
+    key: "T"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "Tensordot/range/start"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+        }
+        int_val: 0
+      }
+    }
+  }
+}
+node {
+  name: "Tensordot/range/delta"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+        }
+        int_val: 1
+      }
+    }
+  }
+}
+node {
+  name: "Tensordot/range"
+  op: "Range"
+  input: "Tensordot/range/start"
+  input: "Tensordot/Rank"
+  input: "Tensordot/range/delta"
+  attr {
+    key: "Tidx"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "Tensordot/ListDiff"
+  op: "ListDiff"
+  input: "Tensordot/range"
+  input: "Tensordot/add_1"
+  attr {
+    key: "T"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "out_idx"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "Tensordot/Gather"
+  op: "Gather"
+  input: "Tensordot/Shape"
+  input: "Tensordot/ListDiff"
+  attr {
+    key: "Tindices"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "Tparams"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "validate_indices"
+    value {
+      b: true
+    }
+  }
+}
+node {
+  name: "Tensordot/Gather_1"
+  op: "Gather"
+  input: "Tensordot/Shape"
+  input: "Tensordot/add_1"
+  attr {
+    key: "Tindices"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "Tparams"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "validate_indices"
+    value {
+      b: true
+    }
+  }
+}
+node {
+  name: "Tensordot/Const"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+            size: 1
+          }
+        }
+        int_val: 0
+      }
+    }
+  }
+}
+node {
+  name: "Tensordot/Prod"
+  op: "Prod"
+  input: "Tensordot/Gather"
+  input: "Tensordot/Const"
+  attr {
+    key: "T"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "Tidx"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "keep_dims"
+    value {
+      b: false
+    }
+  }
+}
+node {
+  name: "Tensordot/Const_1"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+            size: 1
+          }
+        }
+        int_val: 0
+      }
+    }
+  }
+}
+node {
+  name: "Tensordot/Prod_1"
+  op: "Prod"
+  input: "Tensordot/Gather_1"
+  input: "Tensordot/Const_1"
+  attr {
+    key: "T"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "Tidx"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "keep_dims"
+    value {
+      b: false
+    }
+  }
+}
+node {
+  name: "Tensordot/concat_1/axis"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+        }
+        int_val: 0
+      }
+    }
+  }
+}
+node {
+  name: "Tensordot/concat_1"
+  op: "ConcatV2"
+  input: "Tensordot/ListDiff"
+  input: "Tensordot/add_1"
+  input: "Tensordot/concat_1/axis"
+  attr {
+    key: "N"
+    value {
+      i: 2
+    }
+  }
+  attr {
+    key: "T"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "Tidx"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "Tensordot/stack"
+  op: "Pack"
+  input: "Tensordot/Prod"
+  input: "Tensordot/Prod_1"
+  attr {
+    key: "N"
+    value {
+      i: 2
+    }
+  }
+  attr {
+    key: "T"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "axis"
+    value {
+      i: 0
+    }
+  }
+}
+node {
+  name: "Tensordot/transpose"
+  op: "Transpose"
+  input: "input_a"
+  input: "Tensordot/concat_1"
+  attr {
+    key: "T"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "Tperm"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "Tensordot/Reshape"
+  op: "Reshape"
+  input: "Tensordot/transpose"
+  input: "Tensordot/stack"
+  attr {
+    key: "T"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "Tshape"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "Tensordot/Shape_1"
+  op: "Shape"
+  input: "input_b"
+  attr {
+    key: "T"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "out_type"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "Tensordot/Rank_1"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+        }
+        int_val: 4
+      }
+    }
+  }
+}
+node {
+  name: "Tensordot/axes_1"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+            size: 2
+          }
+        }
+        tensor_content: "\001\000\000\000\002\000\000\000"
+      }
+    }
+  }
+}
+node {
+  name: "Tensordot/GreaterEqual_1/y"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+        }
+        int_val: 0
+      }
+    }
+  }
+}
+node {
+  name: "Tensordot/GreaterEqual_1"
+  op: "GreaterEqual"
+  input: "Tensordot/axes_1"
+  input: "Tensordot/GreaterEqual_1/y"
+  attr {
+    key: "T"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "Tensordot/Cast_2"
+  op: "Cast"
+  input: "Tensordot/GreaterEqual_1"
+  attr {
+    key: "DstT"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "SrcT"
+    value {
+      type: DT_BOOL
+    }
+  }
+}
+node {
+  name: "Tensordot/mul_2"
+  op: "Mul"
+  input: "Tensordot/Cast_2"
+  input: "Tensordot/axes_1"
+  attr {
+    key: "T"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "Tensordot/Less_1/y"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+        }
+        int_val: 0
+      }
+    }
+  }
+}
+node {
+  name: "Tensordot/Less_1"
+  op: "Less"
+  input: "Tensordot/axes_1"
+  input: "Tensordot/Less_1/y"
+  attr {
+    key: "T"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "Tensordot/Cast_3"
+  op: "Cast"
+  input: "Tensordot/Less_1"
+  attr {
+    key: "DstT"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "SrcT"
+    value {
+      type: DT_BOOL
+    }
+  }
+}
+node {
+  name: "Tensordot/add_2"
+  op: "Add"
+  input: "Tensordot/axes_1"
+  input: "Tensordot/Rank_1"
+  attr {
+    key: "T"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "Tensordot/mul_3"
+  op: "Mul"
+  input: "Tensordot/Cast_3"
+  input: "Tensordot/add_2"
+  attr {
+    key: "T"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "Tensordot/add_3"
+  op: "Add"
+  input: "Tensordot/mul_2"
+  input: "Tensordot/mul_3"
+  attr {
+    key: "T"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "Tensordot/range_1/start"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+        }
+        int_val: 0
+      }
+    }
+  }
+}
+node {
+  name: "Tensordot/range_1/delta"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+        }
+        int_val: 1
+      }
+    }
+  }
+}
+node {
+  name: "Tensordot/range_1"
+  op: "Range"
+  input: "Tensordot/range_1/start"
+  input: "Tensordot/Rank_1"
+  input: "Tensordot/range_1/delta"
+  attr {
+    key: "Tidx"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "Tensordot/ListDiff_1"
+  op: "ListDiff"
+  input: "Tensordot/range_1"
+  input: "Tensordot/add_3"
+  attr {
+    key: "T"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "out_idx"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "Tensordot/Gather_2"
+  op: "Gather"
+  input: "Tensordot/Shape_1"
+  input: "Tensordot/ListDiff_1"
+  attr {
+    key: "Tindices"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "Tparams"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "validate_indices"
+    value {
+      b: true
+    }
+  }
+}
+node {
+  name: "Tensordot/Gather_3"
+  op: "Gather"
+  input: "Tensordot/Shape_1"
+  input: "Tensordot/add_3"
+  attr {
+    key: "Tindices"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "Tparams"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "validate_indices"
+    value {
+      b: true
+    }
+  }
+}
+node {
+  name: "Tensordot/Const_2"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+            size: 1
+          }
+        }
+        int_val: 0
+      }
+    }
+  }
+}
+node {
+  name: "Tensordot/Prod_2"
+  op: "Prod"
+  input: "Tensordot/Gather_2"
+  input: "Tensordot/Const_2"
+  attr {
+    key: "T"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "Tidx"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "keep_dims"
+    value {
+      b: false
+    }
+  }
+}
+node {
+  name: "Tensordot/Const_3"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+            size: 1
+          }
+        }
+        int_val: 0
+      }
+    }
+  }
+}
+node {
+  name: "Tensordot/Prod_3"
+  op: "Prod"
+  input: "Tensordot/Gather_3"
+  input: "Tensordot/Const_3"
+  attr {
+    key: "T"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "Tidx"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "keep_dims"
+    value {
+      b: false
+    }
+  }
+}
+node {
+  name: "Tensordot/concat_3/axis"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+        }
+        int_val: 0
+      }
+    }
+  }
+}
+node {
+  name: "Tensordot/concat_3"
+  op: "ConcatV2"
+  input: "Tensordot/add_3"
+  input: "Tensordot/ListDiff_1"
+  input: "Tensordot/concat_3/axis"
+  attr {
+    key: "N"
+    value {
+      i: 2
+    }
+  }
+  attr {
+    key: "T"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "Tidx"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "Tensordot/stack_1"
+  op: "Pack"
+  input: "Tensordot/Prod_3"
+  input: "Tensordot/Prod_2"
+  attr {
+    key: "N"
+    value {
+      i: 2
+    }
+  }
+  attr {
+    key: "T"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "axis"
+    value {
+      i: 0
+    }
+  }
+}
+node {
+  name: "Tensordot/transpose_1"
+  op: "Transpose"
+  input: "input_b"
+  input: "Tensordot/concat_3"
+  attr {
+    key: "T"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "Tperm"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "Tensordot/Reshape_1"
+  op: "Reshape"
+  input: "Tensordot/transpose_1"
+  input: "Tensordot/stack_1"
+  attr {
+    key: "T"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "Tshape"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "Tensordot/MatMul"
+  op: "MatMul"
+  input: "Tensordot/Reshape"
+  input: "Tensordot/Reshape_1"
+  attr {
+    key: "T"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "transpose_a"
+    value {
+      b: false
+    }
+  }
+  attr {
+    key: "transpose_b"
+    value {
+      b: false
+    }
+  }
+}
+node {
+  name: "Tensordot/concat_4/axis"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+        }
+        int_val: 0
+      }
+    }
+  }
+}
+node {
+  name: "Tensordot/concat_4"
+  op: "ConcatV2"
+  input: "Tensordot/Gather"
+  input: "Tensordot/Gather_2"
+  input: "Tensordot/concat_4/axis"
+  attr {
+    key: "N"
+    value {
+      i: 2
+    }
+  }
+  attr {
+    key: "T"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "Tidx"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "Tensordot"
+  op: "Reshape"
+  input: "Tensordot/MatMul"
+  input: "Tensordot/concat_4"
+  attr {
+    key: "T"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "Tshape"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "transpose/perm"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+            size: 4
+          }
+        }
+        tensor_content: "\000\000\000\000\001\000\000\000\003\000\000\000\002\000\000\000"
+      }
+    }
+  }
+}
+node {
+  name: "transpose"
+  op: "Transpose"
+  input: "Tensordot"
+  input: "transpose/perm"
+  attr {
+    key: "T"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "Tperm"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "BatchToSpaceND/block_shape"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+            size: 2
+          }
+        }
+        tensor_content: "\001\000\000\000\004\000\000\000"
+      }
+    }
+  }
+}
+node {
+  name: "BatchToSpaceND/crops"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+            size: 2
+          }
+          dim {
+            size: 2
+          }
+        }
+        tensor_content: "\000\000\000\000\000\000\000\000\001\000\000\000\002\000\000\000"
+      }
+    }
+  }
+}
+node {
+  name: "BatchToSpaceND"
+  op: "BatchToSpaceND"
+  input: "transpose"
+  input: "BatchToSpaceND/block_shape"
+  input: "BatchToSpaceND/crops"
+  attr {
+    key: "T"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "Tblock_shape"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "Tcrops"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "BatchToSpaceND_1/block_shape"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+            size: 2
+          }
+        }
+        tensor_content: "\003\000\000\000\003\000\000\000"
+      }
+    }
+  }
+}
+node {
+  name: "BatchToSpaceND_1/crops"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+            size: 2
+          }
+          dim {
+            size: 2
+          }
+        }
+        tensor_content: "\001\000\000\000\005\000\000\000\004\000\000\000\003\000\000\000"
+      }
+    }
+  }
+}
+node {
+  name: "BatchToSpaceND_1"
+  op: "BatchToSpaceND"
+  input: "BatchToSpaceND"
+  input: "BatchToSpaceND_1/block_shape"
+  input: "BatchToSpaceND_1/crops"
+  attr {
+    key: "T"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "Tblock_shape"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "Tcrops"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "SpaceToDepth"
+  op: "SpaceToDepth"
+  input: "BatchToSpaceND_1"
+  attr {
+    key: "T"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "block_size"
+    value {
+      i: 2
+    }
+  }
+}
+node {
+  name: "Round"
+  op: "Round"
+  input: "SpaceToDepth"
+  attr {
+    key: "T"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+}
+node {
+  name: "Variable"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_DOUBLE
+        tensor_shape {
+          dim {
+            size: 16
+          }
+          dim {
+            size: 20
+          }
+        }
+        tensor_content: "\273%\214\313yg\375\277t\016\201j\351 \364?\222\324\346\215\345Q\342\277C\251\3432\267\206\315\2777\014a13o\326?\201:\']i>\336?Xp\010\2162\343\327\277u\344\271\264j\223\320?\236}\302)\264\262\363\2779Z\220\005V\243\326\277\324\257\312\350\205\303\351\277\230C)\033\010\001\345?\177-14\224\206\224?\372G\307\344\363\316\336\277!g*\031Q\366\223?\276\033\217\031\025$\346?\215\234\205y\363\322\341\277\336f\2578\224\266\334?E\252\263\374\032\246\351\277\"U\335n\377\313\354\277\t\205t\246j\276\377?!\207Z\260\351l\320\277\334\361[2\014\337\361?#@\224\231D\'\354\277\260\311\230\206\0068\320\277\361\277`l\255&\374\277\343\r\374\2262\025\341?\026\305\207\206\032\036\307\277\231B\3503n\204\337\277A\233\255\251h\035\307\277\253\275\374Ac\334\365?\211\357\010\310\321\240\340\2778\035\230\023F4\313?\310\247\272\\W\274\347\277\035\223\266\225\243\337\243\277>\366\237\333\2402\336?\212\025\252r\257D\345\2779M\243\363\214\247\266?\360\351\362r\343Y\003\300I\342z|\233\210\354\277\210\216\275W\274\235\000@4\320R\013\365\274\331?5\201\315\201\327\233\243?\036Z\0137\020\034\341?Q\307\032\314\323}\365?)\347\311\212\016\350\377?\014\317\201\233\355\317\002@\277\204\352\034\t\233\325?\207\342\016R\362\354\342?\021\000\270\363\251;\343?\224t\203z0\362\355\277-\220\214Jo \324\277B\363@{k\235\247\277\322c\234\243\252Q\347\277\t@\354\307\351\275\341\277\203\223C\347V\350\332\277\211n\200\030\321L\360\277# ;:d\002\362?\3626\325\354\240\320\370\2777\336\331E\353C\363?i\004\335{@F\352\277\324\354\335X\253\016\346\277\322\352\034\344\272c\345?c\331\260\202\247\337\300\2772\332\324\205\321;\343\277c..\313)N\322\277uV\241\353>\336\243?\"M\201\354.5\366?\241N\313h\365\221\005@`xj\223\324\314\006\300;\226\317eDV\003\300\225\026\365\356\207\247\374?\331\304M\306*H\356\277f\320\376R\035\275\330\277\374L\251\203\277R\342\277s\225\330\272i\220\371?h\365a\211F\303\340\277t\223}\360\2132\367\277a\222\246\"\004\371\333?h\2424\222\006W\370\277\226\270Mc?\236\020\300\313\226\322}\271T\356?\213\337\214,B-\341?\2051<\206S\246\321\277r\366\017\t\004\203\345\277\224\311F\346\322\233\327\277qp9ZE\320\315\2775N\246 \"p\312\277\354D\224\222\360\277\352\277\370\352o\024]<\342?$\2267\315\350\\\346?lED\247\216\216\251?pj\216\261?\\\363\277\245p\021\231#\020\363?,i#\345\275(\357?\307[\263o\231`\340?\226\356\235\364,\215\366?mm\353\362\315C\337\277\235\023\n\316\222\004\341?\273\360T\266\0224\335?e!\234\236N\032\371?\001\204P3\221\020\345?\260(]\217\211\217\361\277V\266\004d\323\376\321\277p\332\320p\322R\337\277_Ra\030t\243\364\277\270\347Q\244\241\342\000\300\027\251(\325\205\206\373\277bT\344\215\375\311\271?&O\362\202\314\035\323\277\324\216Fg\207\300\343\277\243\207Il9\354\311?\257\371\310\035#\365\004\300\204N\253\214\215\201\331\277\021\331\026$\266\275\331\277mt\211\252\322\362\360?\303\016Ofrn\370\277\250u\354K#\267\344\277\245\366\035#\350c\257?p\034\311\305\307\344\351?\216\323\212R\220u\320?\031\315\363i\251\203\375\277\367\004\233\306\377d\216?\251\251\207\326^\225\310?\221\034N\231\3669\372\277\266\303\234S\346M\363\277 \355r\001%\327\355\277\324\260\247.\252\021\251?\224\264G\312S\365\344?X\023,\211\351x\361?\242\235\363\021,\314\374\277\354\224\203p\024\"\363?~e\226\017u\202\365?\016\013}\367\241,\323?\270\200V\347~\306\355?\201 \243\347\235|\331?[\251\206\232\273H\367\277;j\2459\005]\253?d\277<\330\374\317\362?My\304O\260z\370?\266\331\355\361\336\355\307\277NYU\235+$\002@\367\017+\232\354\371\350\277\275\207\342\177?F\373\277\0368\0249\223(\261?\3731M\366\354\316\360?\006d\327\366\031\340\371\277\305S\202\251\352\247\326?;\\\271=\205\361\343?\325\255\226d\2060\240?\016\023)D\005\230\240\277\356\354\303\336W\214\013@1\017K)\250\016\355\277\356\243~\344\364\341\325\277\235\375\312_\371\364\263\277\014\273\000Y\355\331\326\277\361y\362\220\334\374\367?\241\003\220\342\003:\361?\352\202\360.\364\374\353?\006H\323\340q\367\345\277\340I\234\244 \346\360\277dl\370k\001\017\204?\371\327\356h\215\226\357?\210/\231p\r\305\363\2776\340\366\240J\323\324?\330;\013[(\016\370?_5\273s\277c\370?J\307\263\346\212\347\331\277#\261pD\005j\344\277j\\{&\231\320\367?\321\034Wo\023X\345?\252\373\221\275W8\345?Sj,\375\252\246\337\277\307}\037-={\352\277\014\352\t\014\216f\355\277\313\000\213r\361\203\316?I\253\"\r\377\202\346\277\311T\265\364\332\n\331?\0268}<\313\200\344\277W]x<\317!\002@\347\326\234\344\245%\367?\233\026D\3326m\326\277\320\303\224\017\274\216\353\277a\370\347\304\023\251\370\277\227\024ay\352~\267\277\315\356\332p\314V\321\277\355\321\247r\017\344\341?w{g\035ny\347\277\242\312\351;\356\304\346?\t\325\375\311\376\214\370?\360\237%\212\016\320\262?/\374\023}\004\356\333?\177\304\332\374R.\007@\032X:\362\317\252\356\277\2421X\235\213\243\342\277J\262C\237\235\010\205\277\320$\271Sr4\351?K4\370\022\213\252\316\277lg\202\025\204\000\365?\301\020jS\316j\342?\354\233Om\201\005\324?\271\337j \3455\247\277\375\016+7\342\310\344?F\231\353\231f(\342\2775\360\267@~\263\361\277\272B\320<\017\316\343\277{\'\333\027\031P\351\277n@A0\306=\336?+\246\365$\343\235\330\277\234\233\341\356\364\376\363\277\2225\224\001!\021\272\277\231\246Vx\337?\342\277\0037o\235\331\306\327\277\325;T\345\267\016\370\277\247DF\000O\020\327?+Zb\217x\005\370\277\201\000}\021\206U\265\277R,#X\270\206\360?\207\247.!\363\326\366?B\323\031\327\3463\377\277\323\334\222\222q\222\364?X\001\336Ea\\\005@\255\302\205XHT\365\2775\331$T\235_\325\277Jr\307\031\312\224\340\277r<L\367jh\342?\330\np\361f<\277?\326q\354#\270D\361?N&\246\315\013\302\313?\237};\274j\252\377?/\313\360\251Ot\342\277\003\027\\fM\275\353?\215\271\307\245\314\010\336\2772\355\'/\244\323\265?\377\374u/\016$\357?\233\211\354\237<\327\354?wJ\363\244\340Z\003@l\337\372.\263o\362\277\300\0355d\355\370\354?<\332\340\r\265<\356?c\222\252}\036\276\375\277\203VY\'\311\025\372?\007N@\204\224\322\265?Ep0x\321B\304\277,\211\215\263\007\306\342\2770k\036\201n\014\327\277\3328t8\333%\354\277\256\300\322\377\204\243\007@n\353R\227\246\201\341\277\304\234g\252\314\352\374\277\310:^\353\367x\372?\372\265\342\261\002<\360\277\377\220\001o#\323\330?<!28^E\254?d\345>\210\024G\312?\354C\223f\243@\305\277\312N\313ij\340\360?y\231\335s\014\371\366?~\254[mFP\261\277\336\314\224co\202\274\277\307\210B\037\236\306\370\277Kf\256\356\274\371\245\277b\004(\032\276\302\343\277\340\310.L\234\304\361\277V4T\315\206\233\263\277\265[\334\007\241\034\320?\266\020\351/\3337\352\277\325 \\\'\316\346\332\277\277\217\0022\025q\342\277\224Z*\222\204\215\327?\303\027M\317I\303\365?N\261\274\254\230\324\354\277\277\352\260\360F\213\361?\373\241\307\325l\272\333\277|\021@\231\257\257\354\277\210\311\262\177\221H\346?\276*\361Et\211\002\300uS\260\267\234\320\343\277+\333\t\250\2123\312?j\010\353y\016\312\374?\n\301\"\353\325I\354?X\351\332\344\257\032\323\277\tbU\013yb\361\277O\017\005\205\026\350\321?:\210%zB!\300\277(=\"\355\341\354\331?\347\240i\217\022s\351?\212\315|\023\333\236\337?u\302\350\337bX\342?}S\225K\n\006\360\277\3340Z*)\251\300\277\006T/\245\253!\266?\365g]z%\017\352?\267t\301\331N\303\260\277\004c\210k`\211\361?!!\321]\354\263\321\277\014\206\261s7u\326?7w\024\003}\211\330?/\242_\232-z\356\277`\r\230W\320\324\316?Fg\236\206\032g\342?be\010\357\241X\360\277J\313\0041.5\356?\205\334k\031\332\370\353?\361>\252x\332 \333\277i\301\234\333u/\312?\001) o\230\367\353\277\026B\276\002\227\340\362\277\326\214q\300&\032\326?\003Y\300\344=_\377\277&(\027\251\274\363\340\277\310\251P\226&\250\324?\2063$\360\200@\320\2777\n\007yc\037\005\300=\327T\326Zm\350?\201\307\035Q\3054\370\277\221:e8\301X\337\277\325A\241\001\346P\361?3\207\201\332\362\346\352\277\324t}<AR\366?"
+      }
+    }
+  }
+}
+node {
+  name: "Variable/read"
+  op: "Identity"
+  input: "Variable"
+  attr {
+    key: "T"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Variable"
+      }
+    }
+  }
+}
+node {
+  name: "Add"
+  op: "Add"
+  input: "Variable/read"
+  input: "Round"
+  attr {
+    key: "T"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+}
+node {
+  name: "output"
+  op: "Round"
+  input: "Add"
+  attr {
+    key: "T"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+}
+library {
+}
