@@ -1,0 +1,435 @@
+node {
+  name: "input_a"
+  op: "Placeholder"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "shape"
+    value {
+      shape {
+        dim {
+          size: -1
+        }
+        dim {
+          size: 3
+        }
+        dim {
+          size: 4
+        }
+        dim {
+          size: 3
+        }
+      }
+    }
+  }
+}
+node {
+  name: "Erf"
+  op: "Erf"
+  input: "input_a"
+  attr {
+    key: "T"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+}
+node {
+  name: "input_b"
+  op: "Placeholder"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "shape"
+    value {
+      shape {
+        dim {
+          size: -1
+        }
+        dim {
+          size: 3
+        }
+      }
+    }
+  }
+}
+node {
+  name: "ReverseSequence/seq_lengths"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT64
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT64
+        tensor_shape {
+          dim {
+            size: 4
+          }
+        }
+        tensor_content: "\002\000\000\000\000\000\000\000\001\000\000\000\000\000\000\000\003\000\000\000\000\000\000\000\002\000\000\000\000\000\000\000"
+      }
+    }
+  }
+}
+node {
+  name: "ReverseSequence"
+  op: "ReverseSequence"
+  input: "Erf"
+  input: "ReverseSequence/seq_lengths"
+  attr {
+    key: "T"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "Tlen"
+    value {
+      type: DT_INT64
+    }
+  }
+  attr {
+    key: "batch_dim"
+    value {
+      i: 2
+    }
+  }
+  attr {
+    key: "seq_dim"
+    value {
+      i: 3
+    }
+  }
+}
+node {
+  name: "Round"
+  op: "Round"
+  input: "ReverseSequence"
+  attr {
+    key: "T"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+}
+node {
+  name: "Sum/reduction_indices"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+            size: 2
+          }
+        }
+        tensor_content: "\000\000\000\000\002\000\000\000"
+      }
+    }
+  }
+}
+node {
+  name: "Sum"
+  op: "Sum"
+  input: "Round"
+  input: "Sum/reduction_indices"
+  attr {
+    key: "T"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "Tidx"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "keep_dims"
+    value {
+      b: false
+    }
+  }
+}
+node {
+  name: "Erfc"
+  op: "Erfc"
+  input: "input_b"
+  attr {
+    key: "T"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+}
+node {
+  name: "add"
+  op: "Add"
+  input: "Erfc"
+  input: "Sum"
+  attr {
+    key: "T"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+}
+node {
+  name: "eye/shape"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+          }
+        }
+      }
+    }
+  }
+}
+node {
+  name: "eye/concat/values_1"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+            size: 1
+          }
+        }
+        int_val: 3
+      }
+    }
+  }
+}
+node {
+  name: "eye/concat/axis"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+        }
+        int_val: 0
+      }
+    }
+  }
+}
+node {
+  name: "eye/concat"
+  op: "ConcatV2"
+  input: "eye/shape"
+  input: "eye/concat/values_1"
+  input: "eye/concat/axis"
+  attr {
+    key: "N"
+    value {
+      i: 2
+    }
+  }
+  attr {
+    key: "T"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "Tidx"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "eye/ones/Const"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+        }
+        float_val: 1.0
+      }
+    }
+  }
+}
+node {
+  name: "eye/ones"
+  op: "Fill"
+  input: "eye/concat"
+  input: "eye/ones/Const"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "eye/MatrixDiag"
+  op: "MatrixDiag"
+  input: "eye/ones"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "Cast"
+  op: "Cast"
+  input: "eye/MatrixDiag"
+  attr {
+    key: "DstT"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "SrcT"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "add_1"
+  op: "Add"
+  input: "add"
+  input: "Cast"
+  attr {
+    key: "T"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+}
+node {
+  name: "Variable"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_DOUBLE
+        tensor_shape {
+          dim {
+            size: 3
+          }
+          dim {
+            size: 3
+          }
+        }
+        tensor_content: "\342b\226l\372\221\345\277H\223\360\230X\323\366\277D\365!\006`g\366\277\030\371\0367\347\206\004\300\323`\271c.\t\342\277\207\366\243:_\264\372\277\340\200\260\232\262\001\365?.o\245m\277\307\332\277+\361\206bz\371\372?"
+      }
+    }
+  }
+}
+node {
+  name: "Variable/read"
+  op: "Identity"
+  input: "Variable"
+  attr {
+    key: "T"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Variable"
+      }
+    }
+  }
+}
+node {
+  name: "Log1p"
+  op: "Log1p"
+  input: "add_1"
+  attr {
+    key: "T"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+}
+node {
+  name: "output"
+  op: "Add"
+  input: "Log1p"
+  input: "Variable/read"
+  attr {
+    key: "T"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+}
+library {
+}
