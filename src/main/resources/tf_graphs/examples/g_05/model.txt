@@ -40,7 +40,12 @@ node {
     key: "shape"
     value {
       shape {
-        unknown_rank: true
+        dim {
+          size: 3
+        }
+        dim {
+          size: 2
+        }
       }
     }
   }
