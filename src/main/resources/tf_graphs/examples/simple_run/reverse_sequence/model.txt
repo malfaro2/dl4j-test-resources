@@ -1,0 +1,1051 @@
+node {
+  name: "Variable/initial_value"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+            size: 2
+          }
+          dim {
+            size: 2
+          }
+        }
+        tensor_content: "\000\000\000\000\002\000\000\000\001\000\000\000\377\377\377\377"
+      }
+    }
+  }
+}
+node {
+  name: "Variable"
+  op: "VariableV2"
+  attr {
+    key: "container"
+    value {
+      s: ""
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "shape"
+    value {
+      shape {
+        dim {
+          size: 2
+        }
+        dim {
+          size: 2
+        }
+      }
+    }
+  }
+  attr {
+    key: "shared_name"
+    value {
+      s: ""
+    }
+  }
+}
+node {
+  name: "Variable/Assign"
+  op: "Assign"
+  input: "Variable"
+  input: "Variable/initial_value"
+  attr {
+    key: "T"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Variable"
+      }
+    }
+  }
+  attr {
+    key: "use_locking"
+    value {
+      b: true
+    }
+  }
+  attr {
+    key: "validate_shape"
+    value {
+      b: true
+    }
+  }
+}
+node {
+  name: "Variable/read"
+  op: "Identity"
+  input: "Variable"
+  attr {
+    key: "T"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Variable"
+      }
+    }
+  }
+}
+node {
+  name: "output/Const"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+        }
+        float_val: 5.0
+      }
+    }
+  }
+}
+node {
+  name: "output/Const_1"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+        }
+        float_val: -2.0
+      }
+    }
+  }
+}
+node {
+  name: "output/depth"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+        }
+        int_val: 3
+      }
+    }
+  }
+}
+node {
+  name: "output/on_value"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+        }
+        float_val: 5.0
+      }
+    }
+  }
+}
+node {
+  name: "output/off_value"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+        }
+        float_val: -2.0
+      }
+    }
+  }
+}
+node {
+  name: "output"
+  op: "OneHot"
+  input: "Variable/read"
+  input: "output/depth"
+  input: "output/on_value"
+  input: "output/off_value"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "TI"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "axis"
+    value {
+      i: 1
+    }
+  }
+}
+node {
+  name: "save/Const"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_STRING
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_STRING
+        tensor_shape {
+        }
+        string_val: "model"
+      }
+    }
+  }
+}
+node {
+  name: "save/SaveV2/tensor_names"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_STRING
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_STRING
+        tensor_shape {
+          dim {
+            size: 1
+          }
+        }
+        string_val: "Variable"
+      }
+    }
+  }
+}
+node {
+  name: "save/SaveV2/shape_and_slices"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_STRING
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_STRING
+        tensor_shape {
+          dim {
+            size: 1
+          }
+        }
+        string_val: ""
+      }
+    }
+  }
+}
+node {
+  name: "save/SaveV2"
+  op: "SaveV2"
+  input: "save/Const"
+  input: "save/SaveV2/tensor_names"
+  input: "save/SaveV2/shape_and_slices"
+  input: "Variable"
+  attr {
+    key: "dtypes"
+    value {
+      list {
+        type: DT_INT32
+      }
+    }
+  }
+}
+node {
+  name: "save/control_dependency"
+  op: "Identity"
+  input: "save/Const"
+  input: "^save/SaveV2"
+  attr {
+    key: "T"
+    value {
+      type: DT_STRING
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@save/Const"
+      }
+    }
+  }
+}
+node {
+  name: "save/RestoreV2/tensor_names"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_STRING
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_STRING
+        tensor_shape {
+          dim {
+            size: 1
+          }
+        }
+        string_val: "Variable"
+      }
+    }
+  }
+}
+node {
+  name: "save/RestoreV2/shape_and_slices"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_STRING
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_STRING
+        tensor_shape {
+          dim {
+            size: 1
+          }
+        }
+        string_val: ""
+      }
+    }
+  }
+}
+node {
+  name: "save/RestoreV2"
+  op: "RestoreV2"
+  input: "save/Const"
+  input: "save/RestoreV2/tensor_names"
+  input: "save/RestoreV2/shape_and_slices"
+  attr {
+    key: "dtypes"
+    value {
+      list {
+        type: DT_INT32
+      }
+    }
+  }
+}
+node {
+  name: "save/Assign"
+  op: "Assign"
+  input: "Variable"
+  input: "save/RestoreV2"
+  attr {
+    key: "T"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Variable"
+      }
+    }
+  }
+  attr {
+    key: "use_locking"
+    value {
+      b: true
+    }
+  }
+  attr {
+    key: "validate_shape"
+    value {
+      b: true
+    }
+  }
+}
+node {
+  name: "save/restore_all"
+  op: "NoOp"
+  input: "^save/Assign"
+}
+node {
+  name: "init"
+  op: "NoOp"
+  input: "^Variable/Assign"
+}
+node {
+  name: "save/Const_1"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_STRING
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_STRING
+        tensor_shape {
+        }
+        string_val: "model"
+      }
+    }
+  }
+}
+node {
+  name: "save/SaveV2_1/tensor_names"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_STRING
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_STRING
+        tensor_shape {
+          dim {
+            size: 1
+          }
+        }
+        string_val: "Variable"
+      }
+    }
+  }
+}
+node {
+  name: "save/SaveV2_1/shape_and_slices"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_STRING
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_STRING
+        tensor_shape {
+          dim {
+            size: 1
+          }
+        }
+        string_val: ""
+      }
+    }
+  }
+}
+node {
+  name: "save/SaveV2_1"
+  op: "SaveV2"
+  input: "save/Const_1"
+  input: "save/SaveV2_1/tensor_names"
+  input: "save/SaveV2_1/shape_and_slices"
+  input: "Variable"
+  attr {
+    key: "dtypes"
+    value {
+      list {
+        type: DT_INT32
+      }
+    }
+  }
+}
+node {
+  name: "save/control_dependency_1"
+  op: "Identity"
+  input: "save/Const_1"
+  input: "^save/SaveV2_1"
+  attr {
+    key: "T"
+    value {
+      type: DT_STRING
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@save/Const_1"
+      }
+    }
+  }
+}
+node {
+  name: "save/RestoreV2_1/tensor_names"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_STRING
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_STRING
+        tensor_shape {
+          dim {
+            size: 1
+          }
+        }
+        string_val: "Variable"
+      }
+    }
+  }
+}
+node {
+  name: "save/RestoreV2_1/shape_and_slices"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_STRING
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_STRING
+        tensor_shape {
+          dim {
+            size: 1
+          }
+        }
+        string_val: ""
+      }
+    }
+  }
+}
+node {
+  name: "save/RestoreV2_1"
+  op: "RestoreV2"
+  input: "save/Const_1"
+  input: "save/RestoreV2_1/tensor_names"
+  input: "save/RestoreV2_1/shape_and_slices"
+  attr {
+    key: "dtypes"
+    value {
+      list {
+        type: DT_INT32
+      }
+    }
+  }
+}
+node {
+  name: "save/Assign_1"
+  op: "Assign"
+  input: "Variable"
+  input: "save/RestoreV2_1"
+  attr {
+    key: "T"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Variable"
+      }
+    }
+  }
+  attr {
+    key: "use_locking"
+    value {
+      b: true
+    }
+  }
+  attr {
+    key: "validate_shape"
+    value {
+      b: true
+    }
+  }
+}
+node {
+  name: "save/restore_all_1"
+  op: "NoOp"
+  input: "^save/Assign_1"
+}
+node {
+  name: "Variable_1/initial_value"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_DOUBLE
+        tensor_shape {
+          dim {
+            size: 8
+          }
+          dim {
+            size: 8
+          }
+          dim {
+            size: 3
+          }
+          dim {
+            size: 2
+          }
+        }
+        tensor_content: "He\306M\366\367\270?\025\246\246](\\\350?@\350q\333\251\233\317?TD \224L\256\301?\032\262g\245k6\325?\300mI\241u?\265?>[x\024\326\200\345?\004X\010\314\235\317\351?\304\006\354+\237r\357?\322\270i.UW\344?\214\220\225\215_\243\313?<\025-\372\241\221\341?,\0045(:u\341?\014\243xk4\366\315?h\351l\010#\035\275?\376\226\307\334j\372\337?\264\265\337\355Ix\303?\203\344\340\255\303\013\341?\250\277s\t\270\304\330?\220\251\027&\307\006\346?\344\035$\335\t\336\327?\005\312<n\361F\356?,\302q\266\035\340\350?\366\252\320Z\004u\343?\'\326\222\030\373\257\343?l\355\345\273Z\223\344?\214\370\250r\325.\321?\023\235\244wG\001\350?\356\210\343Dn[\322?\006\273\035k5\263\346?\270Q\335\271\335\225\260?\016m\346\026R\023\346?[\371T\340[\253\341?\365\366\222O\362\270\341?|\002\005k\206-\326?x\2646u.\030\306?<\001_\035\203W\341? \\e\325x\201\252?\332\035\321\314\367j\352?X\034\315\204\017\301\346?\260\002\311\021\026\235\246?\300j\276l\346\227\263?\000\257\261\031./\205?iK\273XX\321\357?\316-\272\367\244.\343?\004*\331[\256\001\307?R\t\364\311\371Q\327?\017}w\353\214\244\353?Z\230\336r\374\320\334?\326\351~\rv\025\357?\344\356/\260L]\301?\376H9,\316\346\346?)\2252whx\355?j\353\225^\201\356\355?\323\230\227\2041\366\355?\301\020\014o]\207\345?\367)\215H:\014\356?[\316\235;y\306\340?,J2R\"\273\334?0\006\247\247\235\003\240?x\0077\263\310}\353?L#t\200\032]\307?\250-\253\234ON\347?\030i\001R\256\364\356?\310?\300\251\000\277\354?\241q\246\335+\263\352?}\265J\237p\345\342?\306\361\342\370%\"\327?\220:\375\031,\031\305?\242A\232\362m,\334?L\256\366\256rS\350?\316#\004\3506N\334?\024?\313\221\375\264\300?\\@\321\337)M\307?)\310U\262\001\353\357?&\n\000\233\3364\321?\3047\035\201\216\022\354?tg\376\335\250\374\304?\352l\371\252\303a\356?\036\303\277\rV\234\331?QKW\335\277\342\344?\267\036\255rR\276\346?\272\251\251\377\036\251\331?\017\033\317n\256-\355?\000@\364T \233\253?\200I\214\315l\261\337?|\202\221\262(\364\317?\344\031\206\272XM\326?)\212\271\352V\265\347?\232\325\266H2\035\327?\245 \375\016\n/\344?[#L-\346,\357?~r\243\334\316\004\333? BTFr2\260?p\272b[G\036\264?\254\r\205\014\323Y\312?\302\2564O\300f\322?6\027\260\202\377i\330?\351\335\262\317\332\271\352?\200[\302\342\352\002\265?\344ru~GD\352?CC`p\016\"\352?6\034\356\237pQ\325?\253\241\247\200\306\236\345?\264\331\251PNx\357?\253L\274\272\302\261\356?\352?r3.p\345? $\004N$\223\354?\030\336\'\305b>\326?.\302\217\250\2326\344?\350\017m\206\213 \310?T\2615TKJ\326?\nF\2754K\203\357?\271\217\321\364\\\r\350?\2031>\211m\250\352?\364\226x\267\016.\302?\200\320\253\340i\255\216?\340y\211\337\312n\353?\336\225\014\317A\310\346?\261hD\367\306h\353?\2708\251>C\222\353?\\\215O0:w\351?p\0138\255\337\210\336?Hf\250\332\251\332\267?\370U*8\202\023\324?\300\250Y\010\345\204\344?\310\024\252\002\033\260\342?&\350\331\340\233\027\321?\200;\301\324\220\364\254?\032GZ\t\311 \355?v)\006\013Xi\323?\350\200k?#6\325? \367\003x\373\005\255?\300\023j\317\271\021\236?\000\337\354o\016%\300?0\361\303\347u\177\271?\224\301\340\251V\302\304?<\t\033\335\024P\303?\220\034&O4\376\323?\210$\223\373\342\351\341?\236%,\367YF\326?\260\310gV\322\\\326?2\n<\324y\243\343?\000\265\241\341\221\372\261?\315+nTL\037\343?\360\3246\365$\366\323?<V\215<H#\320?\254h\201\341\235\320\340?\360\336p\373\220\326\341?\265/v\200\020\t\343?\345\326\312`\216`\343?@B\017\256BK\263?\226\231+\2455\351\341?(\346\275p;\317\330?\244C\326P`\213\312?\212h\306*#P\330?\220\213\225\037\276\200\307?\222\000R\277\217 \337?\300*\205\227V\375\256?\340\010T\357\365\267\245?\373\2674u\351X\345?\220\367\314\305\266\360\261?\250\251vt\266\377\342?\271\316\260\004S\325\347?q\301\237\340\227\032\353?\tT\320A\'c\340?\270I\tQ*\371\277?h\320e9;\352\315?*\000\223h\252t\321?\320n\225\322n\250\352?\006\177\224\243\017D\350?\374b\341/\333\235\320?\021\232\261gR\342\353?\320^NQ\220A\317?\220CJ\345\203\304\251?\004\324\364\321\024\252\340?\232JH\363a\221\336?\350\312\255n\322\276\354?\224\256\212O\377\006\326?\227D\004\304\013\033\353?\000\263\321\313\t\000\265?\240\027M\010j8\273?\342jof\027\031\351?X\376\313LN\251\353?0\013\321\310 Z\327?\000t\377\325\214,\271?\252E\022\024\362y\353?\270`2>\330/\274?\200\022\266\010\007\331\275?\304%\237D?3\333?\000\307\377^\342!\234?\240\200$\213/\244\277?\000V\204\361\203\364\221?\2226\317\231\316W\332?\034\"\007\374\307<\336?\340\341+\'\241*\265?\374n@s\226\237\313?\\\025~\354\031?\350?(\372|\274@C\311?\344\320\221\234\242t\334?\320\267\t\206\264V\325?\010\3075\2056\323\314?\nu\326\356\251-\324?\230ITj\235\362\302?\013\275o\032\367\210\344?\266(\346\331\223\330\340?PB@b\205\247\310?\324>\027\216\331^\357?\270o!\202\320\266\303?iQ\306\001\257I\353?\005Y\3628/@\345?\0009\035\271V\266\315?p\364\025\027\261\341\347?0{\nV\362@\255?\212|\005\364f`\337?,TR\022\360\374\336?H\225\237\005\244\r\343?\210E\302\356\206\251\267?\3631\'_\333\r\356?]\355*\237\245\203\356?\303x4\226\310\302\340?\3525j\245\302\033\345?t\231\347\223\251\255\336?\252\177\320\004\321\362\337?\3720q\376)\377\325?\016^\010\354\020\007\351?\214`\244\375\232\315\301?\022\232\322b-\244\356?\237\325bE\033\352\352?\250\372\036g\364\\\267?\000\024\275 \263\201\333?\030\315\211\370$[\272?D\003\2177\374)\326?\276\002\274Z59\346?|\341_ ~\263\332?Pr\006\374\277\217\303?\017M\366\004\032\311\347?\220\255\306\n\307K\335?hj\353\356\316]\300?\374Y-\330\313}\331?\274\251\\+V\030\312?\275\374@\240\351\032\343?\214-*{\313\032\356?\244\243\2301(\013\333?\304\256g.\274\276\351?\247\312\304\312\265\205\351?\334\243/\207\213V\322?P\314/F\234A\343?30\0074\005\340\341?\354s5\351\262\366\325?\014\357\351\332/)\344?`{\255\247\236a\327?\362\003\346\250e\263\354?QXE%\202o\347?\236\002\302yl\255\343?\300\207\033\231\350\317\352?}j|\314\231\275\345?\342b\235\210\233\013\347??\237\346\237\311\314\350?\262\237\353rT-\347?\350\363\373S\037 \326?0j,-\200\237\315?\350\'[\263&\272\311?I#\r\225\370b\353?!\377\036\005nj\347?\227\271w\354\363^\341?\234\214\315\265*\360\311?\305\003Y\307\313\370\340?,\203\351\230\376\203\323?\352\005\322\301[T\352?\227\254<\306\313\273\342?\326\221\026\347\004>\347?0\244\2453n\213\307?\200\017\021\250\225\350x?\360\23458{y\316?\004\245\016\244\n\305\305?\202\234\'\244\033\024\350?ztngn2\353?T\347\206\002\205\331\330?T\"%\316Z\243\325?\200\223\324v\371\037\206?<\262\357\346\251p\321?\276<\363\223\217*\352?\354@{\233\037\235\303?U\225\026/\023\357\346?\235\241\365=\020\321\357?\010?\237\217\375\021\275?\360zm\317\357)\340?\022\203[\271\211G\343?@\207]\"5n\327?|y\007\354*\270\357?\0101\340\3663\356\272?\\\215@\020\206\001\310?\346f\016\3759\253\333?\204M&p{(\320?\254\240}P\032\263\336?\266/\004\340\"^\354?\340qX\0367\177\325?\312n`\345Z\214\355?0\226\361j1\023\310?\377\272\231\2034k\351?\200\341%\346.\351\276?`\003\323\266F\317\227?\330S\314\264\340\346\271?x\337\340A,\275\352?\206\215\226\243)\202\345?\254iN\274^\206\345?\230\211\203gc\202\276?\247,@\033\003\201\350?V\006X\254\027\017\334?\346\303\002\'lB\322?\243j\007\201\305|\351?\324X\2358n\256\336?\022)I\275i\212\347?\312\275\356K\274\211\332?`\004\232b\031&\274?\330\371\350\302\243\362\311?\000\337\"p)_u?\014%b\352\355`\315?\213d\267\030\010\014\351?\300\301\376\262Om\300?\254O\360\266O]\354?\261\310\323\037\212r\350?\226&&\346\221\263\337?\360E\\\277\343W\353?,N\204\034lf\304?\2059\022\361A\276\355?\261O\337_\337\020\344?\357~4\236\331\201\353?d[N\341\2302\301?\276\377\260\006\3170\352?\237\277N\237\310m\343?Z%\034\'\340\221\352?_\317\0309@\225\352?\354\031\"Q\250\342\330?SL3\335\\s\355?\304w\266\032~{\335?\024\341\360\355\177<\337?\222$\211\300l8\340?\000H\237\340\300\316z?\354R\250\236i\207\324?\302\253\332\333\203\035\333?\250\n\300u\307\345\262?\320\265\t\305w/\315?\266,(9\203\021\321?>\025\362#\266\346\357?\000GE\236\310\002\277?\3648\252|\256\377\325?\030UsrE\254\357?\036\244Qw\307\312\356?cR\313\204\217\330\354?t)\211\204d\t\311?\360\277\234\374\005\374\266?\230:Rw\313\314\270?\247\341@\000\207$\343?\007I\246\332?+\350?\205\352\300\324\236\250\345?\274\340o&\325\366\313?\306u\207\241-\320\322?\216)\207e\'\'\340?\320<\254\362x5\262?\322[|9\031O\341?\322\200\320\005v\325\345?\036\264\253\027\035\321\337?\310a\223\214\216\332\332?\347!w\301\261\303\345?\206\275p\230\321\205\336?\325\251v\212\004?\344?\270\t\3706d-\356?\032 \035\n\312w\341?\360H\310\241\347.\347?*\366\234\t1\201\322?\244\031!\316\323>\350?\312\372\332\023\363\362\340?G\220\031\337X\376\356?\374\232t\022:\364\303?\277\357\214\037\322\353\352?\360\323\036\262z\351\304?\260\360\274\2575\214\255?\250\353\314-\226\227\313?PAA\366\003\366\276?<,:\313\205\005\323?\200\n\351\270\004\234\200?\237\037\205\201\336-\345?"
+      }
+    }
+  }
+}
+node {
+  name: "Variable_1"
+  op: "VariableV2"
+  attr {
+    key: "container"
+    value {
+      s: ""
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "shape"
+    value {
+      shape {
+        dim {
+          size: 8
+        }
+        dim {
+          size: 8
+        }
+        dim {
+          size: 3
+        }
+        dim {
+          size: 2
+        }
+      }
+    }
+  }
+  attr {
+    key: "shared_name"
+    value {
+      s: ""
+    }
+  }
+}
+node {
+  name: "Variable_1/Assign"
+  op: "Assign"
+  input: "Variable_1"
+  input: "Variable_1/initial_value"
+  attr {
+    key: "T"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Variable_1"
+      }
+    }
+  }
+  attr {
+    key: "use_locking"
+    value {
+      b: true
+    }
+  }
+  attr {
+    key: "validate_shape"
+    value {
+      b: true
+    }
+  }
+}
+node {
+  name: "Variable_1/read"
+  op: "Identity"
+  input: "Variable_1"
+  attr {
+    key: "T"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Variable_1"
+      }
+    }
+  }
+}
+node {
+  name: "ReverseSequence/seq_lengths"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT64
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT64
+        tensor_shape {
+          dim {
+            size: 8
+          }
+        }
+        tensor_content: "\007\000\000\000\000\000\000\000\002\000\000\000\000\000\000\000\003\000\000\000\000\000\000\000\005\000\000\000\000\000\000\000\002\000\000\000\000\000\000\000\001\000\000\000\000\000\000\000\006\000\000\000\000\000\000\000\004\000\000\000\000\000\000\000"
+      }
+    }
+  }
+}
+node {
+  name: "ReverseSequence"
+  op: "ReverseSequence"
+  input: "Variable_1/read"
+  input: "ReverseSequence/seq_lengths"
+  attr {
+    key: "T"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "Tlen"
+    value {
+      type: DT_INT64
+    }
+  }
+  attr {
+    key: "batch_dim"
+    value {
+      i: 0
+    }
+  }
+  attr {
+    key: "seq_dim"
+    value {
+      i: 1
+    }
+  }
+}
+node {
+  name: "save_1/Const"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_STRING
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_STRING
+        tensor_shape {
+        }
+        string_val: "model"
+      }
+    }
+  }
+}
+node {
+  name: "save_1/SaveV2/tensor_names"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_STRING
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_STRING
+        tensor_shape {
+          dim {
+            size: 1
+          }
+        }
+        string_val: "Variable_1"
+      }
+    }
+  }
+}
+node {
+  name: "save_1/SaveV2/shape_and_slices"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_STRING
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_STRING
+        tensor_shape {
+          dim {
+            size: 1
+          }
+        }
+        string_val: ""
+      }
+    }
+  }
+}
+node {
+  name: "save_1/SaveV2"
+  op: "SaveV2"
+  input: "save_1/Const"
+  input: "save_1/SaveV2/tensor_names"
+  input: "save_1/SaveV2/shape_and_slices"
+  input: "Variable_1"
+  attr {
+    key: "dtypes"
+    value {
+      list {
+        type: DT_DOUBLE
+      }
+    }
+  }
+}
+node {
+  name: "save_1/control_dependency"
+  op: "Identity"
+  input: "save_1/Const"
+  input: "^save_1/SaveV2"
+  attr {
+    key: "T"
+    value {
+      type: DT_STRING
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@save_1/Const"
+      }
+    }
+  }
+}
+node {
+  name: "save_1/RestoreV2/tensor_names"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_STRING
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_STRING
+        tensor_shape {
+          dim {
+            size: 1
+          }
+        }
+        string_val: "Variable_1"
+      }
+    }
+  }
+}
+node {
+  name: "save_1/RestoreV2/shape_and_slices"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_STRING
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_STRING
+        tensor_shape {
+          dim {
+            size: 1
+          }
+        }
+        string_val: ""
+      }
+    }
+  }
+}
+node {
+  name: "save_1/RestoreV2"
+  op: "RestoreV2"
+  input: "save_1/Const"
+  input: "save_1/RestoreV2/tensor_names"
+  input: "save_1/RestoreV2/shape_and_slices"
+  attr {
+    key: "dtypes"
+    value {
+      list {
+        type: DT_DOUBLE
+      }
+    }
+  }
+}
+node {
+  name: "save_1/Assign"
+  op: "Assign"
+  input: "Variable_1"
+  input: "save_1/RestoreV2"
+  attr {
+    key: "T"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Variable_1"
+      }
+    }
+  }
+  attr {
+    key: "use_locking"
+    value {
+      b: true
+    }
+  }
+  attr {
+    key: "validate_shape"
+    value {
+      b: true
+    }
+  }
+}
+node {
+  name: "save_1/restore_all"
+  op: "NoOp"
+  input: "^save_1/Assign"
+}
+node {
+  name: "init_1"
+  op: "NoOp"
+  input: "^Variable_1/Assign"
+}
+versions {
+  producer: 24
+}
