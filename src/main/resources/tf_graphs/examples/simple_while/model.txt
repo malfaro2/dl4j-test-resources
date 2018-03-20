@@ -284,11 +284,6 @@ node {
   }
 }
 node {
-  name: "init"
-  op: "NoOp"
-  input: "^loop_var/Assign"
-}
-node {
   name: "save/Const"
   op: "Const"
   attr {
@@ -492,6 +487,11 @@ node {
   name: "save/restore_all"
   op: "NoOp"
   input: "^save/Assign"
+}
+node {
+  name: "init"
+  op: "NoOp"
+  input: "^loop_var/Assign"
 }
 versions {
   producer: 24
