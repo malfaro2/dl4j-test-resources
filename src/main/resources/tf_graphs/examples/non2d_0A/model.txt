@@ -11,7 +11,6 @@ node {
     key: "shape"
     value {
       shape {
-        unknown_rank: true
       }
     }
   }
@@ -29,7 +28,6 @@ node {
     key: "shape"
     value {
       shape {
-        unknown_rank: true
       }
     }
   }
@@ -64,14 +62,14 @@ node {
   attr {
     key: "dtype"
     value {
-      type: DT_DOUBLE
+      type: DT_FLOAT
     }
   }
   attr {
     key: "value"
     value {
       tensor {
-        dtype: DT_DOUBLE
+        dtype: DT_FLOAT
         tensor_shape {
           dim {
             size: 3
@@ -80,7 +78,7 @@ node {
             size: 4
           }
         }
-        tensor_content: "He\306M\366\367\270?\025\246\246](\\\350?@\350q\333\251\233\317?TD \224L\256\301?\032\262g\245k6\325?\300mI\241u?\265?>[x\024\326\200\345?\004X\010\314\235\317\351?\304\006\354+\237r\357?\322\270i.UW\344?\214\220\225\215_\243\313?<\025-\372\241\221\341?"
+        tensor_content: "\001>s>\353\003S?W;w?c\374x?\200*\350>5\352\033?\350\210F?\306@$?0\3268?u\202\017=^\316\230>\313\252o="
       }
     }
   }
@@ -97,7 +95,7 @@ node {
   attr {
     key: "dtype"
     value {
-      type: DT_DOUBLE
+      type: DT_FLOAT
     }
   }
   attr {
@@ -128,7 +126,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_DOUBLE
+      type: DT_FLOAT
     }
   }
   attr {
@@ -159,7 +157,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_DOUBLE
+      type: DT_FLOAT
     }
   }
   attr {
@@ -179,7 +177,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_DOUBLE
+      type: DT_FLOAT
     }
   }
   attr {
@@ -188,11 +186,6 @@ node {
       type: DT_INT32
     }
   }
-}
-node {
-  name: "init"
-  op: "NoOp"
-  input: "^Variable/Assign"
 }
 node {
   name: "save/Const"
@@ -274,7 +267,7 @@ node {
     key: "dtypes"
     value {
       list {
-        type: DT_DOUBLE
+        type: DT_FLOAT
       }
     }
   }
@@ -357,7 +350,7 @@ node {
     key: "dtypes"
     value {
       list {
-        type: DT_DOUBLE
+        type: DT_FLOAT
       }
     }
   }
@@ -370,7 +363,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_DOUBLE
+      type: DT_FLOAT
     }
   }
   attr {
@@ -398,6 +391,11 @@ node {
   name: "save/restore_all"
   op: "NoOp"
   input: "^save/Assign"
+}
+node {
+  name: "init"
+  op: "NoOp"
+  input: "^Variable/Assign"
 }
 versions {
   producer: 24

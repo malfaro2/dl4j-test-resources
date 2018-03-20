@@ -1215,16 +1215,6 @@ node {
   }
 }
 node {
-  name: "init"
-  op: "NoOp"
-  input: "^greater/Assign"
-  input: "^lesser/Assign"
-  input: "^cond5/div_f1_constant/Assign"
-  input: "^cond5/mul_f2_constant/Assign"
-  input: "^cond6/div_f1_constant/Assign"
-  input: "^cond6/mul_f2_constant/Assign"
-}
-node {
   name: "save/Const"
   op: "Const"
   attr {
@@ -1928,6 +1918,16 @@ node {
   input: "^save/Assign_3"
   input: "^save/Assign_4"
   input: "^save/Assign_5"
+}
+node {
+  name: "init"
+  op: "NoOp"
+  input: "^greater/Assign"
+  input: "^lesser/Assign"
+  input: "^cond5/div_f1_constant/Assign"
+  input: "^cond5/mul_f2_constant/Assign"
+  input: "^cond6/div_f1_constant/Assign"
+  input: "^cond6/mul_f2_constant/Assign"
 }
 versions {
   producer: 24
