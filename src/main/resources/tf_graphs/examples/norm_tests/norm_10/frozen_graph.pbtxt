@@ -4,7 +4,7 @@ node {
   attr {
     key: "dtype"
     value {
-      type: DT_DOUBLE
+      type: DT_FLOAT
     }
   }
   attr {
@@ -27,14 +27,14 @@ node {
   attr {
     key: "dtype"
     value {
-      type: DT_DOUBLE
+      type: DT_FLOAT
     }
   }
   attr {
     key: "value"
     value {
       tensor {
-        dtype: DT_DOUBLE
+        dtype: DT_FLOAT
         tensor_shape {
           dim {
             size: 2
@@ -43,7 +43,7 @@ node {
             size: 5
           }
         }
-        tensor_content: "\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000"
+        tensor_content: "\357\201\231\276\325\377\273\277\001fj\277=\355\205\277=\212\211\276\215\237\217\277F\0075?\327\202\274?\231\264\301\277q\260\216>"
       }
     }
   }
@@ -55,7 +55,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_DOUBLE
+      type: DT_FLOAT
     }
   }
   attr {
@@ -75,19 +75,18 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_DOUBLE
+      type: DT_FLOAT
     }
   }
 }
 node {
-  name: "norm_op/mul"
-  op: "Mul"
-  input: "add"
+  name: "norm_op/Abs"
+  op: "Abs"
   input: "add"
   attr {
     key: "T"
     value {
-      type: DT_DOUBLE
+      type: DT_FLOAT
     }
   }
 }
@@ -116,14 +115,14 @@ node {
   }
 }
 node {
-  name: "norm_op/Sum"
-  op: "Sum"
-  input: "norm_op/mul"
+  name: "norm_op/Max"
+  op: "Max"
+  input: "norm_op/Abs"
   input: "norm_op/Const"
   attr {
     key: "T"
     value {
-      type: DT_DOUBLE
+      type: DT_FLOAT
     }
   }
   attr {
@@ -140,24 +139,13 @@ node {
   }
 }
 node {
-  name: "norm_op/Sqrt"
-  op: "Sqrt"
-  input: "norm_op/Sum"
-  attr {
-    key: "T"
-    value {
-      type: DT_DOUBLE
-    }
-  }
-}
-node {
   name: "norm_op/Squeeze"
   op: "Squeeze"
-  input: "norm_op/Sqrt"
+  input: "norm_op/Max"
   attr {
     key: "T"
     value {
-      type: DT_DOUBLE
+      type: DT_FLOAT
     }
   }
   attr {
@@ -175,7 +163,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_DOUBLE
+      type: DT_FLOAT
     }
   }
 }

@@ -4,7 +4,7 @@ node {
   attr {
     key: "dtype"
     value {
-      type: DT_DOUBLE
+      type: DT_FLOAT
     }
   }
   attr {
@@ -27,14 +27,14 @@ node {
   attr {
     key: "dtype"
     value {
-      type: DT_DOUBLE
+      type: DT_FLOAT
     }
   }
   attr {
     key: "value"
     value {
       tensor {
-        dtype: DT_DOUBLE
+        dtype: DT_FLOAT
         tensor_shape {
           dim {
             size: 2
@@ -43,7 +43,7 @@ node {
             size: 5
           }
         }
-        tensor_content: "\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000"
+        tensor_content: "_S@?a\000\256>s\237\200\277\346Y<?B\227\326?\002\255\327\276\004#\017@\2315\372>\325\375Q\276\2234\242?"
       }
     }
   }
@@ -55,7 +55,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_DOUBLE
+      type: DT_FLOAT
     }
   }
   attr {
@@ -75,24 +75,23 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_DOUBLE
+      type: DT_FLOAT
     }
   }
 }
 node {
-  name: "norm_op/mul"
-  op: "Mul"
-  input: "add"
+  name: "norm_op/Abs"
+  op: "Abs"
   input: "add"
   attr {
     key: "T"
     value {
-      type: DT_DOUBLE
+      type: DT_FLOAT
     }
   }
 }
 node {
-  name: "norm_op/Const"
+  name: "norm_op/Sum/reduction_indices"
   op: "Const"
   attr {
     key: "dtype"
@@ -106,11 +105,8 @@ node {
       tensor {
         dtype: DT_INT32
         tensor_shape {
-          dim {
-            size: 2
-          }
         }
-        tensor_content: "\000\000\000\000\001\000\000\000"
+        int_val: -1
       }
     }
   }
@@ -118,12 +114,12 @@ node {
 node {
   name: "norm_op/Sum"
   op: "Sum"
-  input: "norm_op/mul"
-  input: "norm_op/Const"
+  input: "norm_op/Abs"
+  input: "norm_op/Sum/reduction_indices"
   attr {
     key: "T"
     value {
-      type: DT_DOUBLE
+      type: DT_FLOAT
     }
   }
   attr {
@@ -140,30 +136,66 @@ node {
   }
 }
 node {
-  name: "norm_op/Sqrt"
-  op: "Sqrt"
+  name: "norm_op/Max/reduction_indices"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+        }
+        int_val: -2
+      }
+    }
+  }
+}
+node {
+  name: "norm_op/Max"
+  op: "Max"
   input: "norm_op/Sum"
+  input: "norm_op/Max/reduction_indices"
   attr {
     key: "T"
     value {
-      type: DT_DOUBLE
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "Tidx"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "keep_dims"
+    value {
+      b: true
     }
   }
 }
 node {
   name: "norm_op/Squeeze"
   op: "Squeeze"
-  input: "norm_op/Sqrt"
+  input: "norm_op/Max"
   attr {
     key: "T"
     value {
-      type: DT_DOUBLE
+      type: DT_FLOAT
     }
   }
   attr {
     key: "squeeze_dims"
     value {
       list {
+        i: -2
+        i: -1
       }
     }
   }
@@ -175,7 +207,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_DOUBLE
+      type: DT_FLOAT
     }
   }
 }
