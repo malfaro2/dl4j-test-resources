@@ -12,7 +12,7 @@ node {
     value {
       shape {
         dim {
-          size: 3
+          size: -1
         }
         dim {
           size: 3
@@ -35,7 +35,7 @@ node {
     value {
       shape {
         dim {
-          size: 3
+          size: -1
         }
         dim {
           size: 3
@@ -45,10 +45,80 @@ node {
   }
 }
 node {
-  name: "output"
+  name: "in0"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_DOUBLE
+        tensor_shape {
+          dim {
+            size: 3
+          }
+          dim {
+            size: 3
+          }
+        }
+        tensor_content: "0\0077T\306\224\340\277,T \247\034\352\355?\356\233\017\367\323M\341?]\017\226\276\022\322\366\277\340v\341G\276\203\357\277\305\014\260@\343\276\270\277jr\206Rw\215\303\277\235O!\027\007W\315\277\366C\224l\200\024\337\277"
+      }
+    }
+  }
+}
+node {
+  name: "in0/read"
+  op: "Identity"
+  input: "in0"
+  attr {
+    key: "T"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@in0"
+      }
+    }
+  }
+}
+node {
+  name: "MatMul"
   op: "MatMul"
   input: "input_0"
   input: "input_1"
+  attr {
+    key: "T"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "transpose_a"
+    value {
+      b: false
+    }
+  }
+  attr {
+    key: "transpose_b"
+    value {
+      b: false
+    }
+  }
+}
+node {
+  name: "output"
+  op: "MatMul"
+  input: "in0/read"
+  input: "MatMul"
   attr {
     key: "T"
     value {

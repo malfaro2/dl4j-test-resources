@@ -1,5 +1,5 @@
 node {
-  name: "rank2dF"
+  name: "rank2df"
   op: "Placeholder"
   attr {
     key: "dtype"
@@ -22,7 +22,7 @@ node {
   }
 }
 node {
-  name: "rank2dB"
+  name: "rank2db"
   op: "Placeholder"
   attr {
     key: "dtype"
@@ -71,7 +71,7 @@ node {
   }
 }
 node {
-  name: "rank3dB"
+  name: "rank3db"
   op: "Placeholder"
   attr {
     key: "dtype"
@@ -118,7 +118,7 @@ node {
             size: 1
           }
         }
-        tensor_content: "He\306M\366\367\270?\025\246\246](\\\350?"
+        tensor_content: "T\236>\004\344f\320?L+\362G\305>\326?"
       }
     }
   }
@@ -145,7 +145,7 @@ node {
 node {
   name: "transpose/Rank"
   op: "Rank"
-  input: "rank2dB"
+  input: "rank2db"
   attr {
     key: "T"
     value {
@@ -256,7 +256,7 @@ node {
 node {
   name: "transpose"
   op: "Transpose"
-  input: "rank2dB"
+  input: "rank2db"
   input: "transpose/sub_1"
   attr {
     key: "T"
@@ -274,7 +274,7 @@ node {
 node {
   name: "stack"
   op: "Pack"
-  input: "rank2dF"
+  input: "rank2df"
   input: "transpose"
   attr {
     key: "N"
@@ -559,7 +559,7 @@ node {
 node {
   name: "add_2"
   op: "Add"
-  input: "rank3dB"
+  input: "rank3db"
   input: "Squeeze_1"
   attr {
     key: "T"

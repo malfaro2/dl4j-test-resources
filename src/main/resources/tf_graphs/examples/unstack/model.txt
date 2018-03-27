@@ -112,7 +112,7 @@ node {
   }
 }
 node {
-  name: "output"
+  name: "unstack"
   op: "Unpack"
   input: "Variable/read"
   attr {
@@ -135,9 +135,76 @@ node {
   }
 }
 node {
-  name: "init"
-  op: "NoOp"
-  input: "^Variable/Assign"
+  name: "output/input"
+  op: "Pack"
+  input: "unstack"
+  input: "unstack:1"
+  input: "unstack:2"
+  input: "unstack:3"
+  input: "unstack:4"
+  attr {
+    key: "N"
+    value {
+      i: 5
+    }
+  }
+  attr {
+    key: "T"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "axis"
+    value {
+      i: 0
+    }
+  }
+}
+node {
+  name: "output/reduction_indices"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+        }
+        int_val: 0
+      }
+    }
+  }
+}
+node {
+  name: "output"
+  op: "Sum"
+  input: "output/input"
+  input: "output/reduction_indices"
+  attr {
+    key: "T"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "Tidx"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "keep_dims"
+    value {
+      b: false
+    }
+  }
 }
 node {
   name: "save/Const"
@@ -343,6 +410,11 @@ node {
   name: "save/restore_all"
   op: "NoOp"
   input: "^save/Assign"
+}
+node {
+  name: "init"
+  op: "NoOp"
+  input: "^Variable/Assign"
 }
 versions {
   producer: 24

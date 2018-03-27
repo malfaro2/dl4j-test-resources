@@ -106,7 +106,7 @@ node {
   attr {
     key: "seed"
     value {
-      i: 13
+      i: 1
     }
   }
   attr {
@@ -279,11 +279,6 @@ node {
       type: DT_DOUBLE
     }
   }
-}
-node {
-  name: "init"
-  op: "NoOp"
-  input: "^in0/Assign"
 }
 node {
   name: "save/Const"
@@ -489,6 +484,11 @@ node {
   name: "save/restore_all"
   op: "NoOp"
   input: "^save/Assign"
+}
+node {
+  name: "init"
+  op: "NoOp"
+  input: "^in0/Assign"
 }
 versions {
   producer: 24

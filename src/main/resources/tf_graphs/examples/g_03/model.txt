@@ -112,7 +112,7 @@ node {
   attr {
     key: "seed"
     value {
-      i: 13
+      i: 1
     }
   }
   attr {
@@ -377,11 +377,6 @@ node {
   }
 }
 node {
-  name: "init"
-  op: "NoOp"
-  input: "^in0/Assign"
-}
-node {
   name: "save/Const"
   op: "Const"
   attr {
@@ -585,6 +580,11 @@ node {
   name: "save/restore_all"
   op: "NoOp"
   input: "^save/Assign"
+}
+node {
+  name: "init"
+  op: "NoOp"
+  input: "^in0/Assign"
 }
 versions {
   producer: 24

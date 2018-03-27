@@ -95,17 +95,6 @@ node {
   }
 }
 node {
-  name: "Rsqrt"
-  op: "Rsqrt"
-  input: "Abs"
-  attr {
-    key: "T"
-    value {
-      type: DT_DOUBLE
-    }
-  }
-}
-node {
   name: "random_normal/shape"
   op: "Const"
   attr {
@@ -190,13 +179,13 @@ node {
   attr {
     key: "seed"
     value {
-      i: 0
+      i: 1
     }
   }
   attr {
     key: "seed2"
     value {
-      i: 0
+      i: 8
     }
   }
 }
@@ -344,11 +333,6 @@ node {
       type: DT_DOUBLE
     }
   }
-}
-node {
-  name: "init"
-  op: "NoOp"
-  input: "^Variable/Assign"
 }
 node {
   name: "save/Const"
@@ -554,6 +538,11 @@ node {
   name: "save/restore_all"
   op: "NoOp"
   input: "^save/Assign"
+}
+node {
+  name: "init"
+  op: "NoOp"
+  input: "^Variable/Assign"
 }
 versions {
   producer: 24

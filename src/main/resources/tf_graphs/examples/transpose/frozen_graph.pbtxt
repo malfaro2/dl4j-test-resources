@@ -1,5 +1,5 @@
 node {
-  name: "input_0"
+  name: "input"
   op: "Placeholder"
   attr {
     key: "dtype"
@@ -12,7 +12,7 @@ node {
     value {
       shape {
         dim {
-          size: 3
+          size: -1
         }
         dim {
           size: 3
@@ -43,7 +43,7 @@ node {
             size: 3
           }
         }
-        tensor_content: "\234\246\0362\366-\331\277\353\205\033\355K\037\324?O*\240\375\275\212\360\277\211\201;\035\261b\006\300\026\n\353M\005\034\360?If*\334\025\001\337\277C\3145u\023\270\365?\211\327%\250\2737\363\277\264\267i\\l\233\343\277"
+        tensor_content: "t\332\323\263$\351\360\277\025\340^\312\243m\377\277\035\332I\351\2408\357?\251\037\233\322\030E\327?C\350a$\214+\321?\351\263\363F\\|\346?\355\312\3608\274\306\326\277\353\023\3431\224\271\346?\345\241\217\310\351]\323\277"
       }
     }
   }
@@ -70,7 +70,7 @@ node {
 node {
   name: "input_1/Rank"
   op: "Rank"
-  input: "input_0"
+  input: "input"
   attr {
     key: "T"
     value {
@@ -181,7 +181,7 @@ node {
 node {
   name: "input_1"
   op: "Transpose"
-  input: "input_0"
+  input: "input"
   input: "input_1/sub_1"
   attr {
     key: "T"

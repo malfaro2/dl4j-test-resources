@@ -12,7 +12,7 @@ node {
     value {
       shape {
         dim {
-          size: 3
+          size: -1
         }
         dim {
           size: 3
@@ -35,7 +35,7 @@ node {
     value {
       shape {
         dim {
-          size: 3
+          size: -1
         }
         dim {
           size: 3
@@ -129,13 +129,13 @@ node {
   attr {
     key: "seed"
     value {
-      i: 0
+      i: 1
     }
   }
   attr {
     key: "seed2"
     value {
-      i: 0
+      i: 5
     }
   }
 }
@@ -289,11 +289,6 @@ node {
       type: DT_DOUBLE
     }
   }
-}
-node {
-  name: "init"
-  op: "NoOp"
-  input: "^in0/Assign"
 }
 node {
   name: "save/Const"
@@ -499,6 +494,11 @@ node {
   name: "save/restore_all"
   op: "NoOp"
   input: "^save/Assign"
+}
+node {
+  name: "init"
+  op: "NoOp"
+  input: "^in0/Assign"
 }
 versions {
   producer: 24

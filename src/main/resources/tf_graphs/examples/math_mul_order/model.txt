@@ -12,7 +12,7 @@ node {
     value {
       shape {
         dim {
-          size: 3
+          size: -1
         }
         dim {
           size: 3
@@ -35,7 +35,7 @@ node {
     value {
       shape {
         dim {
-          size: 3
+          size: -1
         }
         dim {
           size: 3
@@ -129,13 +129,13 @@ node {
   attr {
     key: "seed"
     value {
-      i: 0
+      i: 1
     }
   }
   attr {
     key: "seed2"
     value {
-      i: 0
+      i: 5
     }
   }
 }
@@ -250,7 +250,7 @@ node {
   }
 }
 node {
-  name: "output"
+  name: "MatMul"
   op: "MatMul"
   input: "input_0"
   input: "input_1"
@@ -274,9 +274,28 @@ node {
   }
 }
 node {
-  name: "init"
-  op: "NoOp"
-  input: "^in0/Assign"
+  name: "output"
+  op: "MatMul"
+  input: "in0/read"
+  input: "MatMul"
+  attr {
+    key: "T"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "transpose_a"
+    value {
+      b: false
+    }
+  }
+  attr {
+    key: "transpose_b"
+    value {
+      b: false
+    }
+  }
 }
 node {
   name: "save/Const"
@@ -482,6 +501,11 @@ node {
   name: "save/restore_all"
   op: "NoOp"
   input: "^save/Assign"
+}
+node {
+  name: "init"
+  op: "NoOp"
+  input: "^in0/Assign"
 }
 versions {
   producer: 24
