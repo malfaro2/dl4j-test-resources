@@ -1,17 +1,17 @@
 node {
-  name: "in0"
+  name: "in_0"
   op: "Const"
   attr {
     key: "dtype"
     value {
-      type: DT_DOUBLE
+      type: DT_FLOAT
     }
   }
   attr {
     key: "value"
     value {
       tensor {
-        dtype: DT_DOUBLE
+        dtype: DT_FLOAT
         tensor_shape {
           dim {
             size: 3
@@ -20,26 +20,26 @@ node {
             size: 3
           }
         }
-        tensor_content: "\335\360L|\357\253\372?4\030\034\335\266\230\303?RS\002~\244Y\000\300w\266\233\275r\232\341\277\206\230]0\346\002\305?\235\263F\334\245,\354?B\255\023\236\351\315\372?I\363\301\2128\226\373?\324\035\217s\325X\362?"
+        tensor_content: "\220\275+\277\351\357d>\026\032L?\026\365\304=8 9?G\036\255>K\345:\277NZi?\332f\002\277"
       }
     }
   }
 }
 node {
-  name: "in0/read"
+  name: "in_0/read"
   op: "Identity"
-  input: "in0"
+  input: "in_0"
   attr {
     key: "T"
     value {
-      type: DT_DOUBLE
+      type: DT_FLOAT
     }
   }
   attr {
     key: "_class"
     value {
       list {
-        s: "loc:@in0"
+        s: "loc:@in_0"
       }
     }
   }
@@ -50,14 +50,14 @@ node {
   attr {
     key: "dtype"
     value {
-      type: DT_DOUBLE
+      type: DT_FLOAT
     }
   }
   attr {
     key: "value"
     value {
       tensor {
-        dtype: DT_DOUBLE
+        dtype: DT_FLOAT
         tensor_shape {
           dim {
             size: 3
@@ -66,7 +66,7 @@ node {
             size: 3
           }
         }
-        tensor_content: "\000\000\000\000\000\000\020\300\000\000\000\000\000\000\010\300\000\000\000\000\000\000\000\300\000\000\000\000\000\000\360\277\000\000\000\000\000\000\000\000\000\000\000\000\000\000\360?\000\000\000\000\000\000\000@\000\000\000\000\000\000\010@\000\000\000\000\000\000\020@"
+        tensor_content: "\000\000\200\300\000\000@\300\000\000\000\300\000\000\200\277\000\000\000\000\000\000\200?\000\000\000@\000\000@@\000\000\200@"
       }
     }
   }
@@ -75,11 +75,11 @@ node {
   name: "Add"
   op: "Add"
   input: "Add/x"
-  input: "in0/read"
+  input: "in_0/read"
   attr {
     key: "T"
     value {
-      type: DT_DOUBLE
+      type: DT_FLOAT
     }
   }
 }
@@ -90,7 +90,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_DOUBLE
+      type: DT_FLOAT
     }
   }
 }
@@ -101,7 +101,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_DOUBLE
+      type: DT_FLOAT
     }
   }
 }
@@ -112,7 +112,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_DOUBLE
+      type: DT_FLOAT
     }
   }
 }

@@ -4,7 +4,7 @@ node {
   attr {
     key: "dtype"
     value {
-      type: DT_DOUBLE
+      type: DT_FLOAT
     }
   }
   attr {
@@ -34,7 +34,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_DOUBLE
+      type: DT_FLOAT
     }
   }
   attr {
@@ -56,14 +56,14 @@ node {
   attr {
     key: "dtype"
     value {
-      type: DT_DOUBLE
+      type: DT_FLOAT
     }
   }
   attr {
     key: "value"
     value {
       tensor {
-        dtype: DT_DOUBLE
+        dtype: DT_FLOAT
         tensor_shape {
           dim {
             size: 2
@@ -75,7 +75,7 @@ node {
             size: 5
           }
         }
-        double_val: 0.0
+        float_val: 0.0
       }
     }
   }
@@ -92,7 +92,7 @@ node {
   attr {
     key: "dtype"
     value {
-      type: DT_DOUBLE
+      type: DT_FLOAT
     }
   }
   attr {
@@ -126,7 +126,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_DOUBLE
+      type: DT_FLOAT
     }
   }
   attr {
@@ -157,7 +157,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_DOUBLE
+      type: DT_FLOAT
     }
   }
   attr {
@@ -177,7 +177,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_DOUBLE
+      type: DT_FLOAT
     }
   }
 }
@@ -197,7 +197,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_DOUBLE
+      type: DT_FLOAT
     }
   }
   attr {
@@ -206,11 +206,6 @@ node {
       i: -4
     }
   }
-}
-node {
-  name: "init"
-  op: "NoOp"
-  input: "^Variable/Assign"
 }
 node {
   name: "save/Const"
@@ -292,7 +287,7 @@ node {
     key: "dtypes"
     value {
       list {
-        type: DT_DOUBLE
+        type: DT_FLOAT
       }
     }
   }
@@ -375,7 +370,7 @@ node {
     key: "dtypes"
     value {
       list {
-        type: DT_DOUBLE
+        type: DT_FLOAT
       }
     }
   }
@@ -388,7 +383,7 @@ node {
   attr {
     key: "T"
     value {
-      type: DT_DOUBLE
+      type: DT_FLOAT
     }
   }
   attr {
@@ -416,6 +411,11 @@ node {
   name: "save/restore_all"
   op: "NoOp"
   input: "^save/Assign"
+}
+node {
+  name: "init"
+  op: "NoOp"
+  input: "^Variable/Assign"
 }
 versions {
   producer: 24
