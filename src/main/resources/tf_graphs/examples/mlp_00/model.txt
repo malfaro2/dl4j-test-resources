@@ -106,13 +106,13 @@ node {
   attr {
     key: "seed"
     value {
-      i: 0
+      i: 1
     }
   }
   attr {
     key: "seed2"
     value {
-      i: 0
+      i: 4
     }
   }
 }
@@ -311,13 +311,13 @@ node {
   attr {
     key: "seed"
     value {
-      i: 0
+      i: 1
     }
   }
   attr {
     key: "seed2"
     value {
-      i: 0
+      i: 13
     }
   }
 }
@@ -516,13 +516,13 @@ node {
   attr {
     key: "seed"
     value {
-      i: 0
+      i: 1
     }
   }
   attr {
     key: "seed2"
     value {
-      i: 0
+      i: 22
     }
   }
 }
@@ -718,13 +718,13 @@ node {
   attr {
     key: "seed"
     value {
-      i: 0
+      i: 1
     }
   }
   attr {
     key: "seed2"
     value {
-      i: 0
+      i: 31
     }
   }
 }
@@ -940,14 +940,6 @@ node {
       type: DT_DOUBLE
     }
   }
-}
-node {
-  name: "init"
-  op: "NoOp"
-  input: "^l0W/Assign"
-  input: "^l1W/Assign"
-  input: "^l0B/Assign"
-  input: "^l1B/Assign"
 }
 node {
   name: "save/Const"
@@ -1453,6 +1445,14 @@ node {
   input: "^save/Assign_1"
   input: "^save/Assign_2"
   input: "^save/Assign_3"
+}
+node {
+  name: "init"
+  op: "NoOp"
+  input: "^l0W/Assign"
+  input: "^l1W/Assign"
+  input: "^l0B/Assign"
+  input: "^l1B/Assign"
 }
 versions {
   producer: 24
