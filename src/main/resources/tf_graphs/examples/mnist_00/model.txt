@@ -284,7 +284,7 @@ node {
   }
 }
 node {
-  name: "Placeholder"
+  name: "target"
   op: "Placeholder"
   attr {
     key: "dtype"
@@ -303,17 +303,6 @@ node {
           size: 10
         }
       }
-    }
-  }
-}
-node {
-  name: "output"
-  op: "Softmax"
-  input: "BiasAdd"
-  attr {
-    key: "T"
-    value {
-      type: DT_FLOAT
     }
   }
 }
@@ -604,7 +593,7 @@ node {
 node {
   name: "Shape_2"
   op: "Shape"
-  input: "Placeholder"
+  input: "target"
   attr {
     key: "T"
     value {
@@ -790,7 +779,7 @@ node {
 node {
   name: "Reshape_1"
   op: "Reshape"
-  input: "Placeholder"
+  input: "target"
   input: "concat_1"
   attr {
     key: "T"
@@ -1694,6 +1683,190 @@ node {
   input: "^GradientDescent/update_Variable_1/ApplyGradientDescent"
 }
 node {
+  name: "output"
+  op: "Softmax"
+  input: "BiasAdd"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "init"
+  op: "NoOp"
+  input: "^Variable/Assign"
+  input: "^Variable_1/Assign"
+}
+node {
+  name: "ArgMax/dimension"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+        }
+        int_val: 1
+      }
+    }
+  }
+}
+node {
+  name: "ArgMax"
+  op: "ArgMax"
+  input: "BiasAdd"
+  input: "ArgMax/dimension"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "Tidx"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "output_type"
+    value {
+      type: DT_INT64
+    }
+  }
+}
+node {
+  name: "ArgMax_1/dimension"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+        }
+        int_val: 1
+      }
+    }
+  }
+}
+node {
+  name: "ArgMax_1"
+  op: "ArgMax"
+  input: "target"
+  input: "ArgMax_1/dimension"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "Tidx"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "output_type"
+    value {
+      type: DT_INT64
+    }
+  }
+}
+node {
+  name: "Equal"
+  op: "Equal"
+  input: "ArgMax"
+  input: "ArgMax_1"
+  attr {
+    key: "T"
+    value {
+      type: DT_INT64
+    }
+  }
+}
+node {
+  name: "Cast_1"
+  op: "Cast"
+  input: "Equal"
+  attr {
+    key: "DstT"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "SrcT"
+    value {
+      type: DT_BOOL
+    }
+  }
+}
+node {
+  name: "Const_1"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+            size: 1
+          }
+        }
+        int_val: 0
+      }
+    }
+  }
+}
+node {
+  name: "Mean_1"
+  op: "Mean"
+  input: "Cast_1"
+  input: "Const_1"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "Tidx"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "keep_dims"
+    value {
+      b: false
+    }
+  }
+}
+node {
   name: "save/Const"
   op: "Const"
   attr {
@@ -1997,179 +2170,6 @@ node {
   op: "NoOp"
   input: "^save/Assign"
   input: "^save/Assign_1"
-}
-node {
-  name: "init"
-  op: "NoOp"
-  input: "^Variable/Assign"
-  input: "^Variable_1/Assign"
-}
-node {
-  name: "ArgMax/dimension"
-  op: "Const"
-  attr {
-    key: "dtype"
-    value {
-      type: DT_INT32
-    }
-  }
-  attr {
-    key: "value"
-    value {
-      tensor {
-        dtype: DT_INT32
-        tensor_shape {
-        }
-        int_val: 1
-      }
-    }
-  }
-}
-node {
-  name: "ArgMax"
-  op: "ArgMax"
-  input: "BiasAdd"
-  input: "ArgMax/dimension"
-  attr {
-    key: "T"
-    value {
-      type: DT_FLOAT
-    }
-  }
-  attr {
-    key: "Tidx"
-    value {
-      type: DT_INT32
-    }
-  }
-  attr {
-    key: "output_type"
-    value {
-      type: DT_INT64
-    }
-  }
-}
-node {
-  name: "ArgMax_1/dimension"
-  op: "Const"
-  attr {
-    key: "dtype"
-    value {
-      type: DT_INT32
-    }
-  }
-  attr {
-    key: "value"
-    value {
-      tensor {
-        dtype: DT_INT32
-        tensor_shape {
-        }
-        int_val: 1
-      }
-    }
-  }
-}
-node {
-  name: "ArgMax_1"
-  op: "ArgMax"
-  input: "Placeholder"
-  input: "ArgMax_1/dimension"
-  attr {
-    key: "T"
-    value {
-      type: DT_FLOAT
-    }
-  }
-  attr {
-    key: "Tidx"
-    value {
-      type: DT_INT32
-    }
-  }
-  attr {
-    key: "output_type"
-    value {
-      type: DT_INT64
-    }
-  }
-}
-node {
-  name: "Equal"
-  op: "Equal"
-  input: "ArgMax"
-  input: "ArgMax_1"
-  attr {
-    key: "T"
-    value {
-      type: DT_INT64
-    }
-  }
-}
-node {
-  name: "Cast_1"
-  op: "Cast"
-  input: "Equal"
-  attr {
-    key: "DstT"
-    value {
-      type: DT_FLOAT
-    }
-  }
-  attr {
-    key: "SrcT"
-    value {
-      type: DT_BOOL
-    }
-  }
-}
-node {
-  name: "Const_1"
-  op: "Const"
-  attr {
-    key: "dtype"
-    value {
-      type: DT_INT32
-    }
-  }
-  attr {
-    key: "value"
-    value {
-      tensor {
-        dtype: DT_INT32
-        tensor_shape {
-          dim {
-            size: 1
-          }
-        }
-        int_val: 0
-      }
-    }
-  }
-}
-node {
-  name: "Mean_1"
-  op: "Mean"
-  input: "Cast_1"
-  input: "Const_1"
-  attr {
-    key: "T"
-    value {
-      type: DT_FLOAT
-    }
-  }
-  attr {
-    key: "Tidx"
-    value {
-      type: DT_INT32
-    }
-  }
-  attr {
-    key: "keep_dims"
-    value {
-      b: false
-    }
-  }
 }
 versions {
   producer: 24
