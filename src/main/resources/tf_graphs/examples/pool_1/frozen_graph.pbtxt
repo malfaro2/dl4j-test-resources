@@ -1,5 +1,5 @@
 node {
-  name: "input_0"
+  name: "image"
   op: "Placeholder"
   attr {
     key: "dtype"
@@ -12,7 +12,7 @@ node {
     value {
       shape {
         dim {
-          size: 1
+          size: -1
         }
         dim {
           size: 4
@@ -30,7 +30,7 @@ node {
 node {
   name: "max_pool1"
   op: "MaxPool"
-  input: "input_0"
+  input: "image"
   attr {
     key: "T"
     value {

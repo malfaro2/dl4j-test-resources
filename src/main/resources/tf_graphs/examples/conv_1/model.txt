@@ -1,5 +1,5 @@
 node {
-  name: "input_0"
+  name: "image"
   op: "Placeholder"
   attr {
     key: "dtype"
@@ -12,7 +12,7 @@ node {
     value {
       shape {
         dim {
-          size: 4
+          size: -1
         }
         dim {
           size: 2
@@ -115,13 +115,13 @@ node {
   attr {
     key: "seed"
     value {
-      i: 0
+      i: 1
     }
   }
   attr {
     key: "seed2"
     value {
-      i: 0
+      i: 4
     }
   }
 }
@@ -247,7 +247,7 @@ node {
 node {
   name: "conv3d1"
   op: "Conv3D"
-  input: "input_0"
+  input: "image"
   input: "filterW0/read"
   attr {
     key: "T"
@@ -299,7 +299,7 @@ node {
             size: 2
           }
         }
-        tensor_content: "\004\000\000\000\030\001\000\000"
+        tensor_content: "\377\377\377\377\030\001\000\000"
       }
     }
   }
@@ -407,13 +407,13 @@ node {
   attr {
     key: "seed"
     value {
-      i: 0
+      i: 1
     }
   }
   attr {
     key: "seed2"
     value {
-      i: 0
+      i: 16
     }
   }
 }
@@ -562,12 +562,6 @@ node {
       b: false
     }
   }
-}
-node {
-  name: "init"
-  op: "NoOp"
-  input: "^filterW0/Assign"
-  input: "^Variable/Assign"
 }
 node {
   name: "save/Const"
@@ -873,6 +867,12 @@ node {
   op: "NoOp"
   input: "^save/Assign"
   input: "^save/Assign_1"
+}
+node {
+  name: "init"
+  op: "NoOp"
+  input: "^filterW0/Assign"
+  input: "^Variable/Assign"
 }
 versions {
   producer: 24

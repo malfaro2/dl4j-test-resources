@@ -1,5 +1,5 @@
 node {
-  name: "input_0"
+  name: "image"
   op: "Placeholder"
   attr {
     key: "dtype"
@@ -12,7 +12,7 @@ node {
     value {
       shape {
         dim {
-          size: 4
+          size: -1
         }
         dim {
           size: 128
@@ -112,13 +112,13 @@ node {
   attr {
     key: "seed"
     value {
-      i: 0
+      i: 1
     }
   }
   attr {
     key: "seed2"
     value {
-      i: 0
+      i: 4
     }
   }
 }
@@ -248,9 +248,9 @@ node {
   }
 }
 node {
-  name: "atrous_one"
+  name: "dilation_one"
   op: "Dilation2D"
-  input: "input_0"
+  input: "image"
   input: "filter1/read"
   attr {
     key: "T"
@@ -372,13 +372,13 @@ node {
   attr {
     key: "seed"
     value {
-      i: 0
+      i: 1
     }
   }
   attr {
     key: "seed2"
     value {
-      i: 0
+      i: 15
     }
   }
 }
@@ -510,7 +510,7 @@ node {
 node {
   name: "output"
   op: "Dilation2D"
-  input: "atrous_one"
+  input: "dilation_one"
   input: "filter2/read"
   attr {
     key: "T"
@@ -548,10 +548,15 @@ node {
   }
 }
 node {
-  name: "init"
-  op: "NoOp"
-  input: "^filter1/Assign"
-  input: "^filter2/Assign"
+  name: "output_1"
+  op: "Identity"
+  input: "output"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
 }
 node {
   name: "save/Const"
@@ -857,6 +862,12 @@ node {
   op: "NoOp"
   input: "^save/Assign"
   input: "^save/Assign_1"
+}
+node {
+  name: "init"
+  op: "NoOp"
+  input: "^filter1/Assign"
+  input: "^filter2/Assign"
 }
 versions {
   producer: 24
