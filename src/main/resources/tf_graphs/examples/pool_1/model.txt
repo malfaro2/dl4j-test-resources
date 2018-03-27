@@ -1,5 +1,5 @@
 node {
-  name: "input_0"
+  name: "image"
   op: "Placeholder"
   attr {
     key: "dtype"
@@ -12,7 +12,7 @@ node {
     value {
       shape {
         dim {
-          size: 1
+          size: -1
         }
         dim {
           size: 4
@@ -24,62 +24,6 @@ node {
           size: 2
         }
       }
-    }
-  }
-}
-node {
-  name: "max_pool1"
-  op: "MaxPool"
-  input: "input_0"
-  attr {
-    key: "T"
-    value {
-      type: DT_FLOAT
-    }
-  }
-  attr {
-    key: "data_format"
-    value {
-      s: "NHWC"
-    }
-  }
-  attr {
-    key: "ksize"
-    value {
-      list {
-        i: 1
-        i: 2
-        i: 2
-        i: 1
-      }
-    }
-  }
-  attr {
-    key: "padding"
-    value {
-      s: "SAME"
-    }
-  }
-  attr {
-    key: "strides"
-    value {
-      list {
-        i: 1
-        i: 1
-        i: 1
-        i: 1
-      }
-    }
-  }
-}
-node {
-  name: "output"
-  op: "Identity"
-  input: "max_pool1"
-  attr {
-    key: "T"
-    value {
-      type: DT_FLOAT
     }
   }
 }
@@ -168,13 +112,13 @@ node {
   attr {
     key: "seed"
     value {
-      i: 0
+      i: 1
     }
   }
   attr {
     key: "seed2"
     value {
-      i: 0
+      i: 4
     }
   }
 }
@@ -301,9 +245,60 @@ node {
   }
 }
 node {
-  name: "init"
-  op: "NoOp"
-  input: "^Variable/Assign"
+  name: "max_pool1"
+  op: "MaxPool"
+  input: "image"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "data_format"
+    value {
+      s: "NHWC"
+    }
+  }
+  attr {
+    key: "ksize"
+    value {
+      list {
+        i: 1
+        i: 2
+        i: 2
+        i: 1
+      }
+    }
+  }
+  attr {
+    key: "padding"
+    value {
+      s: "SAME"
+    }
+  }
+  attr {
+    key: "strides"
+    value {
+      list {
+        i: 1
+        i: 1
+        i: 1
+        i: 1
+      }
+    }
+  }
+}
+node {
+  name: "output"
+  op: "Identity"
+  input: "max_pool1"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
 }
 node {
   name: "save/Const"
@@ -509,6 +504,11 @@ node {
   name: "save/restore_all"
   op: "NoOp"
   input: "^save/Assign"
+}
+node {
+  name: "init"
+  op: "NoOp"
+  input: "^Variable/Assign"
 }
 versions {
   producer: 24

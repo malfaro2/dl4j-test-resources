@@ -15,14 +15,20 @@ node {
           size: -1
         }
         dim {
-          size: 784
+          size: 28
+        }
+        dim {
+          size: 28
+        }
+        dim {
+          size: 1
         }
       }
     }
   }
 }
 node {
-  name: "Placeholder"
+  name: "target"
   op: "Placeholder"
   attr {
     key: "dtype"
@@ -57,50 +63,7 @@ node {
     key: "shape"
     value {
       shape {
-        unknown_rank: true
       }
-    }
-  }
-}
-node {
-  name: "reshape/Reshape/shape"
-  op: "Const"
-  attr {
-    key: "dtype"
-    value {
-      type: DT_INT32
-    }
-  }
-  attr {
-    key: "value"
-    value {
-      tensor {
-        dtype: DT_INT32
-        tensor_shape {
-          dim {
-            size: 4
-          }
-        }
-        tensor_content: "\377\377\377\377\034\000\000\000\034\000\000\000\001\000\000\000"
-      }
-    }
-  }
-}
-node {
-  name: "reshape/Reshape"
-  op: "Reshape"
-  input: "input"
-  input: "reshape/Reshape/shape"
-  attr {
-    key: "T"
-    value {
-      type: DT_FLOAT
-    }
-  }
-  attr {
-    key: "Tshape"
-    value {
-      type: DT_INT32
     }
   }
 }
@@ -189,13 +152,13 @@ node {
   attr {
     key: "seed"
     value {
-      i: 0
+      i: 1
     }
   }
   attr {
     key: "seed2"
     value {
-      i: 0
+      i: 6
     }
   }
 }
@@ -425,7 +388,7 @@ node {
 node {
   name: "conv1/Conv2D"
   op: "Conv2D"
-  input: "reshape/Reshape"
+  input: "input"
   input: "conv1/Variable/read"
   attr {
     key: "T"
@@ -616,13 +579,13 @@ node {
   attr {
     key: "seed"
     value {
-      i: 0
+      i: 1
     }
   }
   attr {
     key: "seed2"
     value {
-      i: 0
+      i: 23
     }
   }
 }
@@ -1043,13 +1006,13 @@ node {
   attr {
     key: "seed"
     value {
-      i: 0
+      i: 1
     }
   }
   attr {
     key: "seed2"
     value {
-      i: 0
+      i: 40
     }
   }
 }
@@ -1437,13 +1400,13 @@ node {
   attr {
     key: "seed"
     value {
-      i: 0
+      i: 1
     }
   }
   attr {
     key: "seed2"
     value {
-      i: 0
+      i: 58
     }
   }
 }
@@ -1615,13 +1578,13 @@ node {
   attr {
     key: "seed"
     value {
-      i: 0
+      i: 1
     }
   }
   attr {
     key: "seed2"
     value {
-      i: 0
+      i: 69
     }
   }
 }
@@ -2176,7 +2139,7 @@ node {
 node {
   name: "loss/Shape_2"
   op: "Shape"
-  input: "Placeholder"
+  input: "target"
   attr {
     key: "T"
     value {
@@ -2362,7 +2325,7 @@ node {
 node {
   name: "loss/Reshape_1"
   op: "Reshape"
-  input: "Placeholder"
+  input: "target"
   input: "loss/concat_1"
   attr {
     key: "T"
@@ -3523,18 +3486,23 @@ node {
 }
 node {
   name: "adam_optimizer/gradients/dropout/dropout/div_grad/Shape_1"
-  op: "Shape"
-  input: "keep_prob"
+  op: "Const"
   attr {
-    key: "T"
+    key: "dtype"
     value {
-      type: DT_FLOAT
+      type: DT_INT32
     }
   }
   attr {
-    key: "out_type"
+    key: "value"
     value {
-      type: DT_INT32
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+          }
+        }
+      }
     }
   }
 }
@@ -4721,7 +4689,7 @@ node {
 node {
   name: "adam_optimizer/gradients/conv1/Conv2D_grad/Shape"
   op: "Shape"
-  input: "reshape/Reshape"
+  input: "input"
   attr {
     key: "T"
     value {
@@ -4804,7 +4772,7 @@ node {
 node {
   name: "adam_optimizer/gradients/conv1/Conv2D_grad/Conv2DBackpropFilter"
   op: "Conv2DBackpropFilter"
-  input: "reshape/Reshape"
+  input: "input"
   input: "adam_optimizer/gradients/conv1/Conv2D_grad/Shape_1"
   input: "adam_optimizer/gradients/conv1/add_grad/tuple/control_dependency"
   attr {
@@ -7794,7 +7762,7 @@ node {
 node {
   name: "accuracy/ArgMax_1"
   op: "ArgMax"
-  input: "Placeholder"
+  input: "target"
   input: "accuracy/ArgMax_1/dimension"
   attr {
     key: "T"
@@ -7891,6 +7859,36 @@ node {
       b: false
     }
   }
+}
+node {
+  name: "init"
+  op: "NoOp"
+  input: "^conv1/Variable/Assign"
+  input: "^conv1/Variable_1/Assign"
+  input: "^conv2/Variable/Assign"
+  input: "^conv2/Variable_1/Assign"
+  input: "^fc1/Variable/Assign"
+  input: "^fc1/Variable_1/Assign"
+  input: "^fc2/Variable/Assign"
+  input: "^fc2/Variable_1/Assign"
+  input: "^adam_optimizer/beta1_power/Assign"
+  input: "^adam_optimizer/beta2_power/Assign"
+  input: "^conv1/Variable/Adam/Assign"
+  input: "^conv1/Variable/Adam_1/Assign"
+  input: "^conv1/Variable_1/Adam/Assign"
+  input: "^conv1/Variable_1/Adam_1/Assign"
+  input: "^conv2/Variable/Adam/Assign"
+  input: "^conv2/Variable/Adam_1/Assign"
+  input: "^conv2/Variable_1/Adam/Assign"
+  input: "^conv2/Variable_1/Adam_1/Assign"
+  input: "^fc1/Variable/Adam/Assign"
+  input: "^fc1/Variable/Adam_1/Assign"
+  input: "^fc1/Variable_1/Adam/Assign"
+  input: "^fc1/Variable_1/Adam_1/Assign"
+  input: "^fc2/Variable/Adam/Assign"
+  input: "^fc2/Variable/Adam_1/Assign"
+  input: "^fc2/Variable_1/Adam/Assign"
+  input: "^fc2/Variable_1/Adam_1/Assign"
 }
 node {
   name: "save/Const"
@@ -10596,36 +10594,6 @@ node {
   input: "^save/Assign_23"
   input: "^save/Assign_24"
   input: "^save/Assign_25"
-}
-node {
-  name: "init"
-  op: "NoOp"
-  input: "^conv1/Variable/Assign"
-  input: "^conv1/Variable_1/Assign"
-  input: "^conv2/Variable/Assign"
-  input: "^conv2/Variable_1/Assign"
-  input: "^fc1/Variable/Assign"
-  input: "^fc1/Variable_1/Assign"
-  input: "^fc2/Variable/Assign"
-  input: "^fc2/Variable_1/Assign"
-  input: "^adam_optimizer/beta1_power/Assign"
-  input: "^adam_optimizer/beta2_power/Assign"
-  input: "^conv1/Variable/Adam/Assign"
-  input: "^conv1/Variable/Adam_1/Assign"
-  input: "^conv1/Variable_1/Adam/Assign"
-  input: "^conv1/Variable_1/Adam_1/Assign"
-  input: "^conv2/Variable/Adam/Assign"
-  input: "^conv2/Variable/Adam_1/Assign"
-  input: "^conv2/Variable_1/Adam/Assign"
-  input: "^conv2/Variable_1/Adam_1/Assign"
-  input: "^fc1/Variable/Adam/Assign"
-  input: "^fc1/Variable/Adam_1/Assign"
-  input: "^fc1/Variable_1/Adam/Assign"
-  input: "^fc1/Variable_1/Adam_1/Assign"
-  input: "^fc2/Variable/Adam/Assign"
-  input: "^fc2/Variable/Adam_1/Assign"
-  input: "^fc2/Variable_1/Adam/Assign"
-  input: "^fc2/Variable_1/Adam_1/Assign"
 }
 versions {
   producer: 24
