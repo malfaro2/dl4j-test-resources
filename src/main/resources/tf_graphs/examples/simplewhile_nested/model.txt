@@ -1152,13 +1152,6 @@ node {
   }
 }
 node {
-  name: "init"
-  op: "NoOp"
-  input: "^Variable/Assign"
-  input: "^Variable_1/Assign"
-  input: "^Variable_2/Assign"
-}
-node {
   name: "save/Const"
   op: "Const"
   attr {
@@ -1562,6 +1555,13 @@ node {
   input: "^save/Assign"
   input: "^save/Assign_1"
   input: "^save/Assign_2"
+}
+node {
+  name: "init"
+  op: "NoOp"
+  input: "^Variable/Assign"
+  input: "^Variable_1/Assign"
+  input: "^Variable_2/Assign"
 }
 versions {
   producer: 24
