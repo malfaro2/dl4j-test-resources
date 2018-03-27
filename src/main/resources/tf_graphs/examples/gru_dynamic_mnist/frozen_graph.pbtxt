@@ -1,0 +1,4139 @@
+node {
+  name: "input"
+  op: "Placeholder"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "shape"
+    value {
+      shape {
+        dim {
+          size: -1
+        }
+        dim {
+          size: 28
+        }
+        dim {
+          size: 28
+        }
+      }
+    }
+  }
+}
+node {
+  name: "Rank"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+        }
+        int_val: 3
+      }
+    }
+  }
+}
+node {
+  name: "range/start"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+        }
+        int_val: 2
+      }
+    }
+  }
+}
+node {
+  name: "range/delta"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+        }
+        int_val: 1
+      }
+    }
+  }
+}
+node {
+  name: "range"
+  op: "Range"
+  input: "range/start"
+  input: "Rank"
+  input: "range/delta"
+  attr {
+    key: "Tidx"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "concat/values_0"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+            size: 2
+          }
+        }
+        tensor_content: "\001\000\000\000\000\000\000\000"
+      }
+    }
+  }
+}
+node {
+  name: "concat/axis"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+        }
+        int_val: 0
+      }
+    }
+  }
+}
+node {
+  name: "concat"
+  op: "ConcatV2"
+  input: "concat/values_0"
+  input: "range"
+  input: "concat/axis"
+  attr {
+    key: "N"
+    value {
+      i: 2
+    }
+  }
+  attr {
+    key: "T"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "Tidx"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "transpose"
+  op: "Transpose"
+  input: "input"
+  input: "concat"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "Tperm"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "rnn/Shape"
+  op: "Shape"
+  input: "transpose"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "out_type"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "rnn/strided_slice/stack"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+            size: 1
+          }
+        }
+        int_val: 1
+      }
+    }
+  }
+}
+node {
+  name: "rnn/strided_slice/stack_1"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+            size: 1
+          }
+        }
+        int_val: 2
+      }
+    }
+  }
+}
+node {
+  name: "rnn/strided_slice/stack_2"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+            size: 1
+          }
+        }
+        int_val: 1
+      }
+    }
+  }
+}
+node {
+  name: "rnn/strided_slice"
+  op: "StridedSlice"
+  input: "rnn/Shape"
+  input: "rnn/strided_slice/stack"
+  input: "rnn/strided_slice/stack_1"
+  input: "rnn/strided_slice/stack_2"
+  attr {
+    key: "Index"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "T"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "begin_mask"
+    value {
+      i: 0
+    }
+  }
+  attr {
+    key: "ellipsis_mask"
+    value {
+      i: 0
+    }
+  }
+  attr {
+    key: "end_mask"
+    value {
+      i: 0
+    }
+  }
+  attr {
+    key: "new_axis_mask"
+    value {
+      i: 0
+    }
+  }
+  attr {
+    key: "shrink_axis_mask"
+    value {
+      i: 1
+    }
+  }
+}
+node {
+  name: "rnn/MultiRNNCellZeroState/GRUCellZeroState/ExpandDims/dim"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+        }
+        int_val: 0
+      }
+    }
+  }
+}
+node {
+  name: "rnn/MultiRNNCellZeroState/GRUCellZeroState/ExpandDims"
+  op: "ExpandDims"
+  input: "rnn/strided_slice"
+  input: "rnn/MultiRNNCellZeroState/GRUCellZeroState/ExpandDims/dim"
+  attr {
+    key: "T"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "Tdim"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "rnn/MultiRNNCellZeroState/GRUCellZeroState/Const"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+            size: 1
+          }
+        }
+        int_val: 20
+      }
+    }
+  }
+}
+node {
+  name: "rnn/MultiRNNCellZeroState/GRUCellZeroState/concat/axis"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+        }
+        int_val: 0
+      }
+    }
+  }
+}
+node {
+  name: "rnn/MultiRNNCellZeroState/GRUCellZeroState/concat"
+  op: "ConcatV2"
+  input: "rnn/MultiRNNCellZeroState/GRUCellZeroState/ExpandDims"
+  input: "rnn/MultiRNNCellZeroState/GRUCellZeroState/Const"
+  input: "rnn/MultiRNNCellZeroState/GRUCellZeroState/concat/axis"
+  attr {
+    key: "N"
+    value {
+      i: 2
+    }
+  }
+  attr {
+    key: "T"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "Tidx"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "rnn/MultiRNNCellZeroState/GRUCellZeroState/zeros/Const"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+        }
+        float_val: 0.0
+      }
+    }
+  }
+}
+node {
+  name: "rnn/MultiRNNCellZeroState/GRUCellZeroState/zeros"
+  op: "Fill"
+  input: "rnn/MultiRNNCellZeroState/GRUCellZeroState/concat"
+  input: "rnn/MultiRNNCellZeroState/GRUCellZeroState/zeros/Const"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "rnn/MultiRNNCellZeroState/GRUCellZeroState_1/ExpandDims/dim"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+        }
+        int_val: 0
+      }
+    }
+  }
+}
+node {
+  name: "rnn/MultiRNNCellZeroState/GRUCellZeroState_1/ExpandDims"
+  op: "ExpandDims"
+  input: "rnn/strided_slice"
+  input: "rnn/MultiRNNCellZeroState/GRUCellZeroState_1/ExpandDims/dim"
+  attr {
+    key: "T"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "Tdim"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "rnn/MultiRNNCellZeroState/GRUCellZeroState_1/Const"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+            size: 1
+          }
+        }
+        int_val: 20
+      }
+    }
+  }
+}
+node {
+  name: "rnn/MultiRNNCellZeroState/GRUCellZeroState_1/concat/axis"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+        }
+        int_val: 0
+      }
+    }
+  }
+}
+node {
+  name: "rnn/MultiRNNCellZeroState/GRUCellZeroState_1/concat"
+  op: "ConcatV2"
+  input: "rnn/MultiRNNCellZeroState/GRUCellZeroState_1/ExpandDims"
+  input: "rnn/MultiRNNCellZeroState/GRUCellZeroState_1/Const"
+  input: "rnn/MultiRNNCellZeroState/GRUCellZeroState_1/concat/axis"
+  attr {
+    key: "N"
+    value {
+      i: 2
+    }
+  }
+  attr {
+    key: "T"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "Tidx"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "rnn/MultiRNNCellZeroState/GRUCellZeroState_1/zeros/Const"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+        }
+        float_val: 0.0
+      }
+    }
+  }
+}
+node {
+  name: "rnn/MultiRNNCellZeroState/GRUCellZeroState_1/zeros"
+  op: "Fill"
+  input: "rnn/MultiRNNCellZeroState/GRUCellZeroState_1/concat"
+  input: "rnn/MultiRNNCellZeroState/GRUCellZeroState_1/zeros/Const"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "rnn/MultiRNNCellZeroState/GRUCellZeroState_2/ExpandDims/dim"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+        }
+        int_val: 0
+      }
+    }
+  }
+}
+node {
+  name: "rnn/MultiRNNCellZeroState/GRUCellZeroState_2/ExpandDims"
+  op: "ExpandDims"
+  input: "rnn/strided_slice"
+  input: "rnn/MultiRNNCellZeroState/GRUCellZeroState_2/ExpandDims/dim"
+  attr {
+    key: "T"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "Tdim"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "rnn/MultiRNNCellZeroState/GRUCellZeroState_2/Const"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+            size: 1
+          }
+        }
+        int_val: 20
+      }
+    }
+  }
+}
+node {
+  name: "rnn/MultiRNNCellZeroState/GRUCellZeroState_2/concat/axis"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+        }
+        int_val: 0
+      }
+    }
+  }
+}
+node {
+  name: "rnn/MultiRNNCellZeroState/GRUCellZeroState_2/concat"
+  op: "ConcatV2"
+  input: "rnn/MultiRNNCellZeroState/GRUCellZeroState_2/ExpandDims"
+  input: "rnn/MultiRNNCellZeroState/GRUCellZeroState_2/Const"
+  input: "rnn/MultiRNNCellZeroState/GRUCellZeroState_2/concat/axis"
+  attr {
+    key: "N"
+    value {
+      i: 2
+    }
+  }
+  attr {
+    key: "T"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "Tidx"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "rnn/MultiRNNCellZeroState/GRUCellZeroState_2/zeros/Const"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+        }
+        float_val: 0.0
+      }
+    }
+  }
+}
+node {
+  name: "rnn/MultiRNNCellZeroState/GRUCellZeroState_2/zeros"
+  op: "Fill"
+  input: "rnn/MultiRNNCellZeroState/GRUCellZeroState_2/concat"
+  input: "rnn/MultiRNNCellZeroState/GRUCellZeroState_2/zeros/Const"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "rnn/Shape_1"
+  op: "Shape"
+  input: "transpose"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "out_type"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "rnn/strided_slice_1/stack"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+            size: 1
+          }
+        }
+        int_val: 0
+      }
+    }
+  }
+}
+node {
+  name: "rnn/strided_slice_1/stack_1"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+            size: 1
+          }
+        }
+        int_val: 1
+      }
+    }
+  }
+}
+node {
+  name: "rnn/strided_slice_1/stack_2"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+            size: 1
+          }
+        }
+        int_val: 1
+      }
+    }
+  }
+}
+node {
+  name: "rnn/strided_slice_1"
+  op: "StridedSlice"
+  input: "rnn/Shape_1"
+  input: "rnn/strided_slice_1/stack"
+  input: "rnn/strided_slice_1/stack_1"
+  input: "rnn/strided_slice_1/stack_2"
+  attr {
+    key: "Index"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "T"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "begin_mask"
+    value {
+      i: 0
+    }
+  }
+  attr {
+    key: "ellipsis_mask"
+    value {
+      i: 0
+    }
+  }
+  attr {
+    key: "end_mask"
+    value {
+      i: 0
+    }
+  }
+  attr {
+    key: "new_axis_mask"
+    value {
+      i: 0
+    }
+  }
+  attr {
+    key: "shrink_axis_mask"
+    value {
+      i: 1
+    }
+  }
+}
+node {
+  name: "rnn/time"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+        }
+        int_val: 0
+      }
+    }
+  }
+}
+node {
+  name: "rnn/TensorArray"
+  op: "TensorArrayV3"
+  input: "rnn/strided_slice_1"
+  attr {
+    key: "clear_after_read"
+    value {
+      b: true
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "dynamic_size"
+    value {
+      b: false
+    }
+  }
+  attr {
+    key: "element_shape"
+    value {
+      shape {
+        unknown_rank: true
+      }
+    }
+  }
+  attr {
+    key: "tensor_array_name"
+    value {
+      s: "rnn/dynamic_rnn/output_0"
+    }
+  }
+}
+node {
+  name: "rnn/TensorArray_1"
+  op: "TensorArrayV3"
+  input: "rnn/strided_slice_1"
+  attr {
+    key: "clear_after_read"
+    value {
+      b: true
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "dynamic_size"
+    value {
+      b: false
+    }
+  }
+  attr {
+    key: "element_shape"
+    value {
+      shape {
+        unknown_rank: true
+      }
+    }
+  }
+  attr {
+    key: "tensor_array_name"
+    value {
+      s: "rnn/dynamic_rnn/input_0"
+    }
+  }
+}
+node {
+  name: "rnn/TensorArrayUnstack/Shape"
+  op: "Shape"
+  input: "transpose"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "out_type"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "rnn/TensorArrayUnstack/strided_slice/stack"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+            size: 1
+          }
+        }
+        int_val: 0
+      }
+    }
+  }
+}
+node {
+  name: "rnn/TensorArrayUnstack/strided_slice/stack_1"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+            size: 1
+          }
+        }
+        int_val: 1
+      }
+    }
+  }
+}
+node {
+  name: "rnn/TensorArrayUnstack/strided_slice/stack_2"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+            size: 1
+          }
+        }
+        int_val: 1
+      }
+    }
+  }
+}
+node {
+  name: "rnn/TensorArrayUnstack/strided_slice"
+  op: "StridedSlice"
+  input: "rnn/TensorArrayUnstack/Shape"
+  input: "rnn/TensorArrayUnstack/strided_slice/stack"
+  input: "rnn/TensorArrayUnstack/strided_slice/stack_1"
+  input: "rnn/TensorArrayUnstack/strided_slice/stack_2"
+  attr {
+    key: "Index"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "T"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "begin_mask"
+    value {
+      i: 0
+    }
+  }
+  attr {
+    key: "ellipsis_mask"
+    value {
+      i: 0
+    }
+  }
+  attr {
+    key: "end_mask"
+    value {
+      i: 0
+    }
+  }
+  attr {
+    key: "new_axis_mask"
+    value {
+      i: 0
+    }
+  }
+  attr {
+    key: "shrink_axis_mask"
+    value {
+      i: 1
+    }
+  }
+}
+node {
+  name: "rnn/TensorArrayUnstack/range/start"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+        }
+        int_val: 0
+      }
+    }
+  }
+}
+node {
+  name: "rnn/TensorArrayUnstack/range/delta"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+        }
+        int_val: 1
+      }
+    }
+  }
+}
+node {
+  name: "rnn/TensorArrayUnstack/range"
+  op: "Range"
+  input: "rnn/TensorArrayUnstack/range/start"
+  input: "rnn/TensorArrayUnstack/strided_slice"
+  input: "rnn/TensorArrayUnstack/range/delta"
+  attr {
+    key: "Tidx"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "rnn/TensorArrayUnstack/TensorArrayScatter/TensorArrayScatterV3"
+  op: "TensorArrayScatterV3"
+  input: "rnn/TensorArray_1"
+  input: "rnn/TensorArrayUnstack/range"
+  input: "transpose"
+  input: "rnn/TensorArray_1:1"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@transpose"
+      }
+    }
+  }
+}
+node {
+  name: "rnn/while/Enter"
+  op: "Enter"
+  input: "rnn/time"
+  attr {
+    key: "T"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "frame_name"
+    value {
+      s: "rnn/while/rnn/while/"
+    }
+  }
+  attr {
+    key: "is_constant"
+    value {
+      b: false
+    }
+  }
+  attr {
+    key: "parallel_iterations"
+    value {
+      i: 32
+    }
+  }
+}
+node {
+  name: "rnn/while/Enter_1"
+  op: "Enter"
+  input: "rnn/TensorArray:1"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "frame_name"
+    value {
+      s: "rnn/while/rnn/while/"
+    }
+  }
+  attr {
+    key: "is_constant"
+    value {
+      b: false
+    }
+  }
+  attr {
+    key: "parallel_iterations"
+    value {
+      i: 32
+    }
+  }
+}
+node {
+  name: "rnn/while/Enter_2"
+  op: "Enter"
+  input: "rnn/MultiRNNCellZeroState/GRUCellZeroState/zeros"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "frame_name"
+    value {
+      s: "rnn/while/rnn/while/"
+    }
+  }
+  attr {
+    key: "is_constant"
+    value {
+      b: false
+    }
+  }
+  attr {
+    key: "parallel_iterations"
+    value {
+      i: 32
+    }
+  }
+}
+node {
+  name: "rnn/while/Enter_3"
+  op: "Enter"
+  input: "rnn/MultiRNNCellZeroState/GRUCellZeroState_1/zeros"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "frame_name"
+    value {
+      s: "rnn/while/rnn/while/"
+    }
+  }
+  attr {
+    key: "is_constant"
+    value {
+      b: false
+    }
+  }
+  attr {
+    key: "parallel_iterations"
+    value {
+      i: 32
+    }
+  }
+}
+node {
+  name: "rnn/while/Enter_4"
+  op: "Enter"
+  input: "rnn/MultiRNNCellZeroState/GRUCellZeroState_2/zeros"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "frame_name"
+    value {
+      s: "rnn/while/rnn/while/"
+    }
+  }
+  attr {
+    key: "is_constant"
+    value {
+      b: false
+    }
+  }
+  attr {
+    key: "parallel_iterations"
+    value {
+      i: 32
+    }
+  }
+}
+node {
+  name: "rnn/while/Merge"
+  op: "Merge"
+  input: "rnn/while/Enter"
+  input: "rnn/while/NextIteration"
+  attr {
+    key: "N"
+    value {
+      i: 2
+    }
+  }
+  attr {
+    key: "T"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "rnn/while/Merge_1"
+  op: "Merge"
+  input: "rnn/while/Enter_1"
+  input: "rnn/while/NextIteration_1"
+  attr {
+    key: "N"
+    value {
+      i: 2
+    }
+  }
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "rnn/while/Merge_2"
+  op: "Merge"
+  input: "rnn/while/Enter_2"
+  input: "rnn/while/NextIteration_2"
+  attr {
+    key: "N"
+    value {
+      i: 2
+    }
+  }
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "rnn/while/Merge_3"
+  op: "Merge"
+  input: "rnn/while/Enter_3"
+  input: "rnn/while/NextIteration_3"
+  attr {
+    key: "N"
+    value {
+      i: 2
+    }
+  }
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "rnn/while/Merge_4"
+  op: "Merge"
+  input: "rnn/while/Enter_4"
+  input: "rnn/while/NextIteration_4"
+  attr {
+    key: "N"
+    value {
+      i: 2
+    }
+  }
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "rnn/while/Less/Enter"
+  op: "Enter"
+  input: "rnn/strided_slice_1"
+  attr {
+    key: "T"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "frame_name"
+    value {
+      s: "rnn/while/rnn/while/"
+    }
+  }
+  attr {
+    key: "is_constant"
+    value {
+      b: true
+    }
+  }
+  attr {
+    key: "parallel_iterations"
+    value {
+      i: 32
+    }
+  }
+}
+node {
+  name: "rnn/while/Less"
+  op: "Less"
+  input: "rnn/while/Merge"
+  input: "rnn/while/Less/Enter"
+  attr {
+    key: "T"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "rnn/while/LoopCond"
+  op: "LoopCond"
+  input: "rnn/while/Less"
+}
+node {
+  name: "rnn/while/Switch"
+  op: "Switch"
+  input: "rnn/while/Merge"
+  input: "rnn/while/LoopCond"
+  attr {
+    key: "T"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@rnn/while/Merge"
+      }
+    }
+  }
+}
+node {
+  name: "rnn/while/Switch_1"
+  op: "Switch"
+  input: "rnn/while/Merge_1"
+  input: "rnn/while/LoopCond"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@rnn/while/Merge_1"
+      }
+    }
+  }
+}
+node {
+  name: "rnn/while/Switch_2"
+  op: "Switch"
+  input: "rnn/while/Merge_2"
+  input: "rnn/while/LoopCond"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@rnn/while/Merge_2"
+      }
+    }
+  }
+}
+node {
+  name: "rnn/while/Switch_3"
+  op: "Switch"
+  input: "rnn/while/Merge_3"
+  input: "rnn/while/LoopCond"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@rnn/while/Merge_3"
+      }
+    }
+  }
+}
+node {
+  name: "rnn/while/Switch_4"
+  op: "Switch"
+  input: "rnn/while/Merge_4"
+  input: "rnn/while/LoopCond"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@rnn/while/Merge_4"
+      }
+    }
+  }
+}
+node {
+  name: "rnn/while/Identity"
+  op: "Identity"
+  input: "rnn/while/Switch:1"
+  attr {
+    key: "T"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "rnn/while/Identity_1"
+  op: "Identity"
+  input: "rnn/while/Switch_1:1"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "rnn/while/Identity_2"
+  op: "Identity"
+  input: "rnn/while/Switch_2:1"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "rnn/while/Identity_3"
+  op: "Identity"
+  input: "rnn/while/Switch_3:1"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "rnn/while/Identity_4"
+  op: "Identity"
+  input: "rnn/while/Switch_4:1"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "rnn/while/TensorArrayReadV3/Enter"
+  op: "Enter"
+  input: "rnn/TensorArray_1"
+  attr {
+    key: "T"
+    value {
+      type: DT_RESOURCE
+    }
+  }
+  attr {
+    key: "frame_name"
+    value {
+      s: "rnn/while/rnn/while/"
+    }
+  }
+  attr {
+    key: "is_constant"
+    value {
+      b: true
+    }
+  }
+  attr {
+    key: "parallel_iterations"
+    value {
+      i: 32
+    }
+  }
+}
+node {
+  name: "rnn/while/TensorArrayReadV3/Enter_1"
+  op: "Enter"
+  input: "rnn/TensorArrayUnstack/TensorArrayScatter/TensorArrayScatterV3"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "frame_name"
+    value {
+      s: "rnn/while/rnn/while/"
+    }
+  }
+  attr {
+    key: "is_constant"
+    value {
+      b: true
+    }
+  }
+  attr {
+    key: "parallel_iterations"
+    value {
+      i: 32
+    }
+  }
+}
+node {
+  name: "rnn/while/TensorArrayReadV3"
+  op: "TensorArrayReadV3"
+  input: "rnn/while/TensorArrayReadV3/Enter"
+  input: "rnn/while/Identity"
+  input: "rnn/while/TensorArrayReadV3/Enter_1"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "rnn/multi_rnn_cell/cell_0/gru_cell/gates/kernel"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+          dim {
+            size: 48
+          }
+          dim {
+            size: 40
+          }
+        }
+        tensor_content: "\333\217/<\027\347\253=\215\362\356=,\351\234\275a\3238>\000%\265=\355\3069>x\260\337\274\310\nQ>\322!\234\274\314s*>\2029@>\207\334\026\276\221s]>\204\263k\276\224S^>BJ\010<<0V\276a\2732\276\224t\340=x\346\326=\\\0251>\nr\306\275\005-\352\274\020Z{\276\022\303\014\276\270\207\010\2767\207\334=2\031`=\306\220N\275\312\353B\276j4e\276M\240\251=\001\372)>\231\t\030\276B\213j> \235\033\276V\337x>\252\302\024\276D-X\276\034SU\276\272\223\025>\354\177U>9\371E>\215\373\023\276\275\340\373=\360\014\223=\372\234_\276\301\336\022\276\364\330l>\230\204\237\274\250\327\331\275\246\335\233\274\365\325\235=\025)\n\276z\307w\275\222\200\006\276\300\247]\276\231\236\336=\023\314~>\211\335\253=l._\2753`\026\2768 \314=\205\372\263\275\274\250\301\273\310\254\365=\304(\206>\242\331\025\276\350z\004>\357d\002\276\375\273\260\275,/\030\275\300m\260\275a\006\000=\252ZZ\276\0371\017>\224\n\222>N#\311=\204\243#\276\"\235n\276\321\325i>\3773F\275\007\334b\275\2244\271=Y\375\231=\340A&>\332\000m=\307\215?\275~\230\367=\177\242\231>\027=I\275\311\352T>\275\254\307\275\031\202\266>\254\005\340\274\tB\270=\300\250\355=\034yv>\031%\253\275o@t=\325V\234=j\211\300<|O\321>\256\031\246>K\036\004\275;l\351\273\010\250\270>h\3219\276\\k\320=3bO\276\361B\250=1?\330<\002\214\354\274B\035\361=\370\311f\276\242\257\034\276\303\262\206\275\260H`\275\222P\201>\336\274\266\275d\032\001\275\346-C\276\257\347\030;p\332\202>\036(\302\274\267\300j\276dj\242=\226\272\210\275\020\223Z\275w}\221=.?.>\244Y\353=\265\"d\276\333\215\201=~\021N\276\027\350F\276x\366\322=\027:x\2761% \276\344z\020=\331f\337=\250\222\244\275\342\201x\2763WE>\332Y8\274\003E\250>\333\364S>\000]7=\222*\245\2755\014\243\276\235\030\264\275\263\337\313<\310x\244\275\237&0\276\257\225\337<\003\246->j\2010\274\026(,>)s\212>9\343R>\"h\301\276P\221\261\276\267\230\220\276{\264\035=\000\350\251\274\036\354\206\276mv\301\276\346,L\275s\363&>\010\251\347<\211\013\002=v\231C\276\315^\004=j(\211\275HP\230\276\036\2115=\313\275\344\275\313\263\224=\304\251c=\326\240!>|&9\276\003\035l>/9\263\275\276Y\305\275\236\005g>\021uK=!\322\226>p\234\350=\223\343\233\273\014\333\215\276.N\247=\324v\n\276\314\352\203>\313\264y>.\203\244=\025\223j>\316b\334<\337\211\217\276\220\003\216>\326\367X\276\247\006\277<\364\304\251\276\240\306\377\275#\024\226\2761V\272\275\214\351>\276\020l\335\276\202P\267\276\321\345n=\224\035n\275\266s\027<=\342 \276\271\237\223\276V\253\357\275\306\201h\2762/.\275\035\357C\276\010\2443>\210#\300\274\263_F\276\343\331\302\276n\007\273=\216M\036>>\262\214>\030\242\361;\312\244\306\275\257\332\361=6\321\216\275\323[\351=\324\203\273\275\005$\264>\304lI>T\354\266\275r\220\024>\355\323\203>\256\037\211>\034\2074>x\222\357\275\366\225\211>\t\300\365=>\243_\275\226\332\333\275\250h\233\275,\025M\275dr\364=Y\376c\276:\031\220\276C\313O\276b6J\275\275s\304\2765G\335\275\265\235\271\276\355d\n>\260\177\014>\020\302e\275=\357n>\367M\235\276\014\363\201>\202&\250=\327\325D\276\301\343k\276`\366e\276\3452\004>H\356\274=\001`\234=\263\006\270=\211Z\'<\225\031\350\276\226\314\221=\260\374\367\274\304\262\211>\3223\332>x\316\204>*<\343=\302%,\276S;\234>eOK\2767\335W\276T:\303>\002\013\224\274\352\3500>\276d\311\274\231\255\221\276`gf=)\377\254=\255\206\233=\326/\363\275g\307 \276B2:\276a\276X\275Z\365\333\275+\217\002\276\312\310@=j\201\260>\306Zf\275\034m\252\275O\257 \2765\204\227>9\r\330\276Jw\250\2761\223\345=@\214p>$\220\312=l \212>\275\023\346>\251\256S\276\350\315\022>\260m\\\276Q\177\217\275\353\201\236\275\250t\020?\262\212\036?\272\376\201>\024y\254>\352\235\235\276\230{7\2766,\306<m\235\235>\002~\t?(\010\204\276jw\376=\2465,\275\237\010\205\276\203\271\375\275\263\320\027\276\200\204\314=\241\374\330\276\321\275\227\276\212U7=\322\244\234<3B\232=A\013N>(-\204>\252\352\243=AD\312\273)\350\252\274U\035\301\276\033\243\001>#rR=w\363\013\276\305\303\336=\327\337\257>\314\3622>\275t\234>i\037\302>\315\352\250\276@\331\223>Z-\346\275\335\000\247\276:J\341=D\\\243>\265\362\n?\230_\r?\220\323q>\021S\020\277\tD\272=i\251\365=\222\220\247>?\340\251>\274O\275\275\2673\204\273\337*Y<\222\370%\273\331q\034\275^\312S\276\246Qx\276\342m\364\276\250\016\356\275}\217\236\275\303\316\271=$\034\327=\302J/>\272)\231>Zw\234>\375\304l\275\025\330\257\276\225\340J=N\312\020=Hm\250\275V\305\321\274+\004\330\275\330\005\307>`\205$\276\363~u=\234\244\037\275\2222X\276\272\316\221>\037\232\224>\305\274\342\276s\276\375\276H\214;?Y\301\006?\004\204\330>\253\030S\275\200;9\277\344\351\254>\035G\364=\341}\247=\016H\360>\214\305\310>\231\223\265=\275\013/>%\003\224\274Q\226\033=\t\324!\275\345\275\277<\332\357\361\276\375\325\372\276_\353D\275\331\357\200\276\346\240\254=\363\022\372>\003\316\337\274\312\322\343\274\225\317\335\276\257\377\370;G&\235\276\332%B=%\222\251\275^=_\276\034\366\007\275u!\262>Rpg=4\275\354\275@\305r\276\260U\366\275\360\004\007>Y~\014\2759~\326\273\343;\333\2769\'$?\212Cs>,\007\324\275\274\032\220>\203|.\277\226\221\231>\312\031\327>\347\212\267=n\310\254\274\032u\257>\333\227\244>z*\215\273\315\336\323=\025\240j=G\372\274\276H(\206>\235 \005\275H\033M\276\374\210\241<=\255\004\277\177\243\340=?q0>\013\016\304\275\311\370\020\276Y\026\221<\020\336\351\274S\031)=r\311b\276\345>\252>\036\210\266\274e\252\331\276\252\216^=\337\340v\276\233h\324\275\372\271\370\276\261\324\026\275\362>\201=\336N<>w?\254\273J+\230\276\351\215/?S\265\323=\005\342\210\276\241\235$>\242k\255\276\260K\227>\313\213\274>\344\321\330=\334Dx>T\201\216=$p\231\274\355\356\235>Y\002r>f\222\t>}\014\300\276\337#\343=\224Y\200>\177\230\016=\251.s=^\352\362\276\226R]>z\326}>\010\274^\276\370\230[\27659^\276\017c\370=i}\220\276\266\205\217=+\236%?U\311L\275ur\t=\335\274\210\275^\323\004\276\024\016\240\276^\313\207\276\237\273\007\277\'1\224>[\344\235\275\211\2375\276\375LF\276jz\217>p\234\363>/W\214=\223a)>\374S\332\276\303\221\207>\363\022\244>\332L\003>\262\201<>\3363\304>\306\234\306=5\035\375>\346\'\257>\220\237><\347N\350\276\206@7\274P\026\341>^\246\000>\037\342\225>\203\306n=a\226=>\2446\351>H\307?\276\364\r\356\276]_g=\266\365G\276\361V\261\276\215\234p=\235d\221>\333\334s\276\257\211\200\276\337|\222\276\326\244\367=\374\367\252\276C\202\244\276\275\237\371\275\251\"W\276$k\264=!\221M\276\343\227\373\276k\007$>n5\n?\301\262\346=Z\326\207=M\377\206\276\321\022\255\275Q\034+\276\262\313\246>\307\323\025?M\225&>\363Un\275+\312\244>\272\031\311>\226\307\214>\255\335\210\276\306\220C> \\\251=E\344m>\205\"\013>j\024`\276\316\017\215\275\237p\210>\336\340\360\274\205f\374\276s\332\252>\347\nq<\223QU\276\026v\201\276\0020\021?W\312Q\277>N\360\272uLU\276\377\335\356\275\337=\034\277\020y$\277\324\2629\275\355\002I\276^\203\215>\301\203\307\275\001\325\233\276\r\037\357=\024\304\350<\251Yg>\3133\270>(\0322<(\3356=\330m\356=\207\212\236;\270\013\340>\2246n>\260\030\227\2757\371\363=6\211\">\367\220\031>7)\023\276\236\n\360=k\203\327\274\351+\270><\212B>\264Z\242=\013hG\276`\260\247>\n\\\211\275\351*T\2761\305\246>\332C\237\275(|u\274\222\016w\274rNs>\002\262#\277\225\221\212>@\342\203\276\222\245X\276!\032\372\276Q\001\"\276\030\204\366\275\352\254\271\275\217\352\023\275\'X\212>b\377\242=\357\232P\276\217\352\210\2759\361d=\360\355)>\253\252\234\276e\322\305<2,\331\274\014\333\257\275\216\214\223>\032E\333>2\241\260\275\247\303\333\276\222\271\210>*\375\351\275\032k\304\276\267\227\n\276}\002\377\273\316)G>\235\202X\276N\254v\276\031j\326\275tpB=\316ty>H&/>\331\334\\\275\230\007\225\274@\330\317\275&M\002\2765\333\362\275\371\030\003\277\364r,\276\351\336\362\276<HK\276\013\224\226\276c\357\273\274\376\332\214=\340G\330\276\277\261!>C\271\346\275\023j\340<\357an\276g\347\017\276L\344<>\330I\232=\202\021:\276Tc#\275\253>y\276\345\343?=\n\331\031\276\205 (>;\346\364=z@\025\276\360%\013\276^\341\234\276\261P\245\276\220\276]\276\375\035R\2766H\230>>\021&>\214%\214\276\3754\331\276\352\337s>\373F\233>\260j\270=/c\024\276$\033f\276\344\375\234>\2466Y\276\355:\312\275R\367V\275b\363\024>\177{\244\276\025\330\205\276\362+R\276\374\036\360\274\223Y[\276\330dM=&b\206\276\n\350\277=\'\267\026>1\005\305\274l\222\237>j|\253\275\315Y`\276\270\006\">\221V\227\276\371\227\264\276\226\316\t\276\020sv=\330\313\022>\222\237\377=\355M\215\276 uS\276\260\352%\276\234\356\341\276_d\276=\351\202\252>\324\271\252\275\234\357\255=\010l\332=?\203\263<\320\256\341\275B0\210>\004\320e\276\306\222y>\304\2061\276-\261\256>p\003>\275)\3318\2763)\364\2761\'\267=D\214\210=\344\300\215\275\310Tx=\307\301\333>3\264\305=\332\243\205\276\022k\222<\264\351D>\252Z\323\275\244>\202\273\032\252\035\275\361Y\256>\'E\014=\010\263r\275\255\177\270\276\360\n\236\274\351k\024\276\020\370\004\276\356M\247;q\352\240>+\177\245\275\005\263\211\276\377\223\n=\256]\267\276\207<\023>)\220\223\275\t\313\000\277\"l\334\276\256\230X>e\2423>\000kz\276N\025\037>\010,\226\275l\265@>\354\261\">\213.\345>\337\"\027\276Kf\326>\324\314\276\276\313\035\300=\326\313\227\274\337\261\220\276)\223r<,{#=\253\324\217=\257\232\244\276[\344\033>-X\226\276Bd\313\274A\027?=\177\030\331\275 Ud=fI\336>\360\244\243=v=\267\276*\341\267\275\236\277%>\r\260\035\2764P\334\275\317\347;=QMF\276\205\324\033\276\nC0\276N\027!;\227(h\276\335\210n\275\271\241\t\277_\244\013\276Dc\220>\222#\205>\032Dp\276\'\272\251\275\224\016\024\276\263\312\364=\346\324J\276\243\234\226>\245\241\224\276\355\371\374>-c\002\275\363\364\343>\226\2507<XN)\276\002\365\272=Tk\346>\210n&>Y\'e<\305(\035\275\263b\370=\001xQ>\366\246T>\363\243n>\215N,\275w\224\216<\03123\276\321U\247\275\245\206s>\320F>>Pn8>v\362&=/\214\245\275)\317\336\276\227\033\033\276\234\200Y\273\233\331\345\275T\242R\276)(\307\275\016\017\305\276\325\362\022\276\263t\353\274\353\225\230\275\263\355\366\275%\333\372\275\000)\265;\"\034-\276\n\005\253\275Nu\037?\257\224\020\2760\351\014>\201,\t\277\351_,>\341\361\031\275\007M\200\275\201\263Y\276\320\333\241<\351-\"\276.\212K\275gF\374=\352y\014\276\243\206I>\235mb\275\215<\200>%\262\356==a\032\276\200O\233\276\214\326p\276t\027\214=\305D)=\267\231\205\276c\351\202>\363\001B>\263\244\035\277|\'\206\276P\324\250\274F\010\214\275\232\272\"=p\261T\276I\211\254\276\244\207\253\276P\020\365=\335\266p>\2243-\276\331f\027\276\226BX\275\350\362P>\240t\204\276\023\003\355>\"\257w=\017\255\336=\3539\330\276t\3221>\345\225\207\2762\252\374\275\376\303\356<\227\207\233>(\346\t>\252\241\024<p\365\211=B\213}\276\210\016\366>\265K\024>\33428>\2600\r?7\033\341=b\256\325\276\254\231\375\276\036H\373=v\223,\275fa1\275\332C\237>m\302\211=c\207\352\276+V\223\276W0\202=D\261\206\276\217?\341\275\002<\230>R\205\322\276\271\357\300\276\247kP\276\223\003`\276q\373^\275\177\371\351\276\261\267R\276o\346\013>\315;\237\276:\3268>\220@F>\017\201-;\033}\346\276v3\225>H\275-\276\014\323\333\276)\3720>}K\030\276=\267\306=\210\344\001\276fXg\276b/7\276\031\360\352\275\266\261d\276\023\200\211>\000\025\250>\220tq\276\210X\026\277\252\214\024\276mU\250\276\211s\032>\340\203+\275\361?\241>\204\304\242<\037M\357\276\225)K\276\030A\266=\374\376\017>\3100\353\276\265\306\356<\355\337~\276\224\223.\2766\001\225\276\323\234\020\276\212\242)=\377\332\026\276\233P >\361bI\276S`\227\276\002\t\246=\355}\327\275\356\025\331\275\271\274\021>\244;\303<\252\r8=\267\265L\276\250\306J=\241n\276\275Z\337Z\275\3318\267\276\271\031\002\276\211\362\351\274\204\022\021\276\216/\317<\262~p>\366\216\220>\263\345\203\275,= \276\'~\350\276V~\340\276iZ\254\276\2614E>7{O=2\023\264\276\354.B>k\221\177\275\330Dd\276\032p\201>\266\242\225\276\235}\257\27543+\276\324f\263;}\257\234\276zu\201=k\374\004\276\357P\360\276^1\037\276T\327\262\275\243k6\276\224\370y=\2566=>\224\333M\276\033I\027>\216\233\204>\205\253\333\275f\"x\2760Ul=R\010d>\247\177K\276|\365\014>\273\326\243=\345\325\252\276\322\361\303\276\t\340?<dw\351\275\n\274\351=\246\255\210>tP\300\275\263\336\231<\324\277*\276\036\354\005=\276\221+\276\nV\027\273\217lo\276\002|)=\246\010\225=\226\270\366\275W\232\267=1\013\327<\320\356*\275\333v\232=].Q>\026\311q\275k\332\246=\031\303\n\276\001\363r\275s\320\031\276\276\313\023>\232F\204\276\006\r\363\275\037W\232\275\317\337\357\275\271\242\022>L\233\223\275/Tf\276p\351\\>\324:\212>\364xo\276\022\262\276=\332\244\366\275\355\205\216=\205\254\016>\016\266\260\272\2740\\<\"!j\2767 \n>b\020R\276\233\274c>\323\323\205\275s{\034\276\343\3154\276|0\271\275\213-2\276\003qU\276\n\225\205\275\370#`>\237.Y\276o\333\334\275\325\262\003<\016\263\334=f\177\321\274\323\005\311\275\372\014\313=5\335W>\347tB><N\211\276;\355g\276C\214\323\275\252\211\200\276r\375\326\274B\022\206=\223\336\200=\\1\326\275F\036d\275/\231W>\314\243G\276\220\340\347\273/\276C>\00225\275\215\3609=\234\263R\276bXr\274\025\316(\276\013\252\205>\337\313\310=\333{\006\276\t\371\220\275\276\373\031>\371\351\207\276\366\315\224\276P\371}=m\315t>P\223\243\275V\260\234\276\311&{>\333s\206>2)\337<k\354Q>#\217\201\276\"`6\276\377\360!\274\262\202\212=.M\">\2079Z<\347\203Z>K\030\232>\244\344\224\275\r\354\\>\200\315j>wc\340\2767W~\274U\226\223>\017\342C>\034\004\336\275\241\340|>\222.\236>qr\254\276\000\274t>:\366\217>f7/\275N\3551>\351\224\360=^\006\223\276\352K\t\276\337\3311\275X\315\340>T\333\212>\265\245\206=\312\202\302\275 /\213>j\210\"=\240\343\240<`\205Y\276\230n\n\276\026\0045>\267\007\020>\t\253\032\276\273ct>\311\265\026\276}<\361\275\235\010\213=\255{\326=\216X\001\276fhD>\013\270\206>3\035g>0\253\204>\306M\340\274F\355\301=\245m\322\276\374]\312\275k\325\203\276\2602\204>L1!\276\021\271b=d\375l>\246Q\325=\270l\223=\\\230\235\276Z\2562\274\340a\271>N@\t\276r\366=\276S\350\373=R\357\030=\035\250s>\032\347\252;G\024\033\276\246>\203\275\322\302\267=\272w\230\275\034\'s>\023\222\205=\324\366\240\276\343\033\211\275\003z\273\276\027\247\014=\317\016\026>\256\334\224\276\330\252\010\275wuY=Q\377`\276RE\203>\037\361<\276\325\014\372<\275;\203>i\014\210>\315<|\276\334\310\353\274\365h<>\273\215\004<*\264J=X\257\223\2764\262\371>\327U\003>\353\215\215>3\372\321=\262_8\276\325G\014>jb\357\275\257K\317\276\226\374\314<\3151\217\275W\241\231<\020\002\035>XL\263>\335m-\276$Zo\276`M\217\276R\235N>\230\347\266\276U\346\206>\230\017\356<&\226\341=\267\247\220=\370\352\211=\215\n\360\275\007n\251\275b\232\320\276\"W\003>\230\321\223=\366h\260\276\023\000\304\275J\343x\276&\262\200=\277\207>\276\201u#>\260;\016;`v\217>\026h\266>\327\023\037>3X\240>U\025\243=\356B\211<\346\364\234;\250wT\276\366\343\226>+\355^>G9\353\275\005\261>\276\233\310\237<[d\216\276\314\271\343\275\036\020\200\276D\006\354=`^\023>\274WE>\320o\\>\273\306\207>^\001\245\276\004s\373=\345}=>\203\327\211>@\366g\276S5\002\274\205Ys\275\305\274n=\271\347\236>\345n\212\276n\326N\276\260\241[<\352l\255=\035`\231\275ID\241\275Pga>\315\330\022\276\323\307B\274M\251o\276\350?\236\275\336_.\276g\334o\276\026\276P>\035\320\326>/\004\323\275\"\246\022>\2244\207\275\222\375\206=\257\t\305>\335\214}>\220f$\276-\320*\274x\022\222\276\2538\215\274\264}\360>\256G\256<2a4?\037\311\356>_Z\037=WV\032=A\220\247==\215\223>yO\302\274\333\244\255\276HH\212>__\013\276\264\020\206\275\323\334\355\275\024\013\017>\353\243\302\275\034\204B\276\210-\027\276\301\315\254\276\302k\266=\366v\032\276\024\376K=jR\r>\220b\030>\371\033\241\276\262\354x\276\271\251m=\226\023\200= \313\223\276\370\322\232\274-F\312>\217D,>\013\351\211=n\227\263>K\"\004;\347\372\263=\276\336\250\276\345Z\331=\034!&=@\277R=YmG\275U\225\243>G\336\311\275\203\375\210\276\014\315\216\276f^\327\275\276\267\344\275\362\372\316\276G\341N\275\257b\210>m}a>3\303\003\275\304\222\022\275\276j[\276\260A\352<>\250\032\276\347\270\221>\241@\'\276[]\243\275\377\354m\276@\270\224>\334R\304=\361T\010>\336/\270\275\014\222h\276]\031\257\276kZD>\274(\373\276N\263\232\276I\313\330>Nuq\276\301C\234=\352J\332=\251\013\275>r\226\311=~\230\336\276\321d@>\210r>>\000\004\315<\323\037\363\276\202k\035>\245\251\210\275_-\327\276\353\375\372=\310\344\006\276\n\'\260>\302D\225<@N\235\276\314\340+\276.E\275>\210S\010=\273\252\256\275\241\355\001>@\3168\276\014\342\222<Q\216~\274W-\204>Y\201\250>\230\2002\276\246\245\177<)^!>\362\252(>\250\033\364\276\203G\206>0\033\005\276~\213Y=y\032v=\274\301\031=$\311\274=S4T>\371\'\200\276\322k\236\275\355\213p>y`\002\276\313\320\240=\233*\'\2740\007->\300\245\335=\200=\352\276\205\324\300\273Ms\001>f\364D=\337\020\214\275\302BX>K\360\263\2767|9\2750K\347=\231\344\271\275N\272\206>%f9\276\216-j>\024\237\334\275\211!\002?}yZ\276\205\3000>\027\221\005>Njz\276\023\270\234\276\215\251j=\027\021.>\277!\001>\347u\025\276\257\307\035<\221a\243\275\234\314\005\277*}\240;\347>\216>\336\364D\276?\364 >/\361\276>@F\351\275\"\222q>#\227\020>\301\031X>\376\265\021\275*\240\177>>O\263>q\021\237>\370\203&\275B\325\225\276\324\313\220=\031P\225=\036\253u\276\312\002U\276\224\246[>\2506[\276\274A_\276yJ\202>\0359\007\277\350\253\"\276=\213\\\276\\O\241>\371\177q>t&K\275\017\322\342=\023\n\303\276\377\376\313\276\221$\215\275\355\005\232=\211\033\300=,u\201>Y-\n>^\350\346\275\245\264\212=s\300\201\276\342\365/>\314)\024\277\211ak\276(l\032\276\277RO>b\002\224>\201w\327>\327\241\235>H`\323=\255\007\013\276\3615\010\276\351\177n>gYU>\372\"r=\350 \212\275\254J~=J4\300>pi\001?\\\376\227>\216\274\361\276\324\211a\274\307zi>v\330\253<\036\330\006?\323\353\222>\026\317\242\276\377\355;<\014b\336\274r\013H>\036&\300\276\214\242\261>q\276\242>3\255(<\271\003\305=\345\234a\275\374m\037>hSI\276Q\010M>\205\n\277\276rq\252>\226\023G>2\206\326\274Vo\236\276J\201\326=\211\2337=\2374\217\276^\207M<\\F\246\276>\271\241\276j\267A>-\264\311>\315|a>\236n\026\275\226\340%\276F\t\370>\241\275\335<w=>\276\214+\256>%\367\034=#tF>\371\026W>\256B\022\276\246\235\">\270\275\n\277\003\264\354=a\r\001>:\371\270>G\371\313>\212I\200=\330@\231\275r7\306=\027\025\336\275T\231\212\276\307\007\016\276\014\365\245\275o\253\375=b\010\257\276\322\202\370=\262\273\355\276\260\252X>\037\007\262>\001\313\267\275V\026\311\275\005\016\361=\220\177\234<\"\373\177\275gKP\275\275/\276\275\014\033R<\240\267\266=\205\2129>\"\177\304\272\253\344\231\275\221\337\t\276s\374\251\276\377\030$\276!\354.\276\377\330\016\276w\2666>\376W\273=\267A\312>\277W\266\276\201{p>\007\020\267\276V\025\304\276k\013\003\275a\001F>J$V=\305[=\276\001\242\005\276\206\221\240=\277W\t\276D\361\207\276\027\346\'\275\307\000\315=[o\265<2\245\374\274\262\3238>\374\014\301\275~\231\334\276\220;;>\234\352\003>D\215\352=\003\257?\276z\266[>)\332\r\276\022|\211<\031`\n\277\226\215\277\275\277\347\023\276\371\340\260\2756k~\276\002\334_>\350\023\205\276\344\306\014\275\330?\253\275\364X\315\276+\300t\2761O\016\276\352H\030\276\267l\302\276\217\270\363\276\215\220\233\275\211\030\265\276,W\237>\223]\030>g\375\003>\356\004\211>\336\317\256>\216\255 >)\327\014\276u\223\254\275\352V\274\275\225\n\226=\27030<\001\245\226;\215\013\263>\333\363,\276\324\273\347\276D\225:\276Q\221\367\274\324\357\363\276RN\023<h:\024\275\034TG>\027\252\245\276\327\260\256>\004\345\331\275vq\306=\330\277\004\274\342\213\253\276)\375\224=2\275s>\264q\204\275\221\310[\276|=\272>T\"\024\276\334u\005?\030Nw;\250\221\355\275?\320\367=\307\211\233<y\001\316>\324\247 \275\352u\231>+C\027\276\310]\264\273\035\364\221\276\357\244O=\024\t\323\276\307+\221>\000\254\214>@\324\374>\222}n\276\317\300\210\275\212\354\204>~\n\341=w\014D>\367\272?\276`\021\333\274\213\255\t\276P\250\224;D\2444=g5\256>\032\253\013>\005\272\212<\232\331>\275?cR>\275Gk=\322m9>d\322;>\016:\216\2766\344\230\276-\366\225\275\237\202j<?wW\276\264\247\373\275aL\224>\020\250\301>\300\376\225>UE0>/M\350\275\022\367\317\276\262`\"\276\351\376\254\273f\265\306\275U\256\351=HU\211\276\353*\377\275>\264K\276\036\023\005\276\273\254w\275T\335\201\275\032\200\364\274\334\"\002\276Y\021j\275A\317f\276owN\276[}\361>\330\014\372\275@8\220\273\\Z\266>\207\233\n=\255\237\241=\250\255:\276\361\222W>\353\377\001>\332bk>1hs=8V-\276\345/1\2763\236\312\275\301\273\017\276\241D\257=\0138\204\275\001\220\205\275\264\030\276>\373&O>\375\336\362>\006\300,\2767t\223\276\336l \276\231\346\212<\261\222=?\271\013\202\2754\210\254=nO\246=\346\tB<\334\237\210\276\352\006\206>]\033\213\276$\371;\276\201\256\206<\364ip\276F2\035>K\035\224\275\306q\247\276\344\331\215\276tE\222>\306\0027\2750\267=\275\370e\020<oC\256>\2400S=\323\2470<x\322\022\275\024l->\343\200\272>5r!\275\246\317b\276G\347\365\275AQB>]\345\034\276rm\n> \214\205\274\0274\310>\313D\325=\2016\255\275\277\204\250<:\341\205\276R\354%\276\234\211\261\276\263\320\252\275\217,\300>\023\244\373>\301<\000\276r{;>\345\2633\276\220$\261>\004\375\272=\232x\3069\260\013&=\214\335\220\276(5\326\2756\251\247\276mS\257>\235\2644>SXl\276\353\354\356\276\364\237I=\337o\246\274E\376H\276\025\265\032\276\315\367\240\274\220\200\204> _-\276lh\250\276\0170\206\276\031\335\243>\373$\204=\356)\306\276\tOy>\265\377u>\237U\341\275\0322\003=\356Y.=\271\271\327>b\314\227\276\236\321\227>\352a,>\241he>\324\202Y\272\206\363\200\274\336\024\213>\247U1\2773\277\205=$\351J=\036\202\274\275\212\325\256=\201)\304>\262:\003\277)\311\276\2757\266\226\2754>\362=b\203\n\276\232\347F\276\202\025\r\275\202\357)>lSa>\321\250\363\276,\374v>\037\226\260=\334\030Q>\224|P\275e\347\364>\006\330\032>0u\256\275\251\371\300>N\353[=\226\323\276\276\030\0247=nD\340>RG\021\276\355\020\207\276Y\006\237\276\025l\244>\017X\316>\326\006\227\276\236\227\207\276\215U\016\276\304\305\212\276!\207\200=*\r\242>\271\t\210>\004\\!\276e\217\276>G\006v\275\370F\307=\017\003\210=\006,\313\276(\377\224\275\217\2442\276\002l\322=\217\263(>\221\261\201>O]m\274*>\241;Dd_>j\'\331\276\264\357\261\276P\325]\276\213\325.<\344\032#<\261\210\351\276-\327?\276H^h\276\030,\356\275;b\277\276\213\013_=ul\001>Q\224Y\276\366\302;\276\377\275\025>\335\3210=\267\221B\275o\202)>\304Z\241\275\311\245\214=\247\366\335\274`&\252\275\005r?\275b\210\233<\000\0350:\316\225\374\276"
+      }
+    }
+  }
+}
+node {
+  name: "rnn/multi_rnn_cell/cell_0/gru_cell/gates/kernel/read"
+  op: "Identity"
+  input: "rnn/multi_rnn_cell/cell_0/gru_cell/gates/kernel"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "rnn/while/rnn/multi_rnn_cell/cell_0/cell_0/gru_cell/gates/gates/concat/axis"
+  op: "Const"
+  input: "^rnn/while/Identity"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+        }
+        int_val: 1
+      }
+    }
+  }
+}
+node {
+  name: "rnn/while/rnn/multi_rnn_cell/cell_0/cell_0/gru_cell/gates/gates/concat"
+  op: "ConcatV2"
+  input: "rnn/while/TensorArrayReadV3"
+  input: "rnn/while/Identity_2"
+  input: "rnn/while/rnn/multi_rnn_cell/cell_0/cell_0/gru_cell/gates/gates/concat/axis"
+  attr {
+    key: "N"
+    value {
+      i: 2
+    }
+  }
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "Tidx"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "rnn/while/rnn/multi_rnn_cell/cell_0/cell_0/gru_cell/gates/gates/MatMul/Enter"
+  op: "Enter"
+  input: "rnn/multi_rnn_cell/cell_0/gru_cell/gates/kernel/read"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "frame_name"
+    value {
+      s: "rnn/while/rnn/while/"
+    }
+  }
+  attr {
+    key: "is_constant"
+    value {
+      b: true
+    }
+  }
+  attr {
+    key: "parallel_iterations"
+    value {
+      i: 32
+    }
+  }
+}
+node {
+  name: "rnn/while/rnn/multi_rnn_cell/cell_0/cell_0/gru_cell/gates/gates/MatMul"
+  op: "MatMul"
+  input: "rnn/while/rnn/multi_rnn_cell/cell_0/cell_0/gru_cell/gates/gates/concat"
+  input: "rnn/while/rnn/multi_rnn_cell/cell_0/cell_0/gru_cell/gates/gates/MatMul/Enter"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "transpose_a"
+    value {
+      b: false
+    }
+  }
+  attr {
+    key: "transpose_b"
+    value {
+      b: false
+    }
+  }
+}
+node {
+  name: "rnn/multi_rnn_cell/cell_0/gru_cell/gates/bias"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+          dim {
+            size: 40
+          }
+        }
+        tensor_content: "\235\370\203?&X\200?f9o?\260/\201?\275\000\205?\361\241B?\025\233\214?\027\013t?\335\320~?\032U~?W\017y?\010\211\203?l.\201?\234\241\212?x\274\\?0\367\214?\275?\204?\351Qn?8;y?\327(\233?\313\273q?\231\347\205?\025\350:?\212\007W?\"Kx?\304\025\212?:\027\206?\363\250\212?\036OF?p\t\203?\340\307\227?\305\252\204?O\203[?\034\322|?t\201`?gm\210?>\234\216?\3439}?\250\nL?\263\216P?"
+      }
+    }
+  }
+}
+node {
+  name: "rnn/multi_rnn_cell/cell_0/gru_cell/gates/bias/read"
+  op: "Identity"
+  input: "rnn/multi_rnn_cell/cell_0/gru_cell/gates/bias"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "rnn/while/rnn/multi_rnn_cell/cell_0/cell_0/gru_cell/gates/gates/BiasAdd/Enter"
+  op: "Enter"
+  input: "rnn/multi_rnn_cell/cell_0/gru_cell/gates/bias/read"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "frame_name"
+    value {
+      s: "rnn/while/rnn/while/"
+    }
+  }
+  attr {
+    key: "is_constant"
+    value {
+      b: true
+    }
+  }
+  attr {
+    key: "parallel_iterations"
+    value {
+      i: 32
+    }
+  }
+}
+node {
+  name: "rnn/while/rnn/multi_rnn_cell/cell_0/cell_0/gru_cell/gates/gates/BiasAdd"
+  op: "BiasAdd"
+  input: "rnn/while/rnn/multi_rnn_cell/cell_0/cell_0/gru_cell/gates/gates/MatMul"
+  input: "rnn/while/rnn/multi_rnn_cell/cell_0/cell_0/gru_cell/gates/gates/BiasAdd/Enter"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "data_format"
+    value {
+      s: "NHWC"
+    }
+  }
+}
+node {
+  name: "rnn/while/rnn/multi_rnn_cell/cell_0/cell_0/gru_cell/gates/Sigmoid"
+  op: "Sigmoid"
+  input: "rnn/while/rnn/multi_rnn_cell/cell_0/cell_0/gru_cell/gates/gates/BiasAdd"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "rnn/while/rnn/multi_rnn_cell/cell_0/cell_0/gru_cell/gates/split/split_dim"
+  op: "Const"
+  input: "^rnn/while/Identity"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+        }
+        int_val: 1
+      }
+    }
+  }
+}
+node {
+  name: "rnn/while/rnn/multi_rnn_cell/cell_0/cell_0/gru_cell/gates/split"
+  op: "Split"
+  input: "rnn/while/rnn/multi_rnn_cell/cell_0/cell_0/gru_cell/gates/split/split_dim"
+  input: "rnn/while/rnn/multi_rnn_cell/cell_0/cell_0/gru_cell/gates/Sigmoid"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "num_split"
+    value {
+      i: 2
+    }
+  }
+}
+node {
+  name: "rnn/while/rnn/multi_rnn_cell/cell_0/cell_0/gru_cell/candidate/mul"
+  op: "Mul"
+  input: "rnn/while/rnn/multi_rnn_cell/cell_0/cell_0/gru_cell/gates/split"
+  input: "rnn/while/Identity_2"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "rnn/multi_rnn_cell/cell_0/gru_cell/candidate/kernel"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+          dim {
+            size: 48
+          }
+          dim {
+            size: 20
+          }
+        }
+        tensor_content: "\350\323u=\022\034\001\2762\320\225>jg\230>\302\225\004>\021\355L\276n\336p\276\030^Z<\374\301\031>fF\002>\214oa\2763\210\003>\320\347%\276\302\237)>J\013^\276\242\034+>\377\356\024\276\337\367\026\276\364\217\227=\231\207\333\275\252q2<\306=\n>\316A\006\276\035\311m>G\251\240>\303\227$\276\270\363\246\275Kt+>\360w\235>\324\310\002\275\257\020\267=q)\034\276\3349\200\276\2514\203\276j\202\241\276\200\313\316=_\023\034\275\250\240\246\273\001=\025>\347\\\204\276\n\260)\276Q\322\360\274\263fp\275\234\330\300>a\315\007>\267\003\335<\326\350K\276\262\247\200>\001\215\241<\0304-\276>\317\344>\261d\226\275\010}\261\275\306\304\350\276;{\215>\261\025z==\231\177>\273o\227\275\307\344\220\275\332$\215\276q%\232\276\025\242%\276\016g\263\275\312~=\276e\376\225\276\352\002\032=\236\361\265=0>J>\314e*>e\206\332\276\003>\362=\203H0\276\034\326\223\276\226\021\006>+\007N>\362m\033>\214L\217\276~\341#>89A>*W\253\276s\233\001\276\306D\006>+\222\304>\0002\302\276\004]\251\276\030\257*\276\217\017\027\276\322./\274\320\222\032\276&r\376=\207f\212>\257\356\275\276u\037\244\276\221I*\276\323\341\234\276V\345\265=\276d\221>W_\367<\016\335q>\246\312->e\212:\276\245\342\301\276\327\245P>\263{\232\275F\377\373=\317\307\366\275\231\033\204=\373\026\275\276f\013\343\275p\271m>\265h\224>b8\304=\001\3253\276\r\277\034\274Q!\265\276\'\004C\275/\325\345>>\300\t\276z \247>\351V\007>\215(\243\276\213d|\276\320-!>R\233\337\275\364\226\016\275\335\334\357=k\356\002\276\016\345\035\276\370\t,=\373%\215\274\264\037G>\204R\320=\2267E=\365\025+>\353lS\276\304\324\252\275\314\265I>\343\225\323\275ia\260=\032B}=9\024~\276$\337\202;\t\207\214>\307Ic\276\372\360*>\312\305}=\020\221\350=O\372\002\277$\010|\276\323X\201>\030\366\226>,kl>m{\255<<2\212>\337%\213\276\232\345*=\205\372^>\313\331N>\235\002?>7\242\235\275g\330\222\276c\367\t\276\3634\235>\236b\202=\224\006\251\275o\334Z>\277\346\330\276xX\016\277\327~\206\276g\n\236=\007i9=x\214\036<\004\033p\275\364\356j\276\260\243y\276\007\351->\262\253\323\274iE5>\035\265N>S\213F=\2625\237\276\215\277\004>\014*c=\306&\\>\2673\313\275\"\350\230>\226%\034\276-\241J\275\323\273_>-\270\275\274\367\331Y\276\265\254$>H\003G>\363\323x\276>@=\276!\r\330=V(\370\275\256\271X\275\304\200\333\275\346\233\342>\231\365\231\276&\014*\276x\334p>\227y\362\275\232\003q=\343\220\363\275B\260\364\275\271\365\267\275\010\336W\276.\374\002>\377\376\r\276\331i\323;c\271\323>\027\210\035>\375\317\216\276\013fq\276\216\236\244= \360+\273%\003\262>\005\307\376>\234\336\211\276eAC>\272\362\252\274<\241\256>\000\213\310=\260)\203\276l\233\363=\277`t\276f\235\225>q\\[\276\230cG>\273L\002=T\204\253>)\343\212>V\317\317=\345\204\275\276\0375o\276 &\006\276\022\374\235>.\332\214>\014X8\276\223\000[\276Hm\270\276\035\354Z\275\317\227\243\275\250\276c\276\315=^>\354\3537\276%\222\262>\314\252\350\275\343\246O>\313\t\214>j\263\317>\032\215\263>\210`\243\276\3058\207\276y\364`\276\274@\375>\354\214J\276\027TC>\204=\251\275\320\021\363=\245\367+\276KQ[>\3709\000=\300\"\261\275*>{\274\337F\214\275(V\266\275\211\366\007\2760\244s>\017\020\312>\377Bp\275L\317\300>\313\003Q=0\206)\276k|\350\275?\263\">\327u\003\276H\350\252>+\020|\275\360\372\202>\326\275\226\2761\021\010\276\246\275\273\276\337\222;\276\203\207~\276\033.H>4\314u\276$%\000>\244\277\233=\274A\266>q\236\342=U9\315>\r\303\242>\324\004f\276\212Z{\276%\233\263>j!\230\276s\251\367=\244\001T=v\227`\276\024\247\301=\214AE\274<9\277\275\322\341<\276X\033h\276\331|\301=_]\245\276\303\201g\276\343\3303\276\250\030\t>\257\231\327\275\250?\206\275\002\270\313\275\276_\271\275\273\3040\276\000\333g=\353\261\316\276\220-\006>\302\017\">\344\356\252\276\020}\264=\020\225\340=I\351\366=\205\013@\276s\222D>\337\330A\276\360sK>}\2542\276Sv\202>\201.\245\276\332!O\276 \226\334\275\212\361l>hL\327=*\376K\276Y\030\002\276\2766\244\276\333<%>=\256\241<c\354\252\276\270S\231\2751\030\261=\332\312\247<\362\265W\276\2411\233\276\235\206u\273\352\244\223\276\305N\250\276\303\010U>\217\267^\276\374\010\003\276m\020\277\276\n$s>Z\024;>\301[\022\275\324.*\276\010\013{\276\033)\013>\254\nO\276q\204\030\276\357 ->\250\250\276>/\r\366\274\304\\K>\2375^>(\223\354\275\231\347\375;\214\351\225\276X\036I\275j\263\354\275\034\241;\275\224P\202\276\335`9>\273!^>\232:\021\276eE\224=\014\324>\275\370\303b>\223v(\276\225\241D\276\327$\026>\215\r\342=\206\360\002\276\022g+>O\370\206=\354\244=>\200\216\221\275\255\220\220\276b\330\300>H\216\330=\010\373\303=*\333\305\276j.\212>\240\372{>|\301\251\275\"\206\267=\3262>\276c\324\270\276\210\002\220\276\017\232$\276\325M\325\275Y\215\246>\014IW\276\312J\037\276L\262/>\224\361\207\275\221\244\213>S\350:\273./a\276\216s\241=\353\314@\275,\247\331\275\304\344[\275\301\276%>\344{F\275\343\273\212\276\242!G>\230(2\275\344\227\222<\233\236\355\276\331\205S\275\335\253u<\365{F\276\372\036G\276\200\013\027\275J\001\035\276\274T\025\275~\257\234\276}J\243\276\255\3641;\273E\320=\320e\277=\240E\270=\375\265\321=S|G<\212\357\246>|>\230>\200\337C\275\373G~\276\230B\267\276\206\320\276<\316HF\275\266L-=\331z\260>\3677\332=3\214O>\'\032\211>\313\344\373\275\321\r\003\276\201C\210>\016\266\230=\240j\331\274\351\353\212=\363P\225>\232EB\276\360\004^>Ar5\276?\t\242\276\036\"\245=G]p\276\312\357\204\2765\005\374<\373l\236\2761N\234>G&\232\275\t$\203\275\205;\330>\002l\311\276\277\265\226\276I>V>\271\367J\276~O(>\000\255\202\276\271_\360=\312\211\316\275\203\367\261>\"\237C>\361\024\034>b\212(\276\036\351\225\276e\351\314\276-M\264\274\264]\207\276\214E\243\274\rb\236>\314E\213\275w\322\307>F\275\207\276\304\212\345\274\311\2476\276\036z8<;EG\276\241n^\276\307\001}>\337\215\333\276?\026\372>\322\341>=K\215\'>SA\361=\307HA\276\304\316:\276\226\225\\=&\314\016\275rkC\276\312\356l>Z\000\222\2760\331\335>\266\017y\276#\2609>\333\241\226=\324\334O<{\322g\275k\277\240\275\315\004\307\275\033~\227\276w\321i<&\334i>\212n6>\323\346\'\274\032\207\006>\022\344\207\276\234)x>\236}\220\274y\343\364\274\233\360\203>\301\230\013\276\3438\243>\214\373\237\275S%\200\275\251\301$\275\237)6>\200_\200\275\312f\373\275]v\313\275G\374\n>$@\036>\233\3229>\")\257\273B/\343\275\275\350\322\275\214\337\222=\235\200]\276\001\234\205>.1Q\276\336&H\276:3\214\276\370\361\322\275\223\373t>(\023\377<\305\257\205\275\246\334\026\276\237\024M\276\363\206\377=\243\024z\276,\223Y\276.\004<>$\\\255\275\251\026\373\275\305C\223>\n=.>\262:\236>\317\352%>\363\'\032?\260\312\373\275\261\337\205=\361\n\272><\276\225\276\035\017\367>E\307\277<*=&>\306\002\232>\337[w>\327\373\305=Q\260\356>~e\260>\266Q+<\316\020\n\276\2651Y\276\377\223>>R#\025>[\302(>Y\\\326=\224\307~>\301\242\007>qp\374\274\343)C\276k\343L>yf\255=\237\337O\275\372/s\276\253\367\207\276\253\250\212>\266\023\203\276U\356\246=\026\016\t\276\177M\243>W`\030>\335AG>\223\213(\276\224\t\234\276A\330I>\232\003%=\3013N\276\320j\242=\206\314\212\276\342\363V\276\233\010\207\276M\207S\276kvY>U7\347\275\324\250\325=n\304\000\276\304\267\213>\345\215\311=\006bW>`\"\323\276EM\226<al\270\275w\301\250\276\036TJ\276R2\201\275\342\306\256=1\225\266\275\325\207!=l\210\357>\231\333h\276\260\214\265>\343\002\230\276\024\201\260=0\266*\276\343h@>\226\214\033\276\245a\237\276N=n>R\251\360<\264\230\"\274\357\366\354\275\001^\304>\357wT\276I/\202\272\002\3549>\313\355\375=\266\210(>\212\241Y\276k\332\221\275\332\223Y>\255\r\026\276\225\327R>S\340\275\275\025\245x>K7\005>\363#\207\275\3647\220=*\302\265>\223\333\267\274\300P\364=-L:>\333^\211\276\")@\276n\301{>\243\030%>\030\0042\276\207\217a\275\274\262\236\276lv\365=\032\t8\275\366H\004=\317\277\005=\264\243Y\276\262\354\254>\215k\005>/\246\364\275\260\261\257\275\233\035\177\276C\027K>\215c\323=\214\002\351\275B\002\037>r\372\271\276NL!>r\376\273<\037\364{;\302\347>\276\342\343\303>w\\\355>B\211\002\276 K#\276\307B\356=7\313\204\276\317\355\251\275\263\332\212\276\264\207\250\276\003he>4|\314=\317\237\025\276\317\307\203=\353\247\033\276\001\177\r>\343\3474\276*\217\032>\276~\035>\342\233\266>e\256\327>ay\360\275R\262<=\365\313m\275\266`\"=|\277w\275P,\251\275x?P=\017\213\223<\250-\260\275\231C\215=\006A\002>\251\332\332>5\342\307>/i\020>n\037>>\272\347\023\276\004\352\211>R\037j=-\277C;\274\343\205\276\214\241d\276\211M\276\275\367\271\271\276\227\246\036=t\271A\273R\254H\276y\334\267\276c\026\253\276#\365\014>8\024\332=\346\260\230<\224\016\264\276\316O\217\276\037nL\276\370\313\377=\367\331\014\276M\022\177\276\247\321\\\276\027\253L>\243\323\247>\345\360a\275{\362\334=\030\265j>\034A\256\276U\031v=\367.\365=\226\377[\275c\242f\276\002*S\276\304\246\264<\357\331\240=Li\353\274\275Y\324>\211@\n\276\250\232\206>9\241\177>7\025\014>}N\312\275\233l\224\276\340\300\255\275\023\344\300=\301\216\301\275xh\337\275\375nx\2763\326\272>\024_\022\276UB~\276`\233\270\276\255q\347\273\254\210\375=\275\367\033\276\255\321\003>\225\027\244\276\260\342I\276\227T\263\276\210\035\267=\337 \016>\213\331\201\276P\375\013=\364O$>d6\263>.\352\341>\264\333+> n\211>\301\367\004\2760FW>\366y\302:\266\227\016\275iw\365\275[\327\223\2760\213\323\274\235l\223=\364r\210>kV\221\274%E\240\276L\007{\275E\201\240>\2523\n\276\361dS>\346\001\004>o\263\224=\212\344!=@\302\311\276x\262\352>\352\2212\276G\251\205>,w\235;\3517\025=\351\275\271\275\373\334\261\276v\301l\276\000\337)>b1H\276X\277\034>\362\230\241\275\340_\007\275\310\214\334>\277i\206\276*\336\233>O6\322=\226cu=@\212\245>\255\202\336\276*iQ>6J\310>\257GL\276\367\363:\276\237#\234\276\376y\215\274\237$\224>[\\\270=\300{\331\275\364\243\210>\004\302\232\275^\320\007\276n\2364>\032\350\020\276\006w<>\261\222\250>\321%\177=\3104:>\332\323\213>\265\324W>\013\340\366\2754\017\345\275r\222\341=[\226\335=\242;\225\276*\365\210\275\353\342\020>\263\376v\276\017x\037>\222\266M>\353f4\276\376\322\013>R\241\257\276\304y\036>\326\205\'\275w\n\362>\216\205\276\2764\026q>nu\252\275z\330\213\276\033\210*\276\345\013\265\276ji\342\276\2532?>3u)>\\i\311\275[\300o\276%\313\\>n\310\325=\354\342\244\275\371\302.\276>\230\225>\003\262\325\275\025\336\237\276\234\371\256>\267Z\360<\002\214G\276\013\305\255\275\013\222\">\225?\000>\310\235\236\276\345\2047>\311}\311=\004\310o=\006D\300\273\nj\265\276\025/\030\276\276\031\365=\372B\342\274\356\245\013\275/\207\r\276{\245\220>\025\276\330\276@\0256\276\210\226\215\275\340\212Q\276y\267\271\276\017\366\207>\234\'\314>\216\001\265\276\232.\231=\272\020\037\271y\300\315;\200\200,\276\355\317\247;\003Z\251\275vq<>\353\300\177=0l5\276L$\355=\201n`>-\036\251\275\307\037\216\276*\272\207>\361Y\276=\030\300\273\274[\220\304\275\200\262\351\275z\357^\276\231\210\306=4\020X>\200\207\206\275\276\243\216\276x\227\210\2759\241\207\276\353\261J\275\307\212l\276\n\361\031=7\321\325>\327\354\345<\014\350e>.\214\001\276\001\0078\276\373\242\216=\312)\014\276\363\263\343\276\210@\255\275RkS=_`=\276\3057\020\277\221v\216=\034W\311\276Qr\224>\307\346\356>\334\035\324>\340\350\013;\"\321<\275\373\025\253\276\207\026\351\276\371?\214\276\2473\321\274\342\307\201>"
+      }
+    }
+  }
+}
+node {
+  name: "rnn/multi_rnn_cell/cell_0/gru_cell/candidate/kernel/read"
+  op: "Identity"
+  input: "rnn/multi_rnn_cell/cell_0/gru_cell/candidate/kernel"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "rnn/while/rnn/multi_rnn_cell/cell_0/cell_0/gru_cell/candidate/candidate/concat/axis"
+  op: "Const"
+  input: "^rnn/while/Identity"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+        }
+        int_val: 1
+      }
+    }
+  }
+}
+node {
+  name: "rnn/while/rnn/multi_rnn_cell/cell_0/cell_0/gru_cell/candidate/candidate/concat"
+  op: "ConcatV2"
+  input: "rnn/while/TensorArrayReadV3"
+  input: "rnn/while/rnn/multi_rnn_cell/cell_0/cell_0/gru_cell/candidate/mul"
+  input: "rnn/while/rnn/multi_rnn_cell/cell_0/cell_0/gru_cell/candidate/candidate/concat/axis"
+  attr {
+    key: "N"
+    value {
+      i: 2
+    }
+  }
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "Tidx"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "rnn/while/rnn/multi_rnn_cell/cell_0/cell_0/gru_cell/candidate/candidate/MatMul/Enter"
+  op: "Enter"
+  input: "rnn/multi_rnn_cell/cell_0/gru_cell/candidate/kernel/read"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "frame_name"
+    value {
+      s: "rnn/while/rnn/while/"
+    }
+  }
+  attr {
+    key: "is_constant"
+    value {
+      b: true
+    }
+  }
+  attr {
+    key: "parallel_iterations"
+    value {
+      i: 32
+    }
+  }
+}
+node {
+  name: "rnn/while/rnn/multi_rnn_cell/cell_0/cell_0/gru_cell/candidate/candidate/MatMul"
+  op: "MatMul"
+  input: "rnn/while/rnn/multi_rnn_cell/cell_0/cell_0/gru_cell/candidate/candidate/concat"
+  input: "rnn/while/rnn/multi_rnn_cell/cell_0/cell_0/gru_cell/candidate/candidate/MatMul/Enter"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "transpose_a"
+    value {
+      b: false
+    }
+  }
+  attr {
+    key: "transpose_b"
+    value {
+      b: false
+    }
+  }
+}
+node {
+  name: "rnn/multi_rnn_cell/cell_0/gru_cell/candidate/bias"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+          dim {
+            size: 20
+          }
+        }
+        tensor_content: "a\257\302=U\331\314;3\355o=\2369>\2748m\022>E@\206;\206\345L<\226\253\372=\213\364\253\275X\250\246=!\357\014\275\347;\244\275h\030=\275m\017\220\272\017\364\014\274k\276\277=/\217\027>\227\274\234\275\021\330\202=\345\363\033\276"
+      }
+    }
+  }
+}
+node {
+  name: "rnn/multi_rnn_cell/cell_0/gru_cell/candidate/bias/read"
+  op: "Identity"
+  input: "rnn/multi_rnn_cell/cell_0/gru_cell/candidate/bias"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "rnn/while/rnn/multi_rnn_cell/cell_0/cell_0/gru_cell/candidate/candidate/BiasAdd/Enter"
+  op: "Enter"
+  input: "rnn/multi_rnn_cell/cell_0/gru_cell/candidate/bias/read"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "frame_name"
+    value {
+      s: "rnn/while/rnn/while/"
+    }
+  }
+  attr {
+    key: "is_constant"
+    value {
+      b: true
+    }
+  }
+  attr {
+    key: "parallel_iterations"
+    value {
+      i: 32
+    }
+  }
+}
+node {
+  name: "rnn/while/rnn/multi_rnn_cell/cell_0/cell_0/gru_cell/candidate/candidate/BiasAdd"
+  op: "BiasAdd"
+  input: "rnn/while/rnn/multi_rnn_cell/cell_0/cell_0/gru_cell/candidate/candidate/MatMul"
+  input: "rnn/while/rnn/multi_rnn_cell/cell_0/cell_0/gru_cell/candidate/candidate/BiasAdd/Enter"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "data_format"
+    value {
+      s: "NHWC"
+    }
+  }
+}
+node {
+  name: "rnn/while/rnn/multi_rnn_cell/cell_0/cell_0/gru_cell/candidate/Tanh"
+  op: "Tanh"
+  input: "rnn/while/rnn/multi_rnn_cell/cell_0/cell_0/gru_cell/candidate/candidate/BiasAdd"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "rnn/while/rnn/multi_rnn_cell/cell_0/cell_0/gru_cell/mul"
+  op: "Mul"
+  input: "rnn/while/rnn/multi_rnn_cell/cell_0/cell_0/gru_cell/gates/split:1"
+  input: "rnn/while/Identity_2"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "rnn/while/rnn/multi_rnn_cell/cell_0/cell_0/gru_cell/sub/x"
+  op: "Const"
+  input: "^rnn/while/Identity"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+        }
+        float_val: 1.0
+      }
+    }
+  }
+}
+node {
+  name: "rnn/while/rnn/multi_rnn_cell/cell_0/cell_0/gru_cell/sub"
+  op: "Sub"
+  input: "rnn/while/rnn/multi_rnn_cell/cell_0/cell_0/gru_cell/sub/x"
+  input: "rnn/while/rnn/multi_rnn_cell/cell_0/cell_0/gru_cell/gates/split:1"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "rnn/while/rnn/multi_rnn_cell/cell_0/cell_0/gru_cell/mul_1"
+  op: "Mul"
+  input: "rnn/while/rnn/multi_rnn_cell/cell_0/cell_0/gru_cell/sub"
+  input: "rnn/while/rnn/multi_rnn_cell/cell_0/cell_0/gru_cell/candidate/Tanh"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "rnn/while/rnn/multi_rnn_cell/cell_0/cell_0/gru_cell/add"
+  op: "Add"
+  input: "rnn/while/rnn/multi_rnn_cell/cell_0/cell_0/gru_cell/mul"
+  input: "rnn/while/rnn/multi_rnn_cell/cell_0/cell_0/gru_cell/mul_1"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "rnn/multi_rnn_cell/cell_1/gru_cell/gates/kernel"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+          dim {
+            size: 40
+          }
+          dim {
+            size: 40
+          }
+        }
+        tensor_content: "H\3260>s\335\214>\217_*;\357j\252>\207X\367=\275\022\007<u\222\274>\010P\232\273\204\323\315=N\353\212\276\271\037\207\276\226\025\363\275P\271\034\276j\254\270\275\232\3126=\307\214\304>+\253\302\276\251iW\276\014\340\320>Cn\017>\370\016\004\276\177\220\205\276z/\t>Kj\316=\034\215}\276L\247\240\276\020\357\302\274\276\032e>\310\311@=\257\022\020\276+\235\003>.\n\016>#\377\">\260\342\002>\'m\330\275\000>\304=\340\316\006>\276\210\326:K\307\255>\006\022\205>u\306M=\330\267M\276\030\021\262>\201\260>>9\237\376\275\323\025\234\276^\356\223\275\013\365T>@\263y>\243\025*=\353\3338\276\355\t!=L7\247\276\334\032\246\276\263\334\223\276\300$3\274{\030\002>\231\354\203\276\252\363\260\276-(f>\036L\003\275 W\036>o\225\266>\204\235\021>\341{\t?\263\235\337=\027!\243>\022\222\022\276\343\255\202=\366~E>.\255\323>D\341\221>\356k-\276`\273K>\371\245\026\276\265$\000\275\007\336x=\371{\222=\021\307\207=\244\341\224\276\321\217\306\276Vo9=\271\003{\274\330\201\037=\321Ds\276w\026\224=m\333\241\276\333\222\">C\343Z\276(l\200\275!\321\211>p\237r\276\247j)>\342M\325=\323\326\025\276\366\311\033=\264\362w\275h\252\274>e\217\206=h\216\007>\333\343\317\275v]\370;%\211\307=\375\272\222>\277\264:\276\010\374\254=i\265\356=\374\276\030\2762\347\003=Xi9>\"W\031>j\224\020\275Tth\276\374\364^<N\362T=\350\205C=\340\313\235>\365\261\304\276\257\307\211\2760}\351>6u:=\373L;=\2678I=w\014\004=d\344\202>\226B\377\275\311\023x>e\303\302\276\261\317\225\275\225\224\233=)\325\250>cF9\276\326 /\275\333\352\221\275\202w\207=\024_h>8\004d>\"X\266\276\003,h\275\235\277\003=\261Y\312\276\261\207i\276#\247\270\276b\250\271\275z\223\006>\0312\361\276\030\342\245\276\335\232t\275\301\244\366\275\233\351\242\276\263[^=\334C\"\276\005\242\370\275\375\031\341\274\266\200\257=\210E;\276\253\206\026>q\240\331\275\261<\206\275\257\032H\275\223\316R=l\345\027\276\215+9\276\214\247\324\275\250\374\251\27415\300>\202%\234>\r1 >fX\275>\021\262\332\276K:&>\002\022\214\276\312\241\212\2756=\235\275_A\220\276\0346\235>\246\t\214\274\261\254\022\275|Z~\276\027\267\364=\257\203\">\226\355G>P\036+=\267\200\204>\360\322\265\274\370\333\303\275\237\264\030\276\013\255\204>\300\003\034\276\035m\206=\210\274\034=\'\014\t> c`\276\273\005\305\274(\005\231>\005u\372\275\347\203\227>\371\002\213\276<\354<\276\n\335\'>\022=\362\275_\220p\274B\016\337\276\372\310*=(\261q\276Iq\376<\344\037\233\276{f\034>\311d\335=!\254\007>\230<\313\275\235f;\276\210\3056\276\206\216\212\275\372\210\377<m\260\257\275\271Ng=H\0218\275\035=\313\274\335>\317\275x>\371\27586k>p\3552>\354r)<\243\242\026\275\211.2>\352I\224>\375M\315\275\272\367\231>\200e\314\275\317<\212>\034\010|>\335\252\031>\214J\256>x\353F\276\273K\"=\212@\300=3\316(\276\274\225\020\276G(\230\275/|\340=\370c\215>\261es>\214\310\211\275\013,\016\274\330|6:\025\233g\276\3479\004=\310\361s>\314\304\205\276\250\177f=\032\202\212\276\241\256\023\276\333}\243\276\367\322\211=\321\246\262\276\327\335\010>`\332\001\277\264\304\006\276\2107\246\276\032\022|\276y\010\223=\357\263\253\2746\236\226\275,\263\217=\014\353\346\276\306\017\t>\377|M\276\365t\026\275$\320U\276t5\215=\261kV>\252\343\202=\252-\220=\306\370\302;\300\235\211\270W\223\215\275\031\353n>R\236\244=\300\002\307\274\000\272\241\275\321\021\205>\311w\217\276\"\365\003>\223\336\030>rIH>F\2715>\016\210\240\274B\341]\275\004\\\360\274{\270\013\276\226\233\006>_\305\005\276\"\033r\276\2328e\276W\331\273>\023\276\000>\rM\347\276\3526\236>aR\314\275_\3604\274\0066+>\226\013\377=\363P\000>%u\223=][\226\276U|\035\276\034\304\224;\300i#>\202\0035\276\345Y\n\276\274\343->\217\013%\276c&\375=\205\221\250>vmS\276,Qh>\214\031\222=\270^=>\254\267\006>\031\331K\275gK\315\276\363\026\200>l\031\210\276\367\321\026>U\375\317\274\341\215\303<\026\265\216>S<:\275\035z\000\276:\275\234>\232\034Y=\265:\234\275\350K\216\276Y\345\216>R\303\022>\273\033\031=\375\322\233\275\356\367\227\274\036f{;\021\252\361\275\362d\232>0\245a>d~\240\276\347~\255>\321\371\230\275\370\326x>\207\321~\276\373\274\000\276\221\356e=\017/1\2758\023\203=/I\256\275\345>\234>:\3520>\2019\300>\3639a\276W\246\036=f\2038\276\276\t\325\276Y\203\216\276o\330\260\275\353\325\272=\364\234M<\272\364\036>\253\033\031=EH$\276\000\274\030\276xnd>\357\340\302\276\334\222\327<\341C\014>N\rg\275\343\320\255<&\014\256\276\316T\177\276\331\206\302=\r\325\035>\327F\316\274\377\337\230=h\320\003=T\215&>\034i\211\274\n!G>\336y\223>0\'\324>CB\223>\224\220\206>\363\375\255>-\253A\275:_\237>;P\304>&\332\231\276\324\225\313>\306\267Z>\000\316\244\275\027\202!>\207\352>>\321(\301>(\021\342\276\300k\024\273\224\322\014>\177\245=>\325\2568<\273(\213\276\r\232\275>1\332g=\2469C>\2658\300=\272k\324>\027\321O\275\357G/=b\016\263>L\215Z>\303\244\352=\341\273\250<]7*\274/N\344\275X\274\262\274\336\232\245\275\303\331`\275D\017M<B\245M\2766\301\303\276\251i\230=\233\024\036><\354]\276\324\t~>\314r:\276yU\365=\222\001\201\276E\344\037>\014W\362<\367\220\223<,\205\006\274u\000v>Q\0324\274\000.\\\276\214\327\307\275\035\304T>u\030.=\355dJ\276Dk\364>\016\363h>K\235\272>\334\301\037>\232\323\243<\316 \"<\356\273\306<\255\341\241=\nz\212\275-\255\223>\001!k\2765\026L>BH:\276\262\025\371=\030\376\352>\336\254\300\276\037\241\257\276\024\207\025\275 \316\310\275\215n\350=\352\207I>\2478y=\027\303H>\311)+=2\225\'\276Y]0\276\323\275\023\276\016\267\261\276\213>\321\275\316\034\266=\2718\202>\3254\302\276MV\\>\177\017Y>Z\253\'\276\307\337\233>\220\346\023>\003\230\233\276\356\213\316>\230\350\237<K\362\216\276\017\366\203>\206U\210\276 \3071\276X\257\006\277\272|\307\276\237H\364\275\261W\366=\022qY>]\230m\276\322\177\331\275\247\256\270<1\rp>\327\262\243\275?\271\\\276G&=\275\252g\257>\364\231E\276#B\363\274\'\347\364=\276m5\276\227[m>\272\327\020>\004\301\320=\241\331\335=\367Au\276TJ\221\276\037\246\256\276v\341*\276\336\335Z\276K\232\014>\341\026\233\276\364\266\200=\226\263D>\013\215\206>\026\366\275\274\n\320\t\274o:\"\276\243\347L\276\027\360[<K\275\207>\346p\204>\t\325\335>\001\332\007>\3459<>r\236C\273\334u\231>\353\276\302<\022jr\276\301oP<\020\"\373=l\306J>\234\221\254\276;6\200\276\036\"o>h\312u\275\226\344\373\2757\307\303>\352\237\310\274\213\235I>\212\320y\273\221\342\232=\037\243\243>U\032\244\274w\364\\\276\312\264\007\275\330U\236\276t<\204>/\024\207\275C\337\250=U\276p\275\276\310X=\226\3607\276\036_8=e#\306\275\024\303\304>\r\336\001>\000K\177\273*\310\010??\316\274>\377\262r\276g\276\202=t\\\"? \033\337=\263\330\003?\341?(>\312\314\230>\214b\306<&M(>\374\277\217\275\021F\341>\210\272\016>s\366\304>\224v6=\377\204L>\216\023\356\275\216\231\322>\027\035n=\325B\217=\371\213\270=\034\254\277\276\207)\'\2750\210\331<\255\325\207\276\373\204q\276$\252\230>\217<\204<\254\014\345=\272\004\026\276\272\235\002<%.\274=a\270\202\275D\234\004>hp\027\276\311\223/>d\244\036=\332\236\224=e\203\027<O\017o>}B\017\276-y\325\276DJ\322<\216\260,>\350],\276\357G\276\274/3\217\276\024\273)>\031\201D>q\343\245>9Kq\276\037o\214\276\3037\222=\224\272\365\275\243n\000>|.$>\301\377C=\223\305\034\274\232\210\310\276Zz\325<\310\216D\276\366\372\275\276\007B{<r\\\\=\243\351w=x\323Z>B\220v>\016j\303>\216\226B\276\371/\013>\365\036\317\275\372W\207\275O\305-\276\243\027p=\016\275\335\275\350\341\007>\374\3704\276\t\242q\276\316y\240;\245x\327\276\241\243\220\274Y\242\273\276P\264\014<\365G\342\276\221f\023\276\221\274\n\276\217\263\200\276\036B\021\275\314\267\221\276\345E\261=:`\244\275\247h\001>q1v<\r\342\271\276\207\244\204>\322\214\336=\277@\246<\223\322\222<@\305\001\276W 4>\356\366\300=\323\313>>\"8@>\252~w>E\004~>\000\333\351>\264\350H>\312\277\005\276\036\003\355\275\206\377I>\357!\303>\305&\333=8QP=\331\320`>=o\212<\373\020\344\275\034\177\250\276\'\220e\275\304\023\360\274\224,~>\220?\224>&\n\216>\274\020\264>\302\013\212>\336JW\276B\367\222>4R\364\275Ytb>\362\017\233=Dq\266=\225\342\317=\250\345\304\276\216k\245\275%\203\234<\307\355\357\275\216\230{\275\3760\356\275\032\325\323\276/)\210<j\203/>\3614\007>z\301|\275(\n\240>6\213\241>\t\210\237\276\006`\033\276\366\036\357\276\014P\256\276\215\306\346\275\316N\303\275\202KF\276\266%\206=x\266\255;\216\210F\276\354\303\021>.\216\034\273U\225\341>\024\354H=\ta=\275nU\'\276CB\314\2760\032S\276\033\237b\276q\372\270\276\t\003=\276\031S\250\276R\355}\275\036\234\274=\337\272\331\275\243\037`>\302j\221\276:p\212\276\330\237\371\274\267\232\343\276\272\267(>\325\344\204\276\326\333\337\275\005]7\276(|\003>\354\255\266>\335\025b>2\026|>#\305\206>w\217\010\276 n)?\341\267\215>\374Pj\276\276\255I>\006\263\325=\264\'\327>\177\351\207>8\264\224>\350\211\334>6\035\202=\000\025\315>\334\232_\276\024U\227=\002\301\265\275T\020\205\276s\322\200>\203\006\325=\336\343%<\306\325\214>-m=\276\305*\330\276\265\004\240\275 \336\265>7\211\217\276\363Vq>>\020\377>\373mG\2762\224\330=\347L!=\323\342\255\273\313F\263<\354X\233\276\213Zh\275\0308\036\276\350|\274\2768b\022\277\005B\357=\304\336\027\276\256y\227\276\341\365\030>YK\200>FE\010>\244d\213\276\t\327?>S\202\206\275\277\332\200\274\222\212\306<\355\205\264=*O\222<\365\271l\276Q\375v\276\277A\007\276\247\250\330=U\317\336\2766\204A=\014\001W\276B\261\264=\244\020&>\200+\237\276\023\310\341\275\326\243t>\1773\256\276\227\362#>\315\225\226:?:\251\274[V\217=t\232J\275\313\002w>\007\305\014>\357O\035\276\220&!>U\023\232>[\326\257>\245\315\257>\265\237W\276\300\227\276=\277\301\227=\242W\017\276\200\233\363=1\003\021\277^\324\213\276\224\217\004\276\235F\343\274F\006\237<=b\231\276\t\tS\274v:\267=\247\'\317>\211\025@\276\030\240\265>\261\254\237\276(\203\237\276\303\001/\276\t\276\217\276\037/\322>\026\'\202\276kA^\276t\325C\276}\263\032\274\3371W>\205\332\364\273C\022\206\273\341\2678>0\316\365\275\366\\\177\276\311\007\251>\021\301B>\314t\213\275\243\016\177>\360d\r\276a*s>\270*x\2757\261\r=\037u\374>n\272%<\341\261\000\276\322\265m\274\275\240\232\276\247\334G\276\200<\353=d\351\'\276\t\326\376\275U\242\210>\373\233\033>\322\371&\276\237\006.>?\344\215>\030\363x\276\213 9=\223LH>d-B=\0307\232=\'\001?\276V$\346\272\332\227\266>\237?\014\276\034Rf\276nj,\276\375\231C\275A\232\216\275j\361 >\257\0356\274gM\254=?gC\275\212m4\275x\360\007\276\310O,\275\244\001\357\275\222\233\243\276\257\002\007\276b\001\353<d\016\224>>\016\256>\260\335\341>\215\033\307>O7\366\275-Qm>hsv\275H\336\361\275|\037\227>\201\345\211>3\022\251=\210\201|>)}a>\017\346Z>Z\222q=ypE>\360\027\240=\020)\236>\210$\244>\236\362\253=\177\373\215>\234^\233\276q\225k>\264\\0>g\251>>\027\030c>\257\312\220>\250)\207>S\266\240>\3424n=\233+U\276\256)\321<\214\303\277\275y\333\215\276\240g\323=\244\313F\274f\366\345\276\230\350~\276$dX\276]4\023\277\363a\024>\352\350\240\276,B\216=\243\374\262\274R\201\353=\311\253@\274\354\321C\276\343u\177>\274\016\323=\217O\210>\3409\265\275bl^\276J\302\236\275\2747\275>\3603c>\tO\223>\231\244\032\276\233\377\017\274Z3\333<(\000\250>\203\031\t\274\330\314w=\261\231\266=\r\354r\276KY\307\2752\2546\276\315\304\255=\002\344\206=\222S\212=\032>\243\276\360\204/\275z;c=\362\364\232=\2325\274=W\257\003\275J\020\317\275\323vu\2756\371\216=^\256\001=R\206J\276\347F\316=\336\207\274>!\367\312=\225]\253\275\316\376k=\255\236]\275\036S\362\275\322\024\030>\335(\271=T\215\213>p\345\273\275\3529I\275\024\255\246>#\204\221\2766\346\363\273g\324(>o=\230>\035X~\276\"\001\233>\324E\206\276\354\263i>\016\323\002>\375\202I\276}\201\244>\020\364\243\276\320\342\252\276\303\222b\275q\245\220=5%\302\276\226\"E\276\327F\231\275P\224\205>6\r\216\274\001I\312=\0071\'>U\342\"\276p\206Q>\257e\227\275\000\261\263\275\'u\201\276\0214\215\276*V\010?\034\341\036\276\364r3\275\214\251\307>01\027>e,\217>S\325\037>f\232y\276K\362`>\362\177\244>\276\030\233>($\347\274^\252b>8\222\244<\003\267\216>\333\352\213=}\013\347\274.\270\177=\260\236.\275b?\361\275\010\037\220\276H\312\325<\365n\241>\230\2715>\366\345\243>\000F\326:\247Q\020\276\303)\250>\261u\340=\236\347:\273\017o\242\276e>\267\275\036\2067\275\021\202b=\220\363\020>\016\207B\276\n\002\334;0\014\317\275\350\367\265\275Lh\362\273\357:(\277\033\355\377\275\221\362z\276\251\253\220\276W7\223>T\357\274\275\330\274\353<K$i\276e\022\016>\255\033c=\267\302C=\315)\310=\305\307\024=z\003\234<\255\345j\275\204\231\274=\251g8\275\2336p\275\031\355E>\243\354n\275\177x\027\275\330\206\212\2765\243G>\214\035\030>\376(\224\274\266\273\010\276sd\007>CW\363<<\310\204\275\317\374\"\275m\375\302\276u\276\217>\020\362\371<\030\273\206\276\014\242,\276\260w\273=\rP\244=TE\330\275_\277\263>!Wz\276\"\274\n\276\337\035\201>\210`\227\275\237\227\333\276\273\214\245=\005\233\267\275\234\311\247<N\322E\273\007t\037\276*b\261>\035Z\017\276\350zS\276\332\\\222=\006\240\243\276\210tG>\023\305\231\276\263?\357\275\252\326\220\276\373\n\300=\351N\276>\031\376\301\276\037\254:<\343\350\252=V\2031\275:L8\276&n6=\302\325M>\007\263\364=IH\235\275\314\341\320=\342R\307>ql3\276W\t\226\275\3631\301=\324\322\007=\244\236\207\276\034\001\343>\376\240W>mY\217\276\263\032r>\364\027=>\340\314\233\276\344\'\"\276\264\275b\276\334\347\230=\337b\373;V\267\331\275\324J\177>\230\330}\275fJ\006>\2163\034>G\264\214\276\000\364\221=Kl\023\276\272\013\260<\226\333\201>\222x\235\276w\203%=\321M\345=\t5c=,7u\274b\2705\276OD\\\276\346\321\256>\270\224\247>D\211T\276=\204\224=\225\257\327\276=\344\225\274\034\272E\274\300\370=\276\005 \214\276\360d+>\350iE\2753JJ\276\332\213\266>\251\220b>\211\326\022>\270\\y>\215\037\211=\r\2444>VI\013\275\207\271\357\276\346\262\021\276\320\003\204\275vX\225\275\211F\330\274\3719\312\276\213\tp>\234\325\311;>)\257\276\346X\300;\257\267\224=\3163\222\276\017\235L\276\302\224s\275=%]>_\256\253>|*\315\276Z\331 \275z\324@\275#\222\023\275\374\'F>\035\037\214\276\234\361B\276\317\252\007>\n\302\241>\244\013\007?\307\037\233=\013`\323>k\016\314>\374\020\201=\022~\355<\277\213\227=\017\374\272>\004\225\266;\343\315\024>%\"\274\276\342\2127\276\367R\224>\302\234_\276$\225\035\276D5\333>-lE>\250\272C\276\373\352Z\276\260E\n\2767\370\302\275\360l\246\276\221Z\376\275x%\022>\003\r\027\276BTb<:\022\006?f\225*>\023\332\341\275\227=\236\276r\233 >\254\252\231>T\271N\275\264\212\005\276\212`X>\035t\261=j\224\217=\266\036\265\276\347\260\203\273\000\274\035>\037\225\036>\206\314\212=d\251\032\276u\345\235>\004sq\276\355b_>\231\243\t\275\255\360X>\351\233\216=\000Z:>Vv\367\276\351%\247\276\346\215\356\275*Y\217>\252\312\276\276\376\254>\275DI\265>\213\017\207<\246\222\371=\233v\024>}/\313\274f\201l\2765^\010\276T\203\262\273\354h\024>\210\010\003>\024>\200\276\373(\006>N\232\324>a\346\000>6\362h>\000\033\265>\256\304\002\277 \245q=\032J\221\275\0207\207=\250\2338\274\263\356\236>c\207l=w\356\273\275\267Q%>\000#\300\275\034\334f<\257\024\201\276\326c\007>\351!\211\275\032\371R=$\256\003=\260^\220=\330D@\276\016>\256>w \273\275\007\032\221>\373\300\313\2744\234\203>\217u?>\251iJ\275\362p\226=\3124H=\204\365c\276\320\326h\276\301\325\307\274\013\336*\276`\221\257\275\034C\007\275\367\336\n\274\202\347\t\275\031e6\275\266 \242\276A\252\004\274\207\326\000\276^jk\276*\006\032>\34679\276je\237\275\033=N\276\2775\207>J\350\203>.s[\276\236\276\312=W\254\331<\005I7\275\263\254\022\276q\253>\273\334\307v\275\235\265d\275q\r\212\275\314(\336=~Qa\275\013\356\223=\031\215E<K\023\201<.\265\246\276\264c\021>\331U\371\2753\325\244=r\253\253\275\3241\207\276\210c\331=\033t\t\273\t\003\027\275\225~]\2766\340\t>cX\300\274\243o\233>l\242\225\276\363i\233\274K\023\204\276@f\351>\374\265X><\340\210>\243\001d\274\026\221\323\276%\006\221>;\000\374\275\265\332\030\276\370\346Y>\006\253I\274\313\023`>\257G\301>\361\033\256<\005@\263=k\307\255>b\232C>f\207\251=_\177s\276QRs\276@c\256>\373\002\'\276\316\253\264\274Z\350\332=\007c\005\276\364\355Y\276Av\257\276\377\276\336\276.\000^>Z\270\264\275\007w\266<P\014\023\276Q\300N=\204\3446>75\014>\027HT>\344g\244>\262\006\272\276Ic\036=\216\332\350=^\255c\275Q\344\251\275\007\243\013<\245\272\251\274\255\026\320\275[\336\r>Q+H\275\032\0325>\256c\253<\243\233<\276\356gm>\n\336\262=\251\333g>\236\217\312=\252G@>\331:\222\276\210\301\255\2769\327H>\360\3272>)e\377=QW&\276i\361Z>\241\033&\275\213\243\272>\r\0002\276\365\214\023=&\357\345<\252/\203>\346\266\020\275\003\241\013\276\254\304\244< \337\235\276\214<\227\274r.\361\275\"\307\233\276\350\300i<g\2333\2766b\027\275EP\347\275\203+\007\276\245\037\243\275\031\351\361\2769g\270=\375\032\256\274:\020\204\276.#\260>4\377\207\276N/\216\276\005\216\245>\273v\263\275\027\355\235\276\327\022:>d:Z<\350\035\303>q\354o\276{\tO<\204g\202>*\356\263\276a\336{=\354\220x>\030\035\010>avv=\361\3209\2754\211\331\273\n\343\210\276(R]=\213\213\024\276[&U\276\201\301\230>\273\316\237=\270\277q>^\215\\\275\317\027R\276(\237\236=\231\316\375\275\030\234-=F\n\016\276\336w\213\276\336\202\261>\344E\306=\363\305\202>\242w\032\276\371\271\021\276\276\n\020>C\243\214>F\345(>j\267\214=O\331\\>F=a\275RGo\276s\013\272\2766\224*\276\306CA\276\302RN\276Ai\307=#\342\017\276\316nW>\266k\314\274~\262s>Cw\n>\335\200\204\276\204e\010\276\221\337\344\275\371\216\352\276\260\t\353=}\003\336=k\347\345=E\355(\277\270|\230\275\315\234\265=\315\215S\276\343L\316>\352\262=>\354\274\314>\332e\002?\276f\003\276\231\236\235>\017\324\357\2755w8<w\2417>\332W\212\275\323,R>\256\346\261>\312\034\254\275\314k\004>j\311)\276M/\003?\037\364#>\271\271\341\274N\354;=WP\266=\241\272\036\275\301\360$>r$D>\361\003\316\275G[\275\2745=\013>\206\252a\275;\000`>\366\255/\276\031\241\204>r<\317\276\205\274!>\031K6\276x\235\202\276LX\305>\374\226N\276\205\377\356\276\304\203\255>|\365&>\221r\200>_\274\t><Fh\275\032\323\231>\030r\327\275\n\374\222>\310\013*\276\271x\271\275\275\335\014>\021\372\205=\203\to>\217\272\236\275\350#Q=o\256\331=pP99\001\370\203\275\334\306\236>\263\222\000>\023\232=\276\232g\253\275\264@\204\275\232\277\347=J\303\t\276uSR>\231\220\372<\"\272[=c\343\213\276\211\245\272= \266\312\275\354O\254\276\240R\247=\376\216R>\265#\310<.\361\224={\021\334\274\005e\221\274d\372;>\211v\324>Au\266\274\245\332a\275M\024\257>\036q\240\276J}\215\276Pl\215=\3019\025>e2\323>Pq\245\275\311u\245>\032\250\231\275\202P\204>\022[f>\305l]\276\231G\001>\036\361<\273w\026\306\275)\377\313>\244 ^\275\272\262\202\275|\201:>"
+      }
+    }
+  }
+}
+node {
+  name: "rnn/multi_rnn_cell/cell_1/gru_cell/gates/kernel/read"
+  op: "Identity"
+  input: "rnn/multi_rnn_cell/cell_1/gru_cell/gates/kernel"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "rnn/while/rnn/multi_rnn_cell/cell_1/cell_1/gru_cell/gates/gates/concat/axis"
+  op: "Const"
+  input: "^rnn/while/Identity"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+        }
+        int_val: 1
+      }
+    }
+  }
+}
+node {
+  name: "rnn/while/rnn/multi_rnn_cell/cell_1/cell_1/gru_cell/gates/gates/concat"
+  op: "ConcatV2"
+  input: "rnn/while/rnn/multi_rnn_cell/cell_0/cell_0/gru_cell/add"
+  input: "rnn/while/Identity_3"
+  input: "rnn/while/rnn/multi_rnn_cell/cell_1/cell_1/gru_cell/gates/gates/concat/axis"
+  attr {
+    key: "N"
+    value {
+      i: 2
+    }
+  }
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "Tidx"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "rnn/while/rnn/multi_rnn_cell/cell_1/cell_1/gru_cell/gates/gates/MatMul/Enter"
+  op: "Enter"
+  input: "rnn/multi_rnn_cell/cell_1/gru_cell/gates/kernel/read"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "frame_name"
+    value {
+      s: "rnn/while/rnn/while/"
+    }
+  }
+  attr {
+    key: "is_constant"
+    value {
+      b: true
+    }
+  }
+  attr {
+    key: "parallel_iterations"
+    value {
+      i: 32
+    }
+  }
+}
+node {
+  name: "rnn/while/rnn/multi_rnn_cell/cell_1/cell_1/gru_cell/gates/gates/MatMul"
+  op: "MatMul"
+  input: "rnn/while/rnn/multi_rnn_cell/cell_1/cell_1/gru_cell/gates/gates/concat"
+  input: "rnn/while/rnn/multi_rnn_cell/cell_1/cell_1/gru_cell/gates/gates/MatMul/Enter"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "transpose_a"
+    value {
+      b: false
+    }
+  }
+  attr {
+    key: "transpose_b"
+    value {
+      b: false
+    }
+  }
+}
+node {
+  name: "rnn/multi_rnn_cell/cell_1/gru_cell/gates/bias"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+          dim {
+            size: 40
+          }
+        }
+        tensor_content: "\307mv?\302p\203?\204\252\217?8G\212?_\347\203?n\377\205?\232\361\203?\347\357\210?\274\364w?h\312\233?\006\022\225?\353\347\240?\253\377\202?\253\316\216?\270!j?\304\362u?\277\201\226?+\300}?Y\361a?G\263\206?S\206s?]SF?Q\336x?\200\245P?\031\361~?\214\224`?\236\002A?\016\352\213?\264\031Q?\201\346[?_bR?\222md?7\336|?\t\305P?\271\333g?&\023\204?\t\027~?W\236t?\333\244\202?\2469\220?"
+      }
+    }
+  }
+}
+node {
+  name: "rnn/multi_rnn_cell/cell_1/gru_cell/gates/bias/read"
+  op: "Identity"
+  input: "rnn/multi_rnn_cell/cell_1/gru_cell/gates/bias"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "rnn/while/rnn/multi_rnn_cell/cell_1/cell_1/gru_cell/gates/gates/BiasAdd/Enter"
+  op: "Enter"
+  input: "rnn/multi_rnn_cell/cell_1/gru_cell/gates/bias/read"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "frame_name"
+    value {
+      s: "rnn/while/rnn/while/"
+    }
+  }
+  attr {
+    key: "is_constant"
+    value {
+      b: true
+    }
+  }
+  attr {
+    key: "parallel_iterations"
+    value {
+      i: 32
+    }
+  }
+}
+node {
+  name: "rnn/while/rnn/multi_rnn_cell/cell_1/cell_1/gru_cell/gates/gates/BiasAdd"
+  op: "BiasAdd"
+  input: "rnn/while/rnn/multi_rnn_cell/cell_1/cell_1/gru_cell/gates/gates/MatMul"
+  input: "rnn/while/rnn/multi_rnn_cell/cell_1/cell_1/gru_cell/gates/gates/BiasAdd/Enter"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "data_format"
+    value {
+      s: "NHWC"
+    }
+  }
+}
+node {
+  name: "rnn/while/rnn/multi_rnn_cell/cell_1/cell_1/gru_cell/gates/Sigmoid"
+  op: "Sigmoid"
+  input: "rnn/while/rnn/multi_rnn_cell/cell_1/cell_1/gru_cell/gates/gates/BiasAdd"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "rnn/while/rnn/multi_rnn_cell/cell_1/cell_1/gru_cell/gates/split/split_dim"
+  op: "Const"
+  input: "^rnn/while/Identity"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+        }
+        int_val: 1
+      }
+    }
+  }
+}
+node {
+  name: "rnn/while/rnn/multi_rnn_cell/cell_1/cell_1/gru_cell/gates/split"
+  op: "Split"
+  input: "rnn/while/rnn/multi_rnn_cell/cell_1/cell_1/gru_cell/gates/split/split_dim"
+  input: "rnn/while/rnn/multi_rnn_cell/cell_1/cell_1/gru_cell/gates/Sigmoid"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "num_split"
+    value {
+      i: 2
+    }
+  }
+}
+node {
+  name: "rnn/while/rnn/multi_rnn_cell/cell_1/cell_1/gru_cell/candidate/mul"
+  op: "Mul"
+  input: "rnn/while/rnn/multi_rnn_cell/cell_1/cell_1/gru_cell/gates/split"
+  input: "rnn/while/Identity_3"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "rnn/multi_rnn_cell/cell_1/gru_cell/candidate/kernel"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+          dim {
+            size: 40
+          }
+          dim {
+            size: 20
+          }
+        }
+        tensor_content: "e\305\255\276c\365\257\274\002\037(\273\2131\227=\3360\212\276\364{\277\276\304^\361>\216.S\276\\F\241\275\377\035d\276\355\252z>\252E\235>&RC\276\240\3212>!\241\005>\377\243b>*\036\005\275e\314\243\275\363\222\252\276\251\251P>*\246\200\276&b\013=fh\343\275\365\310\233>\272w\210\276dQJ\276\024\272z>iM\217\276\350\240\236\276!\345 \275\267\335h=\014\365\022\276\212A\n>\261\037k>\026Qv>\2055\305\275\274\301\261=\221\260r>\357\215\276>7\264\325\276\361c\031\275\023\306P<\346\215\307=\231\255\272=\214I\027\276\356}\003>\030\336\010\276\240\256@\276\204\314\302\276\323\362\204<O\265b\276.V\t\276DD\264\272\244\325\241>\016q\377\275w\001\210=5\204|\276\235\320.\276\342\267\006\277}\3374\276w)\346\276\260\2509\275m!\252>8\276q\275\212\331;\276\340y\327\276D\005\013>\243\223}\276\357a\230\276hp\023\275\002!E>\":\014>Z\365\250>\036\335\264\276\243R\307=P\372\031=4\233k>\240\376\370\276L\334\240>\353nD>xA{\276=7\264\275\005\203\231>\312\372\316\275\353\263\224\276\351\025\327\276\304H\246\273\334\314 \276\017\036\205\276\0041m=\307\017\341=P\211\267=\0335\000\276\331\234k\276\372E\242\275\2703J> ]\223\276P!\347=\014N\254>\233\235\255=\260\014c>\014!\365<\325\033\300\276\031*(>K\327}>\206\316W>3\"\244=\223\206\204\275\233\033\301\275\252M\334\273\247\215d\276o\030\242\275LO\251\275\234\350\021>\362\024\221=\313\315\274<\242\350\321\276 \214\005;\224@\227\276\344\227I\276g\316#\276br\224>\263)\271\275\323:\375=Z\177\300\275M\004[>s\207\002>0\365_>\254\030q>z\010\352=d\033;\276\264\241^\276\364\244\273>\361l\224=\030C\023\276\216\234\237>\361\004S\276\177\331\256\275\337\034\253>n3\023=\261\337\346\275\341\210\230>H+R>\020\365\262\276U\323\312\276\001\371\236\276h)l>\003\364\220>j-W\276\344*p\276u\370\265>\207sy\275\037\345\232>aW\357\274\223\346A\276h\313\346>+\205\025\276\001x\300\276\343\240\204\275\374\213X\276H\253\221>\336\226>>`1\214\276+\372b>\326\"\227\275\324\255\221\275j\354\215=_b\331\275\262\215\220>\346\343\t\275*\005\221\276\377B5\275\361\364\213>\346;\222>\251Z\206\276@\323\201\275\023C\'\274\266`\357=\235-&=(\263\215=K;\233\276f\244\210>j\373\225>5+\321=\233\330\352\275\331\tA>\347\310\202>\n\357\200\276\234\247\261\276\234N\301=ds\224<\222\257}>:\367f\276.\214\230\275p\261\227<~\017\224\276w\306\r\276\325x0<j\230\335\274\n\217\241\273\036~I\276\303\334\211=\312xC>\300\354\202>2\236n\274\371\362\204>t\014\227\276.\333\271\273\263\236\036>\212D0>\255\254@>\264p{=\277\347\253<h\003O>#B/>\255HV>(\375\314=\023g\301=\277\305\031>\340?\021>\203)\322\275t+\217\276\222\237\273\276\370:\330>\365\375p\275\363\206\260\276\257am>\034[\216\276r\346@=Qg\254<RYS\274\245\037k\276\260\241\202\276\277a\363=\205(\n>\326\212L>\242\231\251\275\300\n\217>\016?\020<\272\"\244\275\357f\307\276(\300\016\273\037\212\215\276\205$\316<?\367,\276\322!\302\276\224\344\243>\355<\014=\336\360\333=l\220\266>T\3018\276\371L\362\276eF$>\342m\303\2767\213\232\275iI\371\275\033FT>\014\220\000?%\030\243\276\356\277\244\276\221\274\340\275M\223\335\276\227Q\231\275D\r\225>\262^~\276B`\310\276D\230\210\276\225o\003\277\243\274\016\275\365Y\257\276\030\355)>\315\355O>\314|J\276E\204\307\274\231\023\252>p,(\276\363\214V>7\226i>\300\242\343>8\231\263\276\336NZ\276Y\031\331>e5\322><\260.\276\251\376\022>\312&M\275=(5\276\341s\321\275\274)`>\303:\251\276\360\357\310>\3564\222\275\362\274\034\275n\t\251\276\364L\305\276d\252\213\275\326\215\231=\017\033\001\277hK\307\276\246?\346>;\311~\273S\022H>\217d\201\276-yT\274Z\305\205\276KZ\326\276\306\264\351>\010\351\031\276<\217\356\276R\032\230\276\034c<>\255V\366\276\322\0270>\310\270E>\312k\234\275\277\035\235>\232J\346\276d\212\227\276\216\233\016>qX\374=xB\312\274\261\361\254\275\211G|>!#\210\276e\356\240\276\312\217y\275\003\336\255>\260\263T>6tr\274\034\005\343=8\244\013\276\236?\200>\314 \251\276)\257\177\276\373\000\031\276\317\335U>z@\353\276\302\177Y>T\360+>Ad\005>B\265\305\275\304\312Q\276H\001\226\276\243 \320\275j\326\217\276\223J\321\276\204>\226>\350z\344=|\034\362=l5\232\276\257\342;>\222FJ>q3\010\276\225\255M\276\203\250\245>\235%R\276\336\365\244>b\020\017>\024r?>vb\374\275X\320O\276\362l\300\276E4\255\274\037\325\271\276;\346\231>\231(\241>gd\220\274\301\204\204>@\'O\276&\374\020:2I\252\276\227\325d>kR\240\275\004\3610\276\2266K\276L\233\317\276\242\346\245\276\206\365\272>9\372\n\275 &\345=\376\275\267\2765\360\216\276\225)\242\276\'\341\260>Z\016\263\275\360\034\371\276\332\3521>\247\232\030\273\022%i\276i\3369:y\027\312\276\217\351\343\275#Ta\2767J\334\275q\302\307=4f\216\276\253q\205=\330f4=\002\331/\276GE\334\276Y\243\004\275\322e\212>)\345\260=\026\263\277\276\227{\031\276\314?\336\274t\212\260\275\346\3411\276\3577\262>\236J1>\033\2325>\217@\262>\217\035\307>\022$\245=\274\373\316\276\336\376^>\336\013\317=\225\340\363\275\256>W>\024\020O\276\333=\307\275s\341r\275\013\315R>\327\254\260>\350\274\007\275K\223\346\275\033\352\211>\025\3338>\033\327&\276\222\301>\276S\251\317\275\302\206\214\276n\356\026=\350\377\262\275\356\001\207\276\236/\330>\025E\243>s\361\\\276\377\301\320\276\237U\220>\2432\217\273\207\261E>\033j\340>}\3374>\"k\226\276\254\366>>{\023N\276\353f\'>Qm\200>&GE\276fu\313\275s&\360\275\213\220\303>\033\315\357\276\036\377\277\276\024m1\276\'\346\236>L\235\266\276z\314\034>\205\322\220>%\2032\276{_\333\276\334\254J\276\377\007\245>\244<\027>?y\265>\t\322\346=W\024\216=\345\327\037\276\340t\273\275\241\013\245\276 4\215\274\003\304\325\276\266\245\317>m\231&?\236.\027>s(\247\276\213\227\267>\006e\251>\027\262\006>g\016\242>\006\246\310\275\tZ@>3\002\220=\355\351\254>z2\205>\331x\327\276\200T\212\276\231\326\007?\324\276\256\276\331\370\343>\341\212%>\320\344\200>\354H\033>\345\260\276\274\271\302\230\275j]\262>,\016@\275\377\014\233\274\023F5>\356x4>o\025\254>N\025/\275\370\311\034>B((\275\250D\242={\355\207\276^\000\231>\253\002\240>N\314\245\275\343\350\271>\264\351\277>0\352\034=:\315\001>\335\302\316\276p\235\213\275<\236\374\275\341\320\021>\'\202h\276dC5>\324\231\251={\003z\276b\233\030\276:{}>\340\026\315\276V_\214=P\247T>[w\345=\216=@\276\3763\264>\366\030g\276\237\006\325\275xUz>A\\\037\274\037\240 >3{3>\'Nc\276V\033z\276;\375\306\275%\013\246;\211,C>\354\034\205=\000\347\377\275g\342\272=d\325\027=\037(\255\276\005\277\023\276\242\215\254>\251\374\005\274\270`\273=\372\246q=\n\374\221\276/\226\002\276m6\254>\332]\332\276\364.I>\016C}\274\321%\277>lI\265\276\r\\%>2\223\373\276\244\344[>\035\314\353\274]\342\247\276\201\336v>\255\215!>;\324\375=\256f\246=`\344\371;rZ\201\276\3116\325<C\tO\276\222RO=\3648l=\370i#\276\370y\242=\254a\235\275\235d<>\256`\334=-H\024<\331\244\230>\251\371<\276kZ\367=\270M\375\276I\254\'>\017\356\300\273\233\310-\276\226\325\357\275!\270\207\275\337\221U=\343e\215\276\0015\357>Ta\026\276\250\257\316>\312\021\355\276\024\371\222>\331\227\224\276\334xb>\360Q\224\276\315vn\275,\267\224\276\035\032\375\275\003;\233>\3340\261=\210\271F\2762:\243\276\315&\236>\321xs=iYW>\241)9\277P\262.>S\353\007>\374x\223>\362\375\235\276\371\2360=t~D\276#\253\345>%\347;\276A\"\270\275\302\017O\276\376\344\227=k\226\260>\344Wt=\032&\321\276\300f\310=\351+X>\276\336J>\177\n\224\2761\265\263=\034\302\372\276\347y\026?\246,\320=C\211\215>\317\271\362=nMq\276%\357\256\275\317d\274>-\361\034=d\272\006>\252\026\272\276\333ki=ev{>\272\230h=\256\237\213>\325\213\036>\244\264\016\276<\371o>\027(\367=A\030\317\274\033\326\001\277h0\024=\326\355\205\276@(W=!\220\274\276\230F\017>KC\261>\016\024\217\276\201\\\\>\201\006I\276\230\222\237>.*x>\310\244\016\274\253\312d>\003\232\354\276\262#\r>\337M\330=\004\273\177>X\001\235\276%Sr>%c\n\276\007_\235\275\\N\005>\203_\322\274p_,=\262\3474>\322N\351;7\202^\276\206\366\240=\005\004B\276\314H\254\276e8\033>Zd\030>J\227\312=g\332\257\275-\356\276>b\001\036>\016>\210\2751e\255\275\0237\266\275\013:)= x|\276\\ZF\275\366\030U\276=\344\222>\304U\n\274\247\000\247\276\225\243\211\275jz\215\276\376q\022\275\336\260\206=\315\003z=\313\350[\276\351u\003\276\001\014\205>o\364\226\274k\313\311\275$\223\325=&\350\001>\0318\215\2764\335r=\352\303\353=\\\223\305\276I}>=\003k\200=\211\312\266>\203\211\212\276j\325\350\275\252\374\224\276Y\316\031\276\251q\325>\325e\274\276\352\033i>\374\362\275\273\331\301:=\301\356\240>\304\251\230=\270\324\256\276\355\275\'\276\266\374\357>\364\002\303\276\310\216\265>a\030\213\276d\271)\275)/\216<H$\255\275\0058\201>U^\302>\364z\000>\357q\245>\222\031\n>j\204\352\274)\270\350\276\024#\314\276\016\230\211>\366\334U>w\221F\276\232\363\000\276g\345\245\276t\361>\276 \210\333=Z\177V\275\037l\342>\245\347\020\275do\270>p\324h>^W\207\276\306\332\230\276\377t\301=\266H\255>\207X\033\277\354\342h>\n\332\232<\235\243\007>\000\372U=\322\351\332>L\347K\275\241\006~\276\177\375\244\276\257*\017\276\005Ki>\207 \3649B!U\276\346\377<>A\321\261>~\r\317\275r\224U>\345X0\275\360\230\242\276\263\350x=+\377\006>\221_\216>6\371?>\346y\213\275\026\025\243=b\327\202>\341\363\233>\002\247\206\275\210\234\333>\230k\251\274\3517\300=!\022\323\275\363\253\346\275F@,=_\0358\276X/\266=:U\270>4\373->$ {>\226\213I\276\267u\023\276"
+      }
+    }
+  }
+}
+node {
+  name: "rnn/multi_rnn_cell/cell_1/gru_cell/candidate/kernel/read"
+  op: "Identity"
+  input: "rnn/multi_rnn_cell/cell_1/gru_cell/candidate/kernel"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "rnn/while/rnn/multi_rnn_cell/cell_1/cell_1/gru_cell/candidate/candidate/concat/axis"
+  op: "Const"
+  input: "^rnn/while/Identity"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+        }
+        int_val: 1
+      }
+    }
+  }
+}
+node {
+  name: "rnn/while/rnn/multi_rnn_cell/cell_1/cell_1/gru_cell/candidate/candidate/concat"
+  op: "ConcatV2"
+  input: "rnn/while/rnn/multi_rnn_cell/cell_0/cell_0/gru_cell/add"
+  input: "rnn/while/rnn/multi_rnn_cell/cell_1/cell_1/gru_cell/candidate/mul"
+  input: "rnn/while/rnn/multi_rnn_cell/cell_1/cell_1/gru_cell/candidate/candidate/concat/axis"
+  attr {
+    key: "N"
+    value {
+      i: 2
+    }
+  }
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "Tidx"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "rnn/while/rnn/multi_rnn_cell/cell_1/cell_1/gru_cell/candidate/candidate/MatMul/Enter"
+  op: "Enter"
+  input: "rnn/multi_rnn_cell/cell_1/gru_cell/candidate/kernel/read"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "frame_name"
+    value {
+      s: "rnn/while/rnn/while/"
+    }
+  }
+  attr {
+    key: "is_constant"
+    value {
+      b: true
+    }
+  }
+  attr {
+    key: "parallel_iterations"
+    value {
+      i: 32
+    }
+  }
+}
+node {
+  name: "rnn/while/rnn/multi_rnn_cell/cell_1/cell_1/gru_cell/candidate/candidate/MatMul"
+  op: "MatMul"
+  input: "rnn/while/rnn/multi_rnn_cell/cell_1/cell_1/gru_cell/candidate/candidate/concat"
+  input: "rnn/while/rnn/multi_rnn_cell/cell_1/cell_1/gru_cell/candidate/candidate/MatMul/Enter"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "transpose_a"
+    value {
+      b: false
+    }
+  }
+  attr {
+    key: "transpose_b"
+    value {
+      b: false
+    }
+  }
+}
+node {
+  name: "rnn/multi_rnn_cell/cell_1/gru_cell/candidate/bias"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+          dim {
+            size: 20
+          }
+        }
+        tensor_content: "\275M\225=\241\200\177=\263TT=u\033\234\2750V\323\272\271\2723\274V\371\274<\346J\'=\341}\377\274\022\260:;\244h\030=\026\270\356<\001\377\230=\354F\314\274\363s\211\275\2425\t\275\022\325U\275%\213u\275\251\330\254=0L<\275"
+      }
+    }
+  }
+}
+node {
+  name: "rnn/multi_rnn_cell/cell_1/gru_cell/candidate/bias/read"
+  op: "Identity"
+  input: "rnn/multi_rnn_cell/cell_1/gru_cell/candidate/bias"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "rnn/while/rnn/multi_rnn_cell/cell_1/cell_1/gru_cell/candidate/candidate/BiasAdd/Enter"
+  op: "Enter"
+  input: "rnn/multi_rnn_cell/cell_1/gru_cell/candidate/bias/read"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "frame_name"
+    value {
+      s: "rnn/while/rnn/while/"
+    }
+  }
+  attr {
+    key: "is_constant"
+    value {
+      b: true
+    }
+  }
+  attr {
+    key: "parallel_iterations"
+    value {
+      i: 32
+    }
+  }
+}
+node {
+  name: "rnn/while/rnn/multi_rnn_cell/cell_1/cell_1/gru_cell/candidate/candidate/BiasAdd"
+  op: "BiasAdd"
+  input: "rnn/while/rnn/multi_rnn_cell/cell_1/cell_1/gru_cell/candidate/candidate/MatMul"
+  input: "rnn/while/rnn/multi_rnn_cell/cell_1/cell_1/gru_cell/candidate/candidate/BiasAdd/Enter"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "data_format"
+    value {
+      s: "NHWC"
+    }
+  }
+}
+node {
+  name: "rnn/while/rnn/multi_rnn_cell/cell_1/cell_1/gru_cell/candidate/Tanh"
+  op: "Tanh"
+  input: "rnn/while/rnn/multi_rnn_cell/cell_1/cell_1/gru_cell/candidate/candidate/BiasAdd"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "rnn/while/rnn/multi_rnn_cell/cell_1/cell_1/gru_cell/mul"
+  op: "Mul"
+  input: "rnn/while/rnn/multi_rnn_cell/cell_1/cell_1/gru_cell/gates/split:1"
+  input: "rnn/while/Identity_3"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "rnn/while/rnn/multi_rnn_cell/cell_1/cell_1/gru_cell/sub/x"
+  op: "Const"
+  input: "^rnn/while/Identity"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+        }
+        float_val: 1.0
+      }
+    }
+  }
+}
+node {
+  name: "rnn/while/rnn/multi_rnn_cell/cell_1/cell_1/gru_cell/sub"
+  op: "Sub"
+  input: "rnn/while/rnn/multi_rnn_cell/cell_1/cell_1/gru_cell/sub/x"
+  input: "rnn/while/rnn/multi_rnn_cell/cell_1/cell_1/gru_cell/gates/split:1"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "rnn/while/rnn/multi_rnn_cell/cell_1/cell_1/gru_cell/mul_1"
+  op: "Mul"
+  input: "rnn/while/rnn/multi_rnn_cell/cell_1/cell_1/gru_cell/sub"
+  input: "rnn/while/rnn/multi_rnn_cell/cell_1/cell_1/gru_cell/candidate/Tanh"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "rnn/while/rnn/multi_rnn_cell/cell_1/cell_1/gru_cell/add"
+  op: "Add"
+  input: "rnn/while/rnn/multi_rnn_cell/cell_1/cell_1/gru_cell/mul"
+  input: "rnn/while/rnn/multi_rnn_cell/cell_1/cell_1/gru_cell/mul_1"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "rnn/multi_rnn_cell/cell_2/gru_cell/gates/kernel"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+          dim {
+            size: 40
+          }
+          dim {
+            size: 40
+          }
+        }
+        tensor_content: "\023F\267=\223E\000\276q\354\245\276\324#\262>\372\004I\276\322\n\207=m7]<qZ2>D\210{\275\023\177V>\376\320\200>\362h\313\275&\226\032\2769 h\276s0W>\265\231\232\276\333m\313>3ds\273\033V\210>y\246/\276;\"/>9\277F\276\366\332\361\275\344\003\273>\177Z/\276\255k\206=\007\275\303=\261)(\276\251\357\360\275m\003>=\273\1779=\243\025\n>J\2318\276\263\"\354>\252\001]\275\356\243m>\362\362\370\2747I.>\366F\007\276b\316\311\275\244\301\307\275Q\212\000\2773;T\276\261U\177;\016M\352\275i\227\265\276\367\325\021>\0077\035=npc\276\362/\327\276\301{\375\274\322!\227\276\306n\236\276N\312\021=i\201\357<\375\343\224>\353\222\013\276\271C\031\274\032\350\302=j\270\254\276<\316P=\223>\252>Y\216&>\366\246\227\275%\202\250\274\230Gg>\003\364\246\276\324\237\222\275\024S\306>\236\262\177\276n\312,><\321\346\275* <>\235\002\021\276)\345\314>Xm\007>\201]\232\276\331.\023>\243?\006=\354\3723>\331G3>\273\005\353<C\'\203>\330M\\<\244\213\300<_\005\034=\243\316\035\275\302`V\275\356hV>\210\2148\275\337-\212\276D6\033\276\374\265\246=N\202\360\275/\206\020>#\202\342\275\252_!>\307.9=\350p\"=\203\324\002\276\300\366`\276*\313I>\221x\355\275\213U\264>!c\361=\373-\265>\014w\n\276y_\346>\234\035\364\274\346\rP>\266\205\310\275\277\007G\276\234\261\267>\0015\020\277\252\336\035?\266\017}>\240\020\332\276\343b\312>\022\311\333>+ =>\221\263\017\276#G\035>\2734p\276m\352\247<\376\350P>L\371R\275\200\006\216\275\304`\363=\242\002\317<\207\365t>\200k;\276\201\000\301=b\265\361\275\016\3424\275\355\022\254\275\204\366\007<\000,\214;\000\"9>\337&\300\276\372j\236=\3230}>4\027\251\275:\354\032>Jz\350=\210\026P\276\021\276\353\275\306X\367>\303U\362\274\320\341k<O\330\323< \300\303<Y\nN\275\312&\201\276T)\317\2768|\210\276w\254\236\274\036\302\002>\027-\352<q6\343\275\n\356\017\276\354 \357\275\025\"#=@\t\037\276\361\315\302>q\005\322>\2358\231\275\334(\256>\024\252\202>\314j\r\276LV\250>\352\034N\276\254zh\275#\034\236=\275\r\177\276\200\277\347\275\310\277\n\276I\016D>\377w\351\275\270\237\301>\214\211^\275\226\363\225>\021+\\>\245*\322\276\214\362\202\275\237X6=D\"\331=r\233\246=\240\2709>\344\262C=\026\322\236\275\206F:\275\332\266~>\370\260\233>\313n\274>\262\252\342<\266\340\376=\005{\257>\204\013f\275>\244\223\276\247lK\276\232\206\271\274\370\002\301=\267\244~\276\317T\277>c\005l=;\241\025\274\036K\237\2753\035\346\274>l\206\276\017\000\322\275\031\'\237>\2472\031\275\215XW\276\306q\237\276\344\231\377;\314\260\214\275\007\211\257\273\227\255\324\276\300\363\262>@\271\223>\356\240\244=2h\320=\261p\246>f+G\275q\204\262<\364\234\262<:\211T\275P\327\227=XI\365\274\301\304\275=\377=J>\030\337\334\275})/=\314\332\224>hpP\276\251\317\001\276b\245\027>;\365\036\276\342\263v\275\202T[=vR\t>\365\336=>\231^P\275\343\376\021\277\327/\376<\302*\267\276\360x\331\275\204\2574\276\256\277\231>_\014\272\275\352\333\322\275\244\266Y>x\020#\276&\311\036\275A@r\276\262\2224\276\203v\263<\270\271\214>$}\365\276\210sJ\275\233\340C;\254U\006\276\312\030\005>\027\375P\276\017-R>&\316\016>\263\217P>.\260Y>)G\003>.\310`\276i\210\250\274\276qP>W\337\r>V\311/\276\001)P\2744\006Z>\254\026\253\276}N\325\275\026\344z>\222\206\013\275X?\251\276\333d\277=\t\250\265\276\225\000l;\224]\327=\302x\227=\361S\371\275\362d\220>\344#\264\276\263\352\306=\362\213\225>2F\321\276\230\331\301\275\037\312\310\274>q\257\275D`\320;\313\016\351>\266\016D\275\324\240]\275B\320\317\275L\311d>\013\003X\276/:,=BFT=\034T\201\276\0079a\273\nZ\362=$q\237\273\0063i\275pi\'\274)3/>\262#a\276wB&\275/`\246\275]VN>\231\236\032\276\366T\222\275\315*\213\276\376\010<\276\014\007\242>\345\316\274>5\234\263\276S\206\307\2758\206K>=\312\234>\315\353\346=\365\213\257>\313\375,\276\274Fz\275p-\'\275\303\271\217>\362\333\217>\255%\337=\222D\031>\021\361\234>`b\236>\237\333\231\276\355W\246= \217\230>\324\251\022>\357]\351=\233\353\036\275\276W\034\277>\253\266\276\327I~\275\2622\377\2757d\340<\020\265/\276\205>*>\357!\360\274eP\265\276\2727\274\275\264A\307=\266\240\225\2738\010\r>\326\344\022\276;\2007>\364\222m=1`\326<\006\204\210\276\267\321\240\275\022P\001>\266\251\r\276\235\242\203=_\312\005\274x\014\214>*\215\225\274@5Z>\322%\257=/#F>5\312\375\275?\273\236\276\352\335\307>a\"\206>S\351\253>\276\242\235<\n\225\366\2757\002\022>\235\253\206>\232\252\277=\002\371\270>\023V\350\276f1a>BS#=\302].\276\032\327\234\276\'\222\234<I\027\025\275\274%\257\275\345\370C=\254\215\365>\n\365\013\276\0131\265\276\311l\326>\355\307+\276o\260G\276\037\324\251>u\350|<\373\313\277\276\357\342m\275d\\\343>\377\013\007\276\265\250\375>\203:;\276\302R|\276\201\342\260\276\226\'\023\276\177\241\201\276\353\320^\276nu\203>\345\370\266\276\270\242w\275\251O\343\275M\346\037>\214\006G>\251\215\257>\302\344d\275\345P\225\276\003U\246;\245[\033<\014\342!\276\206\022\'>\232\017\211\276i+\332= \020\275=B\373\303=\312\216\017\276\203\272\004>\302A\037>D\320\001>\336\237\264\276\245\007\205>\330G\002>\326\365\243\274_]\347>\0360\200\276\027\314\226=\010\202\205\276+\026\352>\377\321\222=\246;\227;\362A\037\272\236\246\264=\022\3063\275Q\345\005>\355_#=A\257\221\275\240\376\006><m_\275\314i_>\034\330x=\272*\354\275i\212\306<\024\356f\276v\356j>\363\271\357\275v\337\364\275a\177\221\276=\274E\2757&\256\275\026\261l\275#u\377<\272\241\355=\203P\243>\313\355\360\275\302\354\270\275\370\361\324\274_~F>\360\222\275\275R\265\343=\310w}\276I\311?>\233\247\273>\313_\257>\002\r\277>\2372\000>\324\347\227<\262Z\001>\016\351\363=\253g|>\331\232\226\276\337v.\276\034\351u\276\013\377\234\275\226k\333\276\021\006M\276<\016\363\274\366\235\243\276\322[P\276\317F\341\276\332\365\267\276\226:\234\276\276G\377=3\013\016\276*\250(<\023P\003\276FZ\033\274\032\316\222\276\316|\027>\350_\265\276}\023e\276\204\2219=\372\311\230>\t\372v\276u;A>\234\371k\273t\253\274=wL/\276v{\270>\214\362\361=e\364\265;\251\017\247\275\033#*\274.\263\301\275n\\\031>\324,\231=\340n\001\276\315\276\303>w\264\205=\022\207\n\275f\353,>X`\225>\371\343\027>D\361b>c\315\206>y\370\274>\275-\314\274\326R\251>\267\346\230\276x\323\231>|a\246\275\375\265\336=EM\300=6\325\325\275\010\302p\275r\003\226\276\213)[>\344\217R>\231\003\000>K\371\321\275\010\213\270=\371\236~\276?\027.<p\270\222<W\313B\275W\301\333<Bq\307=\024\257\362=\'\3012=M\023S>\3015G>p\335\321\275P\273\352\275xP\267>p\272\366\276r\231\023\275\2266\312>\216D\210<\373\374]>t\275\372=\263\232\225=\017l\215>\312\377\250=\264S7\276\220\177\363=<\367w\276\211uR=!s\340<\2064\207>($\270>\247\032\n=\010\025 >C\313\000\2761r\210=\314\3062\275-\3622\276\342\034\227\276\230D\201=.\227\033\276j\360\354=\350|\226\273*\355Y\276\320\376\200\274\017\343=\276<a\332<\245U\321=\227\321\302=\226\334,\276\2443\034\276\273\373\031=\3457\025>\025E\265>\031\265\221\276\3202t\276\376\335\277\276K\032\330<\364lw>@\362\021;\347~K\276\365\202\264=\036\312e\274O\tp=\321bz\276\335\r\320=#\024\205\276\372\003\304<\275\024\223\275\324\304\023\276\302\324\223\276\265~\371=\267{\346\275\353\201]\276y+\246=\010T\306=\024b\007\276\340\314.\272\361\234\206\275\266\322\267\275r\363\235\275\232\200Z=\216u\231=\000\342\t=\337\365\222\275\033\247y=r\3377\276\210\370\250\275u=\216\276L\215\234>\036\263\245\276\223\267\355\275\352\031z>\233\032\214\276d\232\326<\366\215\243\275xZ\203>\202+\345=/o\206\276\347\346R\276vw\344={\346\227>\230\000\317>\222\225\204>\351\005:>\235\206\303;\374Y\035=\372\350<\276\017\275\273>\253h\363<\3441\r\275\234\374\340>#\2561=X\267\r=>\0003=\'\215\215\276\347\254\230\273\376\267\021=\344\362\232\276J\252X<\'\360\242>M\242\315>\002-\026\276\001\331\\>\363\234>\277p\275\271\276\3503&\276=\233\224=%1\205>\0351\302=\261=\037>O\222\223\276\243\2401\277\020\333\374\275d\273\032?\'2y>\305\343;\276\347\223\n\276\3611Y>\260\377\017>\207\201\367>\031\322\201;\226Y\007\275b\276]>9\217+>\032\324\266\275\"\325\300>\243Q\374\273\372\t\002>k\231\347>\220\3027\276LL\003?\205\333\227=\227k\226>\260\376_\275\252\312\230\276\005\204\235=N\277\207\275W\177\204>\031`\323=\352\245\207\276\\\r\233>\240\233\277>D\344\267\274x\005\204\275o\335\255<p\030\332>\336_)\273`\246Q\274h\317U>\006\267\370\275%\256\031\276\023\013\026>zm\003?\314\262^=W\201\n?\213\373\017\276Y\245O\276^x\244\275y\0103\276\026\241\332=2C\333=\376\356D\275\320\301\373=b\337\363>\335\177\342<\343_$\276\3710\212\274\364l\t\276J\250\345\272\010\022\001?V\270~>\250\006=>\240\007\034>\035=[\274\321y\032\272GT\216\276\202?\232=>S\t\275\377o\200>!\261\024\276\375\003\373=\244W3\276{\017x=\030\200\007\276\230\330\230>\020X\014\275\335\232>>)\t\260>\305pf<FJ.\274\367D\201\276\203L?\276>n\204>\016\326\016<\226\236.>\204\214>\276\254m\006>\355\'\201\276\266\233H\276\360\363f=v\260O>\252\213,\276\034p\225\275\017\334\220\276d\004C\275\317~\224\276\200\231\300>Ef\234\276<\364\312\276q\364\253\276)\355\204\276_H\230\276T\224\023\276\337\325\010>\307\017\346\276@\200=>\036!y>\273 3;J8\232\276\203\030\242>\201f^>\203\270\210;\310\304d\274\271*\n\276\371e\332< \207J\2757\312\200\2752\322\000>l\032i>$9\202>W\031\271>%X\361<}\237-\275\253|W\276\240@%\276\204d\253\275^\373#>,\310G\275\326\315\224\275g\225\\\275\033\232s>g\333I>\337\253\212\276M\210\010\276DJ\230\2761]\363\274\302\372\017\277y\244Z>X\262Z\276\240GC\276B\224\316=g\255!\276\374,\271=\003\232]>\n\"\275>\364\200\371\276d\220\024\276\375\260F\276\340Y\355<\262\020\214\273\020\224M\2741\263+\276\261\330\273\275\372\220<>3tv>^;\\\276h`_\276\024\302\007>\236\207\215\276\032,\373=\273\227\243=qg\224=\034\331\254\276a\"\271>\356\262\001>\005\316\036>\032\315\206=\377\211\353\275K?\206>\002\276\000>\354-\360=y\371\000=\020\3356=\254\317\327\275\326C\254\274\245\330\260\275\222\236\212;\r\216\233<!,\303\274@\216<\276\377\347\254>\016\227\177=5\231\367\275\020\206\262\275Q\274B\276\250D\365=\323 {=\271M\350=\331j\272\276\361\357\263>\356\2422\276\021\362\021>au?>\254&\321\276y\213\026>=Y\274=\377\365\350\275/\247\234=R\261:\276\371\036\206>\224\255\364;,\010\025\277\322G\003>\022\315\014=[}\330\274Tf\032>\375\014\226\276\030<\223>\355|\023\276}\247\274=g}\246=\035\305_\276\302\tI\276\321\030B\275~AP>4\250\264>;\0229>u\377\010>\240\002\350\275\216\314\264\273\353\240\305>1\302\367=y\021C> i\213\276\020Ca\276(\007y\272\300\242\216\276\325\224\014=K\257\347\276\362\201\227\275y\302A\276\002\002\370\275_\234\241\276\035\267,\276\034\264f\272\260L|=\213f\232>\237*h=Z\204\271>Hq\030>\203\2568\276\364R.\276\237\3270>(\177\030>f\\g>\025gZ=y\207C\276\342<\257>\211\r\t\276\0166\206>\225aR>\2719n\276\254\271\362\276\rH1\276\220v\213=\276\026*\273\260\361\375\276I\376\n>\364\316\356\275(\304i>\233\315\031\276\261\361\306\275EO\200=(sp\276\022^m>#\261\004\277\363\355G=\031\354\226\275\'\347i>\235\337\211\276\237\022\210\276V\242\222>X\312\363=\316\374i\274\244\221\360\276\356\305\366\275p\336F>!\364\302=&\257\023\276\232d\321>\246R\020\276\007\022\325=o\353\n>\001p\200>\316\363\023\276\245\014\322\276\316E\031>8\207.>\244.#>\223\002S>4\277\306=\232\300\036>d&\255\276>\351\366=\307\211e\274\302\014\000\276\327\346l\276\376\242\261\275\306\256!=\320\376(\276\235\010\306<*\004#>\243A\204=\001\370\237\274\'\255\007>`\206\355\276\037Nl>-K\336\276d\t\256>N\022\264\275\2453\222\275\024\227\341\276=\222\034>\264w\275>b\200\233\276\202\253\247\276\314,\205\276\333f,\276\267!\025>\371D}>\303\3626\2767\343\223>d*\242\276mS\273>\245\274\240>\312\313\217\275 \203V\275\370p]>\231\307E>\230\346.=,\277M\276\210\250\353\274\n\247o\276k\322\265\274=\221\031\276\006\'6>\343\224<\275&\200Z>X^\377=6\346\315\275N-^\276\372\345w>\307\247_\276\375\334\026\276N \031>\2354\255\275\030\252\001>R\353\021<\273YL\276=\261\002\275\373c\205\274c\000\233>\317\213\026>\345\373\340\274\351GC>]\224\356=\210\022\211\276\353\214D\276\363I\217\276\336\3774>\005M\243\276K\234\353>\366\007\224\275\350:>\276\324R\235>W\325=>\346\270\277>o\374f>a\0213>\026\322\024>}\206w>\344_\227\275\274\344%\276\204\325\013=\301\252\030>\t\244\304\276\315\350p\275j\210\217\276a\tI\276\360\340\217>\270m\t\273\243\262a\276\244u\333=Jr\242>\032\3115=\360\215\362\276\014%j\276\217\2460\276\220\005\200>\010\217\226\275xpZ<\322\010\205\276(B\203\275JY\n?8\2222=#\016\022\276\010\"O\275%C\341\274\370<\227>\255\004k\276~\022)\276\376\223\365>(\260\261\275\203\247\t\276\311T\001?|PE=\332\337\207\274P\272\303=\364\020\337\275\376Oy\275\006\327!>\036\326\r>?\203\220=G\273&\275qD\021>%\323A>L\362\214\275&0\362\275\234\341\327<U\244d>\255\025\025\275\nZ\260<\020@\231\275\2354\023==\341 \276\320\263\231>\314j&<H \376\275\224\017\223< G~\275\344\254\206\274\364\312\201\274\353\357\275=l\013c>\005N\324\2757i=\276l\271B>\367\220\242\275I\275)\276Cf\300>\223\320\236>\210\247r=\373:d>\000\373\213\276\345\004\364\276\212{/>\021w\006>\261L+\277]\2541>\277\220F\276^y\233\275\247\010\255\276\214\221&\275c 0\275\307y\236\276\254\003k;\226\313\222>\371\304\324\276\333\301\267\276\354\223\302=\230\350\007>Y\277\311\273\221\255\213=\376\320\014\276\257\362e<\261-o\274\004\343\332\275\032-6\276\rt0>\3460\237\276T\224\223\276\252M\020=\0379\213\275\210\266\226>\202\230\253\273<\001l>\334o\306>\266Q\007>=\334\224>\373\326\025\274\201\241\216<\267\201->F\324\200\276\230\224*\276\3507\370>N\236\n>\213\3142>\367o\200>\000\325\234>\312\313$\276yyE\276\275\255n<\002~\307\275U]\247\275\305\316->@\017\n>\225\322\351<\307\020\030\275\236#W\276\004\303\263>\365\266\226=\025\334\222>\027c\375\275\212b\">N\\a=\031\322[=\266\t\230\275\026H\250\275\366\270\231>>\310\244\276\360H\324=\207/\005\274G<\265\275\255\025\374\271\203\217\255\276\337\013\033>1\246W=\222!]\276U\364\030=\364a\207\276&\303\n\276\226?=>$\232\275\275\035B\247<\217\367V=-\013\235\276\205S\003=\023\266\337>%M\232\275\315\317\240>\347\010^\274\310\350\370=>\023\020>\225\231\004\276\nz\333\276\036\346~=?\265\233>%S>=\272\342\221\275\306\037z\274\331\033Q>\2315\021>\352\330\035\275\267\204\263\275P\021\224>xPb>\356\013r>\264[\027=\210F\242<8\330w>\231?q\275\262\014\177\276\255\0347>\324MK>\221\266\023\276\036\370\036\276\323G+\276v\316r>\377Oc\276\030\330x>~\242\023>\375,\231\275L-\203\276qBo>\276S\243\275w\261\233>\271\236\362\274\326\002\r\276\301Ct>\370\333\375=_?\373;+\330h>o&\373\275Y6\222>\223\306P>\007\344\345>L\034\032=\310\025]>\0232\346>\324\237\001=1\024\216=`\243\205\276=\232D\276\034\332\205\276\017\000\211\276I\200\006?yy\242=\231\226\257>\313{9>Z\377\324>w\213\235\276Gh\237>\354\304\317\275\313\271?\276\317\305\360=\265V\207=\014\231#\276\332q\215>\231#\036>\344\177\001=P\370K>\362()\275x\355\021>\3672\235\276eF\252\276hx~\276\277\231\213\275e\311\335\276C\303\251\276\204o-\276\264c\210\276,\346#\275\227?\317\276\024\304\216\275|\314\306=\245\022\252\276O\006@\276\001\232\234\276\177X\231\276\337W\247>\254\326\264\272\363W\202\276\2714H\276\323\342\206\275\0136\350>\000x\311\275L\2753\276\267\347\010\275R\243R>\200\033\033\276\217X\037>&\220\270\276\374\324o>\302\3436>\225XC>2\314]\276\334\026C>H\247\375\275\207F1>\351O\013\276\354\005n\275T/?\275~\177@\276lS\356=\007\352\255>\364\314\215=@l\206\276P\235\325>\177\320\213=i7\036>\t-\233\276\214\311\320=\316\352\002<\324p\217>\272;\262\274\242T\362\274e\311\363=\016\342\211\276\351\246\354=\360q}\275*\345\235>E\021u:\233e\226=\313\325q>W\301\030\276<\004\027\276I\306\311\275\3179\202<\344\017B\276\254dU\276.\016\353=\272\312\233\276\257\023\n\276\332Yy\276\264]\222\276\317?\"\275\315\347\\\276\177X\032\275J\244#\276\305\036|>\"\004\014>\350\336\335\275\273\243\211\276\036\315\255>A?\335>\257\002\227<\"nf=\347\361\220>\235\374(\275XU\352=%C\270=\0133\254<\377\267\025\276P?\324\276v>\235\276\005j\256\276\303\314\006\276;\260\375\275\211K\277=\253w\221>\224\033/\276\226\212l\276??\036>\212\017\243>\362\255y>\005i\200\276\207L\220\275\361\311\255\275\252Y\302<U\301\336=\274v\224\275+\372`\274U\210a>\353o\317=yn\240\276\230R\211>\257\342\220\275\273h\205\276X\213\322=j\247\001\275\240\324\203\275\341\216\261\275\253\202\210\276FbK>\206\027\230>\376\005\354=\304\232\027?\363\210\216\276\213\301\202>\300\233\252>Q}%<\207\267/\276\267\"\340>\267\270o=\361\324\231=\350Z\337\271\252\r\251\275\341T\210=\250Vf\276\302|\225>T\311\211>2S\027>2\355\316\275\251\360]\275\030o\005\275\221q\366\274T\352\310\275A\t_\276=\321\336=x\325\324<\345\247\210>p\334\262<{\"\023=\002\246B\276\234\203\356\275\365M\023>\276\365\177>\234\244\257>^g5\276\264\324\020\276OY8\276\206\244\371=\021?\207>\227\341\310\276\231\373\254\276E;K\276aE==\3028\226\275\345L\232\276\215\326\361\275\003;\022>B*0\276\374Jb\276\263\003\307=H\013F=v\361\372=\000\203\334\270x\356\300<\314\r\211\276\275B\241>\252&t\276\2338\235\276\210\333\032\276\355\232\317<\345>\030\274\270\3068>\200M:\272v\003\217>.\207\373=0\025?=\\\'\333\274\266\352\021\276\345\272\257\276\314L\207>3\313\212=a\221r\276y\016\325\275L\342G\276\305\337`=\000\246\307\276\356\'\243>\030\035x>\213W\212=\213l\215>H7\247>\373GE\276\017\363\267=\330\352\320<\355\242\200\275\203\276\337=\321\306\010\276\376\316k>\272\250\177>\351\227\373=\312<y\275F\231\221\276\215dM>5\266\016>U\222\274\276\"\313\034>^]\226=\334\351E\276\\\376\226>\022\324\237>DxV>\354#\362=\010\256\014<\241\367:=X\031\344\274\301|\300\275P\324D=\031F\247\275\303\016\212\276\013\327?>hJ\377</Ot\276\237>\332<\016\232\317=IG\036>\n\000\204\276\232\324\030\275\201\246e\2760\r\255=_#\342\276\211\267\032>\241\007\202<\273Y\322=\372\243\204\2758\302*\276X!\370=\265\025\022>\317\322V>\350\365\344>\023\254\223<\035\220*>B\214M\276\241o(>N\337E\275\304\316A\276\t[\217>\243}\263>o\031X=L\027\'>\241*\311=\030\303?\276\274r/=Nr*>[f\203\275-\266\234\276\005$\">p\302\237=\\\016\327\275\025\353\325>\000\224\022\276\324\010\372\274D5\234\276\226e\222>\025%\303\275\237\315O\276t\274\234>u\321\272=\312\276\244\276:\234g\276\017M\323>\303$\227>\222Q\202=s\237d\276\335\211\242=\031\027\225\276\253\016Y\276\260\257\016\276 o\026\275\343\261;\276\213\332i\275?\337\032>\272/\324\2753`S\275>\213\252<%\010\274=\2247G\276lSO=u\370\212=)\017Z\274u\353\246=w\221O\276\336\265\013>\350\324\301>\231\370\t\276\273\332_\276\276;\013\276\337\222\262\276M\373\226>\2544%<!\323\006>\221\014\n\276>-\007\276\0353D>A\020\252>\r\244\024<\343\231,>\344\353G=\362 \313\273\206{\343<\257\332\035\276g\"\340\276\001\023\\=\271\205\202\276\355\230\327\276\271\277F\276\321\003\017\275?E\020>"
+      }
+    }
+  }
+}
+node {
+  name: "rnn/multi_rnn_cell/cell_2/gru_cell/gates/kernel/read"
+  op: "Identity"
+  input: "rnn/multi_rnn_cell/cell_2/gru_cell/gates/kernel"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "rnn/while/rnn/multi_rnn_cell/cell_2/cell_2/gru_cell/gates/gates/concat/axis"
+  op: "Const"
+  input: "^rnn/while/Identity"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+        }
+        int_val: 1
+      }
+    }
+  }
+}
+node {
+  name: "rnn/while/rnn/multi_rnn_cell/cell_2/cell_2/gru_cell/gates/gates/concat"
+  op: "ConcatV2"
+  input: "rnn/while/rnn/multi_rnn_cell/cell_1/cell_1/gru_cell/add"
+  input: "rnn/while/Identity_4"
+  input: "rnn/while/rnn/multi_rnn_cell/cell_2/cell_2/gru_cell/gates/gates/concat/axis"
+  attr {
+    key: "N"
+    value {
+      i: 2
+    }
+  }
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "Tidx"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "rnn/while/rnn/multi_rnn_cell/cell_2/cell_2/gru_cell/gates/gates/MatMul/Enter"
+  op: "Enter"
+  input: "rnn/multi_rnn_cell/cell_2/gru_cell/gates/kernel/read"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "frame_name"
+    value {
+      s: "rnn/while/rnn/while/"
+    }
+  }
+  attr {
+    key: "is_constant"
+    value {
+      b: true
+    }
+  }
+  attr {
+    key: "parallel_iterations"
+    value {
+      i: 32
+    }
+  }
+}
+node {
+  name: "rnn/while/rnn/multi_rnn_cell/cell_2/cell_2/gru_cell/gates/gates/MatMul"
+  op: "MatMul"
+  input: "rnn/while/rnn/multi_rnn_cell/cell_2/cell_2/gru_cell/gates/gates/concat"
+  input: "rnn/while/rnn/multi_rnn_cell/cell_2/cell_2/gru_cell/gates/gates/MatMul/Enter"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "transpose_a"
+    value {
+      b: false
+    }
+  }
+  attr {
+    key: "transpose_b"
+    value {
+      b: false
+    }
+  }
+}
+node {
+  name: "rnn/multi_rnn_cell/cell_2/gru_cell/gates/bias"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+          dim {
+            size: 40
+          }
+        }
+        tensor_content: "\261\t\236?\365\332\201?\247\304\216?\356\343\237?\351v\225??\317\210?\301q\236?\337\306\223?d#\211?\'o\216?\222\214z?z\333\223?[\270\225?T\361y?\232l\216?\265\002\211?\001\003\206?\361i\213?\367.\224?w\251\221?Kyc?\362\264`?\233\355\350>`\345y?\333\005a?\010\217T?\017\275l?\016\327;?\237\330^?A\326a?\263\246\000?\362\034y?{\001\210?\355\023v?[\275o?\207\022A?a3\201?\247\367B?C\343t?\030\\Z?"
+      }
+    }
+  }
+}
+node {
+  name: "rnn/multi_rnn_cell/cell_2/gru_cell/gates/bias/read"
+  op: "Identity"
+  input: "rnn/multi_rnn_cell/cell_2/gru_cell/gates/bias"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "rnn/while/rnn/multi_rnn_cell/cell_2/cell_2/gru_cell/gates/gates/BiasAdd/Enter"
+  op: "Enter"
+  input: "rnn/multi_rnn_cell/cell_2/gru_cell/gates/bias/read"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "frame_name"
+    value {
+      s: "rnn/while/rnn/while/"
+    }
+  }
+  attr {
+    key: "is_constant"
+    value {
+      b: true
+    }
+  }
+  attr {
+    key: "parallel_iterations"
+    value {
+      i: 32
+    }
+  }
+}
+node {
+  name: "rnn/while/rnn/multi_rnn_cell/cell_2/cell_2/gru_cell/gates/gates/BiasAdd"
+  op: "BiasAdd"
+  input: "rnn/while/rnn/multi_rnn_cell/cell_2/cell_2/gru_cell/gates/gates/MatMul"
+  input: "rnn/while/rnn/multi_rnn_cell/cell_2/cell_2/gru_cell/gates/gates/BiasAdd/Enter"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "data_format"
+    value {
+      s: "NHWC"
+    }
+  }
+}
+node {
+  name: "rnn/while/rnn/multi_rnn_cell/cell_2/cell_2/gru_cell/gates/Sigmoid"
+  op: "Sigmoid"
+  input: "rnn/while/rnn/multi_rnn_cell/cell_2/cell_2/gru_cell/gates/gates/BiasAdd"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "rnn/while/rnn/multi_rnn_cell/cell_2/cell_2/gru_cell/gates/split/split_dim"
+  op: "Const"
+  input: "^rnn/while/Identity"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+        }
+        int_val: 1
+      }
+    }
+  }
+}
+node {
+  name: "rnn/while/rnn/multi_rnn_cell/cell_2/cell_2/gru_cell/gates/split"
+  op: "Split"
+  input: "rnn/while/rnn/multi_rnn_cell/cell_2/cell_2/gru_cell/gates/split/split_dim"
+  input: "rnn/while/rnn/multi_rnn_cell/cell_2/cell_2/gru_cell/gates/Sigmoid"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "num_split"
+    value {
+      i: 2
+    }
+  }
+}
+node {
+  name: "rnn/while/rnn/multi_rnn_cell/cell_2/cell_2/gru_cell/candidate/mul"
+  op: "Mul"
+  input: "rnn/while/rnn/multi_rnn_cell/cell_2/cell_2/gru_cell/gates/split"
+  input: "rnn/while/Identity_4"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "rnn/multi_rnn_cell/cell_2/gru_cell/candidate/kernel"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+          dim {
+            size: 40
+          }
+          dim {
+            size: 20
+          }
+        }
+        tensor_content: "\337\252\013\275\230\314\262>2B\376>\375\302\205\276\260\030b\276\035\027\242>\214\350T\276\210\217\313\275\2027\237\276\014K\371;(BA\276\260\037\321<\267#\270\276\350\351\003\277O\023\222>\336\307~\276\264.\361\275o\275\346\276d\263D\275\214i\032\276rhb=\215Zl\276\336\020\236>qR\371\275\251\217j>\010M2>\263<\354=K;\313\275w$\237\276?\005J\276\307Cy>\232\247;\276{\343\307\276\376:\311\275\305\205\222>\031\376\376\276\227\245\n>y30\275\254\347\214>@\253M>\207\272\236\275\300\360\342\275\351\314H\276\034\221v>\303\272\026>At\377\275r\005}\276u\243\007?\221?\207>\366\205\276\2768:\315=\250\372\364\275\235\214\262\275\210\244v=\326\365\302\274`\023\221\276\300\201\021=qm\034\276\221\217\255<\242\224\274>\211\323q\276\032\343\251\276\261\023T<\267A\022\276\021\005p>\014\333\345\275ZX\013\276#\204\020>\321q\270>EA0\276`\201\326\275L\205\200\276\0205\361=\241\213h\276\350\251\242=T\030.?!\035\270\275D)\025?(\334\253>\001_\300=]\032v>ix\271>\356\216\000?p\321\260\275;\3565=\"\352\260\275\311\225F>\274\306o>\245\271y\276\035s\365=E<\033\277l\361\235\276\304B\217\276\356\261o\276\347\340j\276Pt\332=\213d\026\277\227\331\333\276\304f\356=.\003+\275ou\006?75%>7*\025?\311!\231>\025\030j\276\256or>Q\017\227>\242c\215\276\344\331\236\276\243\004\017>tf\331\276\017\244\217\276\374\251x>h\215D\277\035\027->a;\265\276\356\010v\276\2772\215\276\201\317C=\246rr\275Z\256\037\276J\205\207\276+\215<\277\257Z\376\274\234D\272;E3J\276\2313\364=t\227\243=\326x\227>P\315\361\273\365\273\205?\235\tV\275\333\'\237>\2425\"?\255B\223=\256\037\214>K7\342>\343\257j=P\230]\276\347\022Y=-5\247\276\312+y\276Q\255F\275\333M\r\2773<\344\275\255\361\244\275AD\224\276\262\264\267\276\366\272,\2768o\246\276\032[\204\276@f\225>\260\022\326\276\253\247}\276\304\r\300\273\253k\363\276y\341\216\276\240|\333\276\347\336\024\276G\336\247>y(\254=+\232\000?\234\306j>}\370.>{\206M\276\332F\260\276\365\336\242\276\'\204\235=\315\262\352\276\021h\254>\252I\335\276\264\305\003>4\214`\276\025\276\004\277\212\321\202\275h\n\004\276\362\001\024\2775\270\306\276\224\351\302>iGZ>\376\221;\275\330B.\276\377}i>\037\216\">!\204\310\273\327\223\233>\2250\014?\017\236\031\277\314\342\222>\021\312\252\275%\305\337\276R\201C\276F\022k=\036\234\315=\3225?>\261\037\344\276 \037\r>\0322\223\276yT\275\274Q\006*=*\356\035\275\376\020\224\273\346\207`>\252\3775>\013\333\004?<\350]>\201\3474\276\274<~>\345\266\274\276\337\031\254\276\226{c>\301\374\r=\350w\020\2752\355X>(\2435>\273&e\276\207\312\\\276\366m\207\276\022\207\007>\0314\327>Vl\325>\374\270\270=\337\005\343\275\321\001S=7\267\311>\220I\301=\346\334\254<\374.\311\276\212\243v=\021f\215>\317\343\205\276\013\317\251\276o:L>\240!\216>\3257\311=\035\357\343\276\207\226\307=\275ZC\276\002\272\001\276\374N\222\276\007\332M\276m.\256>\373\226\252\276\250\341\231>\235\266N>e\177F\276\036\303\237\276\353B\323>\r\211\235\276.Q\355=@C\032=\005N\332=\245\227\314\275\214\352\007\276\347y\245>\t\353 >\231*<>o\357t\276\317j\032\276\351\310\005?\334\351\237\275\202\241a>\325+>>\372\020\310\275L\274\275\276o\327U>S\350\251>8\004\014\276\303\036}>\356\341\347>\025m<\276\211(\001=\301T\316>\3571\314\276\220\207O\276\3417\232=i\334\203\275\334\261\003>\2378J=\226\315\231\276\320}\227\2765\n\245\276\253\2319\276\217\210\204>\233\275\016\276\300\372\211\276O3#>zO\227\275\216z\205>\241\354f>x\200n>\256\225\204\276\341\232\002?\365\302z>Q\002\275\276\003\274\374>P\344\034\275A\304\026?\311\244\221>\016Kd>O\016\305\276D\304\201=\027o\253:\313%\321\276\232\245\275\276\206\277\330\274\027\346\303\276\273_\210>\032\226\003=\327\241!\277\3211;>6.\221>sxh\276\323\367\307=\312\223\273=\000\247e>;\014\303==\360&\276\325m\243\276\277\016c=\312 \221\275\375\307\207>\334\215\253\274\360\3473>\200\021q>\362\372\237\276\207z\250\276<J\361>\201Zz\276J6X\276\030\005x\276\343\300\023>\265\317~\274\3154\023\275\270\2636>\336\351i\276\370L\242\276\260\206\020>\222k\204>\236\217~\275\307\013\273\276\366*\020\276J\376\252>\345x\027\276\253?\323\276\253\213\">`^0>\3044\341\275\210\355\032\276\214\303\370>(\267\225\276\343x\256\275\321M\215\274\014\026S\276\344^\201\276\026\243\'\276\344R\226=(\2574>\335l\211\276Vkx\276\010\242\205>\020R\224\274\3623\201\276\261)\320=;2\330>XO3\276\345\205\353=\017\234c>\302\342h\276\003\002\266>\022\r\'>\254\322\203>\016\235\210>\013~\026>3\314\337<\345`\350>\253\013\246\274<\272\337<\321\032\000?\310\356\307\275\207\250\362\273\307\240\203>{\276\344>\270\266\306\273\303.\316=Z5\376=\376 \203\276\232m\022>\275j-\276\336M\337\276\254\356v\275\020\340u\275I1\231\274\005\334|\276\022\031\237\276\316m\262\276\350I\273\275{d\235\276\363\261\'=\\tT>\206){>\304\332{\276&\347\302\275\237M\010?\032U\026?\263\200\354>;\317\236\275t^Q>\236\177\272<\000\347N>!\340;\276\301d\032\276\231\033\305=\271>\334\276y\320\270>\317\0338\276\246\004\027\276\220\341\225\276\217\016\244>5\3522\276\362\374\261\276\262\376\231>AV0>\357\333R\276x$\246>\327\'\026\275x\256\337\275\023\222|\276)\004\003\277\2278\263>\253\'{\276\211N\361=K\020\037\276Ck\002<U\203\203\275\026\375R>\276\311\316\276\274\277\346\275\211T\344=\347\345\206>T/\225<T\244$>\332<\026?\227\276\214>\205\010\225\276\024\342\032>\357\0355>Laf\276[\241L>\253\247\327>\353MN\277J,\221\276\303\'#\275\352^\306\276\334\230\006\276j\255\030=C\202\320\276\354\373\203\276\314{\267>\353\342\210\276\002\232\224=\234\305~>>\341\215\276\254\266/?l\032\226>*AG=\025\2624>\034\032\341>\322\'C;\031\333\364\275\257\324\270\275\317T\211\276\"x_>\265sH\276.\313\302>\234\313\017>\027T\375\275D\222&\275L\220\257\276\246\226\247>\230V\341>8\320\250>\213\027\224>\367S\240>h\037\010?\361\234\302>\371\307[>\346O\245=\322\023\215\276\"\030x\276\215K=\276\323)\276\276G\272B\275jAF\275\303\013\341\275\206\264\376<\230\200\305=e\274\237>\331\002\352=\014?\022>\331=\001>\330\231\254\276\272\272y\276\277Y\301>\325j.>+\350%?\264\201\203=\3237\217=\243\364\346\275\310+\325=x\255\256=\346\356\247=\244.k\276\350\340@\276\305D&?\263\'\223\276\033\305-=-\305\370=OU\037><\2306>-\202\253>\367vW>m\271w>M\341j>d\341\264>z\364\273>_\260\245>\270\'\251\275RE\221=\332\267\002>\300\231%\276O9\361\276\305\327\250=@o,\276\034\203\323>\320#\301=\272;%\276\273\264\t\276\243\306\370\276Q\027\033>\031\014\013\275k\277\331\275h\264\017>mC\307<(D\032\276\213\365\303\276r\365s\276z\332\306>\324\n\232=\326Y\227\276\335\366\343\274\221.\241>G}\344=;o\221\275\256\253\230\276&y\246<\330\303\330\274\316\271\335=\271\342\206>\337\026\337>\021\344\371<`l\224\276\244\265J>\343|\323\276\'\345\302=9\262\212>\335\324t>\250\351\313\275\347>\300>M\333\236\276\030y8>\352y\261\276\243\303\337=QD\312>cJ\261\276\314r\206>\307\233\033=\211\312\341=\301m\265>\353L\237\276\231W\211\275g\0347\276\014\r\210\276\266\177\023?x\235\330>o\337\t>\310\260\313>\216w\003\276\300\377f=\315\024\273>\333\2630>\233\344\273\274V30>\003z\215>\202\202\177>fVk\273\025\3125>\332\221\202\275\\>\223\276\254\211\\=\253pA>\t\365\022>z\314\214>\034\352\241=\353\220\240=\236\233\226>\262\217&>\324\257?>v\312h>xEq=\237R\224=\357%+\276\340\t\364\274\243\334\245=&\360\024;\035\341\010<*\222\347\274\221;\032\276\313\317\330\275\2210\212=lS\225\276\354\357\312\275\274\336m\275\215F\311\275:u\317\276S\206\361\276\314\010\250\276\017\242\033>O?\263\276\274\202\244=\202\274_=\324,\006?(\0005<c\272\210\276\273\215\246\274\023=\222=+\355V>\303p\363\275\362\263\020>e]\300>\314\2313\275x\245E>\365&A>=\264\013\276\t\321\006?\004\377O\276\306\325\033>\315\232\226==C\277\272\223\325\203>x\305\210>>\236I\277!R\202>>\031\326<\374\260\310\274\260\271m\276&\026\207\276\244\264z\276\221\276\206>fbj\276sM\025>\014BY>C\235U>\276\353\262\276\256\274\210\276FR\334\273+c\221=k\216\301=\024\'e>\001\037p>\277TS>\211\200]\276\331?B\275\243\223\364;\266Y\261\276JH\030>M\032\310>\260FZ\276\031a\216>(h\225\276\232\241z=\260\351\260\276B\0015\276\037\241\004>\300\264\027\276\212\271\277>3A\207=\324\014v>\330\216\366=\305yL>\216Q\314>;\336\252>$\203\260\276\217\310\013>\333\367<?I\370v\276q\351\016\275\242\3377\276\254f\277\27689\313>Fj\253\276\335)\367\275f\320\233>\366)H>\331aH>\014\251\241\276%JL>\251\004\316=\347\343\230>8\352+>\360_\333=\350\307\206\276\237G\250;\010*t\274\310\260\340=\206\270\371>Ux\234\276\356\337\344>\244Q\323=\310\t\243\275\327\202\307\275\266u\256=\354m!>C\222\000\275.\010E>\347\017\314>>\205\220=\332>[=s\3526\276\261\315\005\276C0\027\276P\312 \275\n\236\325>S3\"\275\262N\320>\n\351\313=\371\2313>Y\207\222\274\261^\202\276\337\'\302=\0353G>\372\264\260\276\3118\205=\322\374\346\276\n\374\022\276Oc\204<\220.\270<\020\3708\276\301i\310>[\257]>\256\2476\276\263\036\256<\250\360\024?&W\372>\232\305\031\276\340\325!>\304sJ\276m\325h=\"\007\017=.\327\254<\222\373L<\005\324L>\226}\024>{fr>Xe\241>\222\345\371\276\245R1\276\244\364+=\373U\027\274\020O\026\276\241\235\031\276!\345P\276v\236\215>\216:\253\276\311\203H\276\377\223\004\275\270P\316\276v/\327;\tP9?4jb\276\2451\225\276\365\352\247\275\326\016H\275\216jP\276\305$\302\276{\277B\275\"Q\221\275\216,\251>\353_\003\2761\275o\275x&\021>4a\264>\210i\323\276kt\266\276Whx\276d\177\214>>\326g\276u\211\325>%81>8J\263>"
+      }
+    }
+  }
+}
+node {
+  name: "rnn/multi_rnn_cell/cell_2/gru_cell/candidate/kernel/read"
+  op: "Identity"
+  input: "rnn/multi_rnn_cell/cell_2/gru_cell/candidate/kernel"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "rnn/while/rnn/multi_rnn_cell/cell_2/cell_2/gru_cell/candidate/candidate/concat/axis"
+  op: "Const"
+  input: "^rnn/while/Identity"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+        }
+        int_val: 1
+      }
+    }
+  }
+}
+node {
+  name: "rnn/while/rnn/multi_rnn_cell/cell_2/cell_2/gru_cell/candidate/candidate/concat"
+  op: "ConcatV2"
+  input: "rnn/while/rnn/multi_rnn_cell/cell_1/cell_1/gru_cell/add"
+  input: "rnn/while/rnn/multi_rnn_cell/cell_2/cell_2/gru_cell/candidate/mul"
+  input: "rnn/while/rnn/multi_rnn_cell/cell_2/cell_2/gru_cell/candidate/candidate/concat/axis"
+  attr {
+    key: "N"
+    value {
+      i: 2
+    }
+  }
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "Tidx"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "rnn/while/rnn/multi_rnn_cell/cell_2/cell_2/gru_cell/candidate/candidate/MatMul/Enter"
+  op: "Enter"
+  input: "rnn/multi_rnn_cell/cell_2/gru_cell/candidate/kernel/read"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "frame_name"
+    value {
+      s: "rnn/while/rnn/while/"
+    }
+  }
+  attr {
+    key: "is_constant"
+    value {
+      b: true
+    }
+  }
+  attr {
+    key: "parallel_iterations"
+    value {
+      i: 32
+    }
+  }
+}
+node {
+  name: "rnn/while/rnn/multi_rnn_cell/cell_2/cell_2/gru_cell/candidate/candidate/MatMul"
+  op: "MatMul"
+  input: "rnn/while/rnn/multi_rnn_cell/cell_2/cell_2/gru_cell/candidate/candidate/concat"
+  input: "rnn/while/rnn/multi_rnn_cell/cell_2/cell_2/gru_cell/candidate/candidate/MatMul/Enter"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "transpose_a"
+    value {
+      b: false
+    }
+  }
+  attr {
+    key: "transpose_b"
+    value {
+      b: false
+    }
+  }
+}
+node {
+  name: "rnn/multi_rnn_cell/cell_2/gru_cell/candidate/bias"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+          dim {
+            size: 20
+          }
+        }
+        tensor_content: "p`\364;\267B\030=\215\266\024\276j\324\375:p2\254=<\r\205=Q\215\005\275\375u\r\275\367m\257\275\240c\2328\261\0339=\202\251\'=Q;\001=\244\230\276=\"\213#>\233\3103\276\"\216\335=\356\205\230\275\020\332z=\001\253\216<"
+      }
+    }
+  }
+}
+node {
+  name: "rnn/multi_rnn_cell/cell_2/gru_cell/candidate/bias/read"
+  op: "Identity"
+  input: "rnn/multi_rnn_cell/cell_2/gru_cell/candidate/bias"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "rnn/while/rnn/multi_rnn_cell/cell_2/cell_2/gru_cell/candidate/candidate/BiasAdd/Enter"
+  op: "Enter"
+  input: "rnn/multi_rnn_cell/cell_2/gru_cell/candidate/bias/read"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "frame_name"
+    value {
+      s: "rnn/while/rnn/while/"
+    }
+  }
+  attr {
+    key: "is_constant"
+    value {
+      b: true
+    }
+  }
+  attr {
+    key: "parallel_iterations"
+    value {
+      i: 32
+    }
+  }
+}
+node {
+  name: "rnn/while/rnn/multi_rnn_cell/cell_2/cell_2/gru_cell/candidate/candidate/BiasAdd"
+  op: "BiasAdd"
+  input: "rnn/while/rnn/multi_rnn_cell/cell_2/cell_2/gru_cell/candidate/candidate/MatMul"
+  input: "rnn/while/rnn/multi_rnn_cell/cell_2/cell_2/gru_cell/candidate/candidate/BiasAdd/Enter"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "data_format"
+    value {
+      s: "NHWC"
+    }
+  }
+}
+node {
+  name: "rnn/while/rnn/multi_rnn_cell/cell_2/cell_2/gru_cell/candidate/Tanh"
+  op: "Tanh"
+  input: "rnn/while/rnn/multi_rnn_cell/cell_2/cell_2/gru_cell/candidate/candidate/BiasAdd"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "rnn/while/rnn/multi_rnn_cell/cell_2/cell_2/gru_cell/mul"
+  op: "Mul"
+  input: "rnn/while/rnn/multi_rnn_cell/cell_2/cell_2/gru_cell/gates/split:1"
+  input: "rnn/while/Identity_4"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "rnn/while/rnn/multi_rnn_cell/cell_2/cell_2/gru_cell/sub/x"
+  op: "Const"
+  input: "^rnn/while/Identity"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+        }
+        float_val: 1.0
+      }
+    }
+  }
+}
+node {
+  name: "rnn/while/rnn/multi_rnn_cell/cell_2/cell_2/gru_cell/sub"
+  op: "Sub"
+  input: "rnn/while/rnn/multi_rnn_cell/cell_2/cell_2/gru_cell/sub/x"
+  input: "rnn/while/rnn/multi_rnn_cell/cell_2/cell_2/gru_cell/gates/split:1"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "rnn/while/rnn/multi_rnn_cell/cell_2/cell_2/gru_cell/mul_1"
+  op: "Mul"
+  input: "rnn/while/rnn/multi_rnn_cell/cell_2/cell_2/gru_cell/sub"
+  input: "rnn/while/rnn/multi_rnn_cell/cell_2/cell_2/gru_cell/candidate/Tanh"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "rnn/while/rnn/multi_rnn_cell/cell_2/cell_2/gru_cell/add"
+  op: "Add"
+  input: "rnn/while/rnn/multi_rnn_cell/cell_2/cell_2/gru_cell/mul"
+  input: "rnn/while/rnn/multi_rnn_cell/cell_2/cell_2/gru_cell/mul_1"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "rnn/while/TensorArrayWrite/TensorArrayWriteV3/Enter"
+  op: "Enter"
+  input: "rnn/TensorArray"
+  attr {
+    key: "T"
+    value {
+      type: DT_RESOURCE
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@rnn/while/rnn/multi_rnn_cell/cell_2/cell_2/gru_cell/add"
+      }
+    }
+  }
+  attr {
+    key: "frame_name"
+    value {
+      s: "rnn/while/rnn/while/"
+    }
+  }
+  attr {
+    key: "is_constant"
+    value {
+      b: true
+    }
+  }
+  attr {
+    key: "parallel_iterations"
+    value {
+      i: 32
+    }
+  }
+}
+node {
+  name: "rnn/while/TensorArrayWrite/TensorArrayWriteV3"
+  op: "TensorArrayWriteV3"
+  input: "rnn/while/TensorArrayWrite/TensorArrayWriteV3/Enter"
+  input: "rnn/while/Identity"
+  input: "rnn/while/rnn/multi_rnn_cell/cell_2/cell_2/gru_cell/add"
+  input: "rnn/while/Identity_1"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@rnn/while/rnn/multi_rnn_cell/cell_2/cell_2/gru_cell/add"
+      }
+    }
+  }
+}
+node {
+  name: "rnn/while/add/y"
+  op: "Const"
+  input: "^rnn/while/Identity"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+        }
+        int_val: 1
+      }
+    }
+  }
+}
+node {
+  name: "rnn/while/add"
+  op: "Add"
+  input: "rnn/while/Identity"
+  input: "rnn/while/add/y"
+  attr {
+    key: "T"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "rnn/while/NextIteration"
+  op: "NextIteration"
+  input: "rnn/while/add"
+  attr {
+    key: "T"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "rnn/while/NextIteration_1"
+  op: "NextIteration"
+  input: "rnn/while/TensorArrayWrite/TensorArrayWriteV3"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "rnn/while/NextIteration_2"
+  op: "NextIteration"
+  input: "rnn/while/rnn/multi_rnn_cell/cell_0/cell_0/gru_cell/add"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "rnn/while/NextIteration_3"
+  op: "NextIteration"
+  input: "rnn/while/rnn/multi_rnn_cell/cell_1/cell_1/gru_cell/add"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "rnn/while/NextIteration_4"
+  op: "NextIteration"
+  input: "rnn/while/rnn/multi_rnn_cell/cell_2/cell_2/gru_cell/add"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "rnn/while/Exit_1"
+  op: "Exit"
+  input: "rnn/while/Switch_1"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "rnn/TensorArrayStack/TensorArraySizeV3"
+  op: "TensorArraySizeV3"
+  input: "rnn/TensorArray"
+  input: "rnn/while/Exit_1"
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@rnn/TensorArray"
+      }
+    }
+  }
+}
+node {
+  name: "rnn/TensorArrayStack/range/start"
+  op: "Const"
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@rnn/TensorArray"
+      }
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+        }
+        int_val: 0
+      }
+    }
+  }
+}
+node {
+  name: "rnn/TensorArrayStack/range/delta"
+  op: "Const"
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@rnn/TensorArray"
+      }
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+        }
+        int_val: 1
+      }
+    }
+  }
+}
+node {
+  name: "rnn/TensorArrayStack/range"
+  op: "Range"
+  input: "rnn/TensorArrayStack/range/start"
+  input: "rnn/TensorArrayStack/TensorArraySizeV3"
+  input: "rnn/TensorArrayStack/range/delta"
+  attr {
+    key: "Tidx"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@rnn/TensorArray"
+      }
+    }
+  }
+}
+node {
+  name: "rnn/TensorArrayStack/TensorArrayGatherV3"
+  op: "TensorArrayGatherV3"
+  input: "rnn/TensorArray"
+  input: "rnn/TensorArrayStack/range"
+  input: "rnn/while/Exit_1"
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@rnn/TensorArray"
+      }
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "element_shape"
+    value {
+      shape {
+        dim {
+          size: -1
+        }
+        dim {
+          size: 20
+        }
+      }
+    }
+  }
+}
+node {
+  name: "rnn/Rank"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+        }
+        int_val: 3
+      }
+    }
+  }
+}
+node {
+  name: "rnn/range/start"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+        }
+        int_val: 2
+      }
+    }
+  }
+}
+node {
+  name: "rnn/range/delta"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+        }
+        int_val: 1
+      }
+    }
+  }
+}
+node {
+  name: "rnn/range"
+  op: "Range"
+  input: "rnn/range/start"
+  input: "rnn/Rank"
+  input: "rnn/range/delta"
+  attr {
+    key: "Tidx"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "rnn/concat_1/values_0"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+            size: 2
+          }
+        }
+        tensor_content: "\001\000\000\000\000\000\000\000"
+      }
+    }
+  }
+}
+node {
+  name: "rnn/concat_1/axis"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+        }
+        int_val: 0
+      }
+    }
+  }
+}
+node {
+  name: "rnn/concat_1"
+  op: "ConcatV2"
+  input: "rnn/concat_1/values_0"
+  input: "rnn/range"
+  input: "rnn/concat_1/axis"
+  attr {
+    key: "N"
+    value {
+      i: 2
+    }
+  }
+  attr {
+    key: "T"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "Tidx"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "rnn/transpose"
+  op: "Transpose"
+  input: "rnn/TensorArrayStack/TensorArrayGatherV3"
+  input: "rnn/concat_1"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "Tperm"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "transpose_1/perm"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+            size: 3
+          }
+        }
+        tensor_content: "\001\000\000\000\000\000\000\000\002\000\000\000"
+      }
+    }
+  }
+}
+node {
+  name: "transpose_1"
+  op: "Transpose"
+  input: "rnn/transpose"
+  input: "transpose_1/perm"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "Tperm"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "Gather/indices"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+        }
+        int_val: 27
+      }
+    }
+  }
+}
+node {
+  name: "Gather"
+  op: "Gather"
+  input: "transpose_1"
+  input: "Gather/indices"
+  attr {
+    key: "Tindices"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "Tparams"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "validate_indices"
+    value {
+      b: true
+    }
+  }
+}
+node {
+  name: "Variable"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+          dim {
+            size: 20
+          }
+          dim {
+            size: 10
+          }
+        }
+        tensor_content: "\311\323\004>\377H\004?\302\250\367\274\034~X\276\306\307{\275\016[\001?S\013\366>2\357\316\276Q\300\254=.\377\212\276\216\3715=\006\253*\277\315\206\036>\313\235\225\275]\232\027<kN\010>\363%\007>\r\335a\277\242\341\005>E S>\315V!>\205\320\306\276\2664\005?\034\323#?\356W2\277F\324\222\274\220\\\250>\r\035\240\276e\320\217>\352\237\026\277\007V<>\365\2301\276\006\226\313\276w\266\343\276\227\022\256=\220\344\345>f\332\243>6@\362\276,\315\025?\2167}\276\342\371\370\276\341\006\'?p\t\342\276\306\210\262\276\234u\277\274\244j\001?\260\360\311>kV4\277\260\335O>H\315\240>\033[(?X_+?U*\204\276\014\344j\274J\307\271\274\333\355\030\276_-]?\201\325\211\276i\377\t\276\302S\303\275J\332\"?\232\r\030?Mj\226\274Z}\025\276}Y\004\276p\216}\275b\231\004?\327Ob\276\255\272\272=\250\304F\276\2034?\277d,\353\276\365ER\277\366#&>aQ\207>\343\013\255>)\030\030\276,t\346\271[\023&>\017IO>S\323R\275f)H?\243\362\215\274T+3>\261;\230\276r\352\243\275r\025+\276H\2743?\244\370y\275\231\355?\276-\300\360>\362Az>\036\361\231>C\2235\277u\244\213=\350\007k\276\205\275d>o\236\217\276+]\332>\335K\207\276?\002\201\276\315y\021?\\Z\212\276\223I\232\276,\266\333>\023\337!\276do\256\276\276\264\252>\300\201\307\276\240P\r?\214\027\014> )=\277\201\027\373;c\n\251\275V\370\200>\257\371Z\276\3071;\277\322\256h>\373\375<>\203#\342=\250\274\002\277of\230>?\344];0\300\243\276T\350\014\276\376\220U>\2174\220>B\225\366>@-\344=$\002G\276\320\344\352\276}\003\275>#\3639\276\3012\265\276\'C\327>eD\265\276\010\325\277>\256\370]>\200B\215\2769\301\324>Aq\033?\350\245w\271\002\373\363\276\350\376\220\276\207]\371>-\216\331>\002\243 ?,^\204\276\353e\222\276\317`&\276\344[\233\276\265\237\336>\3715\250\276\016X\340\273\204\202\273\275U\322\302\276\210o\005\277\256k\253>\3179\027?\212\020\'>\2626s\276>\361\234>\274K%\275.\353Q\276\374-\316>\375o\262\276\031V\265>\335\253\376>od\253\276\0270Q>p~U\276\326\002\004?i\337\304\276\215; \276[\310\370\274\306\272\252\276s\264\217\276:\014\007?g\337\335>\021\026\021>\316z[\2778Gq>\233\374\022>r\227\006>\256v\022\277\367\221\265=\342T\211=\t\363\202\276|2@>\265\210\271=\245\245\207\276\213\374\270\276j\201 \277\r\206G>!\243u>\345\362\336>Ok\364\276\2022\020=hhG\275#\033\201>"
+      }
+    }
+  }
+}
+node {
+  name: "Variable/read"
+  op: "Identity"
+  input: "Variable"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Variable"
+      }
+    }
+  }
+}
+node {
+  name: "Variable_1"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+          dim {
+            size: 10
+          }
+        }
+        tensor_content: "Z\036\271\275Y\273\231=/\323\332=\272\321\271\275\2534\200>_^\204=\2609\301\275\034\271\330=\366\345\336=\244\317\224<"
+      }
+    }
+  }
+}
+node {
+  name: "Variable_1/read"
+  op: "Identity"
+  input: "Variable_1"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Variable_1"
+      }
+    }
+  }
+}
+node {
+  name: "MatMul"
+  op: "MatMul"
+  input: "Gather"
+  input: "Variable/read"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "transpose_a"
+    value {
+      b: false
+    }
+  }
+  attr {
+    key: "transpose_b"
+    value {
+      b: false
+    }
+  }
+}
+node {
+  name: "add"
+  op: "Add"
+  input: "MatMul"
+  input: "Variable_1/read"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "output"
+  op: "Softmax"
+  input: "add"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+library {
+}
