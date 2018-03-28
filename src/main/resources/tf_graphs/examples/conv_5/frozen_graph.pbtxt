@@ -77,53 +77,6 @@ node {
   }
 }
 node {
-  name: "max_pool"
-  op: "MaxPool3D"
-  input: "input"
-  attr {
-    key: "T"
-    value {
-      type: DT_FLOAT
-    }
-  }
-  attr {
-    key: "data_format"
-    value {
-      s: "NDHWC"
-    }
-  }
-  attr {
-    key: "ksize"
-    value {
-      list {
-        i: 1
-        i: 1
-        i: 2
-        i: 2
-        i: 1
-      }
-    }
-  }
-  attr {
-    key: "padding"
-    value {
-      s: "SAME"
-    }
-  }
-  attr {
-    key: "strides"
-    value {
-      list {
-        i: 1
-        i: 1
-        i: 1
-        i: 1
-        i: 1
-      }
-    }
-  }
-}
-node {
   name: "Reshape/shape"
   op: "Const"
   attr {
@@ -150,7 +103,7 @@ node {
 node {
   name: "Reshape"
   op: "Reshape"
-  input: "max_pool"
+  input: "input"
   input: "Reshape/shape"
   attr {
     key: "T"
@@ -256,7 +209,7 @@ node {
   attr {
     key: "seed2"
     value {
-      i: 17
+      i: 15
     }
   }
 }
