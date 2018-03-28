@@ -4,7 +4,7 @@ node {
   attr {
     key: "dtype"
     value {
-      type: DT_INT32
+      type: DT_DOUBLE
     }
   }
   attr {
@@ -12,7 +12,10 @@ node {
     value {
       shape {
         dim {
-          size: 10
+          size: -1
+        }
+        dim {
+          size: 3
         }
       }
     }
@@ -42,6 +45,251 @@ node {
   }
 }
 node {
+  name: "IsFinite"
+  op: "IsFinite"
+  input: "input_1"
+  attr {
+    key: "T"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+}
+node {
+  name: "Const"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+            size: 2
+          }
+        }
+        tensor_content: "\000\000\000\000\001\000\000\000"
+      }
+    }
+  }
+}
+node {
+  name: "All"
+  op: "All"
+  input: "IsFinite"
+  input: "Const"
+  attr {
+    key: "Tidx"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "keep_dims"
+    value {
+      b: false
+    }
+  }
+}
+node {
+  name: "Cast"
+  op: "Cast"
+  input: "IsFinite"
+  attr {
+    key: "DstT"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "SrcT"
+    value {
+      type: DT_BOOL
+    }
+  }
+}
+node {
+  name: "Cast_1"
+  op: "Cast"
+  input: "All"
+  attr {
+    key: "DstT"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "SrcT"
+    value {
+      type: DT_BOOL
+    }
+  }
+}
+node {
+  name: "Add"
+  op: "Add"
+  input: "Cast"
+  input: "Cast_1"
+  attr {
+    key: "T"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+}
+node {
+  name: "Cast_2"
+  op: "Cast"
+  input: "Add"
+  attr {
+    key: "DstT"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "SrcT"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+}
+node {
+  name: "TruncateDiv/y"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+        }
+        int_val: 3
+      }
+    }
+  }
+}
+node {
+  name: "TruncateDiv"
+  op: "TruncateDiv"
+  input: "Cast_2"
+  input: "TruncateDiv/y"
+  attr {
+    key: "T"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "Cast_3"
+  op: "Cast"
+  input: "TruncateDiv"
+  attr {
+    key: "DstT"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "SrcT"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "Reciprocal"
+  op: "Reciprocal"
+  input: "Cast_3"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "IsInf"
+  op: "IsInf"
+  input: "Reciprocal"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "Cast_4"
+  op: "Cast"
+  input: "IsInf"
+  attr {
+    key: "DstT"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "SrcT"
+    value {
+      type: DT_BOOL
+    }
+  }
+}
+node {
+  name: "IsNan"
+  op: "IsNan"
+  input: "Reciprocal"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "Cast_5"
+  op: "Cast"
+  input: "IsNan"
+  attr {
+    key: "DstT"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "SrcT"
+    value {
+      type: DT_BOOL
+    }
+  }
+}
+node {
+  name: "SquaredDifference"
+  op: "SquaredDifference"
+  input: "Cast_5"
+  input: "Cast_4"
+  attr {
+    key: "T"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+}
+node {
   name: "random_normal/shape"
   op: "Const"
   attr {
@@ -60,7 +308,7 @@ node {
             size: 2
           }
         }
-        tensor_content: "\010\000\000\000\n\000\000\000"
+        tensor_content: "\004\000\000\000\003\000\000\000"
       }
     }
   }
@@ -132,7 +380,7 @@ node {
   attr {
     key: "seed2"
     value {
-      i: 5
+      i: 21
     }
   }
 }
@@ -180,10 +428,10 @@ node {
     value {
       shape {
         dim {
-          size: 8
+          size: 4
         }
         dim {
-          size: 10
+          size: 3
         }
       }
     }
@@ -247,38 +495,34 @@ node {
   }
 }
 node {
-  name: "InvertPermutation"
-  op: "InvertPermutation"
-  input: "input_1"
+  name: "ReverseV2/axis"
+  op: "Const"
   attr {
-    key: "T"
+    key: "dtype"
     value {
       type: DT_INT32
     }
   }
-}
-node {
-  name: "Cast"
-  op: "Cast"
-  input: "InvertPermutation"
   attr {
-    key: "DstT"
+    key: "value"
     value {
-      type: DT_DOUBLE
-    }
-  }
-  attr {
-    key: "SrcT"
-    value {
-      type: DT_INT32
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+            size: 1
+          }
+        }
+        int_val: -1
+      }
     }
   }
 }
 node {
-  name: "xw_plus_b/MatMul"
-  op: "MatMul"
-  input: "input_2"
+  name: "ReverseV2"
+  op: "ReverseV2"
   input: "w/read"
+  input: "ReverseV2/axis"
   attr {
     key: "T"
     value {
@@ -286,38 +530,87 @@ node {
     }
   }
   attr {
-    key: "transpose_a"
+    key: "Tidx"
     value {
-      b: false
-    }
-  }
-  attr {
-    key: "transpose_b"
-    value {
-      b: false
+      type: DT_INT32
     }
   }
 }
 node {
-  name: "xw_plus_b"
-  op: "BiasAdd"
-  input: "xw_plus_b/MatMul"
-  input: "Cast"
+  name: "Add_1"
+  op: "Add"
+  input: "ReverseV2"
+  input: "SquaredDifference"
   attr {
     key: "T"
     value {
       type: DT_DOUBLE
     }
   }
+}
+node {
+  name: "Mul/y"
+  op: "Const"
   attr {
-    key: "data_format"
+    key: "dtype"
     value {
-      s: "NHWC"
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_DOUBLE
+        tensor_shape {
+          dim {
+            size: 4
+          }
+          dim {
+            size: 3
+          }
+        }
+        tensor_content: "\000\000\000\000\000\000\000\000\000\000\000\000\000\000\360?\000\000\000\000\000\000\360?\000\000\000\000\000\000\360?\000\000\000\000\000\000\360?\000\000\000\000\000\000\360?\000\000\000\000\000\000\000\000\000\000\000\000\000\000\360?\000\000\000\000\000\000\000\000\000\000\000\000\000\000\360?\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000"
+      }
     }
   }
 }
 node {
-  name: "Fill/dims"
+  name: "Mul"
+  op: "Mul"
+  input: "Add_1"
+  input: "Mul/y"
+  attr {
+    key: "T"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+}
+node {
+  name: "Reciprocal_1"
+  op: "Reciprocal"
+  input: "Mul"
+  attr {
+    key: "T"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+}
+node {
+  name: "IsInf_1"
+  op: "IsInf"
+  input: "Reciprocal_1"
+  attr {
+    key: "T"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+}
+node {
+  name: "Const_1"
   op: "Const"
   attr {
     key: "dtype"
@@ -335,48 +628,33 @@ node {
             size: 2
           }
         }
-        tensor_content: "\n\000\000\000\n\000\000\000"
+        tensor_content: "\000\000\000\000\001\000\000\000"
       }
     }
   }
 }
 node {
-  name: "Fill/value"
-  op: "Const"
+  name: "Any"
+  op: "Any"
+  input: "IsInf_1"
+  input: "Const_1"
   attr {
-    key: "dtype"
+    key: "Tidx"
     value {
-      type: DT_FLOAT
+      type: DT_INT32
     }
   }
   attr {
-    key: "value"
+    key: "keep_dims"
     value {
-      tensor {
-        dtype: DT_FLOAT
-        tensor_shape {
-        }
-        float_val: 1.23450005054
-      }
+      b: false
     }
   }
 }
 node {
-  name: "Fill"
-  op: "Fill"
-  input: "Fill/dims"
-  input: "Fill/value"
-  attr {
-    key: "T"
-    value {
-      type: DT_FLOAT
-    }
-  }
-}
-node {
-  name: "Cast_1"
+  name: "Cast_6"
   op: "Cast"
-  input: "Fill"
+  input: "Any"
   attr {
     key: "DstT"
     value {
@@ -386,1371 +664,18 @@ node {
   attr {
     key: "SrcT"
     value {
-      type: DT_FLOAT
-    }
-  }
-}
-node {
-  name: "Add"
-  op: "Add"
-  input: "xw_plus_b"
-  input: "Cast_1"
-  attr {
-    key: "T"
-    value {
-      type: DT_DOUBLE
-    }
-  }
-}
-node {
-  name: "Relu6"
-  op: "Relu6"
-  input: "Add"
-  attr {
-    key: "T"
-    value {
-      type: DT_DOUBLE
-    }
-  }
-}
-node {
-  name: "moments/mean/reduction_indices"
-  op: "Const"
-  attr {
-    key: "dtype"
-    value {
-      type: DT_INT32
-    }
-  }
-  attr {
-    key: "value"
-    value {
-      tensor {
-        dtype: DT_INT32
-        tensor_shape {
-          dim {
-            size: 2
-          }
-        }
-        tensor_content: "\001\000\000\000\000\000\000\000"
-      }
-    }
-  }
-}
-node {
-  name: "moments/mean"
-  op: "Mean"
-  input: "Relu6"
-  input: "moments/mean/reduction_indices"
-  attr {
-    key: "T"
-    value {
-      type: DT_DOUBLE
-    }
-  }
-  attr {
-    key: "Tidx"
-    value {
-      type: DT_INT32
-    }
-  }
-  attr {
-    key: "keep_dims"
-    value {
-      b: true
-    }
-  }
-}
-node {
-  name: "moments/StopGradient"
-  op: "StopGradient"
-  input: "moments/mean"
-  attr {
-    key: "T"
-    value {
-      type: DT_DOUBLE
-    }
-  }
-}
-node {
-  name: "moments/SquaredDifference"
-  op: "SquaredDifference"
-  input: "Relu6"
-  input: "moments/StopGradient"
-  attr {
-    key: "T"
-    value {
-      type: DT_DOUBLE
-    }
-  }
-}
-node {
-  name: "moments/variance/reduction_indices"
-  op: "Const"
-  attr {
-    key: "dtype"
-    value {
-      type: DT_INT32
-    }
-  }
-  attr {
-    key: "value"
-    value {
-      tensor {
-        dtype: DT_INT32
-        tensor_shape {
-          dim {
-            size: 2
-          }
-        }
-        tensor_content: "\001\000\000\000\000\000\000\000"
-      }
-    }
-  }
-}
-node {
-  name: "moments/variance"
-  op: "Mean"
-  input: "moments/SquaredDifference"
-  input: "moments/variance/reduction_indices"
-  attr {
-    key: "T"
-    value {
-      type: DT_DOUBLE
-    }
-  }
-  attr {
-    key: "Tidx"
-    value {
-      type: DT_INT32
-    }
-  }
-  attr {
-    key: "keep_dims"
-    value {
-      b: true
-    }
-  }
-}
-node {
-  name: "random_normal_1/shape"
-  op: "Const"
-  attr {
-    key: "dtype"
-    value {
-      type: DT_INT32
-    }
-  }
-  attr {
-    key: "value"
-    value {
-      tensor {
-        dtype: DT_INT32
-        tensor_shape {
-          dim {
-            size: 3
-          }
-        }
-        tensor_content: "\002\000\000\000\001\000\000\000\001\000\000\000"
-      }
-    }
-  }
-}
-node {
-  name: "random_normal_1/mean"
-  op: "Const"
-  attr {
-    key: "dtype"
-    value {
-      type: DT_DOUBLE
-    }
-  }
-  attr {
-    key: "value"
-    value {
-      tensor {
-        dtype: DT_DOUBLE
-        tensor_shape {
-        }
-        double_val: 0.0
-      }
-    }
-  }
-}
-node {
-  name: "random_normal_1/stddev"
-  op: "Const"
-  attr {
-    key: "dtype"
-    value {
-      type: DT_DOUBLE
-    }
-  }
-  attr {
-    key: "value"
-    value {
-      tensor {
-        dtype: DT_DOUBLE
-        tensor_shape {
-        }
-        double_val: 1.0
-      }
-    }
-  }
-}
-node {
-  name: "random_normal_1/RandomStandardNormal"
-  op: "RandomStandardNormal"
-  input: "random_normal_1/shape"
-  attr {
-    key: "T"
-    value {
-      type: DT_INT32
-    }
-  }
-  attr {
-    key: "dtype"
-    value {
-      type: DT_DOUBLE
-    }
-  }
-  attr {
-    key: "seed"
-    value {
-      i: 1
-    }
-  }
-  attr {
-    key: "seed2"
-    value {
-      i: 30
-    }
-  }
-}
-node {
-  name: "random_normal_1/mul"
-  op: "Mul"
-  input: "random_normal_1/RandomStandardNormal"
-  input: "random_normal_1/stddev"
-  attr {
-    key: "T"
-    value {
-      type: DT_DOUBLE
-    }
-  }
-}
-node {
-  name: "random_normal_1"
-  op: "Add"
-  input: "random_normal_1/mul"
-  input: "random_normal_1/mean"
-  attr {
-    key: "T"
-    value {
-      type: DT_DOUBLE
-    }
-  }
-}
-node {
-  name: "Variable"
-  op: "VariableV2"
-  attr {
-    key: "container"
-    value {
-      s: ""
-    }
-  }
-  attr {
-    key: "dtype"
-    value {
-      type: DT_DOUBLE
-    }
-  }
-  attr {
-    key: "shape"
-    value {
-      shape {
-        dim {
-          size: 2
-        }
-        dim {
-          size: 1
-        }
-        dim {
-          size: 1
-        }
-      }
-    }
-  }
-  attr {
-    key: "shared_name"
-    value {
-      s: ""
-    }
-  }
-}
-node {
-  name: "Variable/Assign"
-  op: "Assign"
-  input: "Variable"
-  input: "random_normal_1"
-  attr {
-    key: "T"
-    value {
-      type: DT_DOUBLE
-    }
-  }
-  attr {
-    key: "_class"
-    value {
-      list {
-        s: "loc:@Variable"
-      }
-    }
-  }
-  attr {
-    key: "use_locking"
-    value {
-      b: true
-    }
-  }
-  attr {
-    key: "validate_shape"
-    value {
-      b: true
-    }
-  }
-}
-node {
-  name: "Variable/read"
-  op: "Identity"
-  input: "Variable"
-  attr {
-    key: "T"
-    value {
-      type: DT_DOUBLE
-    }
-  }
-  attr {
-    key: "_class"
-    value {
-      list {
-        s: "loc:@Variable"
-      }
-    }
-  }
-}
-node {
-  name: "meshgrid/stack"
-  op: "Pack"
-  input: "moments/mean"
-  input: "moments/variance"
-  attr {
-    key: "N"
-    value {
-      i: 2
-    }
-  }
-  attr {
-    key: "T"
-    value {
-      type: DT_DOUBLE
-    }
-  }
-  attr {
-    key: "axis"
-    value {
-      i: 0
-    }
-  }
-}
-node {
-  name: "meshgrid/Reshape/shape"
-  op: "Const"
-  attr {
-    key: "dtype"
-    value {
-      type: DT_INT32
-    }
-  }
-  attr {
-    key: "value"
-    value {
-      tensor {
-        dtype: DT_INT32
-        tensor_shape {
-          dim {
-            size: 2
-          }
-        }
-        tensor_content: "\377\377\377\377\001\000\000\000"
-      }
-    }
-  }
-}
-node {
-  name: "meshgrid/Reshape"
-  op: "Reshape"
-  input: "meshgrid/stack"
-  input: "meshgrid/Reshape/shape"
-  attr {
-    key: "T"
-    value {
-      type: DT_DOUBLE
-    }
-  }
-  attr {
-    key: "Tshape"
-    value {
-      type: DT_INT32
-    }
-  }
-}
-node {
-  name: "meshgrid/Reshape_1/shape"
-  op: "Const"
-  attr {
-    key: "dtype"
-    value {
-      type: DT_INT32
-    }
-  }
-  attr {
-    key: "value"
-    value {
-      tensor {
-        dtype: DT_INT32
-        tensor_shape {
-          dim {
-            size: 2
-          }
-        }
-        tensor_content: "\001\000\000\000\377\377\377\377"
-      }
-    }
-  }
-}
-node {
-  name: "meshgrid/Reshape_1"
-  op: "Reshape"
-  input: "Variable/read"
-  input: "meshgrid/Reshape_1/shape"
-  attr {
-    key: "T"
-    value {
-      type: DT_DOUBLE
-    }
-  }
-  attr {
-    key: "Tshape"
-    value {
-      type: DT_INT32
-    }
-  }
-}
-node {
-  name: "meshgrid/Size/packed"
-  op: "Pack"
-  input: "moments/mean"
-  input: "moments/variance"
-  attr {
-    key: "N"
-    value {
-      i: 2
-    }
-  }
-  attr {
-    key: "T"
-    value {
-      type: DT_DOUBLE
-    }
-  }
-  attr {
-    key: "axis"
-    value {
-      i: 0
-    }
-  }
-}
-node {
-  name: "meshgrid/Size"
-  op: "Const"
-  attr {
-    key: "dtype"
-    value {
-      type: DT_INT32
-    }
-  }
-  attr {
-    key: "value"
-    value {
-      tensor {
-        dtype: DT_INT32
-        tensor_shape {
-        }
-        int_val: 2
-      }
-    }
-  }
-}
-node {
-  name: "meshgrid/Size_1"
-  op: "Const"
-  attr {
-    key: "dtype"
-    value {
-      type: DT_INT32
-    }
-  }
-  attr {
-    key: "value"
-    value {
-      tensor {
-        dtype: DT_INT32
-        tensor_shape {
-        }
-        int_val: 2
-      }
-    }
-  }
-}
-node {
-  name: "meshgrid/packed"
-  op: "Pack"
-  input: "moments/mean"
-  input: "moments/variance"
-  attr {
-    key: "N"
-    value {
-      i: 2
-    }
-  }
-  attr {
-    key: "T"
-    value {
-      type: DT_DOUBLE
-    }
-  }
-  attr {
-    key: "axis"
-    value {
-      i: 0
-    }
-  }
-}
-node {
-  name: "meshgrid/Reshape_2/shape"
-  op: "Const"
-  attr {
-    key: "dtype"
-    value {
-      type: DT_INT32
-    }
-  }
-  attr {
-    key: "value"
-    value {
-      tensor {
-        dtype: DT_INT32
-        tensor_shape {
-          dim {
-            size: 2
-          }
-        }
-        tensor_content: "\001\000\000\000\377\377\377\377"
-      }
-    }
-  }
-}
-node {
-  name: "meshgrid/Reshape_2"
-  op: "Reshape"
-  input: "meshgrid/Reshape"
-  input: "meshgrid/Reshape_2/shape"
-  attr {
-    key: "T"
-    value {
-      type: DT_DOUBLE
-    }
-  }
-  attr {
-    key: "Tshape"
-    value {
-      type: DT_INT32
-    }
-  }
-}
-node {
-  name: "meshgrid/Reshape_3/shape"
-  op: "Const"
-  attr {
-    key: "dtype"
-    value {
-      type: DT_INT32
-    }
-  }
-  attr {
-    key: "value"
-    value {
-      tensor {
-        dtype: DT_INT32
-        tensor_shape {
-          dim {
-            size: 2
-          }
-        }
-        tensor_content: "\377\377\377\377\001\000\000\000"
-      }
-    }
-  }
-}
-node {
-  name: "meshgrid/Reshape_3"
-  op: "Reshape"
-  input: "meshgrid/Reshape_1"
-  input: "meshgrid/Reshape_3/shape"
-  attr {
-    key: "T"
-    value {
-      type: DT_DOUBLE
-    }
-  }
-  attr {
-    key: "Tshape"
-    value {
-      type: DT_INT32
-    }
-  }
-}
-node {
-  name: "meshgrid/ones/shape"
-  op: "Pack"
-  input: "meshgrid/Size_1"
-  input: "meshgrid/Size"
-  attr {
-    key: "N"
-    value {
-      i: 2
-    }
-  }
-  attr {
-    key: "T"
-    value {
-      type: DT_INT32
-    }
-  }
-  attr {
-    key: "axis"
-    value {
-      i: 0
-    }
-  }
-}
-node {
-  name: "meshgrid/ones/Const"
-  op: "Const"
-  attr {
-    key: "dtype"
-    value {
-      type: DT_DOUBLE
-    }
-  }
-  attr {
-    key: "value"
-    value {
-      tensor {
-        dtype: DT_DOUBLE
-        tensor_shape {
-        }
-        double_val: 1.0
-      }
-    }
-  }
-}
-node {
-  name: "meshgrid/ones"
-  op: "Fill"
-  input: "meshgrid/ones/shape"
-  input: "meshgrid/ones/Const"
-  attr {
-    key: "T"
-    value {
-      type: DT_DOUBLE
-    }
-  }
-}
-node {
-  name: "meshgrid/mul"
-  op: "Mul"
-  input: "meshgrid/Reshape_2"
-  input: "meshgrid/ones"
-  attr {
-    key: "T"
-    value {
-      type: DT_DOUBLE
-    }
-  }
-}
-node {
-  name: "meshgrid/mul_1"
-  op: "Mul"
-  input: "meshgrid/Reshape_3"
-  input: "meshgrid/ones"
-  attr {
-    key: "T"
-    value {
-      type: DT_DOUBLE
-    }
-  }
-}
-node {
-  name: "parallel_stack/ExpandDims/dim"
-  op: "Const"
-  attr {
-    key: "dtype"
-    value {
-      type: DT_INT32
-    }
-  }
-  attr {
-    key: "value"
-    value {
-      tensor {
-        dtype: DT_INT32
-        tensor_shape {
-        }
-        int_val: 0
-      }
-    }
-  }
-}
-node {
-  name: "parallel_stack/ExpandDims"
-  op: "ExpandDims"
-  input: "meshgrid/mul_1"
-  input: "parallel_stack/ExpandDims/dim"
-  attr {
-    key: "T"
-    value {
-      type: DT_DOUBLE
-    }
-  }
-  attr {
-    key: "Tdim"
-    value {
-      type: DT_INT32
-    }
-  }
-}
-node {
-  name: "parallel_stack/ExpandDims_1/dim"
-  op: "Const"
-  attr {
-    key: "dtype"
-    value {
-      type: DT_INT32
-    }
-  }
-  attr {
-    key: "value"
-    value {
-      tensor {
-        dtype: DT_INT32
-        tensor_shape {
-        }
-        int_val: 0
-      }
-    }
-  }
-}
-node {
-  name: "parallel_stack/ExpandDims_1"
-  op: "ExpandDims"
-  input: "meshgrid/mul"
-  input: "parallel_stack/ExpandDims_1/dim"
-  attr {
-    key: "T"
-    value {
-      type: DT_DOUBLE
-    }
-  }
-  attr {
-    key: "Tdim"
-    value {
-      type: DT_INT32
-    }
-  }
-}
-node {
-  name: "parallel_stack/ExpandDims_2/dim"
-  op: "Const"
-  attr {
-    key: "dtype"
-    value {
-      type: DT_INT32
-    }
-  }
-  attr {
-    key: "value"
-    value {
-      tensor {
-        dtype: DT_INT32
-        tensor_shape {
-        }
-        int_val: 0
-      }
-    }
-  }
-}
-node {
-  name: "parallel_stack/ExpandDims_2"
-  op: "ExpandDims"
-  input: "meshgrid/mul_1"
-  input: "parallel_stack/ExpandDims_2/dim"
-  attr {
-    key: "T"
-    value {
-      type: DT_DOUBLE
-    }
-  }
-  attr {
-    key: "Tdim"
-    value {
-      type: DT_INT32
-    }
-  }
-}
-node {
-  name: "parallel_stack/ParallelConcat"
-  op: "ParallelConcat"
-  input: "parallel_stack/ExpandDims"
-  input: "parallel_stack/ExpandDims_1"
-  input: "parallel_stack/ExpandDims_2"
-  attr {
-    key: "N"
-    value {
-      i: 3
-    }
-  }
-  attr {
-    key: "T"
-    value {
-      type: DT_DOUBLE
-    }
-  }
-  attr {
-    key: "shape"
-    value {
-      shape {
-        dim {
-          size: 3
-        }
-        dim {
-          size: 2
-        }
-        dim {
-          size: 2
-        }
-      }
-    }
-  }
-}
-node {
-  name: "strided_slice/stack"
-  op: "Const"
-  attr {
-    key: "dtype"
-    value {
-      type: DT_INT32
-    }
-  }
-  attr {
-    key: "value"
-    value {
-      tensor {
-        dtype: DT_INT32
-        tensor_shape {
-          dim {
-            size: 1
-          }
-        }
-        int_val: 0
-      }
-    }
-  }
-}
-node {
-  name: "strided_slice/stack_1"
-  op: "Const"
-  attr {
-    key: "dtype"
-    value {
-      type: DT_INT32
-    }
-  }
-  attr {
-    key: "value"
-    value {
-      tensor {
-        dtype: DT_INT32
-        tensor_shape {
-          dim {
-            size: 1
-          }
-        }
-        int_val: 1
-      }
-    }
-  }
-}
-node {
-  name: "strided_slice/stack_2"
-  op: "Const"
-  attr {
-    key: "dtype"
-    value {
-      type: DT_INT32
-    }
-  }
-  attr {
-    key: "value"
-    value {
-      tensor {
-        dtype: DT_INT32
-        tensor_shape {
-          dim {
-            size: 1
-          }
-        }
-        int_val: 1
-      }
-    }
-  }
-}
-node {
-  name: "strided_slice"
-  op: "StridedSlice"
-  input: "parallel_stack/ParallelConcat"
-  input: "strided_slice/stack"
-  input: "strided_slice/stack_1"
-  input: "strided_slice/stack_2"
-  attr {
-    key: "Index"
-    value {
-      type: DT_INT32
-    }
-  }
-  attr {
-    key: "T"
-    value {
-      type: DT_DOUBLE
-    }
-  }
-  attr {
-    key: "begin_mask"
-    value {
-      i: 0
-    }
-  }
-  attr {
-    key: "ellipsis_mask"
-    value {
-      i: 0
-    }
-  }
-  attr {
-    key: "end_mask"
-    value {
-      i: 0
-    }
-  }
-  attr {
-    key: "new_axis_mask"
-    value {
-      i: 0
-    }
-  }
-  attr {
-    key: "shrink_axis_mask"
-    value {
-      i: 1
-    }
-  }
-}
-node {
-  name: "strided_slice_1/stack"
-  op: "Const"
-  attr {
-    key: "dtype"
-    value {
-      type: DT_INT32
-    }
-  }
-  attr {
-    key: "value"
-    value {
-      tensor {
-        dtype: DT_INT32
-        tensor_shape {
-          dim {
-            size: 1
-          }
-        }
-        int_val: 1
-      }
-    }
-  }
-}
-node {
-  name: "strided_slice_1/stack_1"
-  op: "Const"
-  attr {
-    key: "dtype"
-    value {
-      type: DT_INT32
-    }
-  }
-  attr {
-    key: "value"
-    value {
-      tensor {
-        dtype: DT_INT32
-        tensor_shape {
-          dim {
-            size: 1
-          }
-        }
-        int_val: 2
-      }
-    }
-  }
-}
-node {
-  name: "strided_slice_1/stack_2"
-  op: "Const"
-  attr {
-    key: "dtype"
-    value {
-      type: DT_INT32
-    }
-  }
-  attr {
-    key: "value"
-    value {
-      tensor {
-        dtype: DT_INT32
-        tensor_shape {
-          dim {
-            size: 1
-          }
-        }
-        int_val: 1
-      }
-    }
-  }
-}
-node {
-  name: "strided_slice_1"
-  op: "StridedSlice"
-  input: "parallel_stack/ParallelConcat"
-  input: "strided_slice_1/stack"
-  input: "strided_slice_1/stack_1"
-  input: "strided_slice_1/stack_2"
-  attr {
-    key: "Index"
-    value {
-      type: DT_INT32
-    }
-  }
-  attr {
-    key: "T"
-    value {
-      type: DT_DOUBLE
-    }
-  }
-  attr {
-    key: "begin_mask"
-    value {
-      i: 0
-    }
-  }
-  attr {
-    key: "ellipsis_mask"
-    value {
-      i: 0
-    }
-  }
-  attr {
-    key: "end_mask"
-    value {
-      i: 0
-    }
-  }
-  attr {
-    key: "new_axis_mask"
-    value {
-      i: 0
-    }
-  }
-  attr {
-    key: "shrink_axis_mask"
-    value {
-      i: 1
-    }
-  }
-}
-node {
-  name: "strided_slice_2/stack"
-  op: "Const"
-  attr {
-    key: "dtype"
-    value {
-      type: DT_INT32
-    }
-  }
-  attr {
-    key: "value"
-    value {
-      tensor {
-        dtype: DT_INT32
-        tensor_shape {
-          dim {
-            size: 1
-          }
-        }
-        int_val: 2
-      }
-    }
-  }
-}
-node {
-  name: "strided_slice_2/stack_1"
-  op: "Const"
-  attr {
-    key: "dtype"
-    value {
-      type: DT_INT32
-    }
-  }
-  attr {
-    key: "value"
-    value {
-      tensor {
-        dtype: DT_INT32
-        tensor_shape {
-          dim {
-            size: 1
-          }
-        }
-        int_val: 3
-      }
-    }
-  }
-}
-node {
-  name: "strided_slice_2/stack_2"
-  op: "Const"
-  attr {
-    key: "dtype"
-    value {
-      type: DT_INT32
-    }
-  }
-  attr {
-    key: "value"
-    value {
-      tensor {
-        dtype: DT_INT32
-        tensor_shape {
-          dim {
-            size: 1
-          }
-        }
-        int_val: 1
-      }
-    }
-  }
-}
-node {
-  name: "strided_slice_2"
-  op: "StridedSlice"
-  input: "parallel_stack/ParallelConcat"
-  input: "strided_slice_2/stack"
-  input: "strided_slice_2/stack_1"
-  input: "strided_slice_2/stack_2"
-  attr {
-    key: "Index"
-    value {
-      type: DT_INT32
-    }
-  }
-  attr {
-    key: "T"
-    value {
-      type: DT_DOUBLE
-    }
-  }
-  attr {
-    key: "begin_mask"
-    value {
-      i: 0
-    }
-  }
-  attr {
-    key: "ellipsis_mask"
-    value {
-      i: 0
-    }
-  }
-  attr {
-    key: "end_mask"
-    value {
-      i: 0
-    }
-  }
-  attr {
-    key: "new_axis_mask"
-    value {
-      i: 0
-    }
-  }
-  attr {
-    key: "shrink_axis_mask"
-    value {
-      i: 1
-    }
-  }
-}
-node {
-  name: "normalize/divisor"
-  op: "Reciprocal"
-  input: "strided_slice"
-  attr {
-    key: "T"
-    value {
-      type: DT_DOUBLE
-    }
-  }
-}
-node {
-  name: "normalize/mean"
-  op: "Mul"
-  input: "strided_slice_1"
-  input: "normalize/divisor"
-  attr {
-    key: "T"
-    value {
-      type: DT_DOUBLE
-    }
-  }
-}
-node {
-  name: "normalize/Mul"
-  op: "Mul"
-  input: "strided_slice_2"
-  input: "normalize/divisor"
-  attr {
-    key: "T"
-    value {
-      type: DT_DOUBLE
-    }
-  }
-}
-node {
-  name: "normalize/Square"
-  op: "Square"
-  input: "normalize/mean"
-  attr {
-    key: "T"
-    value {
-      type: DT_DOUBLE
-    }
-  }
-}
-node {
-  name: "normalize/variance"
-  op: "Sub"
-  input: "normalize/Mul"
-  input: "normalize/Square"
-  attr {
-    key: "T"
-    value {
-      type: DT_DOUBLE
-    }
-  }
-}
-node {
-  name: "Const"
-  op: "Const"
-  attr {
-    key: "dtype"
-    value {
-      type: DT_INT32
-    }
-  }
-  attr {
-    key: "value"
-    value {
-      tensor {
-        dtype: DT_INT32
-        tensor_shape {
-          dim {
-            size: 3
-          }
-          dim {
-            size: 2
-          }
-        }
-        tensor_content: "\001\000\000\000\001\000\000\000\001\000\000\000\001\000\000\000\001\000\000\000\001\000\000\000"
-      }
-    }
-  }
-}
-node {
-  name: "output/input"
-  op: "Pack"
-  input: "normalize/mean"
-  input: "normalize/variance"
-  attr {
-    key: "N"
-    value {
-      i: 2
-    }
-  }
-  attr {
-    key: "T"
-    value {
-      type: DT_DOUBLE
-    }
-  }
-  attr {
-    key: "axis"
-    value {
-      i: 0
+      type: DT_BOOL
     }
   }
 }
 node {
   name: "output"
-  op: "MirrorPad"
-  input: "output/input"
-  input: "Const"
+  op: "Identity"
+  input: "Cast_6"
   attr {
     key: "T"
     value {
       type: DT_DOUBLE
-    }
-  }
-  attr {
-    key: "Tpaddings"
-    value {
-      type: DT_INT32
-    }
-  }
-  attr {
-    key: "mode"
-    value {
-      s: "REFLECT"
     }
   }
 }
@@ -1791,10 +716,9 @@ node {
         dtype: DT_STRING
         tensor_shape {
           dim {
-            size: 2
+            size: 1
           }
         }
-        string_val: "Variable"
         string_val: "w"
       }
     }
@@ -1816,10 +740,9 @@ node {
         dtype: DT_STRING
         tensor_shape {
           dim {
-            size: 2
+            size: 1
           }
         }
-        string_val: ""
         string_val: ""
       }
     }
@@ -1831,13 +754,11 @@ node {
   input: "save/Const"
   input: "save/SaveV2/tensor_names"
   input: "save/SaveV2/shape_and_slices"
-  input: "Variable"
   input: "w"
   attr {
     key: "dtypes"
     value {
       list {
-        type: DT_DOUBLE
         type: DT_DOUBLE
       }
     }
@@ -1882,7 +803,7 @@ node {
             size: 1
           }
         }
-        string_val: "Variable"
+        string_val: "w"
       }
     }
   }
@@ -1929,103 +850,8 @@ node {
 node {
   name: "save/Assign"
   op: "Assign"
-  input: "Variable"
-  input: "save/RestoreV2"
-  attr {
-    key: "T"
-    value {
-      type: DT_DOUBLE
-    }
-  }
-  attr {
-    key: "_class"
-    value {
-      list {
-        s: "loc:@Variable"
-      }
-    }
-  }
-  attr {
-    key: "use_locking"
-    value {
-      b: true
-    }
-  }
-  attr {
-    key: "validate_shape"
-    value {
-      b: true
-    }
-  }
-}
-node {
-  name: "save/RestoreV2_1/tensor_names"
-  op: "Const"
-  attr {
-    key: "dtype"
-    value {
-      type: DT_STRING
-    }
-  }
-  attr {
-    key: "value"
-    value {
-      tensor {
-        dtype: DT_STRING
-        tensor_shape {
-          dim {
-            size: 1
-          }
-        }
-        string_val: "w"
-      }
-    }
-  }
-}
-node {
-  name: "save/RestoreV2_1/shape_and_slices"
-  op: "Const"
-  attr {
-    key: "dtype"
-    value {
-      type: DT_STRING
-    }
-  }
-  attr {
-    key: "value"
-    value {
-      tensor {
-        dtype: DT_STRING
-        tensor_shape {
-          dim {
-            size: 1
-          }
-        }
-        string_val: ""
-      }
-    }
-  }
-}
-node {
-  name: "save/RestoreV2_1"
-  op: "RestoreV2"
-  input: "save/Const"
-  input: "save/RestoreV2_1/tensor_names"
-  input: "save/RestoreV2_1/shape_and_slices"
-  attr {
-    key: "dtypes"
-    value {
-      list {
-        type: DT_DOUBLE
-      }
-    }
-  }
-}
-node {
-  name: "save/Assign_1"
-  op: "Assign"
   input: "w"
-  input: "save/RestoreV2_1"
+  input: "save/RestoreV2"
   attr {
     key: "T"
     value {
@@ -2057,13 +883,11 @@ node {
   name: "save/restore_all"
   op: "NoOp"
   input: "^save/Assign"
-  input: "^save/Assign_1"
 }
 node {
   name: "init"
   op: "NoOp"
   input: "^w/Assign"
-  input: "^Variable/Assign"
 }
 versions {
   producer: 24
