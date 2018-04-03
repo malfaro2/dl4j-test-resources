@@ -417,79 +417,9 @@ node {
   }
 }
 node {
-  name: "IsInf_1"
-  op: "IsInf"
-  input: "Reciprocal_1"
-  attr {
-    key: "T"
-    value {
-      type: DT_DOUBLE
-    }
-  }
-}
-node {
-  name: "Const_1"
-  op: "Const"
-  attr {
-    key: "dtype"
-    value {
-      type: DT_INT32
-    }
-  }
-  attr {
-    key: "value"
-    value {
-      tensor {
-        dtype: DT_INT32
-        tensor_shape {
-          dim {
-            size: 2
-          }
-        }
-        tensor_content: "\000\000\000\000\001\000\000\000"
-      }
-    }
-  }
-}
-node {
-  name: "Any"
-  op: "Any"
-  input: "IsInf_1"
-  input: "Const_1"
-  attr {
-    key: "Tidx"
-    value {
-      type: DT_INT32
-    }
-  }
-  attr {
-    key: "keep_dims"
-    value {
-      b: false
-    }
-  }
-}
-node {
-  name: "Cast_6"
-  op: "Cast"
-  input: "Any"
-  attr {
-    key: "DstT"
-    value {
-      type: DT_DOUBLE
-    }
-  }
-  attr {
-    key: "SrcT"
-    value {
-      type: DT_BOOL
-    }
-  }
-}
-node {
   name: "output"
   op: "Identity"
-  input: "Cast_6"
+  input: "Reciprocal_1"
   attr {
     key: "T"
     value {
