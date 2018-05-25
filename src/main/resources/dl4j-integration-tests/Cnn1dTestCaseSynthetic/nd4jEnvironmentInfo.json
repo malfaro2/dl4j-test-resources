@@ -1,0 +1,11 @@
+#Alex - 1527246015146
+#Fri May 25 21:00:15 AEST 2018
+cores=16
+os=Windows 10
+backend=CPU
+blas.threads=8
+memory.available=7611613184
+omp.threads=8
+memory.free=7611613087
+memoryBandwidth={0\={DEVICE_TO_DEVICE\=0, HOST_TO_DEVICE\=0, HOST_TO_HOST\=0, DEVICE_TO_HOST\=0}}
+blas.vendor=MKL
