@@ -57,3 +57,4 @@ KERAS_BACKEND=tensorflow python3 embedding_conv1d_extended.py
 KERAS_BACKEND=theano python3 embedding_conv1d_extended.py
 KERAS_BACKEND=tensorflow python3 conv2d_reshape.py
 KERAS_BACKEND=theano python3 conv2d_reshape.py
+KERAS_BACKEND=tensorflow python3 sepconv.py
