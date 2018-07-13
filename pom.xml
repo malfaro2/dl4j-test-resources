@@ -75,12 +75,12 @@
                 <repository>
                     <id>ci-nexus-releases</id>
                     <name>Nexus Release Repository</name>
-                    <url>http://52.179.87.114/repository/maven-releases/</url>
+                    <url>http://ci-nexus.eastus.cloudapp.azure.com/repository/maven-releases/</url>
                 </repository>
                 <snapshotRepository>
                     <id>ci-nexus-snapshots</id>
                     <name>Sonatype Nexus snapshot repository</name>
-                    <url>http://52.179.87.114/repository/maven-snapshots/</url>
+                    <url>http://ci-nexus.eastus.cloudapp.azure.com/repository/maven-snapshots/</url>
                 </snapshotRepository>
             </distributionManagement>
             <build>
@@ -109,7 +109,7 @@
                         <extensions>true</extensions>
                         <configuration>
                             <serverId>ci-nexus-snapshots</serverId>
-                            <nexusUrl>http://52.179.87.114/</nexusUrl>
+                            <nexusUrl>http://ci-nexus.eastus.cloudapp.azure.com/</nexusUrl>
                             <skipStagingRepositoryClose>true</skipStagingRepositoryClose>
                         </configuration>
                     </plugin>
