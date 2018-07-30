@@ -1,0 +1,11 @@
+#Alex - 1532940252730
+#Mon Jul 30 18:44:12 AEST 2018
+cores=16
+os=Windows 10
+backend=CPU
+blas.threads=8
+memory.available=7611613184
+omp.threads=8
+memory.free=7611613183
+memoryBandwidth={0\={DEVICE_TO_DEVICE\=0, DEVICE_TO_HOST\=0, HOST_TO_HOST\=0, HOST_TO_DEVICE\=0}}
+blas.vendor=OPENBLAS
