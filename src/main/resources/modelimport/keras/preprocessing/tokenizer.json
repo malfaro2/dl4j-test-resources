@@ -1,0 +1,1 @@
+{"config": {"split": " ", "word_index": "{}", "filters": "!\"#$%&()*+,-./:;<=>?@[\\]^_`{|}~\t\n", "index_docs": "{}", "char_level": false, "document_count": 0, "num_words": 100, "word_docs": "{}", "word_counts": "{}", "lower": true, "index_word": "{}", "oov_token": null}, "class_name": "Tokenizer"}
