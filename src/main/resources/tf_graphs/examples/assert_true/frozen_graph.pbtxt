@@ -1,0 +1,465 @@
+node {
+  name: "input"
+  op: "Placeholder"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "shape"
+    value {
+      shape {
+        dim {
+          size: -1
+        }
+        dim {
+          size: 3
+        }
+      }
+    }
+  }
+}
+node {
+  name: "k0"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_DOUBLE
+        tensor_shape {
+          dim {
+            size: 3
+          }
+          dim {
+            size: 3
+          }
+        }
+        tensor_content: "t\332\323\263$\351\360\277\025\340^\312\243m\377\277\035\332I\351\2408\357?\252\037\233\322\030E\327?C\350a$\214+\321?\351\263\363F\\|\346?\355\312\3608\274\306\326\277\353\023\3431\224\271\346?\345\241\217\310\351]\323\277"
+      }
+    }
+  }
+}
+node {
+  name: "k0/read"
+  op: "Identity"
+  input: "k0"
+  attr {
+    key: "T"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@k0"
+      }
+    }
+  }
+}
+node {
+  name: "Const"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+            size: 2
+          }
+        }
+        tensor_content: "\000\000\000\000\001\000\000\000"
+      }
+    }
+  }
+}
+node {
+  name: "Max"
+  op: "Max"
+  input: "input"
+  input: "Const"
+  attr {
+    key: "T"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "Tidx"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "keep_dims"
+    value {
+      b: false
+    }
+  }
+}
+node {
+  name: "LessEqual/y"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_DOUBLE
+        tensor_shape {
+        }
+        double_val: 100.0
+      }
+    }
+  }
+}
+node {
+  name: "LessEqual"
+  op: "LessEqual"
+  input: "Max"
+  input: "LessEqual/y"
+  attr {
+    key: "T"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+}
+node {
+  name: "Assert/AssertGuard/Switch"
+  op: "Switch"
+  input: "LessEqual"
+  input: "LessEqual"
+  attr {
+    key: "T"
+    value {
+      type: DT_BOOL
+    }
+  }
+}
+node {
+  name: "Assert/AssertGuard/switch_t"
+  op: "Identity"
+  input: "Assert/AssertGuard/Switch:1"
+  attr {
+    key: "T"
+    value {
+      type: DT_BOOL
+    }
+  }
+}
+node {
+  name: "Assert/AssertGuard/switch_f"
+  op: "Identity"
+  input: "Assert/AssertGuard/Switch"
+  attr {
+    key: "T"
+    value {
+      type: DT_BOOL
+    }
+  }
+}
+node {
+  name: "Assert/AssertGuard/pred_id"
+  op: "Identity"
+  input: "LessEqual"
+  attr {
+    key: "T"
+    value {
+      type: DT_BOOL
+    }
+  }
+}
+node {
+  name: "Assert/AssertGuard/NoOp"
+  op: "NoOp"
+  input: "^Assert/AssertGuard/switch_t"
+}
+node {
+  name: "Assert/AssertGuard/control_dependency"
+  op: "Identity"
+  input: "Assert/AssertGuard/switch_t"
+  input: "^Assert/AssertGuard/NoOp"
+  attr {
+    key: "T"
+    value {
+      type: DT_BOOL
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Assert/AssertGuard/switch_t"
+      }
+    }
+  }
+}
+node {
+  name: "Assert/AssertGuard/Assert"
+  op: "Assert"
+  input: "Assert/AssertGuard/Assert/Switch"
+  input: "Assert/AssertGuard/Assert/Switch_1"
+  attr {
+    key: "T"
+    value {
+      list {
+        type: DT_DOUBLE
+      }
+    }
+  }
+  attr {
+    key: "summarize"
+    value {
+      i: 3
+    }
+  }
+}
+node {
+  name: "Assert/AssertGuard/Assert/Switch"
+  op: "Switch"
+  input: "LessEqual"
+  input: "Assert/AssertGuard/pred_id"
+  attr {
+    key: "T"
+    value {
+      type: DT_BOOL
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@LessEqual"
+      }
+    }
+  }
+}
+node {
+  name: "Assert/AssertGuard/Assert/Switch_1"
+  op: "Switch"
+  input: "k0/read"
+  input: "Assert/AssertGuard/pred_id"
+  attr {
+    key: "T"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@k0"
+      }
+    }
+  }
+}
+node {
+  name: "Assert/AssertGuard/control_dependency_1"
+  op: "Identity"
+  input: "Assert/AssertGuard/switch_f"
+  input: "^Assert/AssertGuard/Assert"
+  attr {
+    key: "T"
+    value {
+      type: DT_BOOL
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Assert/AssertGuard/switch_f"
+      }
+    }
+  }
+}
+node {
+  name: "Assert/AssertGuard/Merge"
+  op: "Merge"
+  input: "Assert/AssertGuard/control_dependency_1"
+  input: "Assert/AssertGuard/control_dependency"
+  attr {
+    key: "N"
+    value {
+      i: 2
+    }
+  }
+  attr {
+    key: "T"
+    value {
+      type: DT_BOOL
+    }
+  }
+}
+node {
+  name: "input_1/Rank"
+  op: "Rank"
+  input: "input"
+  input: "^Assert/AssertGuard/Merge"
+  attr {
+    key: "T"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+}
+node {
+  name: "input_1/sub/y"
+  op: "Const"
+  input: "^Assert/AssertGuard/Merge"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+        }
+        int_val: 1
+      }
+    }
+  }
+}
+node {
+  name: "input_1/sub"
+  op: "Sub"
+  input: "input_1/Rank"
+  input: "input_1/sub/y"
+  attr {
+    key: "T"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "input_1/Range/start"
+  op: "Const"
+  input: "^Assert/AssertGuard/Merge"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+        }
+        int_val: 0
+      }
+    }
+  }
+}
+node {
+  name: "input_1/Range/delta"
+  op: "Const"
+  input: "^Assert/AssertGuard/Merge"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+        }
+        int_val: 1
+      }
+    }
+  }
+}
+node {
+  name: "input_1/Range"
+  op: "Range"
+  input: "input_1/Range/start"
+  input: "input_1/Rank"
+  input: "input_1/Range/delta"
+  attr {
+    key: "Tidx"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "input_1/sub_1"
+  op: "Sub"
+  input: "input_1/sub"
+  input: "input_1/Range"
+  attr {
+    key: "T"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "input_1"
+  op: "Transpose"
+  input: "input"
+  input: "input_1/sub_1"
+  attr {
+    key: "T"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "Tperm"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "output"
+  op: "Add"
+  input: "input_1"
+  input: "k0/read"
+  attr {
+    key: "T"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+}
+library {
+}
