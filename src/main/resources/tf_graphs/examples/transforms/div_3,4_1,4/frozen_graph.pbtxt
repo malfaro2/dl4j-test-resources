@@ -1,0 +1,139 @@
+node {
+  name: "Variable_6"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+          dim {
+            size: 3
+          }
+          dim {
+            size: 4
+          }
+        }
+        tensor_content: "\\F\275?\025\330&?fX\372=k`+?\004\223\375\277\270m{\276\332\240i\277G\202\250?\030\264B\275\021\242\224\277[[F\276\216?\211\277"
+      }
+    }
+  }
+}
+node {
+  name: "Variable_6/read"
+  op: "Identity"
+  input: "Variable_6"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Variable_6"
+      }
+    }
+  }
+}
+node {
+  name: "Variable_7"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+          dim {
+            size: 1
+          }
+          dim {
+            size: 4
+          }
+        }
+        tensor_content: "\320\277\037\277\200\302\337>\006\321v?@\347\360>"
+      }
+    }
+  }
+}
+node {
+  name: "Variable_7/read"
+  op: "Identity"
+  input: "Variable_7"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Variable_7"
+      }
+    }
+  }
+}
+node {
+  name: "div-1_1"
+  op: "RealDiv"
+  input: "Variable_6/read"
+  input: "Variable_7/read"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "Add_3/y"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+        }
+        float_val: 1.0
+      }
+    }
+  }
+}
+node {
+  name: "Add_3"
+  op: "Add"
+  input: "div-1_1"
+  input: "Add_3/y"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+library {
+}

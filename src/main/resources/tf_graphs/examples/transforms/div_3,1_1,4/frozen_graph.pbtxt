@@ -1,0 +1,139 @@
+node {
+  name: "Variable_8"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+          dim {
+            size: 3
+          }
+          dim {
+            size: 1
+          }
+        }
+        tensor_content: "\332*7?\031\340\n\300\310\037\216\277"
+      }
+    }
+  }
+}
+node {
+  name: "Variable_8/read"
+  op: "Identity"
+  input: "Variable_8"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Variable_8"
+      }
+    }
+  }
+}
+node {
+  name: "Variable_9"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+          dim {
+            size: 1
+          }
+          dim {
+            size: 4
+          }
+        }
+        tensor_content: "]\227]\277-\024\244>\367\036\"?\212/\372?"
+      }
+    }
+  }
+}
+node {
+  name: "Variable_9/read"
+  op: "Identity"
+  input: "Variable_9"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Variable_9"
+      }
+    }
+  }
+}
+node {
+  name: "div-1_2"
+  op: "RealDiv"
+  input: "Variable_8/read"
+  input: "Variable_9/read"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "Add_4/y"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+        }
+        float_val: 1.0
+      }
+    }
+  }
+}
+node {
+  name: "Add_4"
+  op: "Add"
+  input: "div-1_2"
+  input: "Add_4/y"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+library {
+}
