@@ -1,0 +1,105 @@
+node {
+  name: "Variable"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_BOOL
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_BOOL
+        tensor_shape {
+        }
+        bool_val: true
+      }
+    }
+  }
+}
+node {
+  name: "Variable/read"
+  op: "Identity"
+  input: "Variable"
+  attr {
+    key: "T"
+    value {
+      type: DT_BOOL
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Variable"
+      }
+    }
+  }
+}
+node {
+  name: "Variable_1"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_BOOL
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_BOOL
+        tensor_shape {
+          dim {
+            size: 3
+          }
+          dim {
+            size: 4
+          }
+        }
+        bool_val: false
+        bool_val: false
+        bool_val: false
+        bool_val: false
+        bool_val: true
+        bool_val: false
+        bool_val: true
+        bool_val: false
+        bool_val: true
+        bool_val: true
+        bool_val: false
+        bool_val: true
+      }
+    }
+  }
+}
+node {
+  name: "Variable_1/read"
+  op: "Identity"
+  input: "Variable_1"
+  attr {
+    key: "T"
+    value {
+      type: DT_BOOL
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Variable_1"
+      }
+    }
+  }
+}
+node {
+  name: "logicalor1"
+  op: "LogicalOr"
+  input: "Variable/read"
+  input: "Variable_1/read"
+}
+library {
+}
