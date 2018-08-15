@@ -1,0 +1,109 @@
+node {
+  name: "in_0"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+          dim {
+            size: 6
+          }
+          dim {
+            size: 3
+          }
+        }
+        tensor_content: "\000\000\340@\000\000\000A\000\000\340@\000\000\000@\000\000\340@\000\000\200?\000\000\240@\000\000\000A\000\000\240@\000\000\020A\000\000\000\000\000\000\340@\000\000\300@\000\000\240@\000\000\200?\000\000@@\000\000\200?\000\000\200@"
+      }
+    }
+  }
+}
+node {
+  name: "in_0/read"
+  op: "Identity"
+  input: "in_0"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@in_0"
+      }
+    }
+  }
+}
+node {
+  name: "in_1"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+            size: 6
+          }
+        }
+        tensor_content: "\000\000\000\000\000\000\000\000\001\000\000\000\001\000\000\000\002\000\000\000\002\000\000\000"
+      }
+    }
+  }
+}
+node {
+  name: "in_1/read"
+  op: "Identity"
+  input: "in_1"
+  attr {
+    key: "T"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@in_1"
+      }
+    }
+  }
+}
+node {
+  name: "SegmentMax"
+  op: "SegmentMax"
+  input: "in_0/read"
+  input: "in_1/read"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "Tindices"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+library {
+}
