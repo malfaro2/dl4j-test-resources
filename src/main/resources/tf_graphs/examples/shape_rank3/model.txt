@@ -219,6 +219,39 @@ node {
   }
 }
 node {
+  name: "Add/y"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+        }
+        float_val: 1.0
+      }
+    }
+  }
+}
+node {
+  name: "Add"
+  op: "Add"
+  input: "in_0/read"
+  input: "Add/y"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
   name: "Shape"
   op: "Const"
   attr {
@@ -239,6 +272,39 @@ node {
         }
         tensor_content: "\002\000\000\000\003\000\000\000\004\000\000\000"
       }
+    }
+  }
+}
+node {
+  name: "Add_1/y"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+        }
+        int_val: 1
+      }
+    }
+  }
+}
+node {
+  name: "Add_1"
+  op: "Add"
+  input: "Shape"
+  input: "Add_1/y"
+  attr {
+    key: "T"
+    value {
+      type: DT_INT32
     }
   }
 }
