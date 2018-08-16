@@ -1,0 +1,199 @@
+node {
+  name: "in_0"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+          dim {
+            size: 2
+          }
+          dim {
+            size: 3
+          }
+        }
+        tensor_content: "~^G?L\033M?\236p9?\220ol>\356%:?X\2708>"
+      }
+    }
+  }
+}
+node {
+  name: "in_0/read"
+  op: "Identity"
+  input: "in_0"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@in_0"
+      }
+    }
+  }
+}
+node {
+  name: "in_1"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+          dim {
+            size: 2
+          }
+        }
+        tensor_content: "\006\220E?\202\226m?"
+      }
+    }
+  }
+}
+node {
+  name: "in_1/read"
+  op: "Identity"
+  input: "in_1"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@in_1"
+      }
+    }
+  }
+}
+node {
+  name: "in_2"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+        }
+        float_val: 0.9441485404968262
+      }
+    }
+  }
+}
+node {
+  name: "in_2/read"
+  op: "Identity"
+  input: "in_2"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@in_2"
+      }
+    }
+  }
+}
+node {
+  name: "in_3"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+          dim {
+            size: 2
+          }
+          dim {
+            size: 1
+          }
+          dim {
+            size: 3
+          }
+        }
+        tensor_content: "t\357h?x\262\t?\000.\023?x\214\324>\274\375\313>\000\307\334<"
+      }
+    }
+  }
+}
+node {
+  name: "in_3/read"
+  op: "Identity"
+  input: "in_3"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@in_3"
+      }
+    }
+  }
+}
+node {
+  name: "IdentityN"
+  op: "IdentityN"
+  input: "in_0/read"
+  input: "in_1/read"
+  input: "in_2/read"
+  input: "in_3/read"
+  attr {
+    key: "T"
+    value {
+      list {
+        type: DT_FLOAT
+        type: DT_FLOAT
+        type: DT_FLOAT
+        type: DT_FLOAT
+      }
+    }
+  }
+}
+library {
+}
