@@ -1,0 +1,139 @@
+node {
+  name: "Variable_4"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+          dim {
+            size: 3
+          }
+          dim {
+            size: 4
+          }
+        }
+        tensor_content: "\210j\004\277b\362\212?0\002\037>\007\314\016?\365*\177?\031\361??>>\270\277\202\343\312>e\204\023\277\'#\250?\224\204g<fI\265?"
+      }
+    }
+  }
+}
+node {
+  name: "Variable_4/read"
+  op: "Identity"
+  input: "Variable_4"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Variable_4"
+      }
+    }
+  }
+}
+node {
+  name: "Variable_5"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+          dim {
+            size: 3
+          }
+          dim {
+            size: 4
+          }
+        }
+        tensor_content: "3\341\201\276\271M\r@@\345/>S\032\215\276\335\205\365>GG\377>Qx\237?r+0\277\324\021\345>\243\234\216\274\204\362\353?\016\205G\275"
+      }
+    }
+  }
+}
+node {
+  name: "Variable_5/read"
+  op: "Identity"
+  input: "Variable_5"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Variable_5"
+      }
+    }
+  }
+}
+node {
+  name: "div-1"
+  op: "RealDiv"
+  input: "Variable_4/read"
+  input: "Variable_5/read"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "Add_2/y"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+        }
+        float_val: 1.0
+      }
+    }
+  }
+}
+node {
+  name: "Add_2"
+  op: "Add"
+  input: "div-1"
+  input: "Add_2/y"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+library {
+}

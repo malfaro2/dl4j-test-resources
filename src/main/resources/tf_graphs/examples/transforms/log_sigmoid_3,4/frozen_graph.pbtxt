@@ -1,0 +1,114 @@
+node {
+  name: "Variable_10"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+          dim {
+            size: 3
+          }
+          dim {
+            size: 4
+          }
+        }
+        tensor_content: "\246\020;\277t\261\030?x\3119?\360|\005>;\232\377\276s\323\224?I\3578?0-\033@\242<h?\234[\253?\013\231\217=W\264\265?"
+      }
+    }
+  }
+}
+node {
+  name: "Variable_10/read"
+  op: "Identity"
+  input: "Variable_10"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Variable_10"
+      }
+    }
+  }
+}
+node {
+  name: "log_sigmoid1/Neg"
+  op: "Neg"
+  input: "Variable_10/read"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "log_sigmoid1/Softplus"
+  op: "Softplus"
+  input: "log_sigmoid1/Neg"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "log_sigmoid1"
+  op: "Neg"
+  input: "log_sigmoid1/Softplus"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "Add_5/y"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+        }
+        float_val: 1.0
+      }
+    }
+  }
+}
+node {
+  name: "Add_5"
+  op: "Add"
+  input: "log_sigmoid1"
+  input: "Add_5/y"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+library {
+}

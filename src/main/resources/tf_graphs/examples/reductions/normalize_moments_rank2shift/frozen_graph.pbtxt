@@ -1,0 +1,244 @@
+node {
+  name: "in_0"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+        }
+        float_val: 7.787856101989746
+      }
+    }
+  }
+}
+node {
+  name: "in_0/read"
+  op: "Identity"
+  input: "in_0"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@in_0"
+      }
+    }
+  }
+}
+node {
+  name: "in_1"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+          dim {
+            size: 5
+          }
+          dim {
+            size: 5
+          }
+        }
+        tensor_content: "\264\363\240\276\365\312%?6\374\222<\205\2723\276->\022\277F\336>\277\266\373l\277O4\205=\253\247\350>t\200\025\277\325\230~\276\206\262R>(\273\331\276Ki\013??\377\232\277\215\277\207\276\255G\227\277\263&\334>I{[\275\206\350\222\276U\260\036=X\031\032?\202\266\215?.\006H?N\362\233?"
+      }
+    }
+  }
+}
+node {
+  name: "in_1/read"
+  op: "Identity"
+  input: "in_1"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@in_1"
+      }
+    }
+  }
+}
+node {
+  name: "in_2"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+          dim {
+            size: 5
+          }
+          dim {
+            size: 5
+          }
+        }
+        tensor_content: "\334\244\236>\254\212\231><!r?^3 ?\220:\342=\320\007U>\274?p?\330\352\216>\210\314B>\300\212\363>\310\035\346>H24>\250\265\303>\nN`?\020MG?\026\213E?\224\272{?`\253\267=\366,\'?0\026\350=\312\237a?\350\216\316>\370\034\257>X/K>2\350Q?"
+      }
+    }
+  }
+}
+node {
+  name: "in_2/read"
+  op: "Identity"
+  input: "in_2"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@in_2"
+      }
+    }
+  }
+}
+node {
+  name: "in_3"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+        }
+        float_val: 0.21819686889648438
+      }
+    }
+  }
+}
+node {
+  name: "in_3/read"
+  op: "Identity"
+  input: "in_3"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@in_3"
+      }
+    }
+  }
+}
+node {
+  name: "normalize/divisor"
+  op: "Reciprocal"
+  input: "in_0/read"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "normalize/shifted_mean"
+  op: "Mul"
+  input: "in_1/read"
+  input: "normalize/divisor"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "normalize/mean"
+  op: "Add"
+  input: "normalize/shifted_mean"
+  input: "in_3/read"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "normalize/Mul"
+  op: "Mul"
+  input: "in_2/read"
+  input: "normalize/divisor"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "normalize/Square"
+  op: "Square"
+  input: "normalize/shifted_mean"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "normalize/variance"
+  op: "Sub"
+  input: "normalize/Mul"
+  input: "normalize/Square"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+library {
+}
