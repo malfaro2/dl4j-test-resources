@@ -1,0 +1,130 @@
+node {
+  name: "in_0"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+          dim {
+            size: 2
+          }
+          dim {
+            size: 2
+          }
+          dim {
+            size: 3
+          }
+          dim {
+            size: 4
+          }
+        }
+        tensor_content: "~^G?L\033M?\236p9?\220ol>\356%:?X\2708><q\001?b|d?\224\316\013?\314al?P@\257=,5K?\326\271(?\3566\016?`u#>0\024\236>\240{\036>\240h\360>\222o~?v|\034?\346+-?HM8>v\312,?p\375e>@\235P=\030\216\353>$\024T?\250\004q>H\250y?h\014V?(W\204>\014t\326>\016\3503?\366\226D? \213\t?\24019?D\300\211>\0008\312;\340\310\005=0\374\203=\\\302W?\300\325??\200\206\232=\270\337\037?\220\272\262>\256L\024?\266\256\022?\300\214:>"
+      }
+    }
+  }
+}
+node {
+  name: "in_0/read"
+  op: "Identity"
+  input: "in_0"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@in_0"
+      }
+    }
+  }
+}
+node {
+  name: "in_1"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+          dim {
+            size: 2
+          }
+          dim {
+            size: 2
+          }
+          dim {
+            size: 4
+          }
+          dim {
+            size: 5
+          }
+        }
+        tensor_content: "\006\220E?\202\226m?\346\013|?\330\262\367>\226\260$?@\243\032?\236n&?\244\333B?\334\260B?\360\035\312>p\002s?\322*\\?`\243I?\330\374d?\004w\355>\27077?h+\350>t7N?\312Ru?\262\205\007?*kU?\000\231\'<\370l\314>`\327\033>\270\034\266>\350\301$>\2145\366>\030\033$>\240\024\321>\240\341n?\360\352\232=&\265\022?bFn?\314j\365>\350O\262>\002\333t?\240\313\204=\364{\256>\260\322\334=\300\244\376=\350\212T?\374E`?(\005\266>`\315\322=\324\271\250>p H><ef?P?\250>0\313\216><\220\344>\322dw?H\322\224>\260\377s?\340&\242>\022\220y?0R\002>\020Y\003?<J\262>\220\270\273>\254o\344>\372\245M? \352%>\366cd?\024\241A?\354\013\354>(^Z>\244\352\342>\230\022)?4\206M?V^r?\004\352\247> (#?\2261m?t?\306>\200\327\004=\240\252l?FSu?,\2654?f\337\001?,\304T?"
+      }
+    }
+  }
+}
+node {
+  name: "in_1/read"
+  op: "Identity"
+  input: "in_1"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@in_1"
+      }
+    }
+  }
+}
+node {
+  name: "matmul-1"
+  op: "BatchMatMul"
+  input: "in_0/read"
+  input: "in_1/read"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "adj_x"
+    value {
+      b: false
+    }
+  }
+  attr {
+    key: "adj_y"
+    value {
+      b: false
+    }
+  }
+}
+library {
+}
