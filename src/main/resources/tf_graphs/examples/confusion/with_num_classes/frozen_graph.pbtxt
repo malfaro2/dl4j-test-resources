@@ -1,0 +1,1737 @@
+node {
+  name: "in_0"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+            size: 5
+          }
+        }
+        tensor_content: "\002\000\000\000\002\000\000\000\004\000\000\000\004\000\000\000\003\000\000\000"
+      }
+    }
+  }
+}
+node {
+  name: "in_0/read"
+  op: "Identity"
+  input: "in_0"
+  attr {
+    key: "T"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@in_0"
+      }
+    }
+  }
+}
+node {
+  name: "in_1"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+            size: 5
+          }
+        }
+        tensor_content: "\003\000\000\000\002\000\000\000\000\000\000\000\000\000\000\000\001\000\000\000"
+      }
+    }
+  }
+}
+node {
+  name: "in_1/read"
+  op: "Identity"
+  input: "in_1"
+  attr {
+    key: "T"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@in_1"
+      }
+    }
+  }
+}
+node {
+  name: "confusion_matrix/Cast"
+  op: "Cast"
+  input: "in_1/read"
+  attr {
+    key: "DstT"
+    value {
+      type: DT_INT64
+    }
+  }
+  attr {
+    key: "SrcT"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "confusion_matrix/Cast_1"
+  op: "Cast"
+  input: "in_0/read"
+  attr {
+    key: "DstT"
+    value {
+      type: DT_INT64
+    }
+  }
+  attr {
+    key: "SrcT"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "confusion_matrix/assert_non_negative/Const"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT64
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT64
+        tensor_shape {
+        }
+        int64_val: 0
+      }
+    }
+  }
+}
+node {
+  name: "confusion_matrix/assert_non_negative/assert_less_equal/LessEqual"
+  op: "LessEqual"
+  input: "confusion_matrix/assert_non_negative/Const"
+  input: "confusion_matrix/Cast_1"
+  attr {
+    key: "T"
+    value {
+      type: DT_INT64
+    }
+  }
+}
+node {
+  name: "confusion_matrix/assert_non_negative/assert_less_equal/Const"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+            size: 1
+          }
+        }
+        int_val: 0
+      }
+    }
+  }
+}
+node {
+  name: "confusion_matrix/assert_non_negative/assert_less_equal/All"
+  op: "All"
+  input: "confusion_matrix/assert_non_negative/assert_less_equal/LessEqual"
+  input: "confusion_matrix/assert_non_negative/assert_less_equal/Const"
+  attr {
+    key: "Tidx"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "keep_dims"
+    value {
+      b: false
+    }
+  }
+}
+node {
+  name: "confusion_matrix/assert_non_negative/assert_less_equal/Assert/AssertGuard/Switch"
+  op: "Switch"
+  input: "confusion_matrix/assert_non_negative/assert_less_equal/All"
+  input: "confusion_matrix/assert_non_negative/assert_less_equal/All"
+  attr {
+    key: "T"
+    value {
+      type: DT_BOOL
+    }
+  }
+}
+node {
+  name: "confusion_matrix/assert_non_negative/assert_less_equal/Assert/AssertGuard/switch_t"
+  op: "Identity"
+  input: "confusion_matrix/assert_non_negative/assert_less_equal/Assert/AssertGuard/Switch:1"
+  attr {
+    key: "T"
+    value {
+      type: DT_BOOL
+    }
+  }
+}
+node {
+  name: "confusion_matrix/assert_non_negative/assert_less_equal/Assert/AssertGuard/switch_f"
+  op: "Identity"
+  input: "confusion_matrix/assert_non_negative/assert_less_equal/Assert/AssertGuard/Switch"
+  attr {
+    key: "T"
+    value {
+      type: DT_BOOL
+    }
+  }
+}
+node {
+  name: "confusion_matrix/assert_non_negative/assert_less_equal/Assert/AssertGuard/pred_id"
+  op: "Identity"
+  input: "confusion_matrix/assert_non_negative/assert_less_equal/All"
+  attr {
+    key: "T"
+    value {
+      type: DT_BOOL
+    }
+  }
+}
+node {
+  name: "confusion_matrix/assert_non_negative/assert_less_equal/Assert/AssertGuard/NoOp"
+  op: "NoOp"
+  input: "^confusion_matrix/assert_non_negative/assert_less_equal/Assert/AssertGuard/switch_t"
+}
+node {
+  name: "confusion_matrix/assert_non_negative/assert_less_equal/Assert/AssertGuard/control_dependency"
+  op: "Identity"
+  input: "confusion_matrix/assert_non_negative/assert_less_equal/Assert/AssertGuard/switch_t"
+  input: "^confusion_matrix/assert_non_negative/assert_less_equal/Assert/AssertGuard/NoOp"
+  attr {
+    key: "T"
+    value {
+      type: DT_BOOL
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@confusion_matrix/assert_non_negative/assert_less_equal/Assert/AssertGuard/switch_t"
+      }
+    }
+  }
+}
+node {
+  name: "confusion_matrix/assert_non_negative/assert_less_equal/Assert/AssertGuard/Assert/data_0"
+  op: "Const"
+  input: "^confusion_matrix/assert_non_negative/assert_less_equal/Assert/AssertGuard/switch_f"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_STRING
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_STRING
+        tensor_shape {
+        }
+        string_val: "`labels` contains negative values"
+      }
+    }
+  }
+}
+node {
+  name: "confusion_matrix/assert_non_negative/assert_less_equal/Assert/AssertGuard/Assert/data_1"
+  op: "Const"
+  input: "^confusion_matrix/assert_non_negative/assert_less_equal/Assert/AssertGuard/switch_f"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_STRING
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_STRING
+        tensor_shape {
+        }
+        string_val: "Condition x >= 0 did not hold element-wise:"
+      }
+    }
+  }
+}
+node {
+  name: "confusion_matrix/assert_non_negative/assert_less_equal/Assert/AssertGuard/Assert/data_2"
+  op: "Const"
+  input: "^confusion_matrix/assert_non_negative/assert_less_equal/Assert/AssertGuard/switch_f"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_STRING
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_STRING
+        tensor_shape {
+        }
+        string_val: "x (confusion_matrix/Cast_1:0) = "
+      }
+    }
+  }
+}
+node {
+  name: "confusion_matrix/assert_non_negative/assert_less_equal/Assert/AssertGuard/Assert"
+  op: "Assert"
+  input: "confusion_matrix/assert_non_negative/assert_less_equal/Assert/AssertGuard/Assert/Switch"
+  input: "confusion_matrix/assert_non_negative/assert_less_equal/Assert/AssertGuard/Assert/data_0"
+  input: "confusion_matrix/assert_non_negative/assert_less_equal/Assert/AssertGuard/Assert/data_1"
+  input: "confusion_matrix/assert_non_negative/assert_less_equal/Assert/AssertGuard/Assert/data_2"
+  input: "confusion_matrix/assert_non_negative/assert_less_equal/Assert/AssertGuard/Assert/Switch_1"
+  attr {
+    key: "T"
+    value {
+      list {
+        type: DT_STRING
+        type: DT_STRING
+        type: DT_STRING
+        type: DT_INT64
+      }
+    }
+  }
+  attr {
+    key: "summarize"
+    value {
+      i: 3
+    }
+  }
+}
+node {
+  name: "confusion_matrix/assert_non_negative/assert_less_equal/Assert/AssertGuard/Assert/Switch"
+  op: "Switch"
+  input: "confusion_matrix/assert_non_negative/assert_less_equal/All"
+  input: "confusion_matrix/assert_non_negative/assert_less_equal/Assert/AssertGuard/pred_id"
+  attr {
+    key: "T"
+    value {
+      type: DT_BOOL
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@confusion_matrix/assert_non_negative/assert_less_equal/All"
+      }
+    }
+  }
+}
+node {
+  name: "confusion_matrix/assert_non_negative/assert_less_equal/Assert/AssertGuard/Assert/Switch_1"
+  op: "Switch"
+  input: "confusion_matrix/Cast_1"
+  input: "confusion_matrix/assert_non_negative/assert_less_equal/Assert/AssertGuard/pred_id"
+  attr {
+    key: "T"
+    value {
+      type: DT_INT64
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@confusion_matrix/Cast_1"
+      }
+    }
+  }
+}
+node {
+  name: "confusion_matrix/assert_non_negative/assert_less_equal/Assert/AssertGuard/control_dependency_1"
+  op: "Identity"
+  input: "confusion_matrix/assert_non_negative/assert_less_equal/Assert/AssertGuard/switch_f"
+  input: "^confusion_matrix/assert_non_negative/assert_less_equal/Assert/AssertGuard/Assert"
+  attr {
+    key: "T"
+    value {
+      type: DT_BOOL
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@confusion_matrix/assert_non_negative/assert_less_equal/Assert/AssertGuard/switch_f"
+      }
+    }
+  }
+}
+node {
+  name: "confusion_matrix/assert_non_negative/assert_less_equal/Assert/AssertGuard/Merge"
+  op: "Merge"
+  input: "confusion_matrix/assert_non_negative/assert_less_equal/Assert/AssertGuard/control_dependency_1"
+  input: "confusion_matrix/assert_non_negative/assert_less_equal/Assert/AssertGuard/control_dependency"
+  attr {
+    key: "N"
+    value {
+      i: 2
+    }
+  }
+  attr {
+    key: "T"
+    value {
+      type: DT_BOOL
+    }
+  }
+}
+node {
+  name: "confusion_matrix/control_dependency"
+  op: "Identity"
+  input: "confusion_matrix/Cast_1"
+  input: "^confusion_matrix/assert_non_negative/assert_less_equal/Assert/AssertGuard/Merge"
+  attr {
+    key: "T"
+    value {
+      type: DT_INT64
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@confusion_matrix/Cast_1"
+      }
+    }
+  }
+}
+node {
+  name: "confusion_matrix/assert_non_negative_1/Const"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT64
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT64
+        tensor_shape {
+        }
+        int64_val: 0
+      }
+    }
+  }
+}
+node {
+  name: "confusion_matrix/assert_non_negative_1/assert_less_equal/LessEqual"
+  op: "LessEqual"
+  input: "confusion_matrix/assert_non_negative_1/Const"
+  input: "confusion_matrix/Cast"
+  attr {
+    key: "T"
+    value {
+      type: DT_INT64
+    }
+  }
+}
+node {
+  name: "confusion_matrix/assert_non_negative_1/assert_less_equal/Const"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+            size: 1
+          }
+        }
+        int_val: 0
+      }
+    }
+  }
+}
+node {
+  name: "confusion_matrix/assert_non_negative_1/assert_less_equal/All"
+  op: "All"
+  input: "confusion_matrix/assert_non_negative_1/assert_less_equal/LessEqual"
+  input: "confusion_matrix/assert_non_negative_1/assert_less_equal/Const"
+  attr {
+    key: "Tidx"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "keep_dims"
+    value {
+      b: false
+    }
+  }
+}
+node {
+  name: "confusion_matrix/assert_non_negative_1/assert_less_equal/Assert/AssertGuard/Switch"
+  op: "Switch"
+  input: "confusion_matrix/assert_non_negative_1/assert_less_equal/All"
+  input: "confusion_matrix/assert_non_negative_1/assert_less_equal/All"
+  attr {
+    key: "T"
+    value {
+      type: DT_BOOL
+    }
+  }
+}
+node {
+  name: "confusion_matrix/assert_non_negative_1/assert_less_equal/Assert/AssertGuard/switch_t"
+  op: "Identity"
+  input: "confusion_matrix/assert_non_negative_1/assert_less_equal/Assert/AssertGuard/Switch:1"
+  attr {
+    key: "T"
+    value {
+      type: DT_BOOL
+    }
+  }
+}
+node {
+  name: "confusion_matrix/assert_non_negative_1/assert_less_equal/Assert/AssertGuard/switch_f"
+  op: "Identity"
+  input: "confusion_matrix/assert_non_negative_1/assert_less_equal/Assert/AssertGuard/Switch"
+  attr {
+    key: "T"
+    value {
+      type: DT_BOOL
+    }
+  }
+}
+node {
+  name: "confusion_matrix/assert_non_negative_1/assert_less_equal/Assert/AssertGuard/pred_id"
+  op: "Identity"
+  input: "confusion_matrix/assert_non_negative_1/assert_less_equal/All"
+  attr {
+    key: "T"
+    value {
+      type: DT_BOOL
+    }
+  }
+}
+node {
+  name: "confusion_matrix/assert_non_negative_1/assert_less_equal/Assert/AssertGuard/NoOp"
+  op: "NoOp"
+  input: "^confusion_matrix/assert_non_negative_1/assert_less_equal/Assert/AssertGuard/switch_t"
+}
+node {
+  name: "confusion_matrix/assert_non_negative_1/assert_less_equal/Assert/AssertGuard/control_dependency"
+  op: "Identity"
+  input: "confusion_matrix/assert_non_negative_1/assert_less_equal/Assert/AssertGuard/switch_t"
+  input: "^confusion_matrix/assert_non_negative_1/assert_less_equal/Assert/AssertGuard/NoOp"
+  attr {
+    key: "T"
+    value {
+      type: DT_BOOL
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@confusion_matrix/assert_non_negative_1/assert_less_equal/Assert/AssertGuard/switch_t"
+      }
+    }
+  }
+}
+node {
+  name: "confusion_matrix/assert_non_negative_1/assert_less_equal/Assert/AssertGuard/Assert/data_0"
+  op: "Const"
+  input: "^confusion_matrix/assert_non_negative_1/assert_less_equal/Assert/AssertGuard/switch_f"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_STRING
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_STRING
+        tensor_shape {
+        }
+        string_val: "`predictions` contains negative values"
+      }
+    }
+  }
+}
+node {
+  name: "confusion_matrix/assert_non_negative_1/assert_less_equal/Assert/AssertGuard/Assert/data_1"
+  op: "Const"
+  input: "^confusion_matrix/assert_non_negative_1/assert_less_equal/Assert/AssertGuard/switch_f"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_STRING
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_STRING
+        tensor_shape {
+        }
+        string_val: "Condition x >= 0 did not hold element-wise:"
+      }
+    }
+  }
+}
+node {
+  name: "confusion_matrix/assert_non_negative_1/assert_less_equal/Assert/AssertGuard/Assert/data_2"
+  op: "Const"
+  input: "^confusion_matrix/assert_non_negative_1/assert_less_equal/Assert/AssertGuard/switch_f"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_STRING
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_STRING
+        tensor_shape {
+        }
+        string_val: "x (confusion_matrix/Cast:0) = "
+      }
+    }
+  }
+}
+node {
+  name: "confusion_matrix/assert_non_negative_1/assert_less_equal/Assert/AssertGuard/Assert"
+  op: "Assert"
+  input: "confusion_matrix/assert_non_negative_1/assert_less_equal/Assert/AssertGuard/Assert/Switch"
+  input: "confusion_matrix/assert_non_negative_1/assert_less_equal/Assert/AssertGuard/Assert/data_0"
+  input: "confusion_matrix/assert_non_negative_1/assert_less_equal/Assert/AssertGuard/Assert/data_1"
+  input: "confusion_matrix/assert_non_negative_1/assert_less_equal/Assert/AssertGuard/Assert/data_2"
+  input: "confusion_matrix/assert_non_negative_1/assert_less_equal/Assert/AssertGuard/Assert/Switch_1"
+  attr {
+    key: "T"
+    value {
+      list {
+        type: DT_STRING
+        type: DT_STRING
+        type: DT_STRING
+        type: DT_INT64
+      }
+    }
+  }
+  attr {
+    key: "summarize"
+    value {
+      i: 3
+    }
+  }
+}
+node {
+  name: "confusion_matrix/assert_non_negative_1/assert_less_equal/Assert/AssertGuard/Assert/Switch"
+  op: "Switch"
+  input: "confusion_matrix/assert_non_negative_1/assert_less_equal/All"
+  input: "confusion_matrix/assert_non_negative_1/assert_less_equal/Assert/AssertGuard/pred_id"
+  attr {
+    key: "T"
+    value {
+      type: DT_BOOL
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@confusion_matrix/assert_non_negative_1/assert_less_equal/All"
+      }
+    }
+  }
+}
+node {
+  name: "confusion_matrix/assert_non_negative_1/assert_less_equal/Assert/AssertGuard/Assert/Switch_1"
+  op: "Switch"
+  input: "confusion_matrix/Cast"
+  input: "confusion_matrix/assert_non_negative_1/assert_less_equal/Assert/AssertGuard/pred_id"
+  attr {
+    key: "T"
+    value {
+      type: DT_INT64
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@confusion_matrix/Cast"
+      }
+    }
+  }
+}
+node {
+  name: "confusion_matrix/assert_non_negative_1/assert_less_equal/Assert/AssertGuard/control_dependency_1"
+  op: "Identity"
+  input: "confusion_matrix/assert_non_negative_1/assert_less_equal/Assert/AssertGuard/switch_f"
+  input: "^confusion_matrix/assert_non_negative_1/assert_less_equal/Assert/AssertGuard/Assert"
+  attr {
+    key: "T"
+    value {
+      type: DT_BOOL
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@confusion_matrix/assert_non_negative_1/assert_less_equal/Assert/AssertGuard/switch_f"
+      }
+    }
+  }
+}
+node {
+  name: "confusion_matrix/assert_non_negative_1/assert_less_equal/Assert/AssertGuard/Merge"
+  op: "Merge"
+  input: "confusion_matrix/assert_non_negative_1/assert_less_equal/Assert/AssertGuard/control_dependency_1"
+  input: "confusion_matrix/assert_non_negative_1/assert_less_equal/Assert/AssertGuard/control_dependency"
+  attr {
+    key: "N"
+    value {
+      i: 2
+    }
+  }
+  attr {
+    key: "T"
+    value {
+      type: DT_BOOL
+    }
+  }
+}
+node {
+  name: "confusion_matrix/control_dependency_1"
+  op: "Identity"
+  input: "confusion_matrix/Cast"
+  input: "^confusion_matrix/assert_non_negative_1/assert_less_equal/Assert/AssertGuard/Merge"
+  attr {
+    key: "T"
+    value {
+      type: DT_INT64
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@confusion_matrix/Cast"
+      }
+    }
+  }
+}
+node {
+  name: "confusion_matrix/Cast_2/x"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+        }
+        int_val: 5
+      }
+    }
+  }
+}
+node {
+  name: "confusion_matrix/Cast_2"
+  op: "Cast"
+  input: "confusion_matrix/Cast_2/x"
+  attr {
+    key: "DstT"
+    value {
+      type: DT_INT64
+    }
+  }
+  attr {
+    key: "SrcT"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "confusion_matrix/assert_less/Less"
+  op: "Less"
+  input: "confusion_matrix/control_dependency"
+  input: "confusion_matrix/Cast_2"
+  attr {
+    key: "T"
+    value {
+      type: DT_INT64
+    }
+  }
+}
+node {
+  name: "confusion_matrix/assert_less/Const"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+            size: 1
+          }
+        }
+        int_val: 0
+      }
+    }
+  }
+}
+node {
+  name: "confusion_matrix/assert_less/All"
+  op: "All"
+  input: "confusion_matrix/assert_less/Less"
+  input: "confusion_matrix/assert_less/Const"
+  attr {
+    key: "Tidx"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "keep_dims"
+    value {
+      b: false
+    }
+  }
+}
+node {
+  name: "confusion_matrix/assert_less/Assert/AssertGuard/Switch"
+  op: "Switch"
+  input: "confusion_matrix/assert_less/All"
+  input: "confusion_matrix/assert_less/All"
+  attr {
+    key: "T"
+    value {
+      type: DT_BOOL
+    }
+  }
+}
+node {
+  name: "confusion_matrix/assert_less/Assert/AssertGuard/switch_t"
+  op: "Identity"
+  input: "confusion_matrix/assert_less/Assert/AssertGuard/Switch:1"
+  attr {
+    key: "T"
+    value {
+      type: DT_BOOL
+    }
+  }
+}
+node {
+  name: "confusion_matrix/assert_less/Assert/AssertGuard/switch_f"
+  op: "Identity"
+  input: "confusion_matrix/assert_less/Assert/AssertGuard/Switch"
+  attr {
+    key: "T"
+    value {
+      type: DT_BOOL
+    }
+  }
+}
+node {
+  name: "confusion_matrix/assert_less/Assert/AssertGuard/pred_id"
+  op: "Identity"
+  input: "confusion_matrix/assert_less/All"
+  attr {
+    key: "T"
+    value {
+      type: DT_BOOL
+    }
+  }
+}
+node {
+  name: "confusion_matrix/assert_less/Assert/AssertGuard/NoOp"
+  op: "NoOp"
+  input: "^confusion_matrix/assert_less/Assert/AssertGuard/switch_t"
+}
+node {
+  name: "confusion_matrix/assert_less/Assert/AssertGuard/control_dependency"
+  op: "Identity"
+  input: "confusion_matrix/assert_less/Assert/AssertGuard/switch_t"
+  input: "^confusion_matrix/assert_less/Assert/AssertGuard/NoOp"
+  attr {
+    key: "T"
+    value {
+      type: DT_BOOL
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@confusion_matrix/assert_less/Assert/AssertGuard/switch_t"
+      }
+    }
+  }
+}
+node {
+  name: "confusion_matrix/assert_less/Assert/AssertGuard/Assert/data_0"
+  op: "Const"
+  input: "^confusion_matrix/assert_less/Assert/AssertGuard/switch_f"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_STRING
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_STRING
+        tensor_shape {
+        }
+        string_val: "`labels` out of bound"
+      }
+    }
+  }
+}
+node {
+  name: "confusion_matrix/assert_less/Assert/AssertGuard/Assert/data_1"
+  op: "Const"
+  input: "^confusion_matrix/assert_less/Assert/AssertGuard/switch_f"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_STRING
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_STRING
+        tensor_shape {
+        }
+        string_val: "Condition x < y did not hold element-wise:"
+      }
+    }
+  }
+}
+node {
+  name: "confusion_matrix/assert_less/Assert/AssertGuard/Assert/data_2"
+  op: "Const"
+  input: "^confusion_matrix/assert_less/Assert/AssertGuard/switch_f"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_STRING
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_STRING
+        tensor_shape {
+        }
+        string_val: "x (confusion_matrix/control_dependency:0) = "
+      }
+    }
+  }
+}
+node {
+  name: "confusion_matrix/assert_less/Assert/AssertGuard/Assert/data_4"
+  op: "Const"
+  input: "^confusion_matrix/assert_less/Assert/AssertGuard/switch_f"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_STRING
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_STRING
+        tensor_shape {
+        }
+        string_val: "y (confusion_matrix/Cast_2:0) = "
+      }
+    }
+  }
+}
+node {
+  name: "confusion_matrix/assert_less/Assert/AssertGuard/Assert"
+  op: "Assert"
+  input: "confusion_matrix/assert_less/Assert/AssertGuard/Assert/Switch"
+  input: "confusion_matrix/assert_less/Assert/AssertGuard/Assert/data_0"
+  input: "confusion_matrix/assert_less/Assert/AssertGuard/Assert/data_1"
+  input: "confusion_matrix/assert_less/Assert/AssertGuard/Assert/data_2"
+  input: "confusion_matrix/assert_less/Assert/AssertGuard/Assert/Switch_1"
+  input: "confusion_matrix/assert_less/Assert/AssertGuard/Assert/data_4"
+  input: "confusion_matrix/assert_less/Assert/AssertGuard/Assert/Switch_2"
+  attr {
+    key: "T"
+    value {
+      list {
+        type: DT_STRING
+        type: DT_STRING
+        type: DT_STRING
+        type: DT_INT64
+        type: DT_STRING
+        type: DT_INT64
+      }
+    }
+  }
+  attr {
+    key: "summarize"
+    value {
+      i: 3
+    }
+  }
+}
+node {
+  name: "confusion_matrix/assert_less/Assert/AssertGuard/Assert/Switch"
+  op: "Switch"
+  input: "confusion_matrix/assert_less/All"
+  input: "confusion_matrix/assert_less/Assert/AssertGuard/pred_id"
+  attr {
+    key: "T"
+    value {
+      type: DT_BOOL
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@confusion_matrix/assert_less/All"
+      }
+    }
+  }
+}
+node {
+  name: "confusion_matrix/assert_less/Assert/AssertGuard/Assert/Switch_1"
+  op: "Switch"
+  input: "confusion_matrix/control_dependency"
+  input: "confusion_matrix/assert_less/Assert/AssertGuard/pred_id"
+  attr {
+    key: "T"
+    value {
+      type: DT_INT64
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@confusion_matrix/Cast_1"
+      }
+    }
+  }
+}
+node {
+  name: "confusion_matrix/assert_less/Assert/AssertGuard/Assert/Switch_2"
+  op: "Switch"
+  input: "confusion_matrix/Cast_2"
+  input: "confusion_matrix/assert_less/Assert/AssertGuard/pred_id"
+  attr {
+    key: "T"
+    value {
+      type: DT_INT64
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@confusion_matrix/Cast_2"
+      }
+    }
+  }
+}
+node {
+  name: "confusion_matrix/assert_less/Assert/AssertGuard/control_dependency_1"
+  op: "Identity"
+  input: "confusion_matrix/assert_less/Assert/AssertGuard/switch_f"
+  input: "^confusion_matrix/assert_less/Assert/AssertGuard/Assert"
+  attr {
+    key: "T"
+    value {
+      type: DT_BOOL
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@confusion_matrix/assert_less/Assert/AssertGuard/switch_f"
+      }
+    }
+  }
+}
+node {
+  name: "confusion_matrix/assert_less/Assert/AssertGuard/Merge"
+  op: "Merge"
+  input: "confusion_matrix/assert_less/Assert/AssertGuard/control_dependency_1"
+  input: "confusion_matrix/assert_less/Assert/AssertGuard/control_dependency"
+  attr {
+    key: "N"
+    value {
+      i: 2
+    }
+  }
+  attr {
+    key: "T"
+    value {
+      type: DT_BOOL
+    }
+  }
+}
+node {
+  name: "confusion_matrix/control_dependency_2"
+  op: "Identity"
+  input: "confusion_matrix/control_dependency"
+  input: "^confusion_matrix/assert_less/Assert/AssertGuard/Merge"
+  attr {
+    key: "T"
+    value {
+      type: DT_INT64
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@confusion_matrix/Cast_1"
+      }
+    }
+  }
+}
+node {
+  name: "confusion_matrix/assert_less_1/Less"
+  op: "Less"
+  input: "confusion_matrix/control_dependency_1"
+  input: "confusion_matrix/Cast_2"
+  attr {
+    key: "T"
+    value {
+      type: DT_INT64
+    }
+  }
+}
+node {
+  name: "confusion_matrix/assert_less_1/Const"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+            size: 1
+          }
+        }
+        int_val: 0
+      }
+    }
+  }
+}
+node {
+  name: "confusion_matrix/assert_less_1/All"
+  op: "All"
+  input: "confusion_matrix/assert_less_1/Less"
+  input: "confusion_matrix/assert_less_1/Const"
+  attr {
+    key: "Tidx"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "keep_dims"
+    value {
+      b: false
+    }
+  }
+}
+node {
+  name: "confusion_matrix/assert_less_1/Assert/AssertGuard/Switch"
+  op: "Switch"
+  input: "confusion_matrix/assert_less_1/All"
+  input: "confusion_matrix/assert_less_1/All"
+  attr {
+    key: "T"
+    value {
+      type: DT_BOOL
+    }
+  }
+}
+node {
+  name: "confusion_matrix/assert_less_1/Assert/AssertGuard/switch_t"
+  op: "Identity"
+  input: "confusion_matrix/assert_less_1/Assert/AssertGuard/Switch:1"
+  attr {
+    key: "T"
+    value {
+      type: DT_BOOL
+    }
+  }
+}
+node {
+  name: "confusion_matrix/assert_less_1/Assert/AssertGuard/switch_f"
+  op: "Identity"
+  input: "confusion_matrix/assert_less_1/Assert/AssertGuard/Switch"
+  attr {
+    key: "T"
+    value {
+      type: DT_BOOL
+    }
+  }
+}
+node {
+  name: "confusion_matrix/assert_less_1/Assert/AssertGuard/pred_id"
+  op: "Identity"
+  input: "confusion_matrix/assert_less_1/All"
+  attr {
+    key: "T"
+    value {
+      type: DT_BOOL
+    }
+  }
+}
+node {
+  name: "confusion_matrix/assert_less_1/Assert/AssertGuard/NoOp"
+  op: "NoOp"
+  input: "^confusion_matrix/assert_less_1/Assert/AssertGuard/switch_t"
+}
+node {
+  name: "confusion_matrix/assert_less_1/Assert/AssertGuard/control_dependency"
+  op: "Identity"
+  input: "confusion_matrix/assert_less_1/Assert/AssertGuard/switch_t"
+  input: "^confusion_matrix/assert_less_1/Assert/AssertGuard/NoOp"
+  attr {
+    key: "T"
+    value {
+      type: DT_BOOL
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@confusion_matrix/assert_less_1/Assert/AssertGuard/switch_t"
+      }
+    }
+  }
+}
+node {
+  name: "confusion_matrix/assert_less_1/Assert/AssertGuard/Assert/data_0"
+  op: "Const"
+  input: "^confusion_matrix/assert_less_1/Assert/AssertGuard/switch_f"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_STRING
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_STRING
+        tensor_shape {
+        }
+        string_val: "`predictions` out of bound"
+      }
+    }
+  }
+}
+node {
+  name: "confusion_matrix/assert_less_1/Assert/AssertGuard/Assert/data_1"
+  op: "Const"
+  input: "^confusion_matrix/assert_less_1/Assert/AssertGuard/switch_f"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_STRING
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_STRING
+        tensor_shape {
+        }
+        string_val: "Condition x < y did not hold element-wise:"
+      }
+    }
+  }
+}
+node {
+  name: "confusion_matrix/assert_less_1/Assert/AssertGuard/Assert/data_2"
+  op: "Const"
+  input: "^confusion_matrix/assert_less_1/Assert/AssertGuard/switch_f"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_STRING
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_STRING
+        tensor_shape {
+        }
+        string_val: "x (confusion_matrix/control_dependency_1:0) = "
+      }
+    }
+  }
+}
+node {
+  name: "confusion_matrix/assert_less_1/Assert/AssertGuard/Assert/data_4"
+  op: "Const"
+  input: "^confusion_matrix/assert_less_1/Assert/AssertGuard/switch_f"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_STRING
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_STRING
+        tensor_shape {
+        }
+        string_val: "y (confusion_matrix/Cast_2:0) = "
+      }
+    }
+  }
+}
+node {
+  name: "confusion_matrix/assert_less_1/Assert/AssertGuard/Assert"
+  op: "Assert"
+  input: "confusion_matrix/assert_less_1/Assert/AssertGuard/Assert/Switch"
+  input: "confusion_matrix/assert_less_1/Assert/AssertGuard/Assert/data_0"
+  input: "confusion_matrix/assert_less_1/Assert/AssertGuard/Assert/data_1"
+  input: "confusion_matrix/assert_less_1/Assert/AssertGuard/Assert/data_2"
+  input: "confusion_matrix/assert_less_1/Assert/AssertGuard/Assert/Switch_1"
+  input: "confusion_matrix/assert_less_1/Assert/AssertGuard/Assert/data_4"
+  input: "confusion_matrix/assert_less_1/Assert/AssertGuard/Assert/Switch_2"
+  attr {
+    key: "T"
+    value {
+      list {
+        type: DT_STRING
+        type: DT_STRING
+        type: DT_STRING
+        type: DT_INT64
+        type: DT_STRING
+        type: DT_INT64
+      }
+    }
+  }
+  attr {
+    key: "summarize"
+    value {
+      i: 3
+    }
+  }
+}
+node {
+  name: "confusion_matrix/assert_less_1/Assert/AssertGuard/Assert/Switch"
+  op: "Switch"
+  input: "confusion_matrix/assert_less_1/All"
+  input: "confusion_matrix/assert_less_1/Assert/AssertGuard/pred_id"
+  attr {
+    key: "T"
+    value {
+      type: DT_BOOL
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@confusion_matrix/assert_less_1/All"
+      }
+    }
+  }
+}
+node {
+  name: "confusion_matrix/assert_less_1/Assert/AssertGuard/Assert/Switch_1"
+  op: "Switch"
+  input: "confusion_matrix/control_dependency_1"
+  input: "confusion_matrix/assert_less_1/Assert/AssertGuard/pred_id"
+  attr {
+    key: "T"
+    value {
+      type: DT_INT64
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@confusion_matrix/Cast"
+      }
+    }
+  }
+}
+node {
+  name: "confusion_matrix/assert_less_1/Assert/AssertGuard/Assert/Switch_2"
+  op: "Switch"
+  input: "confusion_matrix/Cast_2"
+  input: "confusion_matrix/assert_less_1/Assert/AssertGuard/pred_id"
+  attr {
+    key: "T"
+    value {
+      type: DT_INT64
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@confusion_matrix/Cast_2"
+      }
+    }
+  }
+}
+node {
+  name: "confusion_matrix/assert_less_1/Assert/AssertGuard/control_dependency_1"
+  op: "Identity"
+  input: "confusion_matrix/assert_less_1/Assert/AssertGuard/switch_f"
+  input: "^confusion_matrix/assert_less_1/Assert/AssertGuard/Assert"
+  attr {
+    key: "T"
+    value {
+      type: DT_BOOL
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@confusion_matrix/assert_less_1/Assert/AssertGuard/switch_f"
+      }
+    }
+  }
+}
+node {
+  name: "confusion_matrix/assert_less_1/Assert/AssertGuard/Merge"
+  op: "Merge"
+  input: "confusion_matrix/assert_less_1/Assert/AssertGuard/control_dependency_1"
+  input: "confusion_matrix/assert_less_1/Assert/AssertGuard/control_dependency"
+  attr {
+    key: "N"
+    value {
+      i: 2
+    }
+  }
+  attr {
+    key: "T"
+    value {
+      type: DT_BOOL
+    }
+  }
+}
+node {
+  name: "confusion_matrix/control_dependency_3"
+  op: "Identity"
+  input: "confusion_matrix/control_dependency_1"
+  input: "^confusion_matrix/assert_less_1/Assert/AssertGuard/Merge"
+  attr {
+    key: "T"
+    value {
+      type: DT_INT64
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@confusion_matrix/Cast"
+      }
+    }
+  }
+}
+node {
+  name: "confusion_matrix/stack"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+            size: 2
+          }
+        }
+        tensor_content: "\005\000\000\000\005\000\000\000"
+      }
+    }
+  }
+}
+node {
+  name: "confusion_matrix/stack_1"
+  op: "Pack"
+  input: "confusion_matrix/control_dependency_2"
+  input: "confusion_matrix/control_dependency_3"
+  attr {
+    key: "N"
+    value {
+      i: 2
+    }
+  }
+  attr {
+    key: "T"
+    value {
+      type: DT_INT64
+    }
+  }
+  attr {
+    key: "axis"
+    value {
+      i: 1
+    }
+  }
+}
+node {
+  name: "confusion_matrix/ones_like/Shape"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+            size: 1
+          }
+        }
+        int_val: 5
+      }
+    }
+  }
+}
+node {
+  name: "confusion_matrix/ones_like/Const"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+        }
+        int_val: 1
+      }
+    }
+  }
+}
+node {
+  name: "confusion_matrix/ones_like"
+  op: "Fill"
+  input: "confusion_matrix/ones_like/Shape"
+  input: "confusion_matrix/ones_like/Const"
+  attr {
+    key: "T"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "index_type"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "confusion_matrix/ToInt64"
+  op: "Cast"
+  input: "confusion_matrix/stack"
+  attr {
+    key: "DstT"
+    value {
+      type: DT_INT64
+    }
+  }
+  attr {
+    key: "SrcT"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "confusion_matrix/zeros/Const"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+        }
+        int_val: 0
+      }
+    }
+  }
+}
+node {
+  name: "confusion_matrix/zeros"
+  op: "Fill"
+  input: "confusion_matrix/stack"
+  input: "confusion_matrix/zeros/Const"
+  attr {
+    key: "T"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "index_type"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "confusion_matrix/SparseTensorDenseAdd"
+  op: "SparseTensorDenseAdd"
+  input: "confusion_matrix/stack_1"
+  input: "confusion_matrix/ones_like"
+  input: "confusion_matrix/ToInt64"
+  input: "confusion_matrix/zeros"
+  attr {
+    key: "T"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "Tindices"
+    value {
+      type: DT_INT64
+    }
+  }
+}
+library {
+}
