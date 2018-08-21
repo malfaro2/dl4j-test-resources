@@ -1,0 +1,440 @@
+{
+	"class_name": "Model",
+	"keras_version": "2.2.2",
+	"config": {
+		"layers": [
+			{
+				"class_name": "InputLayer",
+				"config": {
+					"dtype": "float32",
+					"batch_input_shape": [
+						null,
+						null,
+						null,
+						3
+					],
+					"name": "input_3",
+					"sparse": false
+				},
+				"inbound_nodes": [
+				],
+				"name": "input_3"
+			},
+			{
+				"class_name": "Conv2D",
+				"config": {
+					"kernel_constraint": null,
+					"kernel_initializer": {
+						"class_name": "VarianceScaling",
+						"config": {
+							"distribution": "uniform",
+							"scale": 1.0,
+							"seed": null,
+							"mode": "fan_avg"
+						}
+					},
+					"name": "conv1",
+					"bias_regularizer": null,
+					"bias_constraint": null,
+					"activation": "linear",
+					"trainable": true,
+					"data_format": "channels_last",
+					"padding": "valid",
+					"strides": [
+						1,
+						1
+					],
+					"dilation_rate": [
+						1,
+						1
+					],
+					"kernel_regularizer": null,
+					"filters": 10,
+					"bias_initializer": {
+						"class_name": "Zeros",
+						"config": {
+						}
+					},
+					"use_bias": true,
+					"activity_regularizer": null,
+					"kernel_size": [
+						3,
+						3
+					]
+				},
+				"inbound_nodes": [
+					[
+						[
+							"input_3",
+							0,
+							0,
+							{
+							}
+						]
+					]
+				],
+				"name": "conv1"
+			},
+			{
+				"class_name": "PReLU",
+				"config": {
+					"name": "PReLU1",
+					"alpha_constraint": null,
+					"trainable": true,
+					"alpha_regularizer": null,
+					"alpha_initializer": {
+						"class_name": "Zeros",
+						"config": {
+						}
+					},
+					"shared_axes": [
+						1,
+						2
+					]
+				},
+				"inbound_nodes": [
+					[
+						[
+							"conv1",
+							0,
+							0,
+							{
+							}
+						]
+					]
+				],
+				"name": "PReLU1"
+			},
+			{
+				"class_name": "MaxPooling2D",
+				"config": {
+					"name": "max_pooling2d_6",
+					"trainable": true,
+					"data_format": "channels_last",
+					"pool_size": [
+						2,
+						2
+					],
+					"padding": "valid",
+					"strides": [
+						2,
+						2
+					]
+				},
+				"inbound_nodes": [
+					[
+						[
+							"PReLU1",
+							0,
+							0,
+							{
+							}
+						]
+					]
+				],
+				"name": "max_pooling2d_6"
+			},
+			{
+				"class_name": "Conv2D",
+				"config": {
+					"kernel_constraint": null,
+					"kernel_initializer": {
+						"class_name": "VarianceScaling",
+						"config": {
+							"distribution": "uniform",
+							"scale": 1.0,
+							"seed": null,
+							"mode": "fan_avg"
+						}
+					},
+					"name": "conv2",
+					"bias_regularizer": null,
+					"bias_constraint": null,
+					"activation": "linear",
+					"trainable": true,
+					"data_format": "channels_last",
+					"padding": "valid",
+					"strides": [
+						1,
+						1
+					],
+					"dilation_rate": [
+						1,
+						1
+					],
+					"kernel_regularizer": null,
+					"filters": 16,
+					"bias_initializer": {
+						"class_name": "Zeros",
+						"config": {
+						}
+					},
+					"use_bias": true,
+					"activity_regularizer": null,
+					"kernel_size": [
+						3,
+						3
+					]
+				},
+				"inbound_nodes": [
+					[
+						[
+							"max_pooling2d_6",
+							0,
+							0,
+							{
+							}
+						]
+					]
+				],
+				"name": "conv2"
+			},
+			{
+				"class_name": "PReLU",
+				"config": {
+					"name": "PReLU2",
+					"alpha_constraint": null,
+					"trainable": true,
+					"alpha_regularizer": null,
+					"alpha_initializer": {
+						"class_name": "Zeros",
+						"config": {
+						}
+					},
+					"shared_axes": [
+						1,
+						2
+					]
+				},
+				"inbound_nodes": [
+					[
+						[
+							"conv2",
+							0,
+							0,
+							{
+							}
+						]
+					]
+				],
+				"name": "PReLU2"
+			},
+			{
+				"class_name": "Conv2D",
+				"config": {
+					"kernel_constraint": null,
+					"kernel_initializer": {
+						"class_name": "VarianceScaling",
+						"config": {
+							"distribution": "uniform",
+							"scale": 1.0,
+							"seed": null,
+							"mode": "fan_avg"
+						}
+					},
+					"name": "conv3",
+					"bias_regularizer": null,
+					"bias_constraint": null,
+					"activation": "linear",
+					"trainable": true,
+					"data_format": "channels_last",
+					"padding": "valid",
+					"strides": [
+						1,
+						1
+					],
+					"dilation_rate": [
+						1,
+						1
+					],
+					"kernel_regularizer": null,
+					"filters": 32,
+					"bias_initializer": {
+						"class_name": "Zeros",
+						"config": {
+						}
+					},
+					"use_bias": true,
+					"activity_regularizer": null,
+					"kernel_size": [
+						3,
+						3
+					]
+				},
+				"inbound_nodes": [
+					[
+						[
+							"PReLU2",
+							0,
+							0,
+							{
+							}
+						]
+					]
+				],
+				"name": "conv3"
+			},
+			{
+				"class_name": "PReLU",
+				"config": {
+					"name": "PReLU3",
+					"alpha_constraint": null,
+					"trainable": true,
+					"alpha_regularizer": null,
+					"alpha_initializer": {
+						"class_name": "Zeros",
+						"config": {
+						}
+					},
+					"shared_axes": [
+						1,
+						2
+					]
+				},
+				"inbound_nodes": [
+					[
+						[
+							"conv3",
+							0,
+							0,
+							{
+							}
+						]
+					]
+				],
+				"name": "PReLU3"
+			},
+			{
+				"class_name": "Conv2D",
+				"config": {
+					"kernel_constraint": null,
+					"kernel_initializer": {
+						"class_name": "VarianceScaling",
+						"config": {
+							"distribution": "uniform",
+							"scale": 1.0,
+							"seed": null,
+							"mode": "fan_avg"
+						}
+					},
+					"name": "conv4-1",
+					"bias_regularizer": null,
+					"bias_constraint": null,
+					"activation": "softmax",
+					"trainable": true,
+					"data_format": "channels_last",
+					"padding": "valid",
+					"strides": [
+						1,
+						1
+					],
+					"dilation_rate": [
+						1,
+						1
+					],
+					"kernel_regularizer": null,
+					"filters": 2,
+					"bias_initializer": {
+						"class_name": "Zeros",
+						"config": {
+						}
+					},
+					"use_bias": true,
+					"activity_regularizer": null,
+					"kernel_size": [
+						1,
+						1
+					]
+				},
+				"inbound_nodes": [
+					[
+						[
+							"PReLU3",
+							0,
+							0,
+							{
+							}
+						]
+					]
+				],
+				"name": "conv4-1"
+			},
+			{
+				"class_name": "Conv2D",
+				"config": {
+					"kernel_constraint": null,
+					"kernel_initializer": {
+						"class_name": "VarianceScaling",
+						"config": {
+							"distribution": "uniform",
+							"scale": 1.0,
+							"seed": null,
+							"mode": "fan_avg"
+						}
+					},
+					"name": "conv4-2",
+					"bias_regularizer": null,
+					"bias_constraint": null,
+					"activation": "linear",
+					"trainable": true,
+					"data_format": "channels_last",
+					"padding": "valid",
+					"strides": [
+						1,
+						1
+					],
+					"dilation_rate": [
+						1,
+						1
+					],
+					"kernel_regularizer": null,
+					"filters": 4,
+					"bias_initializer": {
+						"class_name": "Zeros",
+						"config": {
+						}
+					},
+					"use_bias": true,
+					"activity_regularizer": null,
+					"kernel_size": [
+						1,
+						1
+					]
+				},
+				"inbound_nodes": [
+					[
+						[
+							"PReLU3",
+							0,
+							0,
+							{
+							}
+						]
+					]
+				],
+				"name": "conv4-2"
+			}
+		],
+		"input_layers": [
+			[
+				"input_3",
+				0,
+				0
+			]
+		],
+		"output_layers": [
+			[
+				"conv4-1",
+				0,
+				0
+			],
+			[
+				"conv4-2",
+				0,
+				0
+			]
+		],
+		"name": "model_3"
+	},
+	"backend": "tensorflow"
+}
