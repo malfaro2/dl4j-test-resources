@@ -1,0 +1,250 @@
+node {
+  name: "in_0"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+          dim {
+            size: 4
+          }
+          dim {
+            size: 5
+          }
+          dim {
+            size: 6
+          }
+        }
+        tensor_content: "~^G?L\033M?\236p9?\220ol>\356%:?X\2708><q\001?b|d?\224\316\013?\314al?P@\257=,5K?\326\271(?\3566\016?`u#>0\024\236>\240{\036>\240h\360>\222o~?v|\034?\346+-?HM8>v\312,?p\375e>@\235P=\030\216\353>$\024T?\250\004q>H\250y?h\014V?(W\204>\014t\326>\016\3503?\366\226D? \213\t?\24019?D\300\211>\0008\312;\340\310\005=0\374\203=\\\302W?\300\325??\200\206\232=\270\337\037?\220\272\262>\256L\024?\266\256\022?\300\214:>\262Z$?\240\020j?\350\225\232>\304\372\266>\020\204.>\"\350V?8\370\013?\320W\230=\202\256f?\222N(?\200!\323>`Zz>8|\331>6\231\005?\n\3721?\240\345\372>H\001]>\006ut?\330\357\r>(\033\036>ZY\t?\200\002\\<\310\'\325>\350$\025> ]\322>h_~>\030{\252>D?\230>l\344)?\270\376\302>\212\314]?H!B>F\304@?\336\2618?\346A)?\330\037:?z\005\022?\354{\210>4\315>?\000\3675=\370\317\232>\344U\370>rUL?\200\260\305=\302\306H?\366\353\001?P\347\254=^CV?\2449\034?\254\267\353>~\326\033?\264\000\\?@t\353>\244\341+?\324\202\214>\320\336J>\264\033\324>\322:H?|s\263>V\010\001?p\233\361=$\253T?\320\006:>Z\035X?\204\343\001?x\353\344>\220\261\002?F\246*?l\345\203>h\253o>r\033.? \303\207>"
+      }
+    }
+  }
+}
+node {
+  name: "in_0/read"
+  op: "Identity"
+  input: "in_0"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@in_0"
+      }
+    }
+  }
+}
+node {
+  name: "dropout/dropout/keep_prob"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+        }
+        float_val: 0.5
+      }
+    }
+  }
+}
+node {
+  name: "dropout/dropout/random_uniform/shape"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+            size: 3
+          }
+        }
+        tensor_content: "\004\000\000\000\001\000\000\000\006\000\000\000"
+      }
+    }
+  }
+}
+node {
+  name: "dropout/dropout/random_uniform/min"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+        }
+        float_val: 0.0
+      }
+    }
+  }
+}
+node {
+  name: "dropout/dropout/random_uniform/max"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+        }
+        float_val: 1.0
+      }
+    }
+  }
+}
+node {
+  name: "dropout/dropout/random_uniform/RandomUniform"
+  op: "RandomUniform"
+  input: "dropout/dropout/random_uniform/shape"
+  attr {
+    key: "T"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "seed"
+    value {
+      i: 1
+    }
+  }
+  attr {
+    key: "seed2"
+    value {
+      i: 14
+    }
+  }
+}
+node {
+  name: "dropout/dropout/random_uniform/sub"
+  op: "Sub"
+  input: "dropout/dropout/random_uniform/max"
+  input: "dropout/dropout/random_uniform/min"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "dropout/dropout/random_uniform/mul"
+  op: "Mul"
+  input: "dropout/dropout/random_uniform/RandomUniform"
+  input: "dropout/dropout/random_uniform/sub"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "dropout/dropout/random_uniform"
+  op: "Add"
+  input: "dropout/dropout/random_uniform/mul"
+  input: "dropout/dropout/random_uniform/min"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "dropout/dropout/add"
+  op: "Add"
+  input: "dropout/dropout/keep_prob"
+  input: "dropout/dropout/random_uniform"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "dropout/dropout/Floor"
+  op: "Floor"
+  input: "dropout/dropout/add"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "dropout/dropout/div"
+  op: "RealDiv"
+  input: "in_0/read"
+  input: "dropout/dropout/keep_prob"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "dropout/dropout/mul"
+  op: "Mul"
+  input: "dropout/dropout/div"
+  input: "dropout/dropout/Floor"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+library {
+}
