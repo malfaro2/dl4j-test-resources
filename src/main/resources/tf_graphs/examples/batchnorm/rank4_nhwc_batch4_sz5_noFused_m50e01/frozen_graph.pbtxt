@@ -1,0 +1,330 @@
+node {
+  name: "in_0"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+          dim {
+            size: 4
+          }
+          dim {
+            size: 5
+          }
+          dim {
+            size: 5
+          }
+          dim {
+            size: 1
+          }
+        }
+        tensor_content: "~^G?L\033M?\236p9?\220ol>\356%:?X\2708><q\001?b|d?\224\316\013?\314al?P@\257=,5K?\326\271(?\3566\016?`u#>0\024\236>\240{\036>\240h\360>\222o~?v|\034?\346+-?HM8>v\312,?p\375e>@\235P=\030\216\353>$\024T?\250\004q>H\250y?h\014V?(W\204>\014t\326>\016\3503?\366\226D? \213\t?\24019?D\300\211>\0008\312;\340\310\005=0\374\203=\\\302W?\300\325??\200\206\232=\270\337\037?\220\272\262>\256L\024?\266\256\022?\300\214:>\262Z$?\240\020j?\350\225\232>\304\372\266>\020\204.>\"\350V?8\370\013?\320W\230=\202\256f?\222N(?\200!\323>`Zz>8|\331>6\231\005?\n\3721?\240\345\372>H\001]>\006ut?\330\357\r>(\033\036>ZY\t?\200\002\\<\310\'\325>\350$\025> ]\322>h_~>\030{\252>D?\230>l\344)?\270\376\302>\212\314]?H!B>F\304@?\336\2618?\346A)?\330\037:?z\005\022?\354{\210>4\315>?\000\3675=\370\317\232>\344U\370>rUL?\200\260\305=\302\306H?\366\353\001?P\347\254=^CV?\2449\034?\254\267\353>~\326\033?\264\000\\?"
+      }
+    }
+  }
+}
+node {
+  name: "in_0/read"
+  op: "Identity"
+  input: "in_0"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@in_0"
+      }
+    }
+  }
+}
+node {
+  name: "batch_normalization/gamma"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+          dim {
+            size: 1
+          }
+        }
+        float_val: 1.0
+      }
+    }
+  }
+}
+node {
+  name: "batch_normalization/gamma/read"
+  op: "Identity"
+  input: "batch_normalization/gamma"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@batch_normalization/gamma"
+      }
+    }
+  }
+}
+node {
+  name: "batch_normalization/beta"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+          dim {
+            size: 1
+          }
+        }
+        float_val: 0.0
+      }
+    }
+  }
+}
+node {
+  name: "batch_normalization/beta/read"
+  op: "Identity"
+  input: "batch_normalization/beta"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@batch_normalization/beta"
+      }
+    }
+  }
+}
+node {
+  name: "batch_normalization/moving_mean"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+          dim {
+            size: 1
+          }
+        }
+        float_val: 0.0
+      }
+    }
+  }
+}
+node {
+  name: "batch_normalization/moving_mean/read"
+  op: "Identity"
+  input: "batch_normalization/moving_mean"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@batch_normalization/moving_mean"
+      }
+    }
+  }
+}
+node {
+  name: "batch_normalization/moving_variance"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+          dim {
+            size: 1
+          }
+        }
+        float_val: 1.0
+      }
+    }
+  }
+}
+node {
+  name: "batch_normalization/moving_variance/read"
+  op: "Identity"
+  input: "batch_normalization/moving_variance"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@batch_normalization/moving_variance"
+      }
+    }
+  }
+}
+node {
+  name: "batch_normalization/batchnorm/add/y"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+        }
+        float_val: 0.10000000149011612
+      }
+    }
+  }
+}
+node {
+  name: "batch_normalization/batchnorm/add"
+  op: "Add"
+  input: "batch_normalization/moving_variance/read"
+  input: "batch_normalization/batchnorm/add/y"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "batch_normalization/batchnorm/Rsqrt"
+  op: "Rsqrt"
+  input: "batch_normalization/batchnorm/add"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "batch_normalization/batchnorm/mul"
+  op: "Mul"
+  input: "batch_normalization/batchnorm/Rsqrt"
+  input: "batch_normalization/gamma/read"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "batch_normalization/batchnorm/mul_1"
+  op: "Mul"
+  input: "in_0/read"
+  input: "batch_normalization/batchnorm/mul"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "batch_normalization/batchnorm/mul_2"
+  op: "Mul"
+  input: "batch_normalization/moving_mean/read"
+  input: "batch_normalization/batchnorm/mul"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "batch_normalization/batchnorm/sub"
+  op: "Sub"
+  input: "batch_normalization/beta/read"
+  input: "batch_normalization/batchnorm/mul_2"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "batch_normalization/batchnorm/add_1"
+  op: "Add"
+  input: "batch_normalization/batchnorm/mul_1"
+  input: "batch_normalization/batchnorm/sub"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+library {
+}

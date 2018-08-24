@@ -48,7 +48,7 @@ node {
   }
 }
 node {
-  name: "conv1d/kernel"
+  name: "separable_conv1d/depthwise_kernel"
   op: "Const"
   attr {
     key: "dtype"
@@ -69,18 +69,18 @@ node {
             size: 2
           }
           dim {
-            size: 3
+            size: 2
           }
         }
-        tensor_content: "$\210\327>\334\305)?\010,@?\200\304\315\274\274[c>X\021%>\260\'n>\340&\317>T\242\316>X\363&\276\010,2?\360\310\016?"
+        tensor_content: "\316\370\360>\325\317=?\325\332V?\000\016\346\274\2741~>$\2158>\372!\205>R\232\347>"
       }
     }
   }
 }
 node {
-  name: "conv1d/kernel/read"
+  name: "separable_conv1d/depthwise_kernel/read"
   op: "Identity"
-  input: "conv1d/kernel"
+  input: "separable_conv1d/depthwise_kernel"
   attr {
     key: "T"
     value {
@@ -91,13 +91,62 @@ node {
     key: "_class"
     value {
       list {
-        s: "loc:@conv1d/kernel"
+        s: "loc:@separable_conv1d/depthwise_kernel"
       }
     }
   }
 }
 node {
-  name: "conv1d/bias"
+  name: "separable_conv1d/pointwise_kernel"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+          dim {
+            size: 1
+          }
+          dim {
+            size: 4
+          }
+          dim {
+            size: 3
+          }
+        }
+        tensor_content: "\006\211R?\260m5>\332\352-?n\377\215\276\240\317\227<\230\246\327>@\314e\275*:\006?\014\227%\277\230e\336>(\300O\277<\265\231>"
+      }
+    }
+  }
+}
+node {
+  name: "separable_conv1d/pointwise_kernel/read"
+  op: "Identity"
+  input: "separable_conv1d/pointwise_kernel"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@separable_conv1d/pointwise_kernel"
+      }
+    }
+  }
+}
+node {
+  name: "separable_conv1d/bias"
   op: "Const"
   attr {
     key: "dtype"
@@ -121,9 +170,9 @@ node {
   }
 }
 node {
-  name: "conv1d/bias/read"
+  name: "separable_conv1d/bias/read"
   op: "Identity"
-  input: "conv1d/bias"
+  input: "separable_conv1d/bias"
   attr {
     key: "T"
     value {
@@ -134,13 +183,13 @@ node {
     key: "_class"
     value {
       list {
-        s: "loc:@conv1d/bias"
+        s: "loc:@separable_conv1d/bias"
       }
     }
   }
 }
 node {
-  name: "conv1d/conv1d/ExpandDims/dim"
+  name: "separable_conv1d/ExpandDims/dim"
   op: "Const"
   attr {
     key: "dtype"
@@ -161,10 +210,10 @@ node {
   }
 }
 node {
-  name: "conv1d/conv1d/ExpandDims"
+  name: "separable_conv1d/ExpandDims"
   op: "ExpandDims"
   input: "in_0/read"
-  input: "conv1d/conv1d/ExpandDims/dim"
+  input: "separable_conv1d/ExpandDims/dim"
   attr {
     key: "T"
     value {
@@ -179,7 +228,7 @@ node {
   }
 }
 node {
-  name: "conv1d/conv1d/ExpandDims_1/dim"
+  name: "separable_conv1d/ExpandDims_1/dim"
   op: "Const"
   attr {
     key: "dtype"
@@ -200,10 +249,10 @@ node {
   }
 }
 node {
-  name: "conv1d/conv1d/ExpandDims_1"
+  name: "separable_conv1d/ExpandDims_1"
   op: "ExpandDims"
-  input: "conv1d/kernel/read"
-  input: "conv1d/conv1d/ExpandDims_1/dim"
+  input: "separable_conv1d/depthwise_kernel/read"
+  input: "separable_conv1d/ExpandDims_1/dim"
   attr {
     key: "T"
     value {
@@ -218,10 +267,95 @@ node {
   }
 }
 node {
-  name: "conv1d/conv1d/Conv2D"
+  name: "separable_conv1d/ExpandDims_2/dim"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+        }
+        int_val: 0
+      }
+    }
+  }
+}
+node {
+  name: "separable_conv1d/ExpandDims_2"
+  op: "ExpandDims"
+  input: "separable_conv1d/pointwise_kernel/read"
+  input: "separable_conv1d/ExpandDims_2/dim"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "Tdim"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "separable_conv1d/separable_conv2d/depthwise"
+  op: "DepthwiseConv2dNative"
+  input: "separable_conv1d/ExpandDims"
+  input: "separable_conv1d/ExpandDims_1"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "data_format"
+    value {
+      s: "NHWC"
+    }
+  }
+  attr {
+    key: "dilations"
+    value {
+      list {
+        i: 1
+        i: 1
+        i: 1
+        i: 1
+      }
+    }
+  }
+  attr {
+    key: "padding"
+    value {
+      s: "VALID"
+    }
+  }
+  attr {
+    key: "strides"
+    value {
+      list {
+        i: 1
+        i: 1
+        i: 1
+        i: 1
+      }
+    }
+  }
+}
+node {
+  name: "separable_conv1d/separable_conv2d"
   op: "Conv2D"
-  input: "conv1d/conv1d/ExpandDims"
-  input: "conv1d/conv1d/ExpandDims_1"
+  input: "separable_conv1d/separable_conv2d/depthwise"
+  input: "separable_conv1d/ExpandDims_2"
   attr {
     key: "T"
     value {
@@ -270,9 +404,27 @@ node {
   }
 }
 node {
-  name: "conv1d/conv1d/Squeeze"
+  name: "separable_conv1d/BiasAdd"
+  op: "BiasAdd"
+  input: "separable_conv1d/separable_conv2d"
+  input: "separable_conv1d/bias/read"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "data_format"
+    value {
+      s: "NHWC"
+    }
+  }
+}
+node {
+  name: "separable_conv1d/Squeeze"
   op: "Squeeze"
-  input: "conv1d/conv1d/Conv2D"
+  input: "separable_conv1d/BiasAdd"
   attr {
     key: "T"
     value {
@@ -285,24 +437,6 @@ node {
       list {
         i: 1
       }
-    }
-  }
-}
-node {
-  name: "conv1d/BiasAdd"
-  op: "BiasAdd"
-  input: "conv1d/conv1d/Squeeze"
-  input: "conv1d/bias/read"
-  attr {
-    key: "T"
-    value {
-      type: DT_FLOAT
-    }
-  }
-  attr {
-    key: "data_format"
-    value {
-      s: "NHWC"
     }
   }
 }

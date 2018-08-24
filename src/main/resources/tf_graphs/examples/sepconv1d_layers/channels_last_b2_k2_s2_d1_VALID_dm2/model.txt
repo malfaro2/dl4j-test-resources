@@ -219,13 +219,13 @@ node {
   }
 }
 node {
-  name: "conv1d/kernel/Initializer/random_uniform/shape"
+  name: "separable_conv1d/depthwise_kernel/Initializer/random_uniform/shape"
   op: "Const"
   attr {
     key: "_class"
     value {
       list {
-        s: "loc:@conv1d/kernel"
+        s: "loc:@separable_conv1d/depthwise_kernel"
       }
     }
   }
@@ -245,19 +245,19 @@ node {
             size: 3
           }
         }
-        tensor_content: "\002\000\000\000\002\000\000\000\003\000\000\000"
+        tensor_content: "\002\000\000\000\002\000\000\000\002\000\000\000"
       }
     }
   }
 }
 node {
-  name: "conv1d/kernel/Initializer/random_uniform/min"
+  name: "separable_conv1d/depthwise_kernel/Initializer/random_uniform/min"
   op: "Const"
   attr {
     key: "_class"
     value {
       list {
-        s: "loc:@conv1d/kernel"
+        s: "loc:@separable_conv1d/depthwise_kernel"
       }
     }
   }
@@ -274,19 +274,19 @@ node {
         dtype: DT_FLOAT
         tensor_shape {
         }
-        float_val: -0.7745966911315918
+        float_val: -0.8660253882408142
       }
     }
   }
 }
 node {
-  name: "conv1d/kernel/Initializer/random_uniform/max"
+  name: "separable_conv1d/depthwise_kernel/Initializer/random_uniform/max"
   op: "Const"
   attr {
     key: "_class"
     value {
       list {
-        s: "loc:@conv1d/kernel"
+        s: "loc:@separable_conv1d/depthwise_kernel"
       }
     }
   }
@@ -303,15 +303,15 @@ node {
         dtype: DT_FLOAT
         tensor_shape {
         }
-        float_val: 0.7745966911315918
+        float_val: 0.8660253882408142
       }
     }
   }
 }
 node {
-  name: "conv1d/kernel/Initializer/random_uniform/RandomUniform"
+  name: "separable_conv1d/depthwise_kernel/Initializer/random_uniform/RandomUniform"
   op: "RandomUniform"
-  input: "conv1d/kernel/Initializer/random_uniform/shape"
+  input: "separable_conv1d/depthwise_kernel/Initializer/random_uniform/shape"
   attr {
     key: "T"
     value {
@@ -322,7 +322,7 @@ node {
     key: "_class"
     value {
       list {
-        s: "loc:@conv1d/kernel"
+        s: "loc:@separable_conv1d/depthwise_kernel"
       }
     }
   }
@@ -346,10 +346,10 @@ node {
   }
 }
 node {
-  name: "conv1d/kernel/Initializer/random_uniform/sub"
+  name: "separable_conv1d/depthwise_kernel/Initializer/random_uniform/sub"
   op: "Sub"
-  input: "conv1d/kernel/Initializer/random_uniform/max"
-  input: "conv1d/kernel/Initializer/random_uniform/min"
+  input: "separable_conv1d/depthwise_kernel/Initializer/random_uniform/max"
+  input: "separable_conv1d/depthwise_kernel/Initializer/random_uniform/min"
   attr {
     key: "T"
     value {
@@ -360,16 +360,16 @@ node {
     key: "_class"
     value {
       list {
-        s: "loc:@conv1d/kernel"
+        s: "loc:@separable_conv1d/depthwise_kernel"
       }
     }
   }
 }
 node {
-  name: "conv1d/kernel/Initializer/random_uniform/mul"
+  name: "separable_conv1d/depthwise_kernel/Initializer/random_uniform/mul"
   op: "Mul"
-  input: "conv1d/kernel/Initializer/random_uniform/RandomUniform"
-  input: "conv1d/kernel/Initializer/random_uniform/sub"
+  input: "separable_conv1d/depthwise_kernel/Initializer/random_uniform/RandomUniform"
+  input: "separable_conv1d/depthwise_kernel/Initializer/random_uniform/sub"
   attr {
     key: "T"
     value {
@@ -380,16 +380,16 @@ node {
     key: "_class"
     value {
       list {
-        s: "loc:@conv1d/kernel"
+        s: "loc:@separable_conv1d/depthwise_kernel"
       }
     }
   }
 }
 node {
-  name: "conv1d/kernel/Initializer/random_uniform"
+  name: "separable_conv1d/depthwise_kernel/Initializer/random_uniform"
   op: "Add"
-  input: "conv1d/kernel/Initializer/random_uniform/mul"
-  input: "conv1d/kernel/Initializer/random_uniform/min"
+  input: "separable_conv1d/depthwise_kernel/Initializer/random_uniform/mul"
+  input: "separable_conv1d/depthwise_kernel/Initializer/random_uniform/min"
   attr {
     key: "T"
     value {
@@ -400,19 +400,19 @@ node {
     key: "_class"
     value {
       list {
-        s: "loc:@conv1d/kernel"
+        s: "loc:@separable_conv1d/depthwise_kernel"
       }
     }
   }
 }
 node {
-  name: "conv1d/kernel"
+  name: "separable_conv1d/depthwise_kernel"
   op: "VariableV2"
   attr {
     key: "_class"
     value {
       list {
-        s: "loc:@conv1d/kernel"
+        s: "loc:@separable_conv1d/depthwise_kernel"
       }
     }
   }
@@ -439,7 +439,7 @@ node {
           size: 2
         }
         dim {
-          size: 3
+          size: 2
         }
       }
     }
@@ -452,10 +452,10 @@ node {
   }
 }
 node {
-  name: "conv1d/kernel/Assign"
+  name: "separable_conv1d/depthwise_kernel/Assign"
   op: "Assign"
-  input: "conv1d/kernel"
-  input: "conv1d/kernel/Initializer/random_uniform"
+  input: "separable_conv1d/depthwise_kernel"
+  input: "separable_conv1d/depthwise_kernel/Initializer/random_uniform"
   attr {
     key: "T"
     value {
@@ -466,7 +466,7 @@ node {
     key: "_class"
     value {
       list {
-        s: "loc:@conv1d/kernel"
+        s: "loc:@separable_conv1d/depthwise_kernel"
       }
     }
   }
@@ -484,9 +484,9 @@ node {
   }
 }
 node {
-  name: "conv1d/kernel/read"
+  name: "separable_conv1d/depthwise_kernel/read"
   op: "Identity"
-  input: "conv1d/kernel"
+  input: "separable_conv1d/depthwise_kernel"
   attr {
     key: "T"
     value {
@@ -497,19 +497,303 @@ node {
     key: "_class"
     value {
       list {
-        s: "loc:@conv1d/kernel"
+        s: "loc:@separable_conv1d/depthwise_kernel"
       }
     }
   }
 }
 node {
-  name: "conv1d/bias/Initializer/zeros"
+  name: "separable_conv1d/pointwise_kernel/Initializer/random_uniform/shape"
   op: "Const"
   attr {
     key: "_class"
     value {
       list {
-        s: "loc:@conv1d/bias"
+        s: "loc:@separable_conv1d/pointwise_kernel"
+      }
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+            size: 3
+          }
+        }
+        tensor_content: "\001\000\000\000\004\000\000\000\003\000\000\000"
+      }
+    }
+  }
+}
+node {
+  name: "separable_conv1d/pointwise_kernel/Initializer/random_uniform/min"
+  op: "Const"
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@separable_conv1d/pointwise_kernel"
+      }
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+        }
+        float_val: -0.9258201122283936
+      }
+    }
+  }
+}
+node {
+  name: "separable_conv1d/pointwise_kernel/Initializer/random_uniform/max"
+  op: "Const"
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@separable_conv1d/pointwise_kernel"
+      }
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+        }
+        float_val: 0.9258201122283936
+      }
+    }
+  }
+}
+node {
+  name: "separable_conv1d/pointwise_kernel/Initializer/random_uniform/RandomUniform"
+  op: "RandomUniform"
+  input: "separable_conv1d/pointwise_kernel/Initializer/random_uniform/shape"
+  attr {
+    key: "T"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@separable_conv1d/pointwise_kernel"
+      }
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "seed"
+    value {
+      i: 1
+    }
+  }
+  attr {
+    key: "seed2"
+    value {
+      i: 23
+    }
+  }
+}
+node {
+  name: "separable_conv1d/pointwise_kernel/Initializer/random_uniform/sub"
+  op: "Sub"
+  input: "separable_conv1d/pointwise_kernel/Initializer/random_uniform/max"
+  input: "separable_conv1d/pointwise_kernel/Initializer/random_uniform/min"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@separable_conv1d/pointwise_kernel"
+      }
+    }
+  }
+}
+node {
+  name: "separable_conv1d/pointwise_kernel/Initializer/random_uniform/mul"
+  op: "Mul"
+  input: "separable_conv1d/pointwise_kernel/Initializer/random_uniform/RandomUniform"
+  input: "separable_conv1d/pointwise_kernel/Initializer/random_uniform/sub"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@separable_conv1d/pointwise_kernel"
+      }
+    }
+  }
+}
+node {
+  name: "separable_conv1d/pointwise_kernel/Initializer/random_uniform"
+  op: "Add"
+  input: "separable_conv1d/pointwise_kernel/Initializer/random_uniform/mul"
+  input: "separable_conv1d/pointwise_kernel/Initializer/random_uniform/min"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@separable_conv1d/pointwise_kernel"
+      }
+    }
+  }
+}
+node {
+  name: "separable_conv1d/pointwise_kernel"
+  op: "VariableV2"
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@separable_conv1d/pointwise_kernel"
+      }
+    }
+  }
+  attr {
+    key: "container"
+    value {
+      s: ""
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "shape"
+    value {
+      shape {
+        dim {
+          size: 1
+        }
+        dim {
+          size: 4
+        }
+        dim {
+          size: 3
+        }
+      }
+    }
+  }
+  attr {
+    key: "shared_name"
+    value {
+      s: ""
+    }
+  }
+}
+node {
+  name: "separable_conv1d/pointwise_kernel/Assign"
+  op: "Assign"
+  input: "separable_conv1d/pointwise_kernel"
+  input: "separable_conv1d/pointwise_kernel/Initializer/random_uniform"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@separable_conv1d/pointwise_kernel"
+      }
+    }
+  }
+  attr {
+    key: "use_locking"
+    value {
+      b: true
+    }
+  }
+  attr {
+    key: "validate_shape"
+    value {
+      b: true
+    }
+  }
+}
+node {
+  name: "separable_conv1d/pointwise_kernel/read"
+  op: "Identity"
+  input: "separable_conv1d/pointwise_kernel"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@separable_conv1d/pointwise_kernel"
+      }
+    }
+  }
+}
+node {
+  name: "separable_conv1d/bias/Initializer/zeros"
+  op: "Const"
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@separable_conv1d/bias"
       }
     }
   }
@@ -535,13 +819,13 @@ node {
   }
 }
 node {
-  name: "conv1d/bias"
+  name: "separable_conv1d/bias"
   op: "VariableV2"
   attr {
     key: "_class"
     value {
       list {
-        s: "loc:@conv1d/bias"
+        s: "loc:@separable_conv1d/bias"
       }
     }
   }
@@ -575,10 +859,10 @@ node {
   }
 }
 node {
-  name: "conv1d/bias/Assign"
+  name: "separable_conv1d/bias/Assign"
   op: "Assign"
-  input: "conv1d/bias"
-  input: "conv1d/bias/Initializer/zeros"
+  input: "separable_conv1d/bias"
+  input: "separable_conv1d/bias/Initializer/zeros"
   attr {
     key: "T"
     value {
@@ -589,7 +873,7 @@ node {
     key: "_class"
     value {
       list {
-        s: "loc:@conv1d/bias"
+        s: "loc:@separable_conv1d/bias"
       }
     }
   }
@@ -607,9 +891,9 @@ node {
   }
 }
 node {
-  name: "conv1d/bias/read"
+  name: "separable_conv1d/bias/read"
   op: "Identity"
-  input: "conv1d/bias"
+  input: "separable_conv1d/bias"
   attr {
     key: "T"
     value {
@@ -620,37 +904,13 @@ node {
     key: "_class"
     value {
       list {
-        s: "loc:@conv1d/bias"
+        s: "loc:@separable_conv1d/bias"
       }
     }
   }
 }
 node {
-  name: "conv1d/dilation_rate"
-  op: "Const"
-  attr {
-    key: "dtype"
-    value {
-      type: DT_INT32
-    }
-  }
-  attr {
-    key: "value"
-    value {
-      tensor {
-        dtype: DT_INT32
-        tensor_shape {
-          dim {
-            size: 1
-          }
-        }
-        int_val: 1
-      }
-    }
-  }
-}
-node {
-  name: "conv1d/conv1d/ExpandDims/dim"
+  name: "separable_conv1d/ExpandDims/dim"
   op: "Const"
   attr {
     key: "dtype"
@@ -671,10 +931,10 @@ node {
   }
 }
 node {
-  name: "conv1d/conv1d/ExpandDims"
+  name: "separable_conv1d/ExpandDims"
   op: "ExpandDims"
   input: "in_0/read"
-  input: "conv1d/conv1d/ExpandDims/dim"
+  input: "separable_conv1d/ExpandDims/dim"
   attr {
     key: "T"
     value {
@@ -689,7 +949,7 @@ node {
   }
 }
 node {
-  name: "conv1d/conv1d/ExpandDims_1/dim"
+  name: "separable_conv1d/ExpandDims_1/dim"
   op: "Const"
   attr {
     key: "dtype"
@@ -710,10 +970,10 @@ node {
   }
 }
 node {
-  name: "conv1d/conv1d/ExpandDims_1"
+  name: "separable_conv1d/ExpandDims_1"
   op: "ExpandDims"
-  input: "conv1d/kernel/read"
-  input: "conv1d/conv1d/ExpandDims_1/dim"
+  input: "separable_conv1d/depthwise_kernel/read"
+  input: "separable_conv1d/ExpandDims_1/dim"
   attr {
     key: "T"
     value {
@@ -728,10 +988,143 @@ node {
   }
 }
 node {
-  name: "conv1d/conv1d/Conv2D"
+  name: "separable_conv1d/ExpandDims_2/dim"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+        }
+        int_val: 0
+      }
+    }
+  }
+}
+node {
+  name: "separable_conv1d/ExpandDims_2"
+  op: "ExpandDims"
+  input: "separable_conv1d/pointwise_kernel/read"
+  input: "separable_conv1d/ExpandDims_2/dim"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "Tdim"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "separable_conv1d/separable_conv2d/Shape"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+            size: 4
+          }
+        }
+        tensor_content: "\001\000\000\000\002\000\000\000\002\000\000\000\002\000\000\000"
+      }
+    }
+  }
+}
+node {
+  name: "separable_conv1d/separable_conv2d/dilation_rate"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+            size: 2
+          }
+        }
+        tensor_content: "\001\000\000\000\001\000\000\000"
+      }
+    }
+  }
+}
+node {
+  name: "separable_conv1d/separable_conv2d/depthwise"
+  op: "DepthwiseConv2dNative"
+  input: "separable_conv1d/ExpandDims"
+  input: "separable_conv1d/ExpandDims_1"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "data_format"
+    value {
+      s: "NHWC"
+    }
+  }
+  attr {
+    key: "dilations"
+    value {
+      list {
+        i: 1
+        i: 1
+        i: 1
+        i: 1
+      }
+    }
+  }
+  attr {
+    key: "padding"
+    value {
+      s: "VALID"
+    }
+  }
+  attr {
+    key: "strides"
+    value {
+      list {
+        i: 1
+        i: 2
+        i: 2
+        i: 1
+      }
+    }
+  }
+}
+node {
+  name: "separable_conv1d/separable_conv2d"
   op: "Conv2D"
-  input: "conv1d/conv1d/ExpandDims"
-  input: "conv1d/conv1d/ExpandDims_1"
+  input: "separable_conv1d/separable_conv2d/depthwise"
+  input: "separable_conv1d/ExpandDims_2"
   attr {
     key: "T"
     value {
@@ -767,7 +1160,7 @@ node {
       list {
         i: 1
         i: 1
-        i: 2
+        i: 1
         i: 1
       }
     }
@@ -780,9 +1173,27 @@ node {
   }
 }
 node {
-  name: "conv1d/conv1d/Squeeze"
+  name: "separable_conv1d/BiasAdd"
+  op: "BiasAdd"
+  input: "separable_conv1d/separable_conv2d"
+  input: "separable_conv1d/bias/read"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "data_format"
+    value {
+      s: "NHWC"
+    }
+  }
+}
+node {
+  name: "separable_conv1d/Squeeze"
   op: "Squeeze"
-  input: "conv1d/conv1d/Conv2D"
+  input: "separable_conv1d/BiasAdd"
   attr {
     key: "T"
     value {
@@ -795,24 +1206,6 @@ node {
       list {
         i: 1
       }
-    }
-  }
-}
-node {
-  name: "conv1d/BiasAdd"
-  op: "BiasAdd"
-  input: "conv1d/conv1d/Squeeze"
-  input: "conv1d/bias/read"
-  attr {
-    key: "T"
-    value {
-      type: DT_FLOAT
-    }
-  }
-  attr {
-    key: "data_format"
-    value {
-      s: "NHWC"
     }
   }
 }
@@ -853,12 +1246,13 @@ node {
         dtype: DT_STRING
         tensor_shape {
           dim {
-            size: 3
+            size: 4
           }
         }
-        string_val: "conv1d/bias"
-        string_val: "conv1d/kernel"
         string_val: "in_0"
+        string_val: "separable_conv1d/bias"
+        string_val: "separable_conv1d/depthwise_kernel"
+        string_val: "separable_conv1d/pointwise_kernel"
       }
     }
   }
@@ -879,9 +1273,10 @@ node {
         dtype: DT_STRING
         tensor_shape {
           dim {
-            size: 3
+            size: 4
           }
         }
+        string_val: ""
         string_val: ""
         string_val: ""
         string_val: ""
@@ -895,13 +1290,15 @@ node {
   input: "save/Const"
   input: "save/SaveV2/tensor_names"
   input: "save/SaveV2/shape_and_slices"
-  input: "conv1d/bias"
-  input: "conv1d/kernel"
   input: "in_0"
+  input: "separable_conv1d/bias"
+  input: "separable_conv1d/depthwise_kernel"
+  input: "separable_conv1d/pointwise_kernel"
   attr {
     key: "dtypes"
     value {
       list {
+        type: DT_FLOAT
         type: DT_FLOAT
         type: DT_FLOAT
         type: DT_FLOAT
@@ -946,12 +1343,13 @@ node {
         dtype: DT_STRING
         tensor_shape {
           dim {
-            size: 3
+            size: 4
           }
         }
-        string_val: "conv1d/bias"
-        string_val: "conv1d/kernel"
         string_val: "in_0"
+        string_val: "separable_conv1d/bias"
+        string_val: "separable_conv1d/depthwise_kernel"
+        string_val: "separable_conv1d/pointwise_kernel"
       }
     }
   }
@@ -973,9 +1371,10 @@ node {
         dtype: DT_STRING
         tensor_shape {
           dim {
-            size: 3
+            size: 4
           }
         }
+        string_val: ""
         string_val: ""
         string_val: ""
         string_val: ""
@@ -997,6 +1396,7 @@ node {
         type: DT_FLOAT
         type: DT_FLOAT
         type: DT_FLOAT
+        type: DT_FLOAT
       }
     }
   }
@@ -1004,72 +1404,8 @@ node {
 node {
   name: "save/Assign"
   op: "Assign"
-  input: "conv1d/bias"
-  input: "save/RestoreV2"
-  attr {
-    key: "T"
-    value {
-      type: DT_FLOAT
-    }
-  }
-  attr {
-    key: "_class"
-    value {
-      list {
-        s: "loc:@conv1d/bias"
-      }
-    }
-  }
-  attr {
-    key: "use_locking"
-    value {
-      b: true
-    }
-  }
-  attr {
-    key: "validate_shape"
-    value {
-      b: true
-    }
-  }
-}
-node {
-  name: "save/Assign_1"
-  op: "Assign"
-  input: "conv1d/kernel"
-  input: "save/RestoreV2:1"
-  attr {
-    key: "T"
-    value {
-      type: DT_FLOAT
-    }
-  }
-  attr {
-    key: "_class"
-    value {
-      list {
-        s: "loc:@conv1d/kernel"
-      }
-    }
-  }
-  attr {
-    key: "use_locking"
-    value {
-      b: true
-    }
-  }
-  attr {
-    key: "validate_shape"
-    value {
-      b: true
-    }
-  }
-}
-node {
-  name: "save/Assign_2"
-  op: "Assign"
   input: "in_0"
-  input: "save/RestoreV2:2"
+  input: "save/RestoreV2"
   attr {
     key: "T"
     value {
@@ -1098,18 +1434,116 @@ node {
   }
 }
 node {
+  name: "save/Assign_1"
+  op: "Assign"
+  input: "separable_conv1d/bias"
+  input: "save/RestoreV2:1"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@separable_conv1d/bias"
+      }
+    }
+  }
+  attr {
+    key: "use_locking"
+    value {
+      b: true
+    }
+  }
+  attr {
+    key: "validate_shape"
+    value {
+      b: true
+    }
+  }
+}
+node {
+  name: "save/Assign_2"
+  op: "Assign"
+  input: "separable_conv1d/depthwise_kernel"
+  input: "save/RestoreV2:2"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@separable_conv1d/depthwise_kernel"
+      }
+    }
+  }
+  attr {
+    key: "use_locking"
+    value {
+      b: true
+    }
+  }
+  attr {
+    key: "validate_shape"
+    value {
+      b: true
+    }
+  }
+}
+node {
+  name: "save/Assign_3"
+  op: "Assign"
+  input: "separable_conv1d/pointwise_kernel"
+  input: "save/RestoreV2:3"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@separable_conv1d/pointwise_kernel"
+      }
+    }
+  }
+  attr {
+    key: "use_locking"
+    value {
+      b: true
+    }
+  }
+  attr {
+    key: "validate_shape"
+    value {
+      b: true
+    }
+  }
+}
+node {
   name: "save/restore_all"
   op: "NoOp"
   input: "^save/Assign"
   input: "^save/Assign_1"
   input: "^save/Assign_2"
+  input: "^save/Assign_3"
 }
 node {
   name: "init"
   op: "NoOp"
-  input: "^conv1d/bias/Assign"
-  input: "^conv1d/kernel/Assign"
   input: "^in_0/Assign"
+  input: "^separable_conv1d/bias/Assign"
+  input: "^separable_conv1d/depthwise_kernel/Assign"
+  input: "^separable_conv1d/pointwise_kernel/Assign"
 }
 versions {
   producer: 26

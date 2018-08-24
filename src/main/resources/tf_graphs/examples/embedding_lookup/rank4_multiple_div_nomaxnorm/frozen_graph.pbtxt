@@ -1,0 +1,937 @@
+node {
+  name: "in_0"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+          dim {
+            size: 4
+          }
+          dim {
+            size: 2
+          }
+          dim {
+            size: 3
+          }
+          dim {
+            size: 4
+          }
+        }
+        tensor_content: "~^G?L\033M?\236p9?\220ol>\356%:?X\2708><q\001?b|d?\224\316\013?\314al?P@\257=,5K?\326\271(?\3566\016?`u#>0\024\236>\240{\036>\240h\360>\222o~?v|\034?\346+-?HM8>v\312,?p\375e>@\235P=\030\216\353>$\024T?\250\004q>H\250y?h\014V?(W\204>\014t\326>\016\3503?\366\226D? \213\t?\24019?D\300\211>\0008\312;\340\310\005=0\374\203=\\\302W?\300\325??\200\206\232=\270\337\037?\220\272\262>\256L\024?\266\256\022?\300\214:>\262Z$?\240\020j?\350\225\232>\304\372\266>\020\204.>\"\350V?8\370\013?\320W\230=\202\256f?\222N(?\200!\323>`Zz>8|\331>6\231\005?\n\3721?\240\345\372>H\001]>\006ut?\330\357\r>(\033\036>ZY\t?\200\002\\<\310\'\325>\350$\025> ]\322>h_~>\030{\252>D?\230>l\344)?\270\376\302>\212\314]?H!B>F\304@?\336\2618?\346A)?\330\037:?z\005\022?\354{\210>4\315>?\000\3675=\370\317\232>\344U\370>rUL?\200\260\305=\302\306H?\366\353\001?P\347\254=^CV?"
+      }
+    }
+  }
+}
+node {
+  name: "in_0/read"
+  op: "Identity"
+  input: "in_0"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@in_0"
+      }
+    }
+  }
+}
+node {
+  name: "in_1"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+          dim {
+            size: 3
+          }
+          dim {
+            size: 2
+          }
+          dim {
+            size: 3
+          }
+          dim {
+            size: 4
+          }
+        }
+        tensor_content: "\006\220E?\202\226m?\346\013|?\330\262\367>\226\260$?@\243\032?\236n&?\244\333B?\334\260B?\360\035\312>p\002s?\322*\\?`\243I?\330\374d?\004w\355>\27077?h+\350>t7N?\312Ru?\262\205\007?*kU?\000\231\'<\370l\314>`\327\033>\270\034\266>\350\301$>\2145\366>\030\033$>\240\024\321>\240\341n?\360\352\232=&\265\022?bFn?\314j\365>\350O\262>\002\333t?\240\313\204=\364{\256>\260\322\334=\300\244\376=\350\212T?\374E`?(\005\266>`\315\322=\324\271\250>p H><ef?P?\250>0\313\216><\220\344>\322dw?H\322\224>\260\377s?\340&\242>\022\220y?0R\002>\020Y\003?<J\262>\220\270\273>\254o\344>\372\245M? \352%>\366cd?\024\241A?\354\013\354>(^Z>\244\352\342>\230\022)?4\206M?V^r?\004\352\247> (#?"
+      }
+    }
+  }
+}
+node {
+  name: "in_1/read"
+  op: "Identity"
+  input: "in_1"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@in_1"
+      }
+    }
+  }
+}
+node {
+  name: "in_2"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+          dim {
+            size: 3
+          }
+          dim {
+            size: 2
+          }
+          dim {
+            size: 3
+          }
+          dim {
+            size: 4
+          }
+        }
+        tensor_content: "\270\263q?\342~\030?\026\355]?\374O\263>\346\217\002?|;:?\244|\360>\260}H?\340H\032>\324\r<?`\324|=\202\201)?\000\361\013=D\313\246>\212\350\004?\356\221=?`\0057>\330\331\027>By!?@p\036>\310P<>8\006y>\022\352F?Nw%?\376\013,?\260\337Z?\234\362\210>\300\274~=@\226\205=\324\215\006?.B??\260\376\016?\010Y\212>\354uy?\000\300#?\020j\334>^\3368?8\034\373>8\304\256>\356\351]?\342`\'?\260(9>0e\n?\034\327,?`\372\347>\020k\327=@9\257=\352\345\000?4I\034?l\321\232>\370:\305>4\226M?0E\230>\034\371\350>\274\236\000?X\3563>L\215C?\200\001f?\344\235\316>\n\340\033?\264 \341>\\\355\301>\\>v?fA\001?\304\220\361>h\034\020? \253@?L]\233>z\377\'? GO>hhK>\0245\022?"
+      }
+    }
+  }
+}
+node {
+  name: "in_2/read"
+  op: "Identity"
+  input: "in_2"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@in_2"
+      }
+    }
+  }
+}
+node {
+  name: "in_3"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+            size: 4
+          }
+        }
+        tensor_content: "\002\000\000\000\010\000\000\000\006\000\000\000\000\000\000\000"
+      }
+    }
+  }
+}
+node {
+  name: "in_3/read"
+  op: "Identity"
+  input: "in_3"
+  attr {
+    key: "T"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@in_3"
+      }
+    }
+  }
+}
+node {
+  name: "embedding_lookup/Reshape/shape"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+            size: 1
+          }
+        }
+        int_val: -1
+      }
+    }
+  }
+}
+node {
+  name: "embedding_lookup/Reshape"
+  op: "Reshape"
+  input: "in_3/read"
+  input: "embedding_lookup/Reshape/shape"
+  attr {
+    key: "T"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "Tshape"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "embedding_lookup/Size"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+        }
+        int_val: 4
+      }
+    }
+  }
+}
+node {
+  name: "embedding_lookup/range/start"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+        }
+        int_val: 0
+      }
+    }
+  }
+}
+node {
+  name: "embedding_lookup/range/delta"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+        }
+        int_val: 1
+      }
+    }
+  }
+}
+node {
+  name: "embedding_lookup/range"
+  op: "Range"
+  input: "embedding_lookup/range/start"
+  input: "embedding_lookup/Size"
+  input: "embedding_lookup/range/delta"
+  attr {
+    key: "Tidx"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "embedding_lookup/Const"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+        }
+        int_val: 10
+      }
+    }
+  }
+}
+node {
+  name: "embedding_lookup/floordiv/y"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+        }
+        int_val: 3
+      }
+    }
+  }
+}
+node {
+  name: "embedding_lookup/floordiv"
+  op: "FloorDiv"
+  input: "embedding_lookup/Const"
+  input: "embedding_lookup/floordiv/y"
+  attr {
+    key: "T"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "embedding_lookup/mod/y"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+        }
+        int_val: 3
+      }
+    }
+  }
+}
+node {
+  name: "embedding_lookup/mod"
+  op: "FloorMod"
+  input: "embedding_lookup/Const"
+  input: "embedding_lookup/mod/y"
+  attr {
+    key: "T"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "embedding_lookup/add/y"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+        }
+        int_val: 1
+      }
+    }
+  }
+}
+node {
+  name: "embedding_lookup/add"
+  op: "Add"
+  input: "embedding_lookup/floordiv"
+  input: "embedding_lookup/add/y"
+  attr {
+    key: "T"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "embedding_lookup/floordiv_1"
+  op: "FloorDiv"
+  input: "embedding_lookup/Reshape"
+  input: "embedding_lookup/add"
+  attr {
+    key: "T"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "embedding_lookup/sub"
+  op: "Sub"
+  input: "embedding_lookup/Reshape"
+  input: "embedding_lookup/mod"
+  attr {
+    key: "T"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "embedding_lookup/floordiv_2"
+  op: "FloorDiv"
+  input: "embedding_lookup/sub"
+  input: "embedding_lookup/floordiv"
+  attr {
+    key: "T"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "embedding_lookup/Maximum"
+  op: "Maximum"
+  input: "embedding_lookup/floordiv_1"
+  input: "embedding_lookup/floordiv_2"
+  attr {
+    key: "T"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "embedding_lookup/Less"
+  op: "Less"
+  input: "embedding_lookup/Maximum"
+  input: "embedding_lookup/mod"
+  attr {
+    key: "T"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "embedding_lookup/add_1/y"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+        }
+        int_val: 1
+      }
+    }
+  }
+}
+node {
+  name: "embedding_lookup/add_1"
+  op: "Add"
+  input: "embedding_lookup/floordiv"
+  input: "embedding_lookup/add_1/y"
+  attr {
+    key: "T"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "embedding_lookup/mod_1"
+  op: "FloorMod"
+  input: "embedding_lookup/Reshape"
+  input: "embedding_lookup/add_1"
+  attr {
+    key: "T"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "embedding_lookup/sub_1"
+  op: "Sub"
+  input: "embedding_lookup/Reshape"
+  input: "embedding_lookup/mod"
+  attr {
+    key: "T"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "embedding_lookup/mod_2"
+  op: "FloorMod"
+  input: "embedding_lookup/sub_1"
+  input: "embedding_lookup/floordiv"
+  attr {
+    key: "T"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "embedding_lookup/Select"
+  op: "Select"
+  input: "embedding_lookup/Less"
+  input: "embedding_lookup/mod_1"
+  input: "embedding_lookup/mod_2"
+  attr {
+    key: "T"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "embedding_lookup/DynamicPartition"
+  op: "DynamicPartition"
+  input: "embedding_lookup/Select"
+  input: "embedding_lookup/Maximum"
+  attr {
+    key: "T"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "num_partitions"
+    value {
+      i: 3
+    }
+  }
+}
+node {
+  name: "embedding_lookup/DynamicPartition_1"
+  op: "DynamicPartition"
+  input: "embedding_lookup/range"
+  input: "embedding_lookup/Maximum"
+  attr {
+    key: "T"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "num_partitions"
+    value {
+      i: 3
+    }
+  }
+}
+node {
+  name: "embedding_lookup/GatherV2/axis"
+  op: "Const"
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@in_0"
+      }
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+        }
+        int_val: 0
+      }
+    }
+  }
+}
+node {
+  name: "embedding_lookup/GatherV2"
+  op: "GatherV2"
+  input: "in_0/read"
+  input: "embedding_lookup/DynamicPartition"
+  input: "embedding_lookup/GatherV2/axis"
+  attr {
+    key: "Taxis"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "Tindices"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "Tparams"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@in_0"
+      }
+    }
+  }
+}
+node {
+  name: "embedding_lookup/GatherV2_1/axis"
+  op: "Const"
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@in_1"
+      }
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+        }
+        int_val: 0
+      }
+    }
+  }
+}
+node {
+  name: "embedding_lookup/GatherV2_1"
+  op: "GatherV2"
+  input: "in_1/read"
+  input: "embedding_lookup/DynamicPartition:1"
+  input: "embedding_lookup/GatherV2_1/axis"
+  attr {
+    key: "Taxis"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "Tindices"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "Tparams"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@in_1"
+      }
+    }
+  }
+}
+node {
+  name: "embedding_lookup/GatherV2_2/axis"
+  op: "Const"
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@in_2"
+      }
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+        }
+        int_val: 0
+      }
+    }
+  }
+}
+node {
+  name: "embedding_lookup/GatherV2_2"
+  op: "GatherV2"
+  input: "in_2/read"
+  input: "embedding_lookup/DynamicPartition:2"
+  input: "embedding_lookup/GatherV2_2/axis"
+  attr {
+    key: "Taxis"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "Tindices"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "Tparams"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@in_2"
+      }
+    }
+  }
+}
+node {
+  name: "embedding_lookup"
+  op: "ParallelDynamicStitch"
+  input: "embedding_lookup/DynamicPartition_1"
+  input: "embedding_lookup/DynamicPartition_1:1"
+  input: "embedding_lookup/DynamicPartition_1:2"
+  input: "embedding_lookup/GatherV2"
+  input: "embedding_lookup/GatherV2_1"
+  input: "embedding_lookup/GatherV2_2"
+  attr {
+    key: "N"
+    value {
+      i: 3
+    }
+  }
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "embedding_lookup/Shape"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+            size: 1
+          }
+        }
+        int_val: 4
+      }
+    }
+  }
+}
+node {
+  name: "embedding_lookup/concat/values_1"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+            size: 3
+          }
+        }
+        tensor_content: "\002\000\000\000\003\000\000\000\004\000\000\000"
+      }
+    }
+  }
+}
+node {
+  name: "embedding_lookup/concat/axis"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+        }
+        int_val: 0
+      }
+    }
+  }
+}
+node {
+  name: "embedding_lookup/concat"
+  op: "ConcatV2"
+  input: "embedding_lookup/Shape"
+  input: "embedding_lookup/concat/values_1"
+  input: "embedding_lookup/concat/axis"
+  attr {
+    key: "N"
+    value {
+      i: 2
+    }
+  }
+  attr {
+    key: "T"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "Tidx"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "embedding_lookup/Reshape_1"
+  op: "Reshape"
+  input: "embedding_lookup"
+  input: "embedding_lookup/concat"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "Tshape"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+library {
+}
