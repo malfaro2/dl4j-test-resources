@@ -1,0 +1,887 @@
+node {
+  name: "in_0"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+          dim {
+            size: 2
+          }
+          dim {
+            size: 3
+          }
+          dim {
+            size: 4
+          }
+        }
+        tensor_content: "\220\275+\277\351\357d>\026\032L?\026\365\304=8 9?G\036\255>K\345:\277NZi?\332f\002\277\261\220y?\312\223\010\300\303/\032?\277\321\237\276\253\255[\277\325\260\344?\261\3600\277d\026\274>c\300\362\277\331\354\221\275\253\213\255\275\216\314L?B\314\300>\232\032`?\200J\020>"
+      }
+    }
+  }
+}
+node {
+  name: "in_0/read"
+  op: "Identity"
+  input: "in_0"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@in_0"
+      }
+    }
+  }
+}
+node {
+  name: "in_1"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+          dim {
+            size: 2
+          }
+          dim {
+            size: 3
+          }
+          dim {
+            size: 4
+          }
+        }
+        tensor_content: "\305\266\364\276rib?\246\257\037\277uus\277\\\354u\277.`\273?\027_k?K6\212>\254X\233\274\010B\374\277>\013\302>*\351\024\277\312\250\307>\177P\245?\367\371k>\000\262h?|\303\213\277\n\265\326\277H\355h\277V\222\206\276k[\212?\200\312\202\277\216\336\001@\370\033\005\276"
+      }
+    }
+  }
+}
+node {
+  name: "in_1/read"
+  op: "Identity"
+  input: "in_1"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@in_1"
+      }
+    }
+  }
+}
+node {
+  name: "in_2"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+          dim {
+            size: 1
+          }
+          dim {
+            size: 3
+          }
+          dim {
+            size: 1
+          }
+        }
+        tensor_content: "p\t\262>\236\245u?D\271\352>"
+      }
+    }
+  }
+}
+node {
+  name: "in_2/read"
+  op: "Identity"
+  input: "in_2"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@in_2"
+      }
+    }
+  }
+}
+node {
+  name: "huber_loss/Sub"
+  op: "Sub"
+  input: "in_1/read"
+  input: "in_0/read"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "huber_loss/Abs"
+  op: "Abs"
+  input: "huber_loss/Sub"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "huber_loss/Minimum/y"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+        }
+        float_val: 1.0
+      }
+    }
+  }
+}
+node {
+  name: "huber_loss/Minimum"
+  op: "Minimum"
+  input: "huber_loss/Abs"
+  input: "huber_loss/Minimum/y"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "huber_loss/Sub_1"
+  op: "Sub"
+  input: "huber_loss/Abs"
+  input: "huber_loss/Minimum"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "huber_loss/Const"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+        }
+        float_val: 0.5
+      }
+    }
+  }
+}
+node {
+  name: "huber_loss/Mul"
+  op: "Mul"
+  input: "huber_loss/Minimum"
+  input: "huber_loss/Minimum"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "huber_loss/Mul_1"
+  op: "Mul"
+  input: "huber_loss/Const"
+  input: "huber_loss/Mul"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "huber_loss/Mul_2/x"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+        }
+        float_val: 1.0
+      }
+    }
+  }
+}
+node {
+  name: "huber_loss/Mul_2"
+  op: "Mul"
+  input: "huber_loss/Mul_2/x"
+  input: "huber_loss/Sub_1"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "huber_loss/Add"
+  op: "Add"
+  input: "huber_loss/Mul_1"
+  input: "huber_loss/Mul_2"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "huber_loss/assert_broadcastable/static_dims_check_success"
+  op: "NoOp"
+}
+node {
+  name: "huber_loss/Mul_3"
+  op: "Mul"
+  input: "huber_loss/Add"
+  input: "in_2/read"
+  input: "^huber_loss/assert_broadcastable/static_dims_check_success"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "huber_loss/Const_1"
+  op: "Const"
+  input: "^huber_loss/assert_broadcastable/static_dims_check_success"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+            size: 3
+          }
+        }
+        tensor_content: "\000\000\000\000\001\000\000\000\002\000\000\000"
+      }
+    }
+  }
+}
+node {
+  name: "huber_loss/Sum"
+  op: "Sum"
+  input: "huber_loss/Mul_3"
+  input: "huber_loss/Const_1"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "Tidx"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "keep_dims"
+    value {
+      b: false
+    }
+  }
+}
+node {
+  name: "huber_loss/num_present/Equal/y"
+  op: "Const"
+  input: "^huber_loss/assert_broadcastable/static_dims_check_success"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+        }
+        float_val: 0.0
+      }
+    }
+  }
+}
+node {
+  name: "huber_loss/num_present/Equal"
+  op: "Equal"
+  input: "in_2/read"
+  input: "huber_loss/num_present/Equal/y"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "huber_loss/num_present/zeros_like"
+  op: "Const"
+  input: "^huber_loss/assert_broadcastable/static_dims_check_success"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+          dim {
+            size: 1
+          }
+          dim {
+            size: 3
+          }
+          dim {
+            size: 1
+          }
+        }
+        float_val: 0.0
+      }
+    }
+  }
+}
+node {
+  name: "huber_loss/num_present/ones_like/Shape"
+  op: "Const"
+  input: "^huber_loss/assert_broadcastable/static_dims_check_success"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+            size: 3
+          }
+        }
+        tensor_content: "\001\000\000\000\003\000\000\000\001\000\000\000"
+      }
+    }
+  }
+}
+node {
+  name: "huber_loss/num_present/ones_like/Const"
+  op: "Const"
+  input: "^huber_loss/assert_broadcastable/static_dims_check_success"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+        }
+        float_val: 1.0
+      }
+    }
+  }
+}
+node {
+  name: "huber_loss/num_present/ones_like"
+  op: "Fill"
+  input: "huber_loss/num_present/ones_like/Shape"
+  input: "huber_loss/num_present/ones_like/Const"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "index_type"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "huber_loss/num_present/Select"
+  op: "Select"
+  input: "huber_loss/num_present/Equal"
+  input: "huber_loss/num_present/zeros_like"
+  input: "huber_loss/num_present/ones_like"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "huber_loss/num_present/broadcast_weights/assert_broadcastable/static_dims_check_success"
+  op: "NoOp"
+  input: "^huber_loss/assert_broadcastable/static_dims_check_success"
+}
+node {
+  name: "huber_loss/num_present/broadcast_weights/ones_like/Shape"
+  op: "Const"
+  input: "^huber_loss/assert_broadcastable/static_dims_check_success"
+  input: "^huber_loss/num_present/broadcast_weights/assert_broadcastable/static_dims_check_success"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+            size: 3
+          }
+        }
+        tensor_content: "\002\000\000\000\003\000\000\000\004\000\000\000"
+      }
+    }
+  }
+}
+node {
+  name: "huber_loss/num_present/broadcast_weights/ones_like/Const"
+  op: "Const"
+  input: "^huber_loss/assert_broadcastable/static_dims_check_success"
+  input: "^huber_loss/num_present/broadcast_weights/assert_broadcastable/static_dims_check_success"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+        }
+        float_val: 1.0
+      }
+    }
+  }
+}
+node {
+  name: "huber_loss/num_present/broadcast_weights/ones_like"
+  op: "Fill"
+  input: "huber_loss/num_present/broadcast_weights/ones_like/Shape"
+  input: "huber_loss/num_present/broadcast_weights/ones_like/Const"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "index_type"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "huber_loss/num_present/broadcast_weights"
+  op: "Mul"
+  input: "huber_loss/num_present/Select"
+  input: "huber_loss/num_present/broadcast_weights/ones_like"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "huber_loss/num_present/Const"
+  op: "Const"
+  input: "^huber_loss/assert_broadcastable/static_dims_check_success"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+            size: 3
+          }
+        }
+        tensor_content: "\000\000\000\000\001\000\000\000\002\000\000\000"
+      }
+    }
+  }
+}
+node {
+  name: "huber_loss/num_present"
+  op: "Sum"
+  input: "huber_loss/num_present/broadcast_weights"
+  input: "huber_loss/num_present/Const"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "Tidx"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "keep_dims"
+    value {
+      b: false
+    }
+  }
+}
+node {
+  name: "huber_loss/Const_2"
+  op: "Const"
+  input: "^huber_loss/assert_broadcastable/static_dims_check_success"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+          }
+        }
+      }
+    }
+  }
+}
+node {
+  name: "huber_loss/Sum_1"
+  op: "Sum"
+  input: "huber_loss/Sum"
+  input: "huber_loss/Const_2"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "Tidx"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "keep_dims"
+    value {
+      b: false
+    }
+  }
+}
+node {
+  name: "huber_loss/Greater/y"
+  op: "Const"
+  input: "^huber_loss/assert_broadcastable/static_dims_check_success"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+        }
+        float_val: 0.0
+      }
+    }
+  }
+}
+node {
+  name: "huber_loss/Greater"
+  op: "Greater"
+  input: "huber_loss/num_present"
+  input: "huber_loss/Greater/y"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "huber_loss/Equal/y"
+  op: "Const"
+  input: "^huber_loss/assert_broadcastable/static_dims_check_success"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+        }
+        float_val: 0.0
+      }
+    }
+  }
+}
+node {
+  name: "huber_loss/Equal"
+  op: "Equal"
+  input: "huber_loss/num_present"
+  input: "huber_loss/Equal/y"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "huber_loss/ones_like/Shape"
+  op: "Const"
+  input: "^huber_loss/assert_broadcastable/static_dims_check_success"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+          }
+        }
+      }
+    }
+  }
+}
+node {
+  name: "huber_loss/ones_like/Const"
+  op: "Const"
+  input: "^huber_loss/assert_broadcastable/static_dims_check_success"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+        }
+        float_val: 1.0
+      }
+    }
+  }
+}
+node {
+  name: "huber_loss/ones_like"
+  op: "Fill"
+  input: "huber_loss/ones_like/Shape"
+  input: "huber_loss/ones_like/Const"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "index_type"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "huber_loss/Select"
+  op: "Select"
+  input: "huber_loss/Equal"
+  input: "huber_loss/ones_like"
+  input: "huber_loss/num_present"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "huber_loss/div"
+  op: "RealDiv"
+  input: "huber_loss/Sum_1"
+  input: "huber_loss/Select"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "huber_loss/zeros_like"
+  op: "Const"
+  input: "^huber_loss/assert_broadcastable/static_dims_check_success"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+        }
+        float_val: 0.0
+      }
+    }
+  }
+}
+node {
+  name: "huber_loss/value"
+  op: "Select"
+  input: "huber_loss/Greater"
+  input: "huber_loss/div"
+  input: "huber_loss/zeros_like"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+library {
+}

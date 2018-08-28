@@ -1,0 +1,657 @@
+node {
+  name: "in_0"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+          dim {
+            size: 2
+          }
+          dim {
+            size: 3
+          }
+          dim {
+            size: 4
+          }
+        }
+        tensor_content: "~^G?L\033M?\236p9?\220ol>\356%:?X\2708><q\001?b|d?\224\316\013?\314al?P@\257=,5K?\326\271(?\3566\016?`u#>0\024\236>\240{\036>\240h\360>\222o~?v|\034?\346+-?HM8>v\312,?p\375e>"
+      }
+    }
+  }
+}
+node {
+  name: "in_0/read"
+  op: "Identity"
+  input: "in_0"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@in_0"
+      }
+    }
+  }
+}
+node {
+  name: "in_1"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+          dim {
+            size: 2
+          }
+          dim {
+            size: 3
+          }
+          dim {
+            size: 4
+          }
+        }
+        tensor_content: "\006\220E?\202\226m?\346\013|?\330\262\367>\226\260$?@\243\032?\236n&?\244\333B?\334\260B?\360\035\312>p\002s?\322*\\?`\243I?\330\374d?\004w\355>\27077?h+\350>t7N?\312Ru?\262\205\007?*kU?\000\231\'<\370l\314>`\327\033>"
+      }
+    }
+  }
+}
+node {
+  name: "in_1/read"
+  op: "Identity"
+  input: "in_1"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@in_1"
+      }
+    }
+  }
+}
+node {
+  name: "in_2"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+          dim {
+            size: 2
+          }
+          dim {
+            size: 3
+          }
+          dim {
+            size: 4
+          }
+        }
+        tensor_content: "\270\263q?\342~\030?\026\355]?\374O\263>\346\217\002?|;:?\244|\360>\260}H?\340H\032>\324\r<?`\324|=\202\201)?\000\361\013=D\313\246>\212\350\004?\356\221=?`\0057>\330\331\027>By!?@p\036>\310P<>8\006y>\022\352F?Nw%?"
+      }
+    }
+  }
+}
+node {
+  name: "in_2/read"
+  op: "Identity"
+  input: "in_2"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@in_2"
+      }
+    }
+  }
+}
+node {
+  name: "mean_squared_error/SquaredDifference"
+  op: "SquaredDifference"
+  input: "in_1/read"
+  input: "in_0/read"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "mean_squared_error/assert_broadcastable/static_dims_check_success"
+  op: "NoOp"
+}
+node {
+  name: "mean_squared_error/Mul"
+  op: "Mul"
+  input: "mean_squared_error/SquaredDifference"
+  input: "in_2/read"
+  input: "^mean_squared_error/assert_broadcastable/static_dims_check_success"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "mean_squared_error/Const"
+  op: "Const"
+  input: "^mean_squared_error/assert_broadcastable/static_dims_check_success"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+            size: 3
+          }
+        }
+        tensor_content: "\000\000\000\000\001\000\000\000\002\000\000\000"
+      }
+    }
+  }
+}
+node {
+  name: "mean_squared_error/Sum"
+  op: "Sum"
+  input: "mean_squared_error/Mul"
+  input: "mean_squared_error/Const"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "Tidx"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "keep_dims"
+    value {
+      b: false
+    }
+  }
+}
+node {
+  name: "mean_squared_error/num_present/Equal/y"
+  op: "Const"
+  input: "^mean_squared_error/assert_broadcastable/static_dims_check_success"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+        }
+        float_val: 0.0
+      }
+    }
+  }
+}
+node {
+  name: "mean_squared_error/num_present/Equal"
+  op: "Equal"
+  input: "in_2/read"
+  input: "mean_squared_error/num_present/Equal/y"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "mean_squared_error/num_present/zeros_like"
+  op: "Const"
+  input: "^mean_squared_error/assert_broadcastable/static_dims_check_success"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+          dim {
+            size: 2
+          }
+          dim {
+            size: 3
+          }
+          dim {
+            size: 4
+          }
+        }
+        float_val: 0.0
+      }
+    }
+  }
+}
+node {
+  name: "mean_squared_error/num_present/ones_like/Shape"
+  op: "Const"
+  input: "^mean_squared_error/assert_broadcastable/static_dims_check_success"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+            size: 3
+          }
+        }
+        tensor_content: "\002\000\000\000\003\000\000\000\004\000\000\000"
+      }
+    }
+  }
+}
+node {
+  name: "mean_squared_error/num_present/ones_like/Const"
+  op: "Const"
+  input: "^mean_squared_error/assert_broadcastable/static_dims_check_success"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+        }
+        float_val: 1.0
+      }
+    }
+  }
+}
+node {
+  name: "mean_squared_error/num_present/ones_like"
+  op: "Fill"
+  input: "mean_squared_error/num_present/ones_like/Shape"
+  input: "mean_squared_error/num_present/ones_like/Const"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "index_type"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "mean_squared_error/num_present/Select"
+  op: "Select"
+  input: "mean_squared_error/num_present/Equal"
+  input: "mean_squared_error/num_present/zeros_like"
+  input: "mean_squared_error/num_present/ones_like"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "mean_squared_error/num_present/Const"
+  op: "Const"
+  input: "^mean_squared_error/assert_broadcastable/static_dims_check_success"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+            size: 3
+          }
+        }
+        tensor_content: "\000\000\000\000\001\000\000\000\002\000\000\000"
+      }
+    }
+  }
+}
+node {
+  name: "mean_squared_error/num_present"
+  op: "Sum"
+  input: "mean_squared_error/num_present/Select"
+  input: "mean_squared_error/num_present/Const"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "Tidx"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "keep_dims"
+    value {
+      b: false
+    }
+  }
+}
+node {
+  name: "mean_squared_error/Const_1"
+  op: "Const"
+  input: "^mean_squared_error/assert_broadcastable/static_dims_check_success"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+          }
+        }
+      }
+    }
+  }
+}
+node {
+  name: "mean_squared_error/Sum_1"
+  op: "Sum"
+  input: "mean_squared_error/Sum"
+  input: "mean_squared_error/Const_1"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "Tidx"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "keep_dims"
+    value {
+      b: false
+    }
+  }
+}
+node {
+  name: "mean_squared_error/Greater/y"
+  op: "Const"
+  input: "^mean_squared_error/assert_broadcastable/static_dims_check_success"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+        }
+        float_val: 0.0
+      }
+    }
+  }
+}
+node {
+  name: "mean_squared_error/Greater"
+  op: "Greater"
+  input: "mean_squared_error/num_present"
+  input: "mean_squared_error/Greater/y"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "mean_squared_error/Equal/y"
+  op: "Const"
+  input: "^mean_squared_error/assert_broadcastable/static_dims_check_success"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+        }
+        float_val: 0.0
+      }
+    }
+  }
+}
+node {
+  name: "mean_squared_error/Equal"
+  op: "Equal"
+  input: "mean_squared_error/num_present"
+  input: "mean_squared_error/Equal/y"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "mean_squared_error/ones_like/Shape"
+  op: "Const"
+  input: "^mean_squared_error/assert_broadcastable/static_dims_check_success"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+          }
+        }
+      }
+    }
+  }
+}
+node {
+  name: "mean_squared_error/ones_like/Const"
+  op: "Const"
+  input: "^mean_squared_error/assert_broadcastable/static_dims_check_success"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+        }
+        float_val: 1.0
+      }
+    }
+  }
+}
+node {
+  name: "mean_squared_error/ones_like"
+  op: "Fill"
+  input: "mean_squared_error/ones_like/Shape"
+  input: "mean_squared_error/ones_like/Const"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "index_type"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "mean_squared_error/Select"
+  op: "Select"
+  input: "mean_squared_error/Equal"
+  input: "mean_squared_error/ones_like"
+  input: "mean_squared_error/num_present"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "mean_squared_error/div"
+  op: "RealDiv"
+  input: "mean_squared_error/Sum_1"
+  input: "mean_squared_error/Select"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "mean_squared_error/zeros_like"
+  op: "Const"
+  input: "^mean_squared_error/assert_broadcastable/static_dims_check_success"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+        }
+        float_val: 0.0
+      }
+    }
+  }
+}
+node {
+  name: "mean_squared_error/value"
+  op: "Select"
+  input: "mean_squared_error/Greater"
+  input: "mean_squared_error/div"
+  input: "mean_squared_error/zeros_like"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+library {
+}

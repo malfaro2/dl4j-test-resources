@@ -1,0 +1,240 @@
+node {
+  name: "in_0"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+            size: 10
+          }
+        }
+        tensor_content: "\002\000\000\000\002\000\000\000\004\000\000\000\004\000\000\000\003\000\000\000\003\000\000\000\003\000\000\000\003\000\000\000\004\000\000\000\002\000\000\000"
+      }
+    }
+  }
+}
+node {
+  name: "in_0/read"
+  op: "Identity"
+  input: "in_0"
+  attr {
+    key: "T"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@in_0"
+      }
+    }
+  }
+}
+node {
+  name: "in_1"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+          dim {
+            size: 10
+          }
+          dim {
+            size: 5
+          }
+        }
+        tensor_content: "\257\303\345\276\260:\201?84\341>\261\026S=\373\0355?\210\3577\300hF\245?\004\205G?Tn\323?(\335\316>\276\357\006\277\223n\031?\312\202\036@\234W}?\001\232\024?j4\313>\360-\266>\347\241\354\276z\316C>\237\013\236\277\020W\033\274Y\202\021?\340\010]>\252\204\254\277\323\n\353\2763\253\322=L\241\252?\221a)\276\231R\r\300\261a\204\277\314\013\242\276f\3144\277\332\323\273\2774\032\236?Q\332\266?v\3035\276\2216\245?\277-\262\276\216\352H>E\324X\277\2376\321= \370K\277H\366\252\275\224\374|\276\344\323n>\006%\247?\316\230\304\277\216\354\022?\003+F\277\262\365\010\277"
+      }
+    }
+  }
+}
+node {
+  name: "in_1/read"
+  op: "Identity"
+  input: "in_1"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@in_1"
+      }
+    }
+  }
+}
+node {
+  name: "in_2"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+          dim {
+            size: 10
+          }
+          dim {
+            size: 1
+          }
+        }
+        tensor_content: "ho\010?\200sy>\000\000\000\000\000\000\000\000\200\312\001<p-(>b\"j?\240\230\335>\354\210\251>\000\000\000\000"
+      }
+    }
+  }
+}
+node {
+  name: "in_2/read"
+  op: "Identity"
+  input: "in_2"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@in_2"
+      }
+    }
+  }
+}
+node {
+  name: "sparse_softmax_cross_entropy_loss/Squeeze"
+  op: "Squeeze"
+  input: "in_2/read"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "squeeze_dims"
+    value {
+      list {
+        i: -1
+      }
+    }
+  }
+}
+node {
+  name: "sparse_softmax_cross_entropy_loss/xentropy/xentropy"
+  op: "SparseSoftmaxCrossEntropyWithLogits"
+  input: "in_1/read"
+  input: "in_0/read"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "Tlabels"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "sparse_softmax_cross_entropy_loss/assert_broadcastable/static_dims_check_success"
+  op: "NoOp"
+}
+node {
+  name: "sparse_softmax_cross_entropy_loss/Mul"
+  op: "Mul"
+  input: "sparse_softmax_cross_entropy_loss/xentropy/xentropy"
+  input: "sparse_softmax_cross_entropy_loss/Squeeze"
+  input: "^sparse_softmax_cross_entropy_loss/assert_broadcastable/static_dims_check_success"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "sparse_softmax_cross_entropy_loss/Const"
+  op: "Const"
+  input: "^sparse_softmax_cross_entropy_loss/assert_broadcastable/static_dims_check_success"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+            size: 1
+          }
+        }
+        int_val: 0
+      }
+    }
+  }
+}
+node {
+  name: "sparse_softmax_cross_entropy_loss/Sum"
+  op: "Sum"
+  input: "sparse_softmax_cross_entropy_loss/Mul"
+  input: "sparse_softmax_cross_entropy_loss/Const"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "Tidx"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "keep_dims"
+    value {
+      b: false
+    }
+  }
+}
+library {
+}

@@ -1,0 +1,607 @@
+node {
+  name: "in_0"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+        }
+        float_val: 0.7787855863571167
+      }
+    }
+  }
+}
+node {
+  name: "in_0/read"
+  op: "Identity"
+  input: "in_0"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@in_0"
+      }
+    }
+  }
+}
+node {
+  name: "in_1"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+        }
+        float_val: 0.7717288732528687
+      }
+    }
+  }
+}
+node {
+  name: "in_1/read"
+  op: "Identity"
+  input: "in_1"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@in_1"
+      }
+    }
+  }
+}
+node {
+  name: "absolute_difference/Sub"
+  op: "Sub"
+  input: "in_1/read"
+  input: "in_0/read"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "absolute_difference/Abs"
+  op: "Abs"
+  input: "absolute_difference/Sub"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "absolute_difference/assert_broadcastable/static_scalar_check_success"
+  op: "NoOp"
+}
+node {
+  name: "absolute_difference/ToFloat_3/x"
+  op: "Const"
+  input: "^absolute_difference/assert_broadcastable/static_scalar_check_success"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+        }
+        float_val: 1.0
+      }
+    }
+  }
+}
+node {
+  name: "absolute_difference/Mul"
+  op: "Mul"
+  input: "absolute_difference/Abs"
+  input: "absolute_difference/ToFloat_3/x"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "absolute_difference/Const"
+  op: "Const"
+  input: "^absolute_difference/assert_broadcastable/static_scalar_check_success"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+          }
+        }
+      }
+    }
+  }
+}
+node {
+  name: "absolute_difference/Sum"
+  op: "Sum"
+  input: "absolute_difference/Mul"
+  input: "absolute_difference/Const"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "Tidx"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "keep_dims"
+    value {
+      b: false
+    }
+  }
+}
+node {
+  name: "absolute_difference/num_present/Equal/y"
+  op: "Const"
+  input: "^absolute_difference/assert_broadcastable/static_scalar_check_success"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+        }
+        float_val: 0.0
+      }
+    }
+  }
+}
+node {
+  name: "absolute_difference/num_present/Equal"
+  op: "Equal"
+  input: "absolute_difference/ToFloat_3/x"
+  input: "absolute_difference/num_present/Equal/y"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "absolute_difference/num_present/zeros_like"
+  op: "Const"
+  input: "^absolute_difference/assert_broadcastable/static_scalar_check_success"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+        }
+        float_val: 0.0
+      }
+    }
+  }
+}
+node {
+  name: "absolute_difference/num_present/ones_like/Shape"
+  op: "Const"
+  input: "^absolute_difference/assert_broadcastable/static_scalar_check_success"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+          }
+        }
+      }
+    }
+  }
+}
+node {
+  name: "absolute_difference/num_present/ones_like/Const"
+  op: "Const"
+  input: "^absolute_difference/assert_broadcastable/static_scalar_check_success"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+        }
+        float_val: 1.0
+      }
+    }
+  }
+}
+node {
+  name: "absolute_difference/num_present/ones_like"
+  op: "Fill"
+  input: "absolute_difference/num_present/ones_like/Shape"
+  input: "absolute_difference/num_present/ones_like/Const"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "index_type"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "absolute_difference/num_present/Select"
+  op: "Select"
+  input: "absolute_difference/num_present/Equal"
+  input: "absolute_difference/num_present/zeros_like"
+  input: "absolute_difference/num_present/ones_like"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "absolute_difference/num_present/Const"
+  op: "Const"
+  input: "^absolute_difference/assert_broadcastable/static_scalar_check_success"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+          }
+        }
+      }
+    }
+  }
+}
+node {
+  name: "absolute_difference/num_present"
+  op: "Sum"
+  input: "absolute_difference/num_present/Select"
+  input: "absolute_difference/num_present/Const"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "Tidx"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "keep_dims"
+    value {
+      b: false
+    }
+  }
+}
+node {
+  name: "absolute_difference/Const_1"
+  op: "Const"
+  input: "^absolute_difference/assert_broadcastable/static_scalar_check_success"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+          }
+        }
+      }
+    }
+  }
+}
+node {
+  name: "absolute_difference/Sum_1"
+  op: "Sum"
+  input: "absolute_difference/Sum"
+  input: "absolute_difference/Const_1"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "Tidx"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "keep_dims"
+    value {
+      b: false
+    }
+  }
+}
+node {
+  name: "absolute_difference/Greater/y"
+  op: "Const"
+  input: "^absolute_difference/assert_broadcastable/static_scalar_check_success"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+        }
+        float_val: 0.0
+      }
+    }
+  }
+}
+node {
+  name: "absolute_difference/Greater"
+  op: "Greater"
+  input: "absolute_difference/num_present"
+  input: "absolute_difference/Greater/y"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "absolute_difference/Equal/y"
+  op: "Const"
+  input: "^absolute_difference/assert_broadcastable/static_scalar_check_success"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+        }
+        float_val: 0.0
+      }
+    }
+  }
+}
+node {
+  name: "absolute_difference/Equal"
+  op: "Equal"
+  input: "absolute_difference/num_present"
+  input: "absolute_difference/Equal/y"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "absolute_difference/ones_like/Shape"
+  op: "Const"
+  input: "^absolute_difference/assert_broadcastable/static_scalar_check_success"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+          }
+        }
+      }
+    }
+  }
+}
+node {
+  name: "absolute_difference/ones_like/Const"
+  op: "Const"
+  input: "^absolute_difference/assert_broadcastable/static_scalar_check_success"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+        }
+        float_val: 1.0
+      }
+    }
+  }
+}
+node {
+  name: "absolute_difference/ones_like"
+  op: "Fill"
+  input: "absolute_difference/ones_like/Shape"
+  input: "absolute_difference/ones_like/Const"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "index_type"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "absolute_difference/Select"
+  op: "Select"
+  input: "absolute_difference/Equal"
+  input: "absolute_difference/ones_like"
+  input: "absolute_difference/num_present"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "absolute_difference/div"
+  op: "RealDiv"
+  input: "absolute_difference/Sum_1"
+  input: "absolute_difference/Select"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "absolute_difference/zeros_like"
+  op: "Const"
+  input: "^absolute_difference/assert_broadcastable/static_scalar_check_success"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+        }
+        float_val: 0.0
+      }
+    }
+  }
+}
+node {
+  name: "absolute_difference/value"
+  op: "Select"
+  input: "absolute_difference/Greater"
+  input: "absolute_difference/div"
+  input: "absolute_difference/zeros_like"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+library {
+}

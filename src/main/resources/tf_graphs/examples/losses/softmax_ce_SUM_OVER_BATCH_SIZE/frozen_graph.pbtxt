@@ -1,0 +1,1129 @@
+node {
+  name: "in_0"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+          dim {
+            size: 10
+          }
+          dim {
+            size: 4
+          }
+        }
+        tensor_content: "\000\000\000\000\000\000\200?\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\200?\000\000\000\000\000\000\000\000\000\000\200?\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\200?\000\000\000\000\000\000\200?\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\200?\000\000\200?\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\200?\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\200?\000\000\000\000\000\000\000\000\000\000\200?\000\000\000\000"
+      }
+    }
+  }
+}
+node {
+  name: "in_0/read"
+  op: "Identity"
+  input: "in_0"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@in_0"
+      }
+    }
+  }
+}
+node {
+  name: "in_1"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+          dim {
+            size: 10
+          }
+          dim {
+            size: 4
+          }
+        }
+        tensor_content: "\236E(\2775\327X\276\231e\321\276\206==\276hx\270>\212Gr\277\350(r>\223\212\347\276\026\335\342?1\2402? c\206\277\036\225\250>\276\371\000\276\\\227x>*\223\032@\232U\307>N=\366\277\213=\214?\261M\243?\3024w\277\212\260A>\034\336\301\277dx\305>\250\356\200?\345\240\216>\023\336\024@\032\352\302>7Bm=\257o\230\2772\236\220?\310\252\365\277\305\360$?\325\221\'?\276)\177\277m_\013\277.\030\260\276\r=\013=\371\322I>\212\307\232>8v\010?"
+      }
+    }
+  }
+}
+node {
+  name: "in_1/read"
+  op: "Identity"
+  input: "in_1"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@in_1"
+      }
+    }
+  }
+}
+node {
+  name: "in_2"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+          dim {
+            size: 10
+          }
+        }
+        tensor_content: "\000\000\000\000\000\000\000\000\000\000\000\000h\251e>\000\000\000\000\000\000\000\000\220\235\260=\000\000\000\000\\\221\333>\000\000\000\000"
+      }
+    }
+  }
+}
+node {
+  name: "in_2/read"
+  op: "Identity"
+  input: "in_2"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@in_2"
+      }
+    }
+  }
+}
+node {
+  name: "softmax_cross_entropy_loss/labels_stop_gradient"
+  op: "StopGradient"
+  input: "in_0/read"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "softmax_cross_entropy_loss/xentropy/Rank"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+        }
+        int_val: 2
+      }
+    }
+  }
+}
+node {
+  name: "softmax_cross_entropy_loss/xentropy/Shape"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+            size: 2
+          }
+        }
+        tensor_content: "\n\000\000\000\004\000\000\000"
+      }
+    }
+  }
+}
+node {
+  name: "softmax_cross_entropy_loss/xentropy/Rank_1"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+        }
+        int_val: 2
+      }
+    }
+  }
+}
+node {
+  name: "softmax_cross_entropy_loss/xentropy/Shape_1"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+            size: 2
+          }
+        }
+        tensor_content: "\n\000\000\000\004\000\000\000"
+      }
+    }
+  }
+}
+node {
+  name: "softmax_cross_entropy_loss/xentropy/Sub/y"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+        }
+        int_val: 1
+      }
+    }
+  }
+}
+node {
+  name: "softmax_cross_entropy_loss/xentropy/Sub"
+  op: "Sub"
+  input: "softmax_cross_entropy_loss/xentropy/Rank_1"
+  input: "softmax_cross_entropy_loss/xentropy/Sub/y"
+  attr {
+    key: "T"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "softmax_cross_entropy_loss/xentropy/Slice/begin"
+  op: "Pack"
+  input: "softmax_cross_entropy_loss/xentropy/Sub"
+  attr {
+    key: "N"
+    value {
+      i: 1
+    }
+  }
+  attr {
+    key: "T"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "axis"
+    value {
+      i: 0
+    }
+  }
+}
+node {
+  name: "softmax_cross_entropy_loss/xentropy/Slice/size"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+            size: 1
+          }
+        }
+        int_val: 1
+      }
+    }
+  }
+}
+node {
+  name: "softmax_cross_entropy_loss/xentropy/Slice"
+  op: "Slice"
+  input: "softmax_cross_entropy_loss/xentropy/Shape_1"
+  input: "softmax_cross_entropy_loss/xentropy/Slice/begin"
+  input: "softmax_cross_entropy_loss/xentropy/Slice/size"
+  attr {
+    key: "Index"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "T"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "softmax_cross_entropy_loss/xentropy/concat/values_0"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+            size: 1
+          }
+        }
+        int_val: -1
+      }
+    }
+  }
+}
+node {
+  name: "softmax_cross_entropy_loss/xentropy/concat/axis"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+        }
+        int_val: 0
+      }
+    }
+  }
+}
+node {
+  name: "softmax_cross_entropy_loss/xentropy/concat"
+  op: "ConcatV2"
+  input: "softmax_cross_entropy_loss/xentropy/concat/values_0"
+  input: "softmax_cross_entropy_loss/xentropy/Slice"
+  input: "softmax_cross_entropy_loss/xentropy/concat/axis"
+  attr {
+    key: "N"
+    value {
+      i: 2
+    }
+  }
+  attr {
+    key: "T"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "Tidx"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "softmax_cross_entropy_loss/xentropy/Reshape"
+  op: "Reshape"
+  input: "in_1/read"
+  input: "softmax_cross_entropy_loss/xentropy/concat"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "Tshape"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "softmax_cross_entropy_loss/xentropy/Rank_2"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+        }
+        int_val: 2
+      }
+    }
+  }
+}
+node {
+  name: "softmax_cross_entropy_loss/xentropy/Shape_2"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+            size: 2
+          }
+        }
+        tensor_content: "\n\000\000\000\004\000\000\000"
+      }
+    }
+  }
+}
+node {
+  name: "softmax_cross_entropy_loss/xentropy/Sub_1/y"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+        }
+        int_val: 1
+      }
+    }
+  }
+}
+node {
+  name: "softmax_cross_entropy_loss/xentropy/Sub_1"
+  op: "Sub"
+  input: "softmax_cross_entropy_loss/xentropy/Rank_2"
+  input: "softmax_cross_entropy_loss/xentropy/Sub_1/y"
+  attr {
+    key: "T"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "softmax_cross_entropy_loss/xentropy/Slice_1/begin"
+  op: "Pack"
+  input: "softmax_cross_entropy_loss/xentropy/Sub_1"
+  attr {
+    key: "N"
+    value {
+      i: 1
+    }
+  }
+  attr {
+    key: "T"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "axis"
+    value {
+      i: 0
+    }
+  }
+}
+node {
+  name: "softmax_cross_entropy_loss/xentropy/Slice_1/size"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+            size: 1
+          }
+        }
+        int_val: 1
+      }
+    }
+  }
+}
+node {
+  name: "softmax_cross_entropy_loss/xentropy/Slice_1"
+  op: "Slice"
+  input: "softmax_cross_entropy_loss/xentropy/Shape_2"
+  input: "softmax_cross_entropy_loss/xentropy/Slice_1/begin"
+  input: "softmax_cross_entropy_loss/xentropy/Slice_1/size"
+  attr {
+    key: "Index"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "T"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "softmax_cross_entropy_loss/xentropy/concat_1/values_0"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+            size: 1
+          }
+        }
+        int_val: -1
+      }
+    }
+  }
+}
+node {
+  name: "softmax_cross_entropy_loss/xentropy/concat_1/axis"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+        }
+        int_val: 0
+      }
+    }
+  }
+}
+node {
+  name: "softmax_cross_entropy_loss/xentropy/concat_1"
+  op: "ConcatV2"
+  input: "softmax_cross_entropy_loss/xentropy/concat_1/values_0"
+  input: "softmax_cross_entropy_loss/xentropy/Slice_1"
+  input: "softmax_cross_entropy_loss/xentropy/concat_1/axis"
+  attr {
+    key: "N"
+    value {
+      i: 2
+    }
+  }
+  attr {
+    key: "T"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "Tidx"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "softmax_cross_entropy_loss/xentropy/Reshape_1"
+  op: "Reshape"
+  input: "softmax_cross_entropy_loss/labels_stop_gradient"
+  input: "softmax_cross_entropy_loss/xentropy/concat_1"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "Tshape"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "softmax_cross_entropy_loss/xentropy"
+  op: "SoftmaxCrossEntropyWithLogits"
+  input: "softmax_cross_entropy_loss/xentropy/Reshape"
+  input: "softmax_cross_entropy_loss/xentropy/Reshape_1"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "softmax_cross_entropy_loss/xentropy/Sub_2/y"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+        }
+        int_val: 1
+      }
+    }
+  }
+}
+node {
+  name: "softmax_cross_entropy_loss/xentropy/Sub_2"
+  op: "Sub"
+  input: "softmax_cross_entropy_loss/xentropy/Rank"
+  input: "softmax_cross_entropy_loss/xentropy/Sub_2/y"
+  attr {
+    key: "T"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "softmax_cross_entropy_loss/xentropy/Slice_2/begin"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+            size: 1
+          }
+        }
+        int_val: 0
+      }
+    }
+  }
+}
+node {
+  name: "softmax_cross_entropy_loss/xentropy/Slice_2/size"
+  op: "Pack"
+  input: "softmax_cross_entropy_loss/xentropy/Sub_2"
+  attr {
+    key: "N"
+    value {
+      i: 1
+    }
+  }
+  attr {
+    key: "T"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "axis"
+    value {
+      i: 0
+    }
+  }
+}
+node {
+  name: "softmax_cross_entropy_loss/xentropy/Slice_2"
+  op: "Slice"
+  input: "softmax_cross_entropy_loss/xentropy/Shape"
+  input: "softmax_cross_entropy_loss/xentropy/Slice_2/begin"
+  input: "softmax_cross_entropy_loss/xentropy/Slice_2/size"
+  attr {
+    key: "Index"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "T"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "softmax_cross_entropy_loss/xentropy/Reshape_2"
+  op: "Reshape"
+  input: "softmax_cross_entropy_loss/xentropy"
+  input: "softmax_cross_entropy_loss/xentropy/Slice_2"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "Tshape"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "softmax_cross_entropy_loss/assert_broadcastable/static_dims_check_success"
+  op: "NoOp"
+}
+node {
+  name: "softmax_cross_entropy_loss/Mul"
+  op: "Mul"
+  input: "softmax_cross_entropy_loss/xentropy/Reshape_2"
+  input: "in_2/read"
+  input: "^softmax_cross_entropy_loss/assert_broadcastable/static_dims_check_success"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "softmax_cross_entropy_loss/Const"
+  op: "Const"
+  input: "^softmax_cross_entropy_loss/assert_broadcastable/static_dims_check_success"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+            size: 1
+          }
+        }
+        int_val: 0
+      }
+    }
+  }
+}
+node {
+  name: "softmax_cross_entropy_loss/Sum"
+  op: "Sum"
+  input: "softmax_cross_entropy_loss/Mul"
+  input: "softmax_cross_entropy_loss/Const"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "Tidx"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "keep_dims"
+    value {
+      b: false
+    }
+  }
+}
+node {
+  name: "softmax_cross_entropy_loss/num_elements"
+  op: "Const"
+  input: "^softmax_cross_entropy_loss/assert_broadcastable/static_dims_check_success"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+        }
+        int_val: 10
+      }
+    }
+  }
+}
+node {
+  name: "softmax_cross_entropy_loss/num_elements/Cast"
+  op: "Cast"
+  input: "softmax_cross_entropy_loss/num_elements"
+  attr {
+    key: "DstT"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "SrcT"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "softmax_cross_entropy_loss/Const_1"
+  op: "Const"
+  input: "^softmax_cross_entropy_loss/assert_broadcastable/static_dims_check_success"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+          }
+        }
+      }
+    }
+  }
+}
+node {
+  name: "softmax_cross_entropy_loss/Sum_1"
+  op: "Sum"
+  input: "softmax_cross_entropy_loss/Sum"
+  input: "softmax_cross_entropy_loss/Const_1"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "Tidx"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "keep_dims"
+    value {
+      b: false
+    }
+  }
+}
+node {
+  name: "softmax_cross_entropy_loss/Greater/y"
+  op: "Const"
+  input: "^softmax_cross_entropy_loss/assert_broadcastable/static_dims_check_success"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+        }
+        float_val: 0.0
+      }
+    }
+  }
+}
+node {
+  name: "softmax_cross_entropy_loss/Greater"
+  op: "Greater"
+  input: "softmax_cross_entropy_loss/num_elements/Cast"
+  input: "softmax_cross_entropy_loss/Greater/y"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "softmax_cross_entropy_loss/Equal/y"
+  op: "Const"
+  input: "^softmax_cross_entropy_loss/assert_broadcastable/static_dims_check_success"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+        }
+        float_val: 0.0
+      }
+    }
+  }
+}
+node {
+  name: "softmax_cross_entropy_loss/Equal"
+  op: "Equal"
+  input: "softmax_cross_entropy_loss/num_elements/Cast"
+  input: "softmax_cross_entropy_loss/Equal/y"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "softmax_cross_entropy_loss/ones_like/Shape"
+  op: "Const"
+  input: "^softmax_cross_entropy_loss/assert_broadcastable/static_dims_check_success"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+          }
+        }
+      }
+    }
+  }
+}
+node {
+  name: "softmax_cross_entropy_loss/ones_like/Const"
+  op: "Const"
+  input: "^softmax_cross_entropy_loss/assert_broadcastable/static_dims_check_success"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+        }
+        float_val: 1.0
+      }
+    }
+  }
+}
+node {
+  name: "softmax_cross_entropy_loss/ones_like"
+  op: "Fill"
+  input: "softmax_cross_entropy_loss/ones_like/Shape"
+  input: "softmax_cross_entropy_loss/ones_like/Const"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "index_type"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "softmax_cross_entropy_loss/Select"
+  op: "Select"
+  input: "softmax_cross_entropy_loss/Equal"
+  input: "softmax_cross_entropy_loss/ones_like"
+  input: "softmax_cross_entropy_loss/num_elements/Cast"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "softmax_cross_entropy_loss/div"
+  op: "RealDiv"
+  input: "softmax_cross_entropy_loss/Sum_1"
+  input: "softmax_cross_entropy_loss/Select"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "softmax_cross_entropy_loss/zeros_like"
+  op: "Const"
+  input: "^softmax_cross_entropy_loss/assert_broadcastable/static_dims_check_success"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+        }
+        float_val: 0.0
+      }
+    }
+  }
+}
+node {
+  name: "softmax_cross_entropy_loss/value"
+  op: "Select"
+  input: "softmax_cross_entropy_loss/Greater"
+  input: "softmax_cross_entropy_loss/div"
+  input: "softmax_cross_entropy_loss/zeros_like"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+library {
+}

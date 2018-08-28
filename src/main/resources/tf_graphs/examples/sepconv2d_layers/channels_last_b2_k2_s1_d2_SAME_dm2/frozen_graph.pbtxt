@@ -1,0 +1,469 @@
+node {
+  name: "in_0"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+          dim {
+            size: 2
+          }
+          dim {
+            size: 5
+          }
+          dim {
+            size: 5
+          }
+          dim {
+            size: 2
+          }
+        }
+        tensor_content: "~^G?L\033M?\236p9?\220ol>\356%:?X\2708><q\001?b|d?\224\316\013?\314al?P@\257=,5K?\326\271(?\3566\016?`u#>0\024\236>\240{\036>\240h\360>\222o~?v|\034?\346+-?HM8>v\312,?p\375e>@\235P=\030\216\353>$\024T?\250\004q>H\250y?h\014V?(W\204>\014t\326>\016\3503?\366\226D? \213\t?\24019?D\300\211>\0008\312;\340\310\005=0\374\203=\\\302W?\300\325??\200\206\232=\270\337\037?\220\272\262>\256L\024?\266\256\022?\300\214:>\262Z$?\240\020j?\350\225\232>\304\372\266>\020\204.>\"\350V?8\370\013?\320W\230=\202\256f?\222N(?\200!\323>`Zz>8|\331>6\231\005?\n\3721?\240\345\372>H\001]>\006ut?\330\357\r>(\033\036>ZY\t?\200\002\\<\310\'\325>\350$\025> ]\322>h_~>\030{\252>D?\230>l\344)?\270\376\302>\212\314]?H!B>F\304@?\336\2618?\346A)?\330\037:?z\005\022?\354{\210>4\315>?\000\3675=\370\317\232>\344U\370>rUL?\200\260\305=\302\306H?\366\353\001?P\347\254=^CV?\2449\034?\254\267\353>~\326\033?\264\000\\?"
+      }
+    }
+  }
+}
+node {
+  name: "in_0/read"
+  op: "Identity"
+  input: "in_0"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@in_0"
+      }
+    }
+  }
+}
+node {
+  name: "separable_conv2d/depthwise_kernel"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+          dim {
+            size: 2
+          }
+          dim {
+            size: 2
+          }
+          dim {
+            size: 2
+          }
+          dim {
+            size: 2
+          }
+        }
+        tensor_content: "\222d\252>\2357\006?\341\354\027?`\254\242\274\030\2763>\\\177\002>0G<>\226\304\243>\314[\243>j\374\003\276y\333\014?F\303\341>@`\264>F^\367>0\2335\275LA\207>"
+      }
+    }
+  }
+}
+node {
+  name: "separable_conv2d/depthwise_kernel/read"
+  op: "Identity"
+  input: "separable_conv2d/depthwise_kernel"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@separable_conv2d/depthwise_kernel"
+      }
+    }
+  }
+}
+node {
+  name: "separable_conv2d/pointwise_kernel"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+          dim {
+            size: 1
+          }
+          dim {
+            size: 1
+          }
+          dim {
+            size: 4
+          }
+          dim {
+            size: 3
+          }
+        }
+        tensor_content: "\006\211R?\260m5>\332\352-?n\377\215\276\240\317\227<\230\246\327>@\314e\275*:\006?\014\227%\277\230e\336>(\300O\277<\265\231>"
+      }
+    }
+  }
+}
+node {
+  name: "separable_conv2d/pointwise_kernel/read"
+  op: "Identity"
+  input: "separable_conv2d/pointwise_kernel"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@separable_conv2d/pointwise_kernel"
+      }
+    }
+  }
+}
+node {
+  name: "separable_conv2d/bias"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+          dim {
+            size: 3
+          }
+        }
+        tensor_content: "\000\000\000\000\000\000\000\000\000\000\000\000"
+      }
+    }
+  }
+}
+node {
+  name: "separable_conv2d/bias/read"
+  op: "Identity"
+  input: "separable_conv2d/bias"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@separable_conv2d/bias"
+      }
+    }
+  }
+}
+node {
+  name: "separable_conv2d/separable_conv2d/SpaceToBatchND/block_shape"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+            size: 2
+          }
+        }
+        tensor_content: "\002\000\000\000\002\000\000\000"
+      }
+    }
+  }
+}
+node {
+  name: "separable_conv2d/separable_conv2d/SpaceToBatchND/paddings"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+            size: 2
+          }
+          dim {
+            size: 2
+          }
+        }
+        tensor_content: "\001\000\000\000\002\000\000\000\001\000\000\000\002\000\000\000"
+      }
+    }
+  }
+}
+node {
+  name: "separable_conv2d/separable_conv2d/SpaceToBatchND"
+  op: "SpaceToBatchND"
+  input: "in_0/read"
+  input: "separable_conv2d/separable_conv2d/SpaceToBatchND/block_shape"
+  input: "separable_conv2d/separable_conv2d/SpaceToBatchND/paddings"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "Tblock_shape"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "Tpaddings"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "separable_conv2d/separable_conv2d/depthwise"
+  op: "DepthwiseConv2dNative"
+  input: "separable_conv2d/separable_conv2d/SpaceToBatchND"
+  input: "separable_conv2d/depthwise_kernel/read"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "data_format"
+    value {
+      s: "NHWC"
+    }
+  }
+  attr {
+    key: "dilations"
+    value {
+      list {
+        i: 1
+        i: 1
+        i: 1
+        i: 1
+      }
+    }
+  }
+  attr {
+    key: "padding"
+    value {
+      s: "VALID"
+    }
+  }
+  attr {
+    key: "strides"
+    value {
+      list {
+        i: 1
+        i: 1
+        i: 1
+        i: 1
+      }
+    }
+  }
+}
+node {
+  name: "separable_conv2d/separable_conv2d/BatchToSpaceND/block_shape"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+            size: 2
+          }
+        }
+        tensor_content: "\002\000\000\000\002\000\000\000"
+      }
+    }
+  }
+}
+node {
+  name: "separable_conv2d/separable_conv2d/BatchToSpaceND/crops"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+            size: 2
+          }
+          dim {
+            size: 2
+          }
+        }
+        tensor_content: "\000\000\000\000\001\000\000\000\000\000\000\000\001\000\000\000"
+      }
+    }
+  }
+}
+node {
+  name: "separable_conv2d/separable_conv2d/BatchToSpaceND"
+  op: "BatchToSpaceND"
+  input: "separable_conv2d/separable_conv2d/depthwise"
+  input: "separable_conv2d/separable_conv2d/BatchToSpaceND/block_shape"
+  input: "separable_conv2d/separable_conv2d/BatchToSpaceND/crops"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "Tblock_shape"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "Tcrops"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "separable_conv2d/separable_conv2d"
+  op: "Conv2D"
+  input: "separable_conv2d/separable_conv2d/BatchToSpaceND"
+  input: "separable_conv2d/pointwise_kernel/read"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "data_format"
+    value {
+      s: "NHWC"
+    }
+  }
+  attr {
+    key: "dilations"
+    value {
+      list {
+        i: 1
+        i: 1
+        i: 1
+        i: 1
+      }
+    }
+  }
+  attr {
+    key: "padding"
+    value {
+      s: "VALID"
+    }
+  }
+  attr {
+    key: "strides"
+    value {
+      list {
+        i: 1
+        i: 1
+        i: 1
+        i: 1
+      }
+    }
+  }
+  attr {
+    key: "use_cudnn_on_gpu"
+    value {
+      b: true
+    }
+  }
+}
+node {
+  name: "separable_conv2d/BiasAdd"
+  op: "BiasAdd"
+  input: "separable_conv2d/separable_conv2d"
+  input: "separable_conv2d/bias/read"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "data_format"
+    value {
+      s: "NHWC"
+    }
+  }
+}
+library {
+}

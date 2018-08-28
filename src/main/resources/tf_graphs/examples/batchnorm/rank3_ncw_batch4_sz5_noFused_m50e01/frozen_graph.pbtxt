@@ -1,0 +1,495 @@
+node {
+  name: "in_0"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+          dim {
+            size: 4
+          }
+          dim {
+            size: 5
+          }
+          dim {
+            size: 1
+          }
+        }
+        tensor_content: "~^G?L\033M?\236p9?\220ol>\356%:?X\2708><q\001?b|d?\224\316\013?\314al?P@\257=,5K?\326\271(?\3566\016?`u#>0\024\236>\240{\036>\240h\360>\222o~?v|\034?"
+      }
+    }
+  }
+}
+node {
+  name: "in_0/read"
+  op: "Identity"
+  input: "in_0"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@in_0"
+      }
+    }
+  }
+}
+node {
+  name: "batch_normalization/gamma"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+          dim {
+            size: 5
+          }
+        }
+        tensor_content: "\000\000\200?\000\000\200?\000\000\200?\000\000\200?\000\000\200?"
+      }
+    }
+  }
+}
+node {
+  name: "batch_normalization/gamma/read"
+  op: "Identity"
+  input: "batch_normalization/gamma"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@batch_normalization/gamma"
+      }
+    }
+  }
+}
+node {
+  name: "batch_normalization/beta"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+          dim {
+            size: 5
+          }
+        }
+        tensor_content: "\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000"
+      }
+    }
+  }
+}
+node {
+  name: "batch_normalization/beta/read"
+  op: "Identity"
+  input: "batch_normalization/beta"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@batch_normalization/beta"
+      }
+    }
+  }
+}
+node {
+  name: "batch_normalization/moving_mean"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+          dim {
+            size: 5
+          }
+        }
+        tensor_content: "\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000"
+      }
+    }
+  }
+}
+node {
+  name: "batch_normalization/moving_mean/read"
+  op: "Identity"
+  input: "batch_normalization/moving_mean"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@batch_normalization/moving_mean"
+      }
+    }
+  }
+}
+node {
+  name: "batch_normalization/moving_variance"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+          dim {
+            size: 5
+          }
+        }
+        tensor_content: "\000\000\200?\000\000\200?\000\000\200?\000\000\200?\000\000\200?"
+      }
+    }
+  }
+}
+node {
+  name: "batch_normalization/moving_variance/read"
+  op: "Identity"
+  input: "batch_normalization/moving_variance"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@batch_normalization/moving_variance"
+      }
+    }
+  }
+}
+node {
+  name: "batch_normalization/Reshape/shape"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+            size: 3
+          }
+        }
+        tensor_content: "\001\000\000\000\005\000\000\000\001\000\000\000"
+      }
+    }
+  }
+}
+node {
+  name: "batch_normalization/Reshape"
+  op: "Reshape"
+  input: "batch_normalization/gamma/read"
+  input: "batch_normalization/Reshape/shape"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "Tshape"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "batch_normalization/Reshape_1/shape"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+            size: 3
+          }
+        }
+        tensor_content: "\001\000\000\000\005\000\000\000\001\000\000\000"
+      }
+    }
+  }
+}
+node {
+  name: "batch_normalization/Reshape_1"
+  op: "Reshape"
+  input: "batch_normalization/beta/read"
+  input: "batch_normalization/Reshape_1/shape"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "Tshape"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "batch_normalization/Reshape_2/shape"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+            size: 3
+          }
+        }
+        tensor_content: "\001\000\000\000\005\000\000\000\001\000\000\000"
+      }
+    }
+  }
+}
+node {
+  name: "batch_normalization/Reshape_2"
+  op: "Reshape"
+  input: "batch_normalization/moving_mean/read"
+  input: "batch_normalization/Reshape_2/shape"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "Tshape"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "batch_normalization/Reshape_3/shape"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+            size: 3
+          }
+        }
+        tensor_content: "\001\000\000\000\005\000\000\000\001\000\000\000"
+      }
+    }
+  }
+}
+node {
+  name: "batch_normalization/Reshape_3"
+  op: "Reshape"
+  input: "batch_normalization/moving_variance/read"
+  input: "batch_normalization/Reshape_3/shape"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "Tshape"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "batch_normalization/batchnorm/add/y"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+        }
+        float_val: 0.10000000149011612
+      }
+    }
+  }
+}
+node {
+  name: "batch_normalization/batchnorm/add"
+  op: "Add"
+  input: "batch_normalization/Reshape_3"
+  input: "batch_normalization/batchnorm/add/y"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "batch_normalization/batchnorm/Rsqrt"
+  op: "Rsqrt"
+  input: "batch_normalization/batchnorm/add"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "batch_normalization/batchnorm/mul"
+  op: "Mul"
+  input: "batch_normalization/batchnorm/Rsqrt"
+  input: "batch_normalization/Reshape"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "batch_normalization/batchnorm/mul_1"
+  op: "Mul"
+  input: "in_0/read"
+  input: "batch_normalization/batchnorm/mul"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "batch_normalization/batchnorm/mul_2"
+  op: "Mul"
+  input: "batch_normalization/Reshape_2"
+  input: "batch_normalization/batchnorm/mul"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "batch_normalization/batchnorm/sub"
+  op: "Sub"
+  input: "batch_normalization/Reshape_1"
+  input: "batch_normalization/batchnorm/mul_2"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "batch_normalization/batchnorm/add_1"
+  op: "Add"
+  input: "batch_normalization/batchnorm/mul_1"
+  input: "batch_normalization/batchnorm/sub"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+library {
+}
