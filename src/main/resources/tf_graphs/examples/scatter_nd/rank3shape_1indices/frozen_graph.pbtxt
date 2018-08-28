@@ -1,0 +1,140 @@
+node {
+  name: "in_0"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+            size: 4
+          }
+          dim {
+            size: 1
+          }
+        }
+        tensor_content: "\007\000\000\000\002\000\000\000\t\000\000\000\004\000\000\000"
+      }
+    }
+  }
+}
+node {
+  name: "in_0/read"
+  op: "Identity"
+  input: "in_0"
+  attr {
+    key: "T"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@in_0"
+      }
+    }
+  }
+}
+node {
+  name: "in_1"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+          dim {
+            size: 4
+          }
+          dim {
+            size: 7
+          }
+          dim {
+            size: 5
+          }
+        }
+        tensor_content: "\340\014\013?^\365n?l\026h?\340\375l>\000-M<\330T\354>\240/\244>\250~\'>\3602q>p\347X>T+:?\022\234b?@\271\351<P\014B>\332\354G?\330B\036>\226\364W?$\211\312>\204\222\352>\330z\363>\330\315Y?\010R\177?t\261\311>8\017\363>\212.e?6\373H?l\265\317>X\017\212> \214Q=D\'.?\300\277=?b*\021?`\267\">\356\201\\?l\254\265>\330\022\212>\034\203\321>\324u\225>\312m/?Ps\355>\016h9?\340\233\365>\014qw?\254F\r?\204j\324>\200p\346<\204\200\205>\356\221N?\320l$?@\\\'?\240R\236>\236\333O?\200\t\037=\354\340\370>\316\324u?\364\226Y?p\001\t?x1\215>T}\371> s\306=\202~f?l\002)?\264\025\332> \004R?\212=Y?:\365\n?@\037\362=\020MU?B|\001?(%\037?\0247\"?\314\330\357>\360\310\322=B.O?\260\014\313=.\331\033?\010\316@?\006\366q?\366l\021?\242G\001?\300\305^=\372\217/?d/\341>\372\204-?\220#\n?\306zf?\3468b?\000l\317>\236\216??|S\242>\264\207\020?\332KW?TY\340>\214@m?0W\001>\010ez>\340\004V?L\233\304>\260ln?\230\334{?\370\242\007>\206\027+?\310\266F?D\204%?\334\354t?\210\305\035>\252\254-?\000^\370<\312\320G?$B\010?H \024?\024_\276>(\270\031>P\303`>\200\305\217=\224_B?\000N\031=\354\035h?\200*C>\000\225\372;\036\262z?\260$\334>8\3275>\020\223\016>\010\335\004>\220\032\253=\006\030+?x\312c>\250\302O?\260\350*>\272\030\036?\000\207\231<\004\371i?\014>7?\250{R>\300\326Y=\266\337(?`\356\205=0\360\351>`\236\020="
+      }
+    }
+  }
+}
+node {
+  name: "in_1/read"
+  op: "Identity"
+  input: "in_1"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@in_1"
+      }
+    }
+  }
+}
+node {
+  name: "ScatterNd/shape"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+            size: 3
+          }
+        }
+        tensor_content: "\n\000\000\000\007\000\000\000\005\000\000\000"
+      }
+    }
+  }
+}
+node {
+  name: "ScatterNd"
+  op: "ScatterNd"
+  input: "in_0/read"
+  input: "in_1/read"
+  input: "ScatterNd/shape"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "Tindices"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+library {
+}
