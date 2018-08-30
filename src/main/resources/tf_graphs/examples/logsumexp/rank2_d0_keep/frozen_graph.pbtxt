@@ -1,0 +1,246 @@
+node {
+  name: "in_0"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+          dim {
+            size: 4
+          }
+          dim {
+            size: 5
+          }
+        }
+        tensor_content: "~^G?L\033M?\236p9?\220ol>\356%:?X\2708><q\001?b|d?\224\316\013?\314al?P@\257=,5K?\326\271(?\3566\016?`u#>0\024\236>\240{\036>\240h\360>\222o~?v|\034?"
+      }
+    }
+  }
+}
+node {
+  name: "in_0/read"
+  op: "Identity"
+  input: "in_0"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@in_0"
+      }
+    }
+  }
+}
+node {
+  name: "ReduceLogSumExp/Max/reduction_indices"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+        }
+        int_val: 0
+      }
+    }
+  }
+}
+node {
+  name: "ReduceLogSumExp/Max"
+  op: "Max"
+  input: "in_0/read"
+  input: "ReduceLogSumExp/Max/reduction_indices"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "Tidx"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "keep_dims"
+    value {
+      b: true
+    }
+  }
+}
+node {
+  name: "ReduceLogSumExp/IsFinite"
+  op: "IsFinite"
+  input: "ReduceLogSumExp/Max"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "ReduceLogSumExp/zeros_like"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+          dim {
+            size: 1
+          }
+          dim {
+            size: 5
+          }
+        }
+        float_val: 0.0
+      }
+    }
+  }
+}
+node {
+  name: "ReduceLogSumExp/Select"
+  op: "Select"
+  input: "ReduceLogSumExp/IsFinite"
+  input: "ReduceLogSumExp/Max"
+  input: "ReduceLogSumExp/zeros_like"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "ReduceLogSumExp/StopGradient"
+  op: "StopGradient"
+  input: "ReduceLogSumExp/Select"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "ReduceLogSumExp/Sub"
+  op: "Sub"
+  input: "in_0/read"
+  input: "ReduceLogSumExp/StopGradient"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "ReduceLogSumExp/Exp"
+  op: "Exp"
+  input: "ReduceLogSumExp/Sub"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "ReduceLogSumExp/Sum/reduction_indices"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+        }
+        int_val: 0
+      }
+    }
+  }
+}
+node {
+  name: "ReduceLogSumExp/Sum"
+  op: "Sum"
+  input: "ReduceLogSumExp/Exp"
+  input: "ReduceLogSumExp/Sum/reduction_indices"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "Tidx"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "keep_dims"
+    value {
+      b: true
+    }
+  }
+}
+node {
+  name: "ReduceLogSumExp/Log"
+  op: "Log"
+  input: "ReduceLogSumExp/Sum"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "ReduceLogSumExp/Add"
+  op: "Add"
+  input: "ReduceLogSumExp/Log"
+  input: "ReduceLogSumExp/StopGradient"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+library {
+}
