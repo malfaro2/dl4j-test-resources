@@ -1,0 +1,336 @@
+node {
+  name: "in_0"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+          dim {
+            size: 6
+          }
+          dim {
+            size: 3
+          }
+          dim {
+            size: 2
+          }
+        }
+        tensor_content: "\000\000\340@\000\000\000A\000\000\340@\000\000\000@\000\000\340@\000\000\200?\000\000\240@\000\000\000A\000\000\240@\000\000\020A\000\000\000\000\000\000\340@\000\000\300@\000\000\240@\000\000\200?\000\000@@\000\000\200?\000\000\200@\000\000\020A\000\000\300@\000\000\300@\000\000\200?\000\000\300@\000\000\000@\000\000\000\000\000\000\200@\000\000\000A\000\000\000@\000\000\020A\000\000\000A\000\000\000@\000\000\200@\000\000\340@\000\000\340@\000\000\240@\000\000\340@"
+      }
+    }
+  }
+}
+node {
+  name: "in_0/read"
+  op: "Identity"
+  input: "in_0"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@in_0"
+      }
+    }
+  }
+}
+node {
+  name: "in_1"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+            size: 6
+          }
+        }
+        tensor_content: "\002\000\000\000\001\000\000\000\000\000\000\000\001\000\000\000\001\000\000\000\002\000\000\000"
+      }
+    }
+  }
+}
+node {
+  name: "in_1/read"
+  op: "Identity"
+  input: "in_1"
+  attr {
+    key: "T"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@in_1"
+      }
+    }
+  }
+}
+node {
+  name: "UnsortedSegmentMean/Shape"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+            size: 1
+          }
+        }
+        int_val: 6
+      }
+    }
+  }
+}
+node {
+  name: "UnsortedSegmentMean/ones/Const"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+        }
+        float_val: 1.0
+      }
+    }
+  }
+}
+node {
+  name: "UnsortedSegmentMean/ones"
+  op: "Fill"
+  input: "UnsortedSegmentMean/Shape"
+  input: "UnsortedSegmentMean/ones/Const"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "index_type"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "UnsortedSegmentMean/UnsortedSegmentSum/num_segments"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+        }
+        int_val: 3
+      }
+    }
+  }
+}
+node {
+  name: "UnsortedSegmentMean/UnsortedSegmentSum"
+  op: "UnsortedSegmentSum"
+  input: "UnsortedSegmentMean/ones"
+  input: "in_1/read"
+  input: "UnsortedSegmentMean/UnsortedSegmentSum/num_segments"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "Tindices"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "Tnumsegments"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "UnsortedSegmentMean/Reshape/shape"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+            size: 3
+          }
+        }
+        tensor_content: "\003\000\000\000\001\000\000\000\001\000\000\000"
+      }
+    }
+  }
+}
+node {
+  name: "UnsortedSegmentMean/Reshape"
+  op: "Reshape"
+  input: "UnsortedSegmentMean/UnsortedSegmentSum"
+  input: "UnsortedSegmentMean/Reshape/shape"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "Tshape"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "UnsortedSegmentMean/Maximum/y"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+        }
+        float_val: 1.0
+      }
+    }
+  }
+}
+node {
+  name: "UnsortedSegmentMean/Maximum"
+  op: "Maximum"
+  input: "UnsortedSegmentMean/Reshape"
+  input: "UnsortedSegmentMean/Maximum/y"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "UnsortedSegmentMean/UnsortedSegmentSum_1/num_segments"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+        }
+        int_val: 3
+      }
+    }
+  }
+}
+node {
+  name: "UnsortedSegmentMean/UnsortedSegmentSum_1"
+  op: "UnsortedSegmentSum"
+  input: "in_0/read"
+  input: "in_1/read"
+  input: "UnsortedSegmentMean/UnsortedSegmentSum_1/num_segments"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "Tindices"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "Tnumsegments"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "UnsortedSegmentMean/truediv"
+  op: "RealDiv"
+  input: "UnsortedSegmentMean/UnsortedSegmentSum_1"
+  input: "UnsortedSegmentMean/Maximum"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+library {
+}

@@ -1,0 +1,160 @@
+node {
+  name: "Variable"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_BOOL
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_BOOL
+        tensor_shape {
+          dim {
+            size: 5
+          }
+        }
+        bool_val: true
+        bool_val: true
+        bool_val: true
+        bool_val: false
+        bool_val: true
+      }
+    }
+  }
+}
+node {
+  name: "Variable/read"
+  op: "Identity"
+  input: "Variable"
+  attr {
+    key: "T"
+    value {
+      type: DT_BOOL
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@Variable"
+      }
+    }
+  }
+}
+node {
+  name: "in_1"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+          dim {
+            size: 5
+          }
+          dim {
+            size: 3
+          }
+          dim {
+            size: 4
+          }
+        }
+        tensor_content: "\324\325_? \310n?0\301D?\032 f?\250a<?\320\335\013>\200\224r>\206pV?\324\300\260>\264\376\347>@\336\354=d/\356>\332\227`?\300\201\037=\300\256\305=\014g\243>\350=\322>\244\352\265>t\255\254>\274h\316>`\215\017=`\031\036?\2740\324>Pc\r>(\242\261>xY\\?pEI>\360}X?\320\234\334>\354z\307>.\274Y?\262\027v?L\203\362>\260u\341=\000b#<p\317\245=\352*{?\300\033\336<4\264`?\000\245\251;hO\326>H\373H>\256\273#?\"6\006?$\244\361>\210V|>\200\210\347=\230\274->\344\305\021?R\316C?p\3543>\022\000n?\240\310\323=\310\315Z?\000\022Y?^O<?\340\363|?4=U?LjP?l\026W?"
+      }
+    }
+  }
+}
+node {
+  name: "in_1/read"
+  op: "Identity"
+  input: "in_1"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@in_1"
+      }
+    }
+  }
+}
+node {
+  name: "in_2"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+          dim {
+            size: 5
+          }
+          dim {
+            size: 3
+          }
+          dim {
+            size: 4
+          }
+        }
+        tensor_content: "\034\345I?\336\311F?\210\237L?\246\330`?\260o3?\364CL?\324]\234>\\\2307?\200`Z>\326\363\002?\360\027\005>r\305\010?\000zk;\030\242L>`\235\310=\354H\304>\010\376T>V\212.?H\277d>x\006\273>P\003\016>h\037\317>\240U\235=\336m5?\274\234~?\004Q8?\220\337\216>|1\351>\370\304\266>@\346\205<\310\376\217>\260\314\366=\002\245+?\302XA? MM>\244n\362>\220\225$>n\375A?\020&\254=\222\\\026?(Zs?\216\326\027?\302hf?>\344)?\210[\276>\300\207R=\202.\020?\004\340Y?\340i\002=\274\352\221>\344\245\307>\210\004\037? dM?PP\237=N\353\020?\352\024\036?\236;}?\274\033&?\342cX?lC\256>"
+      }
+    }
+  }
+}
+node {
+  name: "in_2/read"
+  op: "Identity"
+  input: "in_2"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@in_2"
+      }
+    }
+  }
+}
+node {
+  name: "Select"
+  op: "Select"
+  input: "Variable/read"
+  input: "in_1/read"
+  input: "in_2/read"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+library {
+}
