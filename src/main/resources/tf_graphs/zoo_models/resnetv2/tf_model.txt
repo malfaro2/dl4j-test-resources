@@ -1,0 +1,2 @@
+http://download.tensorflow.org/models/official/resnetv2_imagenet_frozen_graph.pb
+8baf281afa5dd9f49284dbff9a4adf33
