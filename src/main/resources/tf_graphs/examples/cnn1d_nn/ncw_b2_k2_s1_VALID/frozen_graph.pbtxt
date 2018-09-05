@@ -1,0 +1,249 @@
+node {
+  name: "in_0"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+          dim {
+            size: 2
+          }
+          dim {
+            size: 2
+          }
+          dim {
+            size: 5
+          }
+        }
+        tensor_content: "~^G?L\033M?\236p9?\220ol>\356%:?X\2708><q\001?b|d?\224\316\013?\314al?P@\257=,5K?\326\271(?\3566\016?`u#>0\024\236>\240{\036>\240h\360>\222o~?v|\034?"
+      }
+    }
+  }
+}
+node {
+  name: "in_0/read"
+  op: "Identity"
+  input: "in_0"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@in_0"
+      }
+    }
+  }
+}
+node {
+  name: "in_1"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+          dim {
+            size: 5
+          }
+          dim {
+            size: 2
+          }
+          dim {
+            size: 3
+          }
+        }
+        tensor_content: "\006\220E?\202\226m?\346\013|?\330\262\367>\226\260$?@\243\032?\236n&?\244\333B?\334\260B?\360\035\312>p\002s?\322*\\?`\243I?\330\374d?\004w\355>\27077?h+\350>t7N?\312Ru?\262\205\007?*kU?\000\231\'<\370l\314>`\327\033>\270\034\266>\350\301$>\2145\366>\030\033$>\240\024\321>\240\341n?"
+      }
+    }
+  }
+}
+node {
+  name: "in_1/read"
+  op: "Identity"
+  input: "in_1"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@in_1"
+      }
+    }
+  }
+}
+node {
+  name: "conv1d/ExpandDims/dim"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+        }
+        int_val: 2
+      }
+    }
+  }
+}
+node {
+  name: "conv1d/ExpandDims"
+  op: "ExpandDims"
+  input: "in_0/read"
+  input: "conv1d/ExpandDims/dim"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "Tdim"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "conv1d/ExpandDims_1/dim"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+        }
+        int_val: 0
+      }
+    }
+  }
+}
+node {
+  name: "conv1d/ExpandDims_1"
+  op: "ExpandDims"
+  input: "in_1/read"
+  input: "conv1d/ExpandDims_1/dim"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "Tdim"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "conv1d/Conv2D"
+  op: "Conv2D"
+  input: "conv1d/ExpandDims"
+  input: "conv1d/ExpandDims_1"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "data_format"
+    value {
+      s: "NCHW"
+    }
+  }
+  attr {
+    key: "dilations"
+    value {
+      list {
+        i: 1
+        i: 1
+        i: 1
+        i: 1
+      }
+    }
+  }
+  attr {
+    key: "padding"
+    value {
+      s: "VALID"
+    }
+  }
+  attr {
+    key: "strides"
+    value {
+      list {
+        i: 1
+        i: 1
+        i: 1
+        i: 1
+      }
+    }
+  }
+  attr {
+    key: "use_cudnn_on_gpu"
+    value {
+      b: true
+    }
+  }
+}
+node {
+  name: "conv1d/Squeeze"
+  op: "Squeeze"
+  input: "conv1d/Conv2D"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "squeeze_dims"
+    value {
+      list {
+        i: 2
+      }
+    }
+  }
+}
+library {
+}

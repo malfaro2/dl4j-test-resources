@@ -1,0 +1,1152 @@
+node {
+  name: "random_uniform/shape"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+            size: 3
+          }
+        }
+        tensor_content: "\001\000\000\000\002\000\000\000\005\000\000\000"
+      }
+    }
+  }
+}
+node {
+  name: "random_uniform/min"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+        }
+        float_val: 0.0
+      }
+    }
+  }
+}
+node {
+  name: "random_uniform/max"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+        }
+        float_val: 1.0
+      }
+    }
+  }
+}
+node {
+  name: "random_uniform/RandomUniform"
+  op: "RandomUniform"
+  input: "random_uniform/shape"
+  attr {
+    key: "T"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "seed"
+    value {
+      i: 1
+    }
+  }
+  attr {
+    key: "seed2"
+    value {
+      i: 3
+    }
+  }
+}
+node {
+  name: "random_uniform/sub"
+  op: "Sub"
+  input: "random_uniform/max"
+  input: "random_uniform/min"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "random_uniform/mul"
+  op: "Mul"
+  input: "random_uniform/RandomUniform"
+  input: "random_uniform/sub"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "random_uniform"
+  op: "Add"
+  input: "random_uniform/mul"
+  input: "random_uniform/min"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "in_0"
+  op: "VariableV2"
+  attr {
+    key: "container"
+    value {
+      s: ""
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "shape"
+    value {
+      shape {
+        dim {
+          size: 1
+        }
+        dim {
+          size: 2
+        }
+        dim {
+          size: 5
+        }
+      }
+    }
+  }
+  attr {
+    key: "shared_name"
+    value {
+      s: ""
+    }
+  }
+}
+node {
+  name: "in_0/Assign"
+  op: "Assign"
+  input: "in_0"
+  input: "random_uniform"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@in_0"
+      }
+    }
+  }
+  attr {
+    key: "use_locking"
+    value {
+      b: true
+    }
+  }
+  attr {
+    key: "validate_shape"
+    value {
+      b: true
+    }
+  }
+}
+node {
+  name: "in_0/read"
+  op: "Identity"
+  input: "in_0"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@in_0"
+      }
+    }
+  }
+}
+node {
+  name: "conv1d/kernel/Initializer/random_uniform/shape"
+  op: "Const"
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@conv1d/kernel"
+      }
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+            size: 3
+          }
+        }
+        tensor_content: "\002\000\000\000\002\000\000\000\002\000\000\000"
+      }
+    }
+  }
+}
+node {
+  name: "conv1d/kernel/Initializer/random_uniform/min"
+  op: "Const"
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@conv1d/kernel"
+      }
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+        }
+        float_val: -0.8660253882408142
+      }
+    }
+  }
+}
+node {
+  name: "conv1d/kernel/Initializer/random_uniform/max"
+  op: "Const"
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@conv1d/kernel"
+      }
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+        }
+        float_val: 0.8660253882408142
+      }
+    }
+  }
+}
+node {
+  name: "conv1d/kernel/Initializer/random_uniform/RandomUniform"
+  op: "RandomUniform"
+  input: "conv1d/kernel/Initializer/random_uniform/shape"
+  attr {
+    key: "T"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@conv1d/kernel"
+      }
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "seed"
+    value {
+      i: 1
+    }
+  }
+  attr {
+    key: "seed2"
+    value {
+      i: 13
+    }
+  }
+}
+node {
+  name: "conv1d/kernel/Initializer/random_uniform/sub"
+  op: "Sub"
+  input: "conv1d/kernel/Initializer/random_uniform/max"
+  input: "conv1d/kernel/Initializer/random_uniform/min"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@conv1d/kernel"
+      }
+    }
+  }
+}
+node {
+  name: "conv1d/kernel/Initializer/random_uniform/mul"
+  op: "Mul"
+  input: "conv1d/kernel/Initializer/random_uniform/RandomUniform"
+  input: "conv1d/kernel/Initializer/random_uniform/sub"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@conv1d/kernel"
+      }
+    }
+  }
+}
+node {
+  name: "conv1d/kernel/Initializer/random_uniform"
+  op: "Add"
+  input: "conv1d/kernel/Initializer/random_uniform/mul"
+  input: "conv1d/kernel/Initializer/random_uniform/min"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@conv1d/kernel"
+      }
+    }
+  }
+}
+node {
+  name: "conv1d/kernel"
+  op: "VariableV2"
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@conv1d/kernel"
+      }
+    }
+  }
+  attr {
+    key: "container"
+    value {
+      s: ""
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "shape"
+    value {
+      shape {
+        dim {
+          size: 2
+        }
+        dim {
+          size: 2
+        }
+        dim {
+          size: 2
+        }
+      }
+    }
+  }
+  attr {
+    key: "shared_name"
+    value {
+      s: ""
+    }
+  }
+}
+node {
+  name: "conv1d/kernel/Assign"
+  op: "Assign"
+  input: "conv1d/kernel"
+  input: "conv1d/kernel/Initializer/random_uniform"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@conv1d/kernel"
+      }
+    }
+  }
+  attr {
+    key: "use_locking"
+    value {
+      b: true
+    }
+  }
+  attr {
+    key: "validate_shape"
+    value {
+      b: true
+    }
+  }
+}
+node {
+  name: "conv1d/kernel/read"
+  op: "Identity"
+  input: "conv1d/kernel"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@conv1d/kernel"
+      }
+    }
+  }
+}
+node {
+  name: "conv1d/bias/Initializer/zeros"
+  op: "Const"
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@conv1d/bias"
+      }
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+          dim {
+            size: 2
+          }
+        }
+        float_val: 0.0
+      }
+    }
+  }
+}
+node {
+  name: "conv1d/bias"
+  op: "VariableV2"
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@conv1d/bias"
+      }
+    }
+  }
+  attr {
+    key: "container"
+    value {
+      s: ""
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "shape"
+    value {
+      shape {
+        dim {
+          size: 2
+        }
+      }
+    }
+  }
+  attr {
+    key: "shared_name"
+    value {
+      s: ""
+    }
+  }
+}
+node {
+  name: "conv1d/bias/Assign"
+  op: "Assign"
+  input: "conv1d/bias"
+  input: "conv1d/bias/Initializer/zeros"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@conv1d/bias"
+      }
+    }
+  }
+  attr {
+    key: "use_locking"
+    value {
+      b: true
+    }
+  }
+  attr {
+    key: "validate_shape"
+    value {
+      b: true
+    }
+  }
+}
+node {
+  name: "conv1d/bias/read"
+  op: "Identity"
+  input: "conv1d/bias"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@conv1d/bias"
+      }
+    }
+  }
+}
+node {
+  name: "conv1d/dilation_rate"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+            size: 1
+          }
+        }
+        int_val: 1
+      }
+    }
+  }
+}
+node {
+  name: "conv1d/conv1d/ExpandDims/dim"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+        }
+        int_val: 2
+      }
+    }
+  }
+}
+node {
+  name: "conv1d/conv1d/ExpandDims"
+  op: "ExpandDims"
+  input: "in_0/read"
+  input: "conv1d/conv1d/ExpandDims/dim"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "Tdim"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "conv1d/conv1d/ExpandDims_1/dim"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+        }
+        int_val: 0
+      }
+    }
+  }
+}
+node {
+  name: "conv1d/conv1d/ExpandDims_1"
+  op: "ExpandDims"
+  input: "conv1d/kernel/read"
+  input: "conv1d/conv1d/ExpandDims_1/dim"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "Tdim"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "conv1d/conv1d/Conv2D"
+  op: "Conv2D"
+  input: "conv1d/conv1d/ExpandDims"
+  input: "conv1d/conv1d/ExpandDims_1"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "data_format"
+    value {
+      s: "NCHW"
+    }
+  }
+  attr {
+    key: "dilations"
+    value {
+      list {
+        i: 1
+        i: 1
+        i: 1
+        i: 1
+      }
+    }
+  }
+  attr {
+    key: "padding"
+    value {
+      s: "SAME"
+    }
+  }
+  attr {
+    key: "strides"
+    value {
+      list {
+        i: 1
+        i: 1
+        i: 1
+        i: 1
+      }
+    }
+  }
+  attr {
+    key: "use_cudnn_on_gpu"
+    value {
+      b: true
+    }
+  }
+}
+node {
+  name: "conv1d/conv1d/Squeeze"
+  op: "Squeeze"
+  input: "conv1d/conv1d/Conv2D"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "squeeze_dims"
+    value {
+      list {
+        i: 2
+      }
+    }
+  }
+}
+node {
+  name: "conv1d/Reshape/shape"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+            size: 3
+          }
+        }
+        tensor_content: "\001\000\000\000\002\000\000\000\001\000\000\000"
+      }
+    }
+  }
+}
+node {
+  name: "conv1d/Reshape"
+  op: "Reshape"
+  input: "conv1d/bias/read"
+  input: "conv1d/Reshape/shape"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "Tshape"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "conv1d/add"
+  op: "Add"
+  input: "conv1d/conv1d/Squeeze"
+  input: "conv1d/Reshape"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "save/Const"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_STRING
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_STRING
+        tensor_shape {
+        }
+        string_val: "model"
+      }
+    }
+  }
+}
+node {
+  name: "save/SaveV2/tensor_names"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_STRING
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_STRING
+        tensor_shape {
+          dim {
+            size: 3
+          }
+        }
+        string_val: "conv1d/bias"
+        string_val: "conv1d/kernel"
+        string_val: "in_0"
+      }
+    }
+  }
+}
+node {
+  name: "save/SaveV2/shape_and_slices"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_STRING
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_STRING
+        tensor_shape {
+          dim {
+            size: 3
+          }
+        }
+        string_val: ""
+        string_val: ""
+        string_val: ""
+      }
+    }
+  }
+}
+node {
+  name: "save/SaveV2"
+  op: "SaveV2"
+  input: "save/Const"
+  input: "save/SaveV2/tensor_names"
+  input: "save/SaveV2/shape_and_slices"
+  input: "conv1d/bias"
+  input: "conv1d/kernel"
+  input: "in_0"
+  attr {
+    key: "dtypes"
+    value {
+      list {
+        type: DT_FLOAT
+        type: DT_FLOAT
+        type: DT_FLOAT
+      }
+    }
+  }
+}
+node {
+  name: "save/control_dependency"
+  op: "Identity"
+  input: "save/Const"
+  input: "^save/SaveV2"
+  attr {
+    key: "T"
+    value {
+      type: DT_STRING
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@save/Const"
+      }
+    }
+  }
+}
+node {
+  name: "save/RestoreV2/tensor_names"
+  op: "Const"
+  device: "/device:CPU:0"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_STRING
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_STRING
+        tensor_shape {
+          dim {
+            size: 3
+          }
+        }
+        string_val: "conv1d/bias"
+        string_val: "conv1d/kernel"
+        string_val: "in_0"
+      }
+    }
+  }
+}
+node {
+  name: "save/RestoreV2/shape_and_slices"
+  op: "Const"
+  device: "/device:CPU:0"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_STRING
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_STRING
+        tensor_shape {
+          dim {
+            size: 3
+          }
+        }
+        string_val: ""
+        string_val: ""
+        string_val: ""
+      }
+    }
+  }
+}
+node {
+  name: "save/RestoreV2"
+  op: "RestoreV2"
+  input: "save/Const"
+  input: "save/RestoreV2/tensor_names"
+  input: "save/RestoreV2/shape_and_slices"
+  device: "/device:CPU:0"
+  attr {
+    key: "dtypes"
+    value {
+      list {
+        type: DT_FLOAT
+        type: DT_FLOAT
+        type: DT_FLOAT
+      }
+    }
+  }
+}
+node {
+  name: "save/Assign"
+  op: "Assign"
+  input: "conv1d/bias"
+  input: "save/RestoreV2"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@conv1d/bias"
+      }
+    }
+  }
+  attr {
+    key: "use_locking"
+    value {
+      b: true
+    }
+  }
+  attr {
+    key: "validate_shape"
+    value {
+      b: true
+    }
+  }
+}
+node {
+  name: "save/Assign_1"
+  op: "Assign"
+  input: "conv1d/kernel"
+  input: "save/RestoreV2:1"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@conv1d/kernel"
+      }
+    }
+  }
+  attr {
+    key: "use_locking"
+    value {
+      b: true
+    }
+  }
+  attr {
+    key: "validate_shape"
+    value {
+      b: true
+    }
+  }
+}
+node {
+  name: "save/Assign_2"
+  op: "Assign"
+  input: "in_0"
+  input: "save/RestoreV2:2"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@in_0"
+      }
+    }
+  }
+  attr {
+    key: "use_locking"
+    value {
+      b: true
+    }
+  }
+  attr {
+    key: "validate_shape"
+    value {
+      b: true
+    }
+  }
+}
+node {
+  name: "save/restore_all"
+  op: "NoOp"
+  input: "^save/Assign"
+  input: "^save/Assign_1"
+  input: "^save/Assign_2"
+}
+node {
+  name: "init"
+  op: "NoOp"
+  input: "^conv1d/bias/Assign"
+  input: "^conv1d/kernel/Assign"
+  input: "^in_0/Assign"
+}
+versions {
+  producer: 26
+}

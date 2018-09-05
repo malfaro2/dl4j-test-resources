@@ -1,0 +1,154 @@
+node {
+  name: "in_0"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+          dim {
+            size: 1
+          }
+          dim {
+            size: 2
+          }
+          dim {
+            size: 5
+          }
+        }
+        tensor_content: "~^G?L\033M?\236p9?\220ol>\356%:?X\2708><q\001?b|d?\224\316\013?\314al?"
+      }
+    }
+  }
+}
+node {
+  name: "in_0/read"
+  op: "Identity"
+  input: "in_0"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@in_0"
+      }
+    }
+  }
+}
+node {
+  name: "average_pooling1d/ExpandDims/dim"
+  op: "Const"
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+        }
+        int_val: 2
+      }
+    }
+  }
+}
+node {
+  name: "average_pooling1d/ExpandDims"
+  op: "ExpandDims"
+  input: "in_0/read"
+  input: "average_pooling1d/ExpandDims/dim"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "Tdim"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "average_pooling1d/AvgPool"
+  op: "AvgPool"
+  input: "average_pooling1d/ExpandDims"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "data_format"
+    value {
+      s: "NCHW"
+    }
+  }
+  attr {
+    key: "ksize"
+    value {
+      list {
+        i: 1
+        i: 1
+        i: 1
+        i: 2
+      }
+    }
+  }
+  attr {
+    key: "padding"
+    value {
+      s: "SAME"
+    }
+  }
+  attr {
+    key: "strides"
+    value {
+      list {
+        i: 1
+        i: 1
+        i: 1
+        i: 2
+      }
+    }
+  }
+}
+node {
+  name: "average_pooling1d/Squeeze"
+  op: "Squeeze"
+  input: "average_pooling1d/AvgPool"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "squeeze_dims"
+    value {
+      list {
+        i: 2
+      }
+    }
+  }
+}
+library {
+}
