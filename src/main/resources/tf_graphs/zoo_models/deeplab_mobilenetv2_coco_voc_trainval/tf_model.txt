@@ -1,0 +1,2 @@
+http://download.tensorflow.org/models/deeplabv3_mnv2_pascal_trainval_2018_01_29.tar.gz
+4020e71ab31636648101b000cca3b6b4
